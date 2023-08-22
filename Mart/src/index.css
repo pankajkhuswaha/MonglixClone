@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  overflow-x: none;
+}
+:root {
+  --red: #ff3f40;
+  --btn_shadow:	box-shadow: 2px 2px 25px -7px #4c4c4c;
+}
