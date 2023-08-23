@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "./layout/Layout";
 import { Stack } from "@mui/material";
 import { Productcard } from "./components/Index";
+import { Login } from "./pages";
 import { ProductSlider } from "./components/Index";
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
         <Stack padding={"20px 40px"}>
           <ProductSlider />
           <Productcard />
+          <Login />
           hiiiii Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
           officia et dolor enim nulla, vel eum inventore dolore, tenetur,
           laudantium illum amet aliquid? Eligendi, nobis rem laudantium aut
