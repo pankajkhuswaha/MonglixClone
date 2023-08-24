@@ -5,35 +5,84 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    type: {
-      type: String,
+    images: {
+      type: Array,
       required: true,
     },
     price: {
       type: String,
       required: true,
     },
-    images: {
-      type: Array,
+    category: {
+      type: String,
       required: true,
     },
-    bannerimg:{
+    subcategory: {
+      type: String,
+      required: true,
+    },
+    subItems:{
+      type: String,
+    },
+    brand: {
+      type: String,
+    },
+    itemCode: {
+      type: String,
+    },
+    hsnCode: {
+      type: String,
+    },
+    perpiece: {
+      type: String,
+    },
+    unitMeausrement: {
+      type: String,
+    },
+    meausrement: {
+      type: String,
+    },
+    retaildiscount: {
+      type: String,
+      validate: {
+        validator: function (value) {
+          return /^\d+(\.\d+)?$/.test(value) && parseFloat(value) >= 0 && parseFloat(value) <= 100;
+        },
+        message: props => `${props.value} is not a valid discount percentage.`,
+      },
+    },
+    silverdiscount: {
+      type: String,
+      validate: {
+        validator: function (value) {
+          return /^\d+(\.\d+)?$/.test(value) && parseFloat(value) >= 0 && parseFloat(value) <= 100;
+        },
+        message: props => `${props.value} is not a valid discount percentage.`,
+      },
+    },
+    golddiscount: {
+      type: String,
+      validate: {
+        validator: function (value) {
+          return /^\d+(\.\d+)?$/.test(value) && parseFloat(value) >= 0 && parseFloat(value) <= 100;
+        },
+        message: props => `${props.value} is not a valid discount percentage.`,
+      },
+    },
+    platinumdiscount: {
+      type: String,
+      validate: {
+        validator: function (value) {
+          return /^\d+(\.\d+)?$/.test(value) && parseFloat(value) >= 0 && parseFloat(value) <= 100;
+        },
+        message: props => `${props.value} is not a valid discount percentage.`,
+      },
+    },
+    mindiscription:{
       type:String
     },
-    specs: {
-      Motor_Type_and_Power: String,
-      Controller_Type: String,
-      Speedo_Meter: String,
-      Battery_Capacity: String,
-      Tyre_Specification_F_and_R: String,
-      Suspension_F_and_R: String,
-      Break_F_and_R: String,
-    },
-
-    feature: {
-      speed: String,
-      Total_Range: String,
-      Charging_Time: String,
+    datasheet:{
+      type:String
     },
   },
   {
