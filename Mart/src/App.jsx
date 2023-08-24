@@ -4,14 +4,16 @@ import { Stack } from "@mui/material";
 import { Productcard } from "./components/Index";
 import { Login } from "./pages";
 import { ProductSlider } from "./components/Index";
+import Loader from "./components/productslider/loader/Loader";
 const App = () => {
   return (
     <>
       <Layout>
-        <Stack padding={"20px 40px"}>
+        <Stack padding={"20px"}>
           <ProductSlider />
           <Productcard />
           <Login />
+          <Loader />
           hiiiii Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
           officia et dolor enim nulla, vel eum inventore dolore, tenetur,
           laudantium illum amet aliquid? Eligendi, nobis rem laudantium aut

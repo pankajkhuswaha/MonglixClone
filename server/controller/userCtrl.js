@@ -34,13 +34,13 @@ const verifyUser = asyncHandler(async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded?.id);
         req.user = user;
-        res.json({success:true})
+        res.json({ success: true });
       }
     } catch (error) {
       res.json("Not Authorized token expired, Please Login again");
     }
   } else {
-    res.json(" There is no token attached to header");
+    res.json("There is no token attached to header");
   }
 });
 
@@ -422,5 +422,5 @@ module.exports = {
   isAdminuser,
   checkSignup,
   checkresetPasswordUser,
-  verifyUser
+  verifyUser,
 };

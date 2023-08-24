@@ -1,20 +1,20 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import "./login.css";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { RegisterApi } from "../../features/authSlice";
-// import { base_url } from "../../utils/baseUrl";
-// import axios from "axios";
-// import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
-// import { checkuserSignup } from "../../apis";
-// import { useDispatch } from "react-redux";
-// import { addBooking } from "../../features/Dummy/dummySlice";
-// import { toggleLoading } from "../../features/loading/loadingSlice";
+import { RegisterApi, LoginApi } from "../../features/authSlice";
 
 const Login = () => {
+  const dtata = useSelector((state) => state.auth.token);
+  console.log(dtata);
   const dispatch = useDispatch();
-  const { values, handleSubmit, resetForm, handleChange } = useFormik({
+  const {
+    values: rvalues,
+    handleSubmit: rhandleSubmit,
+    resetForm: rresetForm,
+    handleChange: rhandleChange,
+  } = useFormik({
     initialValues: {
       name: "",
       email: "",
@@ -23,7 +23,23 @@ const Login = () => {
     },
     onSubmit: (values) => {
       dispatch(RegisterApi(values));
-      resetForm();
+      rresetForm();
+    },
+  });
+  const {
+    values: lvalues,
+    handleSubmit: lhandleSubmit,
+    resetForm: lresetForm,
+    handleChange: lhandleChange,
+  } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      dispatch(LoginApi(values));
+      lresetForm();
     },
   });
 
@@ -39,54 +55,11 @@ const Login = () => {
     container.classList.remove("right-panel-active");
   };
 
-  //   const navigate = useNavigate();
-  //   const dispatch = useDispatch();
-
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    // dispatch(toggleLoading(true));
-    // const res = await checkuserSignup(signup);
-    // if (res.success) {
-    //   dispatch(addBooking(signup));
-    //   try {
-    //     const res2 = await axios.post(`${base_url}otp/send`, {
-    //       email: signup.email,
-    //     });
-    //     if (res2.data.success) {
-    //       toast.success(res2.data.success);
-    //       navigate("/signup");
-    //       dispatch(toggleLoading(false));
-    //     }
-    //   } catch (error) {
-    //     toast.error(error.mesage);
-    //     dispatch(toggleLoading(false));
-    //   }
-    // } else {
-    //   toast.error(res.error);
-    //   dispatch(toggleLoading(false));
-    // }
-  };
-  // todo Login function to handle userr login
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    // const res = await axios.post(`${base_url}user/login`, logins);
-    // if (res.data.name !== undefined) {
-    //   toast.success("Login Sucessfull");
-    //   localStorage.setItem("user", JSON.stringify(res.data));
-    //   if (res.data.role === "admin") {
-    //     navigate("/admin");
-    //   } else {
-    //     navigate("/");
-    //   }
-    // } else {
-    //   toast.error(res.data);
-    // }
-  };
   return (
     <div className="registration-tab">
       <div className="container" id="container">
         <div className="form-container sign-up-container">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={rhandleSubmit}>
             <h1>Create Account</h1>
 
             <span>or use your email for registration</span>
@@ -94,9 +67,8 @@ const Login = () => {
               className="c"
               required
               name="name"
-              onChange={handleChange}
-              value={values.name}
-              //   onChange={(e) => setsignup({ ...signup, name: e.target.value })}
+              onChange={rhandleChange}
+              value={rvalues.name}
               type="text"
               placeholder="Name"
             />
@@ -104,9 +76,7 @@ const Login = () => {
               className="c"
               required
               name="email"
-              onChange={handleChange}
-              value={values.email}
-              //   onChange={(e) => setsignup({ ...signup, email: e.target.value })}
+              onChange={rhandleChange}
               type="email"
               placeholder="Email"
             />
@@ -114,21 +84,17 @@ const Login = () => {
               className="c"
               required
               name="mobile"
-              onChange={handleChange}
-              value={values.mobile}
-              //   onChange={(e) => setsignup({ ...signup, mobile: e.target.value })}
+              onChange={rhandleChange}
+              value={rvalues.mobile}
               type="mobile"
               placeholder="mobile"
             />
             <input
               className="c"
               required
-              //   onChange={(e) =>
-              //     setsignup({ ...signup, password: e.target.value })
-              //   }
               name="password"
-              onChange={handleChange}
-              value={values.password}
+              onChange={rhandleChange}
+              value={rvalues.password}
               type="password"
               placeholder="Password"
             />
@@ -149,25 +115,27 @@ const Login = () => {
           </form>
         </div>
         <div className="form-container sign-in-container">
-          <form>
+          <form onSubmit={lhandleSubmit}>
             <h1>Sign in</h1>
             <span>or use your account</span>
             <input
               className="c"
-              //   onChange={(e) => setLogin({ ...logins, email: e.target.value })}
+              name="email"
+              onChange={lhandleChange}
+              value={lvalues.email}
               type="email"
               placeholder="Email"
             />
             <input
               className="c"
-              //   onChange={(e) =>
-              //     setLogin({ ...logins, password: e.target.value })
-              //   }
+              name="password"
+              value={lvalues.password}
+              onChange={lhandleChange}
               type="password"
               placeholder="Password"
             />
             Forgot your password?
-            <button onClick={handleLogin}>Sign In</button>
+            <button>Sign In</button>
             <p className="hides">
               Does not Have an Account?{" "}
               <span
