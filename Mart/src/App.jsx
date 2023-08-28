@@ -2,15 +2,16 @@ import React, { useEffect } from "react";
 import Layout from "./layout/Layout";
 import Errorpage from "./pages/404/Errorpage";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Stack } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
-import { Login, Viewpage, PageNotFound, Productpage } from "./pages";
-import { Imagecarousel } from "./components/Index";
 import { getProducts } from "./features/ProductSlice";
 import { useDispatch } from "react-redux";
 import { Routess } from "./routes/Routes";
 const App = () => {
-  const error = useSelector((state) => state.products.error);
+  const { error } = useSelector((state) => state.products);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
@@ -18,6 +19,7 @@ const App = () => {
 
   return (
     <>
+      <ToastContainer />
       {error ? (
         <Errorpage />
       ) : (

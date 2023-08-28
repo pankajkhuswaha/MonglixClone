@@ -26,7 +26,6 @@ export const productSlice = createSlice({
       })
       .addCase(getProducts.rejected, (state, action) => {
         state.error = true;
-        console.log(state.error);
       });
   },
 });
