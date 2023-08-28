@@ -56,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="registration-tab">
+    <div className="registration-tab mx-auto">
       <div className="container" id="container">
         <div className="form-container sign-up-container">
           <form onSubmit={rhandleSubmit}>
@@ -134,8 +134,7 @@ const Login = () => {
               type="password"
               placeholder="Password"
             />
-            Forgot your password?
-            <button>Sign In</button>
+            Forgot your password? <button>Sign In</button>
             <p className="hides">
               Does not Have an Account?{" "}
               <span
@@ -156,7 +155,7 @@ const Login = () => {
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h1>Welcome Back!</h1>
-              <p>
+              <p className=" text-white">
                 To keep connected with us please login with your personal info
               </p>
               <button className="ghost" onClick={handleSignInClick}>
@@ -165,7 +164,9 @@ const Login = () => {
             </div>
             <div className="overlay-panel overlay-right">
               <h1>Hello, Friend!</h1>
-              <p>Enter your personal details and start the journey with us</p>
+              <p className=" text-white">
+                Enter your personal details and start the journey with us
+              </p>
               <button className="ghost" onClick={handleSignUpClick}>
                 Sign Up
               </button>

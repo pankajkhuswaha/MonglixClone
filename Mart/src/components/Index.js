@@ -1,14 +1,16 @@
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import SearchComponent from "./searchbar/SearchComponent";
-import ProductSlider from "./productslider/ProductSlider";
+import Imagecarousel from "./productslider/Imagecarousel";
 import BtmDrawer from "./bottomdrawer/BtmDrawer";
-import Productcard from "./productslider/productcard/Productcard";
+import ProductSidebar from "./sidebar/ProductSidebar";
+import Banner from "./herobanner/Banner";
 export {
   Header,
   Footer,
   SearchComponent,
-  ProductSlider,
+  Imagecarousel,
   BtmDrawer,
-  Productcard,
+  Banner,
+  ProductSidebar,
 };

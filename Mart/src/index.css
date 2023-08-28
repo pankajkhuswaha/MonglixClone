@@ -8,6 +8,7 @@
 }
 body {
   overflow-x: none;
+  background-color: #F8FAFC;
 }
 :root {
   --red: #ff3f40;

@@ -1,12 +1,10 @@
 import React, { useRef } from "react";
-import Mycard from "./Mycard";
-import { Productcard } from "../Index";
+import Mycard from "./card/Mycard";
 import "./Imagecarousel.css";
-import Loader from "./loader/Loader";
 
-const Imagecarousel = () => {
+const Imagecarousel = ({ products, load }) => {
   const containerRef = useRef(null);
-  const cardWidth = 300; // Adjust this to the actual width of your cards
+  const cardWidth = 300;
 
   const btnpressprev = () => {
     const container = containerRef.current;
@@ -28,16 +26,7 @@ const Imagecarousel = () => {
       </button>
 
       <div className="product-container md:gap-[20px] gap-0" ref={containerRef}>
-        <Mycard />
-        <Mycard />
-        <Mycard />
-        <Mycard />
-        <Mycard />
-        <Mycard />
-        <Mycard />
-        <Mycard />
-        <Mycard />
-        <Mycard />
+        <Mycard data={products} load={load} />
       </div>
     </div>
   );
