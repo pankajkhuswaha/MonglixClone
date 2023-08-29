@@ -33,16 +33,11 @@
     "@reduxjs/toolkit": "^1.9.5",
 
     "axios": "^1.4.0",
-<<<<<<< HEAD
     "datatables.net": "^1.13.6",
     "datatables.net-dt": "^1.13.6",
-    "formik": "^2.4.3",
     "jquery": "^3.7.0",
-    "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
-    "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
-=======
 
     "formik": "^2.4.3",
 
@@ -50,7 +45,6 @@
 
     "react-dom": "^18.2.0",
 
->>>>>>> 975c6d1af3be52d83a4ec7cf9b64ab8b3e3ee8a1
     "react-redux": "^8.1.2",
 
     "react-router-dom": "^6.15.0",
