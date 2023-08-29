@@ -8,25 +8,32 @@ const jwt = require("jsonwebtoken");
 const { sendEmail } = require("./emailCtrl");
 
 // Create a User ----------------------------------------------
-const checkSignup = asyncHandler(async (req, res) => {
-  const email = req.body.email;
-  const mobile = req.body.mobile;
-  console.log(req.body);
-  const findByEmail = await User.findOne({ email });
-  const findByMobile = await User.findOne({ mobile });
-  if (findByEmail) {
-    res.json({ error: "This email is already in used !" });
-  } else if (findByMobile) {
-    res.json({ error: "This mobile number is already in used !" });
-  } else if (email && mobile) {
-    res.json({ success: true });
+const checkSignup = async (req, res) => {
+  const { name, email, mobile } = req.body;
+  const isNameValid = /^[a-zA-Z\s]+$/.test(name);
+  const isMobileValid = /^[6-9]\d{9}$/.test(mobile);
+
+  if (!isNameValid) {
+    res.json({ error: `${name} is not a vailid name.` });
+  } else if (!isMobileValid) {
+    res.json({ error: `${mobile} is not a vailid mobile number.` });
   } else {
-    res.json({ error: "Invalid Task" });
+    const findByEmail = await User.findOne({ email });
+    const findByMobile = await User.findOne({ mobile });
+
+    if (findByEmail) {
+      res.json({ error: "This email is already in use!" });
+    } else if (findByMobile) {
+      res.json({ error: "This mobile number is already in use!" });
+    } else {
+      res.json({ success: true });
+    }
   }
-});
+};
 
 const verifyUser = asyncHandler(async (req, res) => {
   let token;
+  // console.log(req?.headers)
   if (req?.headers?.authorization?.startsWith("Bearer")) {
     token = req.headers.authorization.split(" ")[1];
     try {
@@ -34,13 +41,13 @@ const verifyUser = asyncHandler(async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded?.id);
         req.user = user;
-        res.json({ success: true });
+        res.json({ success: true ,user});
       }
     } catch (error) {
       res.json("Not Authorized token expired, Please Login again");
     }
   } else {
-    res.json("There is no token attached to header");
+    res.json(" There is no token attached to header");
   }
 });
 
@@ -59,6 +66,21 @@ const createUser = asyncHandler(async (req, res) => {
             error.message.split("{")[1].split(":")[0]
           } no. is already in used`
         );
+      } else if (
+        error.message.includes("validation") &&
+        error.message.includes("mobile")
+      ) {
+        res.json(error.errors?.mobile?.message);
+      } else if (
+        error.message.includes("validation") &&
+        error.message.includes("name")
+      ) {
+        res.json(error.errors?.name?.message);
+      } else if (
+        error.message.includes("validation") &&
+        error.message.includes("email")
+      ) {
+        res.json(error.errors?.email?.message);
       } else {
         res.json(error.message);
       }

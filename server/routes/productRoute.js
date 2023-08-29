@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post("/add", addProduct);
 router.get("/", getallProduct);
-router.post("/del", authMiddleware, isAdmin, deleteProduct);
+router.delete("/", authMiddleware, isAdmin, deleteProduct);
 router.post("/update", updateproduct);
 
 module.exports = router;

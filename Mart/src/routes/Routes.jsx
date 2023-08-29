@@ -5,6 +5,7 @@ import {
   Productpage,
   ProductDetail,
 } from "../pages";
+import Admin from "../pages/admin";
 
 export const Routess = [
   {
@@ -26,5 +27,9 @@ export const Routess = [
   {
     path: "*",
     Element: <PageNotFound />,
+  },
+  {
+    path: "/admin/*",
+    Element: <Admin />,
   },
 ];
