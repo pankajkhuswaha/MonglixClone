@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import $ from 'jquery';
 import 'datatables.net';
 import { useEffect, useRef } from "react";
-import { deleteProduct, getProducts } from "../../../../features/ProductSlice";
+import { deleteProduct } from "../../../../features/ProductSlice";
 
 
 
@@ -14,9 +14,7 @@ const ListProducts = () => {
   useEffect(() => {
     $(tableRef.current).DataTable();
   }, [productData]);
-  useEffect(()=>{
-    dispatch(getProducts())
-  },[dispatch])
+ 
   return (
     <div>
       {productData.length !== 0 ? (
