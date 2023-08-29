@@ -1,8 +1,8 @@
-import { Link,   useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./index.css"
+import "./index.css";
 import Dashboard from "./pages/Dashboard";
 import { useDispatch } from "react-redux";
 import { base_url } from "../../utils/baseUrl";
@@ -12,7 +12,7 @@ import Sidebar from "./components/Sidebar";
 import Homepage from "./pages/website/Homepage";
 import ListProducts from "./pages/products/ListProducts";
 import AddProduct from "./pages/products/AddProduct";
-import 'datatables.net-dt/css/jquery.dataTables.css';
+import "datatables.net-dt/css/jquery.dataTables.css";
 
 const Admin = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -20,10 +20,10 @@ const Admin = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
   const sidetoggle =
-    "col-12 fixed col-md-2 bg-white h-full shadow transition-all w-[3.3rem] top-[48px] z-[9] delay-600 -left-[105vw]";
+    "col-12 fixed col-md-2 bg-white h-full shadow transition-all w-[3.3rem] z-[9] top-0 delay-600 -left-[105vw]";
   const sidenottoggle =
-    "col-12 fixed col-md-2 bg-white h-full shadow transition-all top-[48px] delay-600 left-0";
-  
+    "col-12 fixed col-md-2 bg-white h-full shadow transition-all delay-600 z-[99] top-0 left-0";
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isAdmin, setadmin] = useState(true);
@@ -34,8 +34,8 @@ const Admin = () => {
       const res = await axios.post(`${base_url}user/isadmin`, { email });
       setadmin(res.data.admin);
     } catch (error) {
-    //   setadmin(false);
-    //   navigate("/login");
+      setadmin(false);
+      navigate("/login");
       toast.warn("You are not admin");
       console.error(error.message);
     }
@@ -47,8 +47,11 @@ const Admin = () => {
 
   if (isAdmin) {
     return (
-      <div  className=" relative">
-        <nav className="flex h-14 bg-white z-[999] items-center fixed w-100 right-0 border shadow-sm top-0 gap-4 justify-between px-4">
+      <div className=" relative">
+        <nav
+          style={isSidebarOpen ? { width: "83.33%" } : { width: "100%" }}
+          className="transition-all flex h-14 bg-white z-[999] items-center fixed right-0 border shadow-sm top-0 gap-4 justify-between px-4"
+        >
           <div className="flex gap-2  items-center">
             <AiOutlineMenu
               onClick={toggleSidebar}
@@ -62,7 +65,7 @@ const Admin = () => {
           <button
             className="btn btn-outline-danger"
             onClick={() => {
-            //   dispatch(logout());
+              //   dispatch(logout());
               navigate("/login");
             }}
           >
@@ -71,8 +74,8 @@ const Admin = () => {
         </nav>
         {/* nav ends here */}
 
-        <div className={isSidebarOpen ? sidenottoggle : sidetoggle}>          
-          <Sidebar/>
+        <div className={isSidebarOpen ? sidenottoggle : sidetoggle}>
+          <Sidebar />
         </div>
 
         {/* sidebar end herer */}
@@ -91,15 +94,15 @@ const Admin = () => {
                 : "col-12 flex justify-between p-4"
             }
           >
-           <div className="mt-[20px] w-full">
-           <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/custom-homepage" element={<Homepage />} />
-              <Route path="/products" element={<ListProducts />} />
-              <Route path="/add-products" element={<AddProduct />} />
-              <Route path="/" element={<Dashboard />} />
-            </Routes>
-           </div>
+            <div className="mt-[20px] w-full">
+              <Routes>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/custom-homepage" element={<Homepage />} />
+                <Route path="/products" element={<ListProducts />} />
+                <Route path="/add-products" element={<AddProduct />} />
+                <Route path="/" element={<Dashboard />} />
+              </Routes>
+            </div>
           </div>
         </div>
       </div>

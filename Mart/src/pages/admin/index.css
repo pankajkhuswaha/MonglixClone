@@ -48,4 +48,9 @@
     gap: 8px;
     position: relative;
   }
+  label{
+    color: gray;
+    font-weight: 400;
+    margin-bottom: 3px;
+  }
   

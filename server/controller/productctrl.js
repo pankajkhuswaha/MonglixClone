@@ -49,7 +49,7 @@ const deleteProduct = asyncHandle(async (req, res) => {
   if (_id) {
     try {
       await ProductModel.findByIdAndDelete({ _id });
-      res.json({ success: true, message: "Deleted Sucessfully" });
+      res.json({ success: true, message: "Deleted Sucessfully" ,_id});
     } catch (error) {
       res.json({ error: error.message });
     }

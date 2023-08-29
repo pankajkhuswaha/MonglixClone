@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import Layout from "./layout/Layout";
 import Errorpage from "./pages/404/Errorpage";
 import { useSelector } from "react-redux";
@@ -9,8 +9,12 @@ import { Route, Routes } from "react-router-dom";
 import { getProducts } from "./features/ProductSlice";
 import { useDispatch } from "react-redux";
 import { Routess } from "./routes/Routes";
+import Loading from "./features/loading/Loader";
+import 'react-quill/dist/quill.snow.css';
 const App = () => {
+
   const { error } = useSelector((state) => state.products);
+  const isLoading = useSelector((state) => state.loading.show);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -19,6 +23,7 @@ const App = () => {
 
   return (
     <>
+    {isLoading && <Loading/>}
       <ToastContainer />
       {error ? (
         <Errorpage />
