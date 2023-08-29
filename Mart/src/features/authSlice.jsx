@@ -16,19 +16,19 @@ const initialState = {
 };
 
 export const LoginApi = createAsyncThunk("login", async (payload) => {
-  const res = await axios.post(`${base_url}login`, payload);
+  const res = await axios.post(`${base_url}user/login`, payload);
   localStorage.setItem("token", res.data.token);
   console.log(res.data);
   return res.data;
 });
 export const VerifyApi = createAsyncThunk("Verify", async () => {
-  const res = await axios.post(`${base_url}verify`, {}, config);
+  const res = await axios.post(`${base_url}user/verify`, {}, config);
   console.log(res.data);
   return res.data;
 });
 
 export const RegisterApi = createAsyncThunk("register", async (payload) => {
-  const res = await axios.post(`${base_url}register`, payload);
+  const res = await axios.post(`${base_url}user/register`, payload);
   console.log(res.data);
   return res.data;
 });
