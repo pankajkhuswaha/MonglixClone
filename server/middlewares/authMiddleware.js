@@ -4,8 +4,6 @@ const asyncHandler = require("express-async-handler");
 
 const authMiddleware = asyncHandler(async (req, res, next) => {
   let token;
-  console.log(req?.headers.authorization)
-
   if (req?.headers?.authorization?.startsWith("Bearer")) {
     token = req.headers.authorization.split(" ")[1];
     try {
@@ -16,10 +14,10 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
         next();
       }
     } catch (error) {
-      res.json("Not Authorized token expired, Please Login again");
+      res.json({error:"Not Authorized token expired, Please Login again"});
     }
   } else {
-    res.json(" There is no token attached to header");
+    res.json({error:"There is no token attached to header"});
   }
 });
 const isAdmin = asyncHandler(async (req, res, next) => {
@@ -28,7 +26,7 @@ const isAdmin = asyncHandler(async (req, res, next) => {
   const adminUser = await User.findOne({ email });
 
   if (adminUser.role !== "admin") {
-    res.json("You are not an admin");
+    res.json({error:"You are not an admin"});
   } else {
     req.user = req.user;
     next();

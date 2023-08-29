@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { base_url } from "../utils/baseUrl";
 import axios from "axios";
 import { config } from "../utils/axiosConfig";
+import { toast } from "react-toastify";
 
 const initialState = {
   products: [],
@@ -13,10 +14,13 @@ export const getProducts = createAsyncThunk("product", async () => {
   return res.data;
 });
 
-export const deleteProduct = createAsyncThunk("product/delete", async (payload) => {
-  const res = await axios.delete(`${base_url}product`,payload,config);
-  return res.data;
-});
+export const deleteProduct = createAsyncThunk(
+  "product/delete",
+  async (payload) => {
+    const res = await axios.delete(`${base_url}product/${payload}`, config);
+    return res.data;
+  }
+);
 export const productSlice = createSlice({
   name: "product",
   initialState,
@@ -36,13 +40,14 @@ export const productSlice = createSlice({
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload)
+        if (action.payload.success) {
+          toast.success(action.payload.message);
+        } else {
+          toast.error(action.payload.error);
+        }
       })
       .addCase(deleteProduct.pending, (state) => {
         state.loading = true;
-      })
-      .addCase(deleteProduct.rejected, (state) => {
-        state.error = true;
       });
   },
 });
