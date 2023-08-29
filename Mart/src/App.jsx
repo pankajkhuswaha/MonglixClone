@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import Layout from "./layout/Layout";
 import Errorpage from "./pages/404/Errorpage";
 import { useSelector } from "react-redux";
@@ -11,19 +11,15 @@ import { useDispatch } from "react-redux";
 import { Routess } from "./routes/Routes";
 import { VerifyApi } from "./features/authSlice";
 import Loading from "./features/loading/Loader";
-import 'react-quill/dist/quill.snow.css';
-const App = () => {
-
-  const { error } = useSelector((state) => state.products);
-  const isLoading = useSelector((state) => state.loading.show);
+import "react-quill/dist/quill.snow.css";
 
 const App = () => {
   const dispatch = useDispatch();
   const { error, success } = useSelector((state) => state.auth);
+  const isLoading = useSelector((state) => state.loading.show);
 
   const verifyToken = () => {
     dispatch(VerifyApi());
-    
 
     if (success) {
       toast.success("sucesss");
@@ -39,7 +35,7 @@ const App = () => {
 
   return (
     <>
-    {isLoading && <Loading/>}
+      {isLoading && <Loading />}
       <ToastContainer />
       {error ? (
         <Errorpage />
