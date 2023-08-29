@@ -43,7 +43,6 @@ export const productSlice = createSlice({
       })
       .addCase(deleteProduct.rejected, (state) => {
         state.error = true;
-        console.log(state.error);
       });
   },
 });

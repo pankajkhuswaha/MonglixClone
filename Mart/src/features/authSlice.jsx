@@ -11,13 +11,19 @@ const initialState = {
   success: false,
   error: false,
   loading: true,
+  user: {},
   token,
 };
 
 export const LoginApi = createAsyncThunk("login", async (payload) => {
   const res = await axios.post(`${base_url}login`, payload);
-  console.log(res.data);
   localStorage.setItem("token", res.data.token);
+  console.log(res.data);
+  return res.data;
+});
+export const VerifyApi = createAsyncThunk("Verify", async () => {
+  const res = await axios.post(`${base_url}verify`, {}, config);
+  console.log(res.data);
   return res.data;
 });
 
@@ -33,18 +39,24 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(RegisterApi.fulfilled, (state, action) =>
-        console.log(action.payload)
-      )
-      .addCase(RegisterApi.rejected, (state, action) =>
-        console.log(action.payload)
-      )
-      .addCase(LoginApi.fulfilled, (state, action) =>
-        console.log(action.payload)
-      )
-      .addCase(LoginApi.rejected, (state, action) =>
-        console.log(action.payload)
-      );
+      .addCase(RegisterApi.fulfilled, (state, action) => {
+        state.success = true;
+      })
+      .addCase(RegisterApi.rejected, (state, action) => {
+        console.log(action.payload), (state.error = true);
+      })
+      .addCase(LoginApi.fulfilled, (state, action) => {
+        (state.success = true), console.log(action.payload);
+      })
+      .addCase(LoginApi.rejected, (state, action) => {
+        (state.error = true), console.log(action.payload);
+      })
+      .addCase(VerifyApi.fulfilled, (state, action) => {
+        (state.success = true), (state.user = action.payload);
+      })
+      .addCase(VerifyApi.rejected, (state, action) => {
+        (state.error = true), console.log(action.payload);
+      });
   },
 });
 

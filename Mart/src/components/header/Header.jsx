@@ -8,8 +8,12 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { SearchComponent, BtmDrawer } from "../Index";
 
 const Header = () => {
+  const users = useSelector((state) => state.auth.user);
+  const currentuser = users.user?.name;
   const location = useLocation();
   const data = useSelector((state) => state.products.products);
+  const categories = [...new Set(data.map((item) => item.category))];
+
   const [showDivOnScroll, setShowDivOnScroll] = useState(false);
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -54,96 +58,63 @@ const Header = () => {
             <Badge badgeContent={1} color="primary">
               <LocalMallIcon color="green" />
             </Badge>
-            <Link to={"/login"}>
-              <AccountBoxIcon />
-            </Link>
+            {currentuser ? (
+              <button onClick={() => localStorage.removeItem("token")}>
+                <p>{currentuser}</p>{" "}
+              </button>
+            ) : (
+              <Link to={"/login"}>
+                <AccountBoxIcon />
+              </Link>
+            )}
+
             <Stack display={{ sx: "block", md: "none" }}>
               <BtmDrawer />
             </Stack>
           </Stack>
         </Stack>
-        {/* {location.pathname !== "/login" &&
-          !location.pathname.startsWith("/error") && (
-            <div
-              style={{
-                borderTop: "1px solid #E8F0FE",
-                boxShadow: "0 12px 15px rgba(0,0,0,.15)",
-                transition: "0.2s",
-                opacity: showDivOnScroll ? 1 : 0,
-                backgroundColor: "white",
-                padding: "10px",
-                position: "fixed",
-                top: 78,
-                right: 0,
-                width: "100%",
 
-                zIndex: 9,
-              }}
-            >
-              {data.map((ele, i) => {
-                return (
-                  <Stack
-                    key={i}
-                    flexDirection={"row"}
-                    gap={3}
-                    justifyContent={"center"}
-                  >
-                    <Stack flexDirection={"row"} alignItems={"center"} gap={1}>
-                      <img
-                        src="	https://img.moglimg.com/assets/img/office_supplies.png"
-                        alt=""
-                        width={40}
-                      />
-                      <p className=" text-gray-600">{ele.category}</p>
-                    </Stack>
+        {location.pathname === "/" && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              gap: "24px",
+              borderTop: "1px solid #E8F0FE",
+              boxShadow: "0 12px 15px rgba(0,0,0,.15)",
+              transition: "0.2s",
+              opacity: showDivOnScroll ? 1 : 0,
+              backgroundColor: "white",
+              padding: "10px",
+              position: "fixed",
+              top: 78,
+              right: 0,
+              width: "100%",
+              zIndex: 9,
+            }}
+          >
+            {categories.map((ele, i) => {
+              return (
+                <Stack
+                  key={i}
+                  flexDirection={"row"}
+                  gap={3}
+                  justifyContent={"center"}
+                >
+                  <Stack flexDirection={"row"} alignItems={"center"} gap={1}>
+                    <img
+                      src="https://img.moglimg.com/assets/img/office_supplies.png"
+                      alt=""
+                      width={40}
+                    />
+                    <p className=" text-gray-600">{ele}</p>
                   </Stack>
-                );
-              })}
-            </div>
-          )} */}
-        {location.pathname !== "/login" &&
-          !location.pathname.startsWith("/error") &&
-          location.pathname !== "*" && (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                gap: "24px",
-                borderTop: "1px solid #E8F0FE",
-                boxShadow: "0 12px 15px rgba(0,0,0,.15)",
-                transition: "0.2s",
-                opacity: showDivOnScroll ? 1 : 0,
-                backgroundColor: "white",
-                padding: "10px",
-                position: "fixed",
-                top: 78,
-                right: 0,
-                width: "100%",
-                zIndex: 9,
-              }}
-            >
-              {data.map((ele, i) => {
-                return (
-                  <Stack
-                    key={i}
-                    flexDirection={"row"}
-                    gap={3}
-                    justifyContent={"center"}
-                  >
-                    <Stack flexDirection={"row"} alignItems={"center"} gap={1}>
-                      <img
-                        src="https://img.moglimg.com/assets/img/office_supplies.png"
-                        alt=""
-                        width={40}
-                      />
-                      <p className=" text-gray-600">{ele.category}</p>
-                    </Stack>
-                  </Stack>
-                );
-              })}
-            </div>
-          )}
+                </Stack>
+              );
+            })}
+          </div>
+        )}
       </Stack>
     </>
   );

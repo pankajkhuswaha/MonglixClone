@@ -11,39 +11,35 @@ import { IconButton, Stack } from "@mui/material";
 const Mycard = ({ data, load }) => {
   return (
     <>
-      {data.map((e, i) => (
-        <React.Fragment key={i}>
-          {load ? (
-            <Loader />
-          ) : (
-            <Link to={`products/${e._id}`} state={e}>
-              <div className="mycard  md:m-[3px] m-[0px]">
-                <div className="p-3">
-                  <div className="imgcontainer">
-                    <img src={e.images[0]} alt="" width={140} height={140} />
-                  </div>
-                  <p className="text-sm ">{e.name.slice(0, 29)}</p>
-                  <p className="font-bold text-md">{numberFormat(e.price)}</p>
-                  <Stack
-                    pt={1}
-                    display={"flex"}
-                    flexDirection={"row"}
-                    justifyContent={"space-between"}
-                  >
-                    <Buttonele title={"Buy Now"} />
-                    <IconButton
-                      sx={{ color: "#FF4268" }}
-                      aria-label="add to shopping cart"
-                    >
-                      <ShoppingCartIcon />
-                    </IconButton>
-                  </Stack>
-                </div>
+      {load ? (
+        <Loader />
+      ) : (
+        <Link to={`products/${data._id}`} state={data}>
+          <div className="mycard  md:m-[3px] m-[0px]">
+            <div className="p-3">
+              <div className="imgcontainer">
+                <img src={data.images[0]} alt="" width={140} height={140} />
               </div>
-            </Link>
-          )}
-        </React.Fragment>
-      ))}
+              <p className="text-sm ">{data.name.slice(0, 29)}</p>
+              <p className="font-bold text-md">{numberFormat(data.price)}</p>
+              <Stack
+                pt={1}
+                display={"flex"}
+                flexDirection={"row"}
+                justifyContent={"space-between"}
+              >
+                <Buttonele title={"Buy Now"} />
+                <IconButton
+                  sx={{ color: "#FF4268" }}
+                  aria-label="add to shopping cart"
+                >
+                  <ShoppingCartIcon />
+                </IconButton>
+              </Stack>
+            </div>
+          </div>
+        </Link>
+      )}
     </>
   );
 };

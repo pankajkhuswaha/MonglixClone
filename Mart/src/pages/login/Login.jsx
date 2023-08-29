@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 import "./login.css";
+
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { RegisterApi, LoginApi } from "../../features/authSlice";
+import { RegisterApi, LoginApi, VerifyApi } from "../../features/authSlice";
 
 const Login = () => {
-  const dtata = useSelector((state) => state.auth.token);
-  console.log(dtata);
+  const { verifyapi, verify, error, success } = useSelector(
+    (state) => state.auth
+  );
+
   const dispatch = useDispatch();
   const {
     values: rvalues,
@@ -24,6 +29,12 @@ const Login = () => {
     onSubmit: (values) => {
       dispatch(RegisterApi(values));
       rresetForm();
+      if (success) {
+        toast.success("sucesss");
+      }
+      if (error) {
+        toast.error("Error");
+      }
     },
   });
   const {
@@ -37,11 +48,23 @@ const Login = () => {
       password: "",
     },
     onSubmit: (values) => {
-      console.log(values);
       dispatch(LoginApi(values));
       lresetForm();
     },
   });
+  const verifyToken = () => {
+    dispatch(VerifyApi());
+
+    if (success) {
+      toast.success("sucesss");
+    } else if (error) {
+      toast.error("error");
+    }
+  };
+
+  useEffect(() => {
+    verifyToken();
+  }, []);
 
   const handleSignUpClick = (e) => {
     e.preventDefault();
