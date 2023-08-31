@@ -52,19 +52,6 @@ const Login = () => {
       lresetForm();
     },
   });
-  const verifyToken = () => {
-    dispatch(VerifyApi());
-
-    if (success) {
-      toast.success("sucesss");
-    } else if (error) {
-      toast.error("error");
-    }
-  };
-
-  useEffect(() => {
-    verifyToken();
-  }, []);
 
   const handleSignUpClick = (e) => {
     e.preventDefault();
