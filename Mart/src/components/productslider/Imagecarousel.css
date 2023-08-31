@@ -17,15 +17,13 @@
 }
 .slick-prev,
 .slick-next {
-  border-radius: 12px;
-  background-color: red !important;
+  border-radius: 4px;
   align-items: center !important;
-  background: #fcfcfc !important;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
   color: #000 !important;
   display: flex !important;
-  height: 104px !important;
+  height: 80px !important;
   justify-content: center !important;
-  width: 47px !important;
+  width: 40px !important;
   z-index: 1 !important;
 }

@@ -26,14 +26,6 @@ export const NextBtn = ({ className, onClick }) => {
 };
 
 export default function Imagecarousel({ products, load }) {
-  // var settings = {
-  //   dots: false,
-  //   infinite: false,
-  //   speed: 500,
-
-  //   slidesToShow: 6,
-  //   slidesToScroll: 1,
-  // };
   var settings = {
     dots: false,
     infinite: false,

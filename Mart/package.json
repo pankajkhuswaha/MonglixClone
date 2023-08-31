@@ -26,6 +26,8 @@
 
     "@emotion/styled": "^11.11.0",
 
+    "@headlessui/react": "^1.7.17",
+
     "@mui/icons-material": "^5.14.7",
 
     "@mui/material": "^5.14.5",
@@ -39,6 +41,8 @@
     "datatables.net-dt": "^1.13.6",
 
     "formik": "^2.4.3",
+
+    "heroicons": "^2.0.18",
 
     "jquery": "^3.7.0",
 

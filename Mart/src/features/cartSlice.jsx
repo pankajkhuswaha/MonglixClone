@@ -14,6 +14,11 @@ export const addCart = createAsyncThunk("addcart", async (payload) => {
   console.log(res.data);
   return res.data;
 });
+export const deleteCart = createAsyncThunk("deletecart", async (id) => {
+  const res = await axios.delete(`${base_url}cart/${id}`, config);
+  console.log(res.data);
+  return res.data;
+});
 export const userCart = createAsyncThunk("cart", async () => {
   const res = await axios.get(`${base_url}cart`, config);
   return res.data;
@@ -48,12 +53,19 @@ export const cartSlice = createSlice({
         state.loading = true;
       })
       .addCase(addCart.fulfilled, (state, action) => {
-        // state.carts.push(action.payload);
         console.log(action.payload);
         state.loading = false;
       })
       .addCase(addCart.pending, (state) => {
         state.loading = true;
+      })
+      .addCase(deleteCart.fulfilled, (state, action) => {
+        if (action.payload.error) {
+          toast.error(action.payload.error);
+        } else {
+          state.carts = action.payload;
+          toast.success("Item succesfully Deleted!");
+        }
       });
   },
 });
