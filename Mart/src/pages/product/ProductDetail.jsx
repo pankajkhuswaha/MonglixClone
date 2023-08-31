@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Stack } from "@mui/material";
 import numberFormat from "../../essentail/numberFormat";
+import Checkout from "./Checkout";
 import SelectImage from "./SelectImage";
 
 const ProductDetail = () => {

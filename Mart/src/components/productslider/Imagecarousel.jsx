@@ -1,54 +1,72 @@
-// import React, { useRef } from "react";
-// import Mycard from "./card/Mycard";
-// import "./Imagecarousel.css";
-
-// const Imagecarousel = ({ products, load }) => {
-//   const containerRef = useRef(null);
-//   const cardWidth = 500;
-
-//   const btnpressprev = () => {
-//     const container = containerRef.current;
-//     container.scrollLeft -= cardWidth;
-//   };
-
-//   const btnpressnext = () => {
-//     const container = containerRef.current;
-//     container.scrollLeft += cardWidth;
-//   };
-
-//   return (
-//     <div className="product-carousel">
-//       <button className="pre-btn" onClick={btnpressprev}>
-//         <p>&lt;</p>
-//       </button>
-//       <button className="next-btn" onClick={btnpressnext}>
-//         <p>&gt;</p>
-//       </button>
-
-//       <div className="product-container md:gap-[20px] gap-0" ref={containerRef}>
-//         <Mycard data={products} load={load} />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Imagecarousel;
-
 import React from "react";
 import Slider from "react-slick";
 import "./Imagecarousel.css";
 import "slick-carousel/slick/slick.css";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "slick-carousel/slick/slick-theme.css";
 import Mycard from "./card/Mycard";
 
+export const PreviousBtn = ({ className, onClick }) => {
+  return (
+    <div className={className} onClick={onClick}>
+      <ArrowBackIosIcon
+        sx={{ color: "black", position: "relative", left: "4px" }}
+      />
+    </div>
+  );
+};
+
+export const NextBtn = ({ className, onClick }) => {
+  return (
+    <div className={className} onClick={onClick}>
+      <ArrowForwardIosIcon sx={{ color: "black" }} />
+    </div>
+  );
+};
+
 export default function Imagecarousel({ products, load }) {
+  // var settings = {
+  //   dots: false,
+  //   infinite: false,
+  //   speed: 500,
+
+  //   slidesToShow: 6,
+  //   slidesToScroll: 1,
+  // };
   var settings = {
     dots: false,
     infinite: false,
     speed: 500,
+    slidesToShow: 6,
+    prevArrow: <PreviousBtn />,
+    nextArrow: <NextBtn />,
 
-    slidesToShow: 5,
-    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 390,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
     <Slider {...settings}>

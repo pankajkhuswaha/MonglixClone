@@ -4,18 +4,31 @@ import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Buttonele from "../../button/Buttonele";
 import Loader from "../loader/Loader";
+import { addCart, userCart } from "../../../features/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./Mycard.css";
 import { IconButton, Stack } from "@mui/material";
 
 const Mycard = ({ data, load }) => {
+  const dispatch = useDispatch();
+  const handleCart = ({ id, qty }) => {
+    dispatch(addCart({ id, qty }));
+    dispatch(userCart());
+  };
+
   return (
     <>
       {load ? (
         <Loader />
       ) : (
-        <Link to={`products/${data._id}`} state={data}>
-          <div className="mycard  md:m-[3px] m-[0px]">
+        <Link
+          to={`products/${data._id}`}
+          state={data}
+          className="flex justify-center"
+          >          
+            
+          <div className="mycard hover:shadow-xl rounded-b-lg border border-[#e5e7eb] mx-2 my-4">
             <div className="p-3">
               <div className="imgcontainer">
                 <img src={data.images[0]} alt="" width={140} height={140} />
@@ -30,6 +43,7 @@ const Mycard = ({ data, load }) => {
               >
                 <Buttonele title={"Buy Now"} />
                 <IconButton
+                  onClick={() => handleCart({ id: data._id, qty: 1 })}
                   sx={{ color: "#FF4268" }}
                   aria-label="add to shopping cart"
                 >

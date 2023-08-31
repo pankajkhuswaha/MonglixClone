@@ -3,9 +3,16 @@
   max-width: 200px;
   border-radius: 10px;
   height: 99%;
-  background-color: "white";
-  box-shadow: 0 2px 7px #dfdfdf;
+  background-color: white;
+  /* box-shadow: 0 2px 7px #dfdfdf; */
+  /* border: 1px solid rgb(141, 135, 135); */
   color: white;
+  transition: 0.3s;
+}
+.mycard:hover {
+  /* transform: scale(1.03); */
+  box-shadow: 0 2px 7px #dfdfdf;
+  transition: 0.5s;
 }
 p {
   color: black;

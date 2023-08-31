@@ -1,0 +1,11 @@
+.product-desc-listing li {
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+  padding: 6px;
+}
+.product-desc-listing li h4 ::after {
+  content: ":";
+
+  position: relative;
+}

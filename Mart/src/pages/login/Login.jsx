@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -6,13 +5,12 @@ import "./login.css";
 
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { RegisterApi, LoginApi, VerifyApi } from "../../features/authSlice";
+import { Navigate, useNavigate } from "react-router-dom";
+import { RegisterApi, LoginApi } from "../../features/authSlice";
 
 const Login = () => {
-  const { verifyapi, verify, error, success } = useSelector(
-    (state) => state.auth
-  );
-
+  const { error, success } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     values: rvalues,
@@ -49,7 +47,6 @@ const Login = () => {
     },
     onSubmit: (values) => {
       dispatch(LoginApi(values));
-      lresetForm();
     },
   });
 

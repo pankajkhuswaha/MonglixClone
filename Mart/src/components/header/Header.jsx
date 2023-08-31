@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Stack, Badge } from "@mui/material";
 import { useLocation, Link } from "react-router-dom";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 import { SearchComponent, BtmDrawer } from "../Index";
+import { toast } from "react-toastify";
 
 const Header = () => {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+    toast.success("logout Successfull");
+  };
   const users = useSelector((state) => state.auth.user);
   const currentuser = users.user?.name;
   const location = useLocation();
@@ -55,11 +61,14 @@ const Header = () => {
           </h1>
           <SearchComponent />
           <Stack flexDirection={"row"} gap={4} alignItems={"center"}>
-            <Badge badgeContent={1} color="primary">
-              <LocalMallIcon color="green" />
-            </Badge>
+            <Link to={"/checkout"}>
+              <Badge badgeContent={1} color="primary">
+                <ShoppingBagOutlinedIcon />
+              </Badge>
+            </Link>
+
             {currentuser ? (
-              <button onClick={() => localStorage.removeItem("token")}>
+              <button onClick={handleLogout}>
                 <p>{currentuser}</p>{" "}
               </button>
             ) : (
@@ -103,12 +112,7 @@ const Header = () => {
                   justifyContent={"center"}
                 >
                   <Stack flexDirection={"row"} alignItems={"center"} gap={1}>
-                    <img
-                      src="https://img.moglimg.com/assets/img/office_supplies.png"
-                      alt=""
-                      width={40}
-                    />
-                    <p className=" text-gray-600">{ele}</p>
+                    <p className=" text-gray-600 text-[17px]">{ele}</p>
                   </Stack>
                 </Stack>
               );

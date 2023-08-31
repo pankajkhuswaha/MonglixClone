@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Stack } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import { getProducts } from "./features/ProductSlice";
+import { userCart } from "./features/cartSlice";
 import { useDispatch } from "react-redux";
 import { Routess } from "./routes/Routes";
 import { VerifyApi } from "./features/authSlice";
@@ -16,6 +17,7 @@ import "react-quill/dist/quill.snow.css";
 const App = () => {
   const dispatch = useDispatch();
   const { error, success } = useSelector((state) => state.auth);
+  const { carts } = useSelector((state) => state.cart);
   const isLoading = useSelector((state) => state.loading.show);
 
   const verifyToken = () => {
@@ -31,6 +33,7 @@ const App = () => {
   useEffect(() => {
     verifyToken();
     dispatch(getProducts());
+    dispatch(userCart());
   }, [dispatch]);
 
   return (

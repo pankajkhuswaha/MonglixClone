@@ -103,11 +103,7 @@ const SelectImage = ({ img }) => {
                   </defs>
                 </svg>
 
-                <span
-                  font-size="18px"
-                  className="text-lg font-[600]"
-                  color="#9F2089"
-                >
+                <span className="text-lg font-[600]" color="#9F2089">
                   Add to Cart
                 </span>
               </button>
@@ -123,7 +119,6 @@ const SelectImage = ({ img }) => {
                   stroke="#ffffff"
                   btnType="solid"
                   icon="[object Object]"
-                  class="sc-bcXHqe ioQafO ProductCard__SolidButtonBigStyled-sc-camkhj-1 dEqZtN"
                   iconSize="20"
                 >
                   <path
