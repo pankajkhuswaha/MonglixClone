@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import "./checkout.css";
 import numberFormat from "../../essentail/numberFormat";
-import { BsTruck } from "react-icons/bs";
 import { deleteCart, updateCart, userCart } from "../../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Slider, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 const Checkout = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -12,7 +11,6 @@ const Checkout = () => {
   }, []);
 
   const { carts } = useSelector((state) => state.cart);
-  console.log(carts);
 
   return (
     <>
@@ -154,7 +152,6 @@ const Checkout = () => {
                         <span id="CartAmtFirst"> Items</span>
                       </li>
                       <li>
-                        <h4>Advance Monthly Rental</h4>
                         <span id="CartAmtFirst">
                           {/* <i class="rupees-symbol">₹</i> {`${total_amt}.00`} */}
                         </span>

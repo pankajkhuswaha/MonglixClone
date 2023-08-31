@@ -17,7 +17,7 @@ import "react-quill/dist/quill.snow.css";
 const App = () => {
   const dispatch = useDispatch();
   const { error, success } = useSelector((state) => state.auth);
-  // const { carts } = useSelector((state) => state.cart);
+  const { carts } = useSelector((state) => state.cart);
   const isLoading = useSelector((state) => state.loading.show);
 
   const verifyToken = () => {

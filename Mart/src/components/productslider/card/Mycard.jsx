@@ -26,7 +26,7 @@ const Mycard = ({ data, load }) => {
       ) : (
         <div className="mycard hover:shadow-xl rounded-b-lg border border-[#e5e7eb] mx-2 my-4">
           <div className="p-3">
-            <Link to={`products/${data._id}`} state={data}>
+            <Link to={`/products/${data._id}`} state={data}>
               <div className="imgcontainer">
                 <img src={data.images[0]} alt="" width={140} height={140} />
               </div>
