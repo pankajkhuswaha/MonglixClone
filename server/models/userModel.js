@@ -29,11 +29,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       validate: {
-        validator: function(value) {
+        validator: function (value) {
           return /^[6-9]\d{9}$/.test(value);
         },
-        message: props => `${props.value} is not a valid Indian mobile number.`
-      }
+        message: (props) =>
+          `${props.value} is not a valid Indian mobile number.`,
+      },
     },
     password: {
       type: String,
@@ -51,8 +52,23 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    cart: {
+      products: [
+        {
+          product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "product",
+          },
+          count: Number,
+          total: Number,
+        },
+      ],
+      totalValue:Number
+    },
     order: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
-    address: [{ type: mongoose.Schema.Types.ObjectId, ref: "Address" }],
+    address: {
+      type: Array,
+    },
     refreshToken: {
       type: String,
     },
