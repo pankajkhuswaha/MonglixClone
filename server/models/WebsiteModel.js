@@ -7,9 +7,8 @@ const WebsiteSchema = new mongoose.Schema(
     },
     logo: {
       type: String,
-      required: true,
     },
-    maninbg: {
+    mainbg: {
       type: String,
       required: true,
     },

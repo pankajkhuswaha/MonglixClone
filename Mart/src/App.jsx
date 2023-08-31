@@ -13,6 +13,7 @@ import { Routess } from "./routes/Routes";
 import { VerifyApi } from "./features/authSlice";
 import Loading from "./features/loading/Loader";
 import "react-quill/dist/quill.snow.css";
+import { getSiteConfig } from "./features/Website/configSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const App = () => {
     verifyToken();
     dispatch(getProducts());
     dispatch(userCart());
+    dispatch(getSiteConfig());
   }, [dispatch]);
 
   return (

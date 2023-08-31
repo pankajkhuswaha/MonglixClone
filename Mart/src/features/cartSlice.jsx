@@ -11,12 +11,10 @@ const initialState = {
 };
 export const addCart = createAsyncThunk("addcart", async (payload) => {
   const res = await axios.post(`${base_url}cart`, payload, config);
-  console.log(res.data);
   return res.data;
 });
 export const deleteCart = createAsyncThunk("deletecart", async (id) => {
   const res = await axios.delete(`${base_url}cart/${id}`, config);
-  console.log(res.data);
   return res.data;
 });
 export const userCart = createAsyncThunk("cart", async () => {

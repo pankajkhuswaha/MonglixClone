@@ -42,7 +42,11 @@ const updateConfig = asyncHandle(async (req, res) => {
 
 const getConfig = asyncHandle(async (req, res) => {
   const siteConfig = await WebsiteModel.find();
-  res.json(siteConfig);
+  if(siteConfig.length>=1){
+      res.json(siteConfig[0]);
+    }else{
+      res.json({});
+  }
 });
 
 
