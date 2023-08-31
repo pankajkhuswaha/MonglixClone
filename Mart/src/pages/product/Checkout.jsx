@@ -1,12 +1,16 @@
 import React, { useEffect } from "react";
 import "./checkout.css";
+import numberFormat from "../../essentail/numberFormat";
 import { BsTruck } from "react-icons/bs";
-import { updateCart, userCart } from "../../features/cartSlice";
+import { deleteCart, updateCart, userCart } from "../../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-// import { decqty, incqty } from "../../features/products/CartSlice";
 import { Slider, Stack } from "@mui/material";
 const Checkout = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(userCart());
+  }, []);
+
   const { carts } = useSelector((state) => state.cart);
   console.log(carts);
 
@@ -14,330 +18,79 @@ const Checkout = () => {
     <>
       <section className="section m-3">
         <div className="container">
-          <div className="row">
-            <div className="col-sm-8 flex items-center">
-              <div
-                className="card text-center "
-                style={{ position: "relative", padding: "0px" }}
-              >
-                <div
-                  className="card-header   d-flex justify-content-center align-items-center flex-row"
-                  style={{ background: "rgb(206, 237, 240)" }}
-                >
-                  Rent Cart 1 Items
-                </div>
-                {carts.products?.map((value, index) => {
-                  const { url, name, price, count, _id } = value;
-                  return (
-                    <>
-                      <div className="card-body d-flex justify-between">
-                        <div className="img w-50 ">
-                          <img src={url} width={"100%"} height={100} />
+          <div className="flex justify-between  flex-wrap ">
+            <div class="rounded-lg md:w-[60%] mt-[12px]">
+              {carts.products?.map((value, index) => {
+                const { url, name, price, count, _id } = value;
+                return (
+                  <div class="justify-between mb-4 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+                    <img
+                      src={url}
+                      alt="product-image"
+                      class="w-full rounded-lg sm:w-40"
+                    />
+                    <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+                      <div class="mt-5 sm:mt-0">
+                        <h2 class="text-lg font-bold text-gray-900">{name}</h2>
+                        <p class="mt-1 text-md text-gray-700">
+                          {numberFormat(price)}
+                        </p>
+                      </div>
+                      <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
+                        <div class="flex items-center border-gray-100">
+                          <span
+                            onClick={() => {
+                              dispatch(userCart()),
+                                dispatch(updateCart({ id: _id, type: "dec" }));
+                            }}
+                            class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                          >
+                            -
+                          </span>
+                          <input
+                            class="h-8 w-8 border bg-white text-center text-xs outline-none"
+                            disabled
+                            defaultValue="1"
+                            value={count}
+                            name="quantity"
+                          />
+                          <span
+                            class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                            onClick={() => {
+                              dispatch(userCart()),
+                                dispatch(updateCart({ id: _id, type: "inc" }));
+                            }}
+                          >
+                            +
+                          </span>
                         </div>
-                        <div className="content w-100">
-                          <h5 className="text-3xl" style={{}}>
-                            {name}
-                          </h5>
-                          <p
-                            style={{
-                              cursor: "pointer",
-                              boxSizing: "border-box",
-                              padding: 0,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              gap: "10px",
-                              margin: "0px 0px 20px 0px",
-                              fontFamily: "Work Sans",
-                              fontSize: "1em",
-                              fontWeight: 400,
-                              color: "rgb(119, 119, 119)",
-                              lineHeight: 1.3,
-                            }}
+                        <div class="flex items-center space-x-4">
+                          <p class="text-sm"> {numberFormat(price * count)} </p>
+                          <svg
+                            onClick={() => dispatch(deleteCart(_id))}
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500"
                           >
-                            <BsTruck />
-                            Fast Delivery
-                          </p>
-                          <div
-                            className="muibox d-flex align-items-center gap-2 justify-content-center "
-                            style={{
-                              marginTop: "-15px",
-                              marginBottom: "20px",
-                              padding: "10px",
-                              position: "relative",
-                            }}
-                          >
-                            <p
-                              className="card-text"
-                              style={{
-                                margin: "0 8px 0 0",
-                                fontSize: "100%",
-                                fontWeight: 500,
-                                color: "rgb(188, 188, 188)",
-                                textDecoration: "line-through",
-                                lineHeight: 1.3,
-                              }}
-                            >
-                              ₹{price}
-                            </p>
-                            <p
-                              className="card-text"
-                              style={{
-                                fontSize: "1em",
-                                fontWeight: 600,
-                                color: "rgb(34, 34, 34)",
-                                padding: "4px 8px",
-                                borderRadius: "9px",
-                                backgroundColor: "rgb(255, 245, 183)",
-                                lineHeight: 1.3,
-                              }}
-                            >
-                              10%
-                            </p>
-                            <p
-                              className="card-text"
-                              style={{
-                                cursor: "pointer",
-                                boxSizing: "border-box",
-                                padding: 0,
-                                margin: "0px",
-                                fontFamily: "Work Sans",
-                                fontSize: "20px",
-                                fontWeight: 600,
-                                color: "rgb(34, 34, 34)",
-                                lineHeight: 1.3,
-                              }}
-                            >
-                              {price * count}
-                            </p>
-                          </div>
-
-                          <div
-                            className="qty-icons"
-                            style={{
-                              zIndex: "1",
-                              display: "flex",
-                              flexDirection: "column",
-                              justifyContent: "center",
-                              alignContent: "center",
-                              alignItems: "center",
-                              marginTop: "-15px",
-                            }}
-                          >
-                            <div style={{ display: "flex" }}>
-                              <button
-                                className="btn btn-icon btn-primary minus"
-                                style={{
-                                  boxSizing: "border-box",
-                                  margin: "0",
-                                  textDecoration: "none",
-                                  fontSize: "15px",
-                                  letterSpacing: ".5px",
-                                  transition: "all .3s",
-                                  borderRadius: "5px",
-                                  cursor: "pointer",
-                                  outline: "0",
-                                  height: "36px",
-                                  width: "36px",
-                                  display: "inline-flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  marginBottom: "10px",
-                                }}
-                                onClick={() => {
-                                  dispatch(userCart()),
-                                    dispatch(
-                                      updateCart({ id: _id, type: "dec" })
-                                    );
-                                }}
-                              >
-                                -
-                              </button>
-                              <input
-                                style={{
-                                  boxSizing: "border-box",
-                                  margin: "0 10px",
-                                  outline: "0",
-                                  textDecoration: "none",
-                                  fontSize: "15px",
-                                  letterSpacing: ".5px",
-                                  transition: "all .3s",
-                                  borderRadius: "5px",
-                                  height: "36px",
-                                  display: "inline-flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  padding: "0",
-                                  pointerEvents: "none",
-                                  width: "100px",
-                                }}
-                                type="text"
-                                className="btn btn-primary "
-                                min="0"
-                                defaultValue="dfkh"
-                                value={count}
-                                name="quantity"
-                              />
-                              <button
-                                className="btn btn-icon btn-primary plus"
-                                style={{
-                                  boxSizing: "border-box",
-                                  textDecoration: "none",
-                                  fontSize: "15px",
-                                  letterSpacing: ".5px",
-                                  transition: "all .3s",
-                                  borderRadius: "5px",
-                                  cursor: "pointer",
-                                  outline: "0",
-                                  height: "36px",
-                                  width: "36px",
-                                  display: "inline-flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  padding: "0",
-                                }}
-                                onClick={() => {
-                                  dispatch(userCart()),
-                                    dispatch(
-                                      updateCart({ id: _id, type: "inc" })
-                                    );
-                                }}
-                              >
-                                +
-                              </button>
-                            </div>
-
-                            {/*  */}
-
-                            {/*  */}
-                          </div>
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
                         </div>
                       </div>
-                      <hr />
-                    </>
-                  );
-                })}
-              </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            <div className="col-sm-4 mt-3">
-              <div
-                className=""
-                style={{
-                  boxSizing: "border-box",
-                  margin: "15px 0 0 0",
-                  cursor: "pointer",
-                  background: "rgb(243, 243, 243)",
-                  borderRadius: "8px",
-                  fontFamily: "Work Sans",
-                  fontSize: "16px",
-                  fontWeight: "500",
-                  lineHeight: "1.3",
-                }}
-              >
-                <div
-                  className="cursor-pointer MuiBox-root"
-                  style={{
-                    boxSizing: "border-box",
-                    margin: "0",
-                    cursor: "pointer",
-                    padding: "28px 32px",
-                    background: "rgb(243, 243, 243)",
-                    borderRadius: "8px",
-                    fontFamily: "Work Sans",
-                    fontSize: "16px",
-                    fontWeight: "500",
-                    lineHeight: "1.3",
-                  }}
-                >
-                  <div
-                    className="MuiBox-root "
-                    style={{
-                      cursor: "pointer",
-                      boxSizing: "border-box",
-                      padding: "0",
-                      margin: "0",
-                      height: "auto",
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      flexWrap: "nowrap",
-                      flexShrink: "0",
-                      flexGrow: "0",
-                      fontFamily: "Work Sans",
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      lineHeight: "1.3",
-                    }}
-                  >
-                    <h1
-                      className="MuiTypography-root MuiTypography-body1"
-                      style={{
-                        cursor: "pointer",
-                        boxSizing: "border-box",
-                        padding: "0",
-                        margin: "0",
-                        fontFamily: "Work Sans",
-                        fontSize: "26px",
-                      }}
-                    >
-                      Rent Cart Breakup
-                    </h1>
-                    <svg
-                      width="24"
-                      height="24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        width="24"
-                        height="24"
-                        rx="12"
-                        fill="#76CDD6"
-                      ></rect>
-                      <path
-                        d="M8.5 12h7M12 8.5l3.5 3.5-3.5 3.5"
-                        stroke="#fff"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  <hr className="mt-3 mb-3" />
-                  <div
-                    className="MuiBox-root "
-                    style={{
-                      cursor: "pointer",
-                      boxSizing: "border-box",
-                      padding: "0",
-                      margin: "0",
-                      height: "auto",
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      flexWrap: "nowrap",
-                      flexShrink: "0",
-                      flexGrow: "0",
-                    }}
-                  >
-                    {/* total product logic================== */}
-                    <p className="MuiTypography-root MuiTypography-body1 ">
-                      Total Payable
-                    </p>
-                    {/* {cartdata.map((value, index) => {
-                        console.log(value);
-                        return (
-                          <> */}
-                    <p className="MuiTypography-root MuiTypography-P_SemiBold css-cyezfc d-flex flex-column">
-                      {/* ₹{value.price * value.qty} */}
-                    </p>
-                    {/* </>
-                        );
-                      })} */}
-                  </div>
-                </div>
-              </div>
-
+            {/*  */}
+            <div className="col-sm-4 ">
               <div
                 className="MuiBox-root "
                 style={{
@@ -395,7 +148,7 @@ const Checkout = () => {
                               fill="#fff"
                             ></path>
                           </svg>
-                          <h4> Rent Cart</h4>
+                          <h4> Cart</h4>
                         </Stack>
 
                         <span id="CartAmtFirst"> Items</span>
@@ -430,8 +183,8 @@ const Checkout = () => {
                           id="CartCartGAmtFirst"
                           style={{ fontWeight: "bold" }}
                         >
-                          <i class="rupees-symbol">₹</i>{" "}
-                          {/* {`${total_amt + 100.0 + 500.0}.00 `} */}
+                          <i class="rupees-symbol"></i>{" "}
+                          {numberFormat(carts.totalCartValue)}
                         </span>
                       </li>
                     </ul>

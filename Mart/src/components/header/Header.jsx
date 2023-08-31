@@ -9,6 +9,8 @@ import { SearchComponent, BtmDrawer } from "../Index";
 import { toast } from "react-toastify";
 
 const Header = () => {
+  const cart = useSelector((state) => state.cart.carts);
+  const CartCount = cart.products?.length;
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
@@ -62,7 +64,7 @@ const Header = () => {
           <SearchComponent />
           <Stack flexDirection={"row"} gap={4} alignItems={"center"}>
             <Link to={"/checkout"}>
-              <Badge badgeContent={1} color="primary">
+              <Badge badgeContent={CartCount} color="primary">
                 <ShoppingBagOutlinedIcon />
               </Badge>
             </Link>
