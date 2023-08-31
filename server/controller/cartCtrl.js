@@ -26,7 +26,13 @@ const getcart = asyncHandle(async (req, res) => {
         _id: product._id,
       };
     });
-    res.json({ products: data, totalCartValue:user.cart.totalValue });
+    const totalCartValue = user.cart.products.reduce(
+      (total, item) => total + item.total,
+      0
+    );
+    user.cart.totalValue = totalCartValue;
+    console.log(totalCartValue);
+    res.json({ products: data, totalCartValue });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -72,7 +78,7 @@ const addItemToCart = asyncHandle(async (req, res) => {
 
 const removeAnItem = asyncHandle(async (req, res) => {
   const { _id } = req.user;
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
     const user = await User.findOneAndUpdate(
@@ -97,7 +103,13 @@ const removeAnItem = asyncHandle(async (req, res) => {
         _id: product._id,
       };
     });
-    res.json({ products: data, totalCartValue:user.cart.totalValue });
+    const totalCartValue = user.cart.products.reduce(
+      (total, item) => total + item.total,
+      0
+    );
+    user.cart.totalValue = totalCartValue;
+    console.log(totalCartValue);
+    res.json({ products: data, totalCartValue });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -152,7 +164,7 @@ const updatecart = asyncHandle(async (req, res) => {
     await user.populate({
       path: "cart.products.product",
       select: "_id name price images",
-    })
+    });
 
     const data = user.cart.products.map((item) => {
       const product = item.product;
