@@ -18,7 +18,7 @@ export const Routess = [
     Element: <Login />,
   },
   {
-    path: "/products",
+    path: "/product",
     Element: <Productpage />,
   },
   {

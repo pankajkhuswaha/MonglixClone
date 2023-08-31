@@ -18,7 +18,7 @@ import { getSiteConfig } from "./features/Website/configSlice";
 const App = () => {
   const dispatch = useDispatch();
   const { error, success } = useSelector((state) => state.auth);
-  // const { carts } = useSelector((state) => state.cart);
+  const { carts } = useSelector((state) => state.cart);
   const isLoading = useSelector((state) => state.loading.show);
 
   const verifyToken = () => {

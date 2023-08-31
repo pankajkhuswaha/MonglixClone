@@ -1,37 +1,9 @@
-// import React from "react";
-// import { Stack } from "@mui/material";
-// import { ProductSidebar } from "../../components/Index";
-// const Productpage = () => {
-//   return (
-//     <>
-//       <Stack
-//         display={"flex"}
-//         p={2}
-//         sx={{ background: "#F3F4F6" }}
-//         flexDirection={"row"}
-//       >
-//         <Stack flex={2}>
-//           <ProductSidebar />
-//         </Stack>
-//         <Stack flex={8}>hii its 8</Stack>
-//       </Stack>
-//     </>
-//   );
-// };
-
-// export default Productpage;
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../features/ProductSlice";
 import Mycard from "../../components/productslider/card/Mycard";
-// import { XMarkIcon } from "@heroicons/react/24/outline";
-// import {
-//   ChevronDownIcon,
-//   FunnelIcon,
-//   MinusIcon,
-//   PlusIcon,
-//   Squares2X2Icon,
-// } from "@heroicons/react/20/solid";
+import { Stack } from "@mui/material";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -90,10 +62,16 @@ function classNames(...classes) {
 }
 
 export default function Productpage() {
-  const products = useSelector((state) => state.products.product);
-  console.log(products);
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const dispatch = useDispatch();
 
+  const data = useSelector((state) => state.products.products);
+
+  const categories = [...new Set(data.map((item) => item.category))];
+  console.log(categories);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
   return (
     <div className="bg-white">
       <div>
@@ -296,36 +274,36 @@ export default function Productpage() {
               Products
             </h2>
 
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-              {/* Filters */}
-              <form className="hidden lg:block">
-                <h3 className="sr-only">Categories</h3>
-                <ul
-                  role="list"
-                  className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
-                >
-                  {subCategories.map((category) => (
-                    <li key={category.name}>
-                      <a href={category.href}>{category.name}</a>
-                    </li>
-                  ))}
-                </ul>
-
-                {filters.map((section) => (
-                  <Disclosure
-                    as="div"
-                    key={section.id}
-                    className="border-b border-gray-200 py-6"
+            <Stack display={"flex"} gap={4} flexDirection={"row"}>
+              <Stack flex={2} position={"sticky"} top={"19%"} height={"100%"}>
+                <form>
+                  <h3 className="sr-only">Categories</h3>
+                  <ul
+                    role="list"
+                    className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
                   >
-                    {({ open }) => (
-                      <>
-                        <h3 className="-my-3 flow-root">
-                          <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                            <span className="font-medium text-gray-900">
-                              {section.name}
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {/* {open ? (
+                    {subCategories.map((category) => (
+                      <li key={category.name}>
+                        <a href={category.href}>{category.name}</a>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {filters.map((section) => (
+                    <Disclosure
+                      as="div"
+                      key={section.id}
+                      className="border-b border-gray-200 py-6"
+                    >
+                      {({ open }) => (
+                        <>
+                          <h3 className="-my-3 flow-root">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                              <span className="font-medium text-gray-900">
+                                {section.name}
+                              </span>
+                              <span className="ml-6 flex items-center">
+                                {/* {open ? (
                                 <MinusIcon
                                   className="h-5 w-5"
                                   aria-hidden="true"
@@ -336,48 +314,164 @@ export default function Productpage() {
                                   aria-hidden="true"
                                 />
                               )} */}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel className="pt-6">
-                          <div className="space-y-4">
-                            {section.options.map((option, optionIdx) => (
-                              <div
-                                key={option.value}
-                                className="flex items-center"
-                              >
-                                <input
-                                  id={`filter-${section.id}-${optionIdx}`}
-                                  name={`${section.id}[]`}
-                                  defaultValue={option.value}
-                                  type="checkbox"
-                                  defaultChecked={option.checked}
-                                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                />
-                                <label
-                                  htmlFor={`filter-${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-gray-600"
+                              </span>
+                            </Disclosure.Button>
+                          </h3>
+                          <Disclosure.Panel className="pt-6">
+                            <div className="space-y-4">
+                              {section.options.map((option, optionIdx) => (
+                                <div
+                                  key={option.value}
+                                  className="flex items-center"
                                 >
-                                  {option.label}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))}
-              </form>
+                                  <input
+                                    id={`filter-${section.id}-${optionIdx}`}
+                                    name={`${section.id}[]`}
+                                    defaultValue={option.value}
+                                    type="checkbox"
+                                    defaultChecked={option.checked}
+                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                  />
+                                  <label
+                                    htmlFor={`filter-${section.id}-${optionIdx}`}
+                                    className="ml-3 text-sm text-gray-600"
+                                  >
+                                    {option.label}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  ))}
+                </form>
+              </Stack>
 
-              {/* Product grid */}
-              <div className="lg:col-span-3">
-                <p>hiii</p>
-              </div>
-            </div>
+              <Stack flex={8} flexDirection={"row"} flexWrap={"wrap"}>
+                {data.map((ele, i) => {
+                  return <Mycard data={ele} />;
+                })}
+              </Stack>
+            </Stack>
           </section>
         </main>
       </div>
     </div>
   );
 }
+
+// import React, { Fragment, useEffect, useState } from "react";
+// import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getProducts } from "../../features/ProductSlice";
+// import Mycard from "../../components/productslider/card/Mycard";
+// import { Stack } from "@mui/material";
+
+// const sortOptions = [
+//   { name: "Most Popular", href: "#", current: true },
+//   { name: "Best Rating", href: "#", current: false },
+//   { name: "Newest", href: "#", current: false },
+//   { name: "Price: Low to High", href: "#", current: false },
+//   { name: "Price: High to Low", href: "#", current: false },
+// ];
+
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(" ");
+// }
+
+// export default function Productpage() {
+//   const dispatch = useDispatch();
+//   const data = useSelector((state) => state.products.products);
+
+//   const [selectedFilters, setSelectedFilters] = useState({
+//     color: [],
+//     category: [],
+//     size: [],
+//   });
+
+//   useEffect(() => {
+//     dispatch(getProducts());
+//   }, [dispatch]);
+
+//   // Extract all unique categories (including subcategories)
+//   const categories = [...new Set(data.map((item) => item.category))];
+
+//   // Generate category filter options dynamically
+//   const categoryFilterOptions = categories.map((category) => ({
+//     value: category,
+//     label: category,
+//   }));
+
+//   // Filter products based on selected filters
+//   const filteredProducts = data.filter((product) => {
+//     return (
+//       (selectedFilters.color.length === 0 ||
+//         selectedFilters.color.includes(product.color)) &&
+//       (selectedFilters.category.length === 0 ||
+//         selectedFilters.category.includes(product.category)) &&
+//       (selectedFilters.size.length === 0 ||
+//         selectedFilters.size.includes(product.size))
+//     );
+//   });
+
+//   // Function to update selected filters
+//   const handleFilterChange = (filterId, optionValue) => {
+//     setSelectedFilters((prevFilters) => ({
+//       ...prevFilters,
+//       [filterId]: prevFilters[filterId].includes(optionValue)
+//         ? prevFilters[filterId].filter((value) => value !== optionValue)
+//         : [...prevFilters[filterId], optionValue],
+//     }));
+//   };
+
+//   return (
+//     <div className="bg-white">
+//       {/* Your existing code for mobile filters dialog and product display */}
+//       {/* ... */}
+
+//       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+//         {/* ... */}
+//         <section aria-labelledby="products-heading" className="pb-24 pt-6">
+//           {/* ... */}
+//           <Stack display={"flex"} gap={4} flexDirection={"row"}>
+//             {/* Filter Sidebar */}
+//             <Stack flex={2} position={"sticky"} top={"19%"} height={"100%"}>
+//               <form>
+//                 {/* Dynamic Category Filter */}
+//                 <h3 className="sr-only">Categories</h3>
+//                 <ul
+//                   role="list"
+//                   className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
+//                 >
+//                   {categoryFilterOptions.map((categoryOption) => (
+//                     <li key={categoryOption.value}>
+//                       <a
+//                         href={`#${categoryOption.value}`}
+//                         onClick={(e) => {
+//                           e.preventDefault();
+//                           handleFilterChange("category", categoryOption.value);
+//                         }}
+//                       >
+//                         {categoryOption.label}
+//                       </a>
+//                     </li>
+//                   ))}
+//                 </ul>
+//                 {/* ... */}
+//               </form>
+//             </Stack>
+
+//             {/* Product Display */}
+//             <Stack flex={8} flexDirection={"row"} flexWrap={"wrap"}>
+//               {filteredProducts.map((ele, i) => {
+//                 return <Mycard data={ele} key={i} />;
+//               })}
+//             </Stack>
+//           </Stack>
+//         </section>
+//       </main>
+//     </div>
+//   );
+// }
