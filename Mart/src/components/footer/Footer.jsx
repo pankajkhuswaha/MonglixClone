@@ -1,13 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
+  const site = useSelector(st=>st.site.data)
   return (
     <>
       <footer className="bg-gradient-to-r from-gray-100  to-gray-100">
         <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
-              <h1>Logo</h1>
+              <h1>{site.name}</h1>
 
               <div className="flex mt-8 space-x-6 text-gray-600">
                 <p className="hover:opacity-75">

@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 
 const Header = () => {
   const cart = useSelector((state) => state.cart.carts);
+  const site = useSelector(st=>st.site.data)
+
   const CartCount = cart.products?.length;
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -57,9 +59,9 @@ const Header = () => {
           justifyContent={"space-between"}
         >
           <h1
-            style={{ color: "orangered", fontWeight: "bold", fontSize: "30px" }}
+            style={{ color: site.primarybg, fontWeight: "bold", fontSize: "30px" }}
           >
-            Logo
+            {site.name}
           </h1>
           <SearchComponent />
           <Stack flexDirection={"row"} gap={4} alignItems={"center"}>

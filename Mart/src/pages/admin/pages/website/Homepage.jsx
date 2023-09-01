@@ -8,7 +8,6 @@ import { updateSiteConfig } from "../../../../features/Website/configSlice";
 const Homepage = () => {
   const siteConfig = useSelector((st) => st.site.data);
   const dispatch = useDispatch();
-  console.log(siteConfig)
   
   const { values, handleSubmit, handleChange, setFieldValue } = useFormik({
     initialValues: {
@@ -49,6 +48,7 @@ const Homepage = () => {
               name="name"
               value={values.name}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="col-12 col-md-6 mb-3">

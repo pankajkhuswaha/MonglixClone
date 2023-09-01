@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 const SearchComponent = () => {
   const [search, setSearch] = useState("");
 
@@ -10,6 +11,8 @@ const SearchComponent = () => {
     event.preventDefault();
     // Add your search logic here
   };
+  const site = useSelector(st=>st.site.data)
+
 
   return (
     <div>
@@ -26,12 +29,13 @@ const SearchComponent = () => {
         <div>
           <button
             type="submit"
-            className={`flex items-center bg-[#FF4268] justify-center w-12 h-12 text-white rounded-r-lg 
+            className={`flex items-center  justify-center w-12 h-12 text-white rounded-r-lg 
                             ${
                               search.length > 0
                                 ? " bg-[#f8436a]"
                                 : "bg-[#FF4268] cursor-not-allowed "
                             }`}
+                            style={{background:site.primarybg}}
             disabled={search.length === 0}
             onClick={handleSubmit}
           >
