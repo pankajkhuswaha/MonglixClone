@@ -8,9 +8,9 @@
 }
 body {
   overflow-x: none;
-  background-color: #F8FAFC;
-      font-family: Poppins, sans-serif;
-      font-weight: 400;
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+  /* background-color: #F8FAFC; */
 }
 :root {
   --red: #ff3f40;

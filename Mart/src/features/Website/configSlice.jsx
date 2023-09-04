@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { config } from "../../utils/axiosConfig";
 import { base_url } from "../../utils/baseUrl";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const initialState = {
   data: {},
@@ -20,7 +20,7 @@ export const updateSiteConfig = createAsyncThunk(
   "updateSiteConfiguration",
   async (siteCfg) => {
     const res = await axios.post(`${base_url}config`, siteCfg, config);
-    console.log(res.data)
+    toast.success(res.data.message)
     return res.data;
   }
 );

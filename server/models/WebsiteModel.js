@@ -5,6 +5,9 @@ const WebsiteSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    title:{
+      type: String,
+    },
     logo: {
       type: String,
     },
@@ -20,9 +23,22 @@ const WebsiteSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    headerCol: {
+      type: String,
+      required: true,
+    },
+    footerCol: {
+      type: String,
+      required: true,
+    },
+    textCol: {
+      type: String,
+      required: true,
+    },
     homepageBanner: {
       type: Array,
     },
+    
   },
   {
     timestamps: true,

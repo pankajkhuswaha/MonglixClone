@@ -9,7 +9,6 @@ const SearchComponent = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Add your search logic here
   };
   const site = useSelector(st=>st.site.data)
 

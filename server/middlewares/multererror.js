@@ -4,7 +4,7 @@ const multerError = (err, req, res, next) => {
     if (err.code === "LIMIT_FILE_SIZE") {
       return res
         .status(400)
-        .json({ error: "File size limit exceeded. Max allowed size: 5MB." });
+        .json({ error: "File size limit exceeded. Max allowed size: 1MB." });
     } else {
       return res
         .status(400)

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import ReactQuill from "react-quill";
-import { uploadDoc } from "../../../../utils/uploadimg";
+import { uploadFiles } from "../../../../utils/uploadimg";
 import { toggleLoading } from "../../../../features/loading/loadingSlice";
 
 const AddProduct = () => {
@@ -48,7 +48,7 @@ const AddProduct = () => {
     } else {
       dispatch(toggleLoading(true));
       try {
-        const res = await uploadDoc(e);
+        const res = await uploadFiles(e);
         const images = [...values.images, ...res];
         setFieldValue("images", images);
       } catch (error) {
@@ -61,7 +61,7 @@ const AddProduct = () => {
     const file = [e.target.files[0]];
     dispatch(toggleLoading(true));
     try {
-      const res = await uploadDoc(file);
+      const res = await uploadFiles(file);
       setFieldValue("bannerimg", res[0]);
     } catch (error) {
       toast.error(error.message);

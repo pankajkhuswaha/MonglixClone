@@ -18,6 +18,8 @@ const Mycard = ({ data, load }) => {
     navigate("/checkout");
     dispatch(userCart());
   };
+  const site = useSelector((st) => st.site.data);
+
 
   return (
     <>
@@ -43,7 +45,7 @@ const Mycard = ({ data, load }) => {
               <Buttonele title={"Buy Now"} />
               <IconButton
                 onClick={() => handleCart({ id: data._id, qty: 1 })}
-                sx={{ color: "#FF4268" }}
+                sx={{ color: site.primarybg }}
                 aria-label="add to shopping cart"
               >
                 <ShoppingCartIcon />

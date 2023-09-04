@@ -30,7 +30,7 @@ export default function Imagecarousel({ products, load }) {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 5,
     prevArrow: <PreviousBtn />,
     nextArrow: <NextBtn />,
 
@@ -61,10 +61,12 @@ export default function Imagecarousel({ products, load }) {
     ],
   };
   return (
-    <Slider {...settings}>
+    <div className="container">
+      <Slider {...settings}>
       {products.map((ele, i) => {
         return <Mycard key={i} data={ele} load={load} />;
       })}
     </Slider>
+    </div>
   );
 }

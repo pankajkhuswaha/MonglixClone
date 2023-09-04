@@ -16,6 +16,8 @@ const uploadimageRoute = require("./routes/uploadRoute");
 const websiteRoute = require("./routes/websiteRoute");
 const morgan = require("morgan");
 const cors = require("cors");
+const path = require("path");
+
 
 mongoose.set("strictQuery", true);
 dbConnect();
@@ -30,8 +32,10 @@ app.use("/api/otp", otpRoute);
 app.use("/api/contact", contactusRoute);
 app.use("/api/blog", blogRoute);
 app.use("/api/product", productRoute);
-app.use("/api/upload/image", uploadimageRoute);
 app.use("/api/config", websiteRoute);
+app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
+app.use("/api/uploads", uploadimageRoute);
+
 app.use(notFound);
 app.use(errorHandler);
 const os = require("os");

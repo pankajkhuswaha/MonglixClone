@@ -26,7 +26,7 @@ const Admin = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isAdmin, setadmin] = useState(true);
+  const [isAdmin, setadmin] = useState(false);
 
   const checkAdmin = async () => {
     const email = JSON.parse(localStorage.getItem("user"))?.email || null;
@@ -94,7 +94,7 @@ const Admin = () => {
                 : "col-12 flex justify-between p-4"
             }
           >
-            <div className="mt-[20px] w-full">
+            <div className="mt-[20px] w-full min-h-screen">
               <Routes>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/custom-homepage" element={<Homepage />} />
