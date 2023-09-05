@@ -20,7 +20,7 @@ const App = () => {
   const { error, success } = useSelector((state) => state.auth);
   const site = useSelector((st) => st.site.data);
   const isLoading = useSelector((state) => state.loading.show);
-  console.log(site.title)
+  // console.log(site.title);
 
   const verifyToken = () => {
     dispatch(VerifyApi());
