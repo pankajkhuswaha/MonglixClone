@@ -7,6 +7,7 @@ import {
   Checkout,
 } from "../pages";
 import Admin from "../pages/admin";
+import ContactUs from "../pages/admin/pages/contactus/ContactUs";
 
 export const Routess = [
   {
@@ -28,6 +29,10 @@ export const Routess = [
   {
     path: "/checkout",
     Element: <Checkout />,
+  },
+  {
+    path: "/contact",
+    Element: <ContactUs />,
   },
   {
     path: "*",
