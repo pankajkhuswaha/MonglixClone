@@ -4,4 +4,13 @@ import PageNotFound from "./404/PageNotFound";
 import Productpage from "./product/Productpage";
 import ProductDetail from "./product/ProductDetail";
 import Checkout from "./product/Checkout";
-export { Login, Viewpage, PageNotFound, Productpage, ProductDetail, Checkout };
+import About from "./about/About";
+export {
+  Login,
+  Viewpage,
+  PageNotFound,
+  Productpage,
+  ProductDetail,
+  Checkout,
+  About,
+};

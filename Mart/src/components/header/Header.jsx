@@ -12,6 +12,7 @@ const Header = () => {
   const site = useSelector((st) => st.site.data);
 
   const CartCount = cart.products?.length;
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
@@ -21,7 +22,7 @@ const Header = () => {
   const currentuser = users.user?.name;
   const location = useLocation();
   const data = useSelector((state) => state.products.products);
-  const categories = [...new Set(data.map((item) => item.category))];
+  const categories = ["All", ...new Set(data.map((item) => item.category))];
 
   const [showDivOnScroll, setShowDivOnScroll] = useState(false);
   const handleScroll = () => {
@@ -128,16 +129,21 @@ const Header = () => {
             >
               {categories.map((ele, i) => {
                 return (
-                  <Stack
-                    key={i}
-                    flexDirection={"row"}
-                    gap={3}
-                    justifyContent={"center"}
-                  >
-                    <Stack flexDirection={"row"} alignItems={"center"} gap={1}>
-                      <p className=" text-gray-600 text-[17px]">{ele}</p>
+                  <Link to={"/product"} key={i}>
+                    <Stack
+                      flexDirection={"row"}
+                      gap={3}
+                      justifyContent={"center"}
+                    >
+                      <Stack
+                        flexDirection={"row"}
+                        alignItems={"center"}
+                        gap={1}
+                      >
+                        <p className=" text-gray-600 text-[17px]">{ele}</p>
+                      </Stack>
                     </Stack>
-                  </Stack>
+                  </Link>
                 );
               })}
             </div>

@@ -5,6 +5,7 @@ import {
   Productpage,
   ProductDetail,
   Checkout,
+  About,
 } from "../pages";
 import Admin from "../pages/admin";
 import ContactUs from "../pages/admin/pages/contactus/ContactUs";
@@ -33,6 +34,10 @@ export const Routess = [
   {
     path: "/contact",
     Element: <ContactUs />,
+  },
+  {
+    path: "/about",
+    Element: <About />,
   },
   {
     path: "*",
