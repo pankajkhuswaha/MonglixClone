@@ -10,7 +10,7 @@ export const uploadFiles = async (data) => {
   });
   try {
     const res = await axios.post(
-      `${base_url}uploads`,
+      "https://images.deepmart.shop/upload",
       formData
     );
     return res.data;
