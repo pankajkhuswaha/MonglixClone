@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import $ from 'jquery';
 import 'datatables.net';
 import { useEffect, useRef } from "react";
-import { deleteProduct } from "../../../../features/ProductSlice";
+import { deleteProduct, getProducts } from "../../../../features/ProductSlice";
+import { Link } from "react-router-dom";
 
 
 
@@ -14,6 +15,11 @@ const ListProducts = () => {
   useEffect(() => {
     $(tableRef.current).DataTable();
   }, [productData]);
+
+  useEffect(()=>{
+    dispatch(getProducts())
+  },[])
+
  
   return (
     <div>
@@ -66,7 +72,7 @@ const ListProducts = () => {
                               />
                             </svg>
                           </p>
-                          <p  className="text-primary cursor-pointer">
+                          <Link to={`/admin/update-products/${e._id}`} state={e} className="text-primary cursor-pointer">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -81,7 +87,7 @@ const ListProducts = () => {
                                 d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
                               />
                             </svg>
-                          </p>
+                          </Link>
                         </div>
                       </td>
                     </tr>

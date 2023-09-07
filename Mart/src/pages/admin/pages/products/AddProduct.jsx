@@ -1,16 +1,20 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import Dropzone from "react-dropzone";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import { uploadFiles } from "../../../../utils/uploadimg";
 import { toggleLoading } from "../../../../features/loading/loadingSlice";
+import { addAProduct, getProducts } from "../../../../features/ProductSlice";
+import { useEffect } from "react";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
+  const editproduct = useLocation().state;
+  const navigate = useNavigate()
+  const site = useSelector((st) => st.site.data);
   const { values, handleSubmit, handleChange, resetForm, setFieldValue } =
     useFormik({
       initialValues: {
@@ -33,11 +37,14 @@ const AddProduct = () => {
         datasheet: "",
       },
       onSubmit: (values) => {
-        if (values.images.length < 5) {
-          toast.error("Please select at least 5 product images.");
+        if (values.images.length < 1) {
+          toast.error("Please select at least 1 product images.");
         } else {
-          // dispatch(addAProduct(values));
-          // dispatch(getAllProducts());
+          dispatch(addAProduct(values));
+          dispatch(getProducts());
+          if(editproduct){
+            navigate("/admin/products")
+          }
           resetForm();
         }
       },
@@ -57,61 +64,26 @@ const AddProduct = () => {
       dispatch(toggleLoading(false));
     }
   };
-  const handleBannerImage = async (e) => {
-    const file = [e.target.files[0]];
-    dispatch(toggleLoading(true));
-    try {
-      const res = await uploadFiles(file);
-      setFieldValue("bannerimg", res[0]);
-    } catch (error) {
-      toast.error(error.message);
-    }
-    dispatch(toggleLoading(false));
-  };
+
   //todo code of edit product
 
-  const editproduct = useLocation().state;
-  // useEffect(() => {
-  //   if (editproduct === null) {
-  //     return;
-  //   } else {
-  //     // console.log(editproduct?.specs?.Motor_Type_and_Power);
-  //     setFieldValue("name", editproduct.name);
-  //     setFieldValue("price", editproduct.price);
-  //     setFieldValue("type", editproduct.type);
-  //     setFieldValue("images", editproduct.images);
-  //     setFieldValue("bannerimg", editproduct?.bannerimg);
-
-  //     setFieldValue(
-  //       "specs.Motor_Type_and_Power",
-  //       editproduct?.specs?.Motor_Type_and_Power
-  //     );
-  //     setFieldValue(
-  //       "specs.Controller_Type",
-  //       editproduct?.specs?.Controller_Type
-  //     );
-  //     setFieldValue("specs.Speedo_Meter", editproduct?.specs?.Speedo_Meter);
-  //     setFieldValue(
-  //       "specs.Battery_Capacity",
-  //       editproduct?.specs?.Battery_Capacity
-  //     );
-  //     setFieldValue(
-  //       "specs.Tyre_Specification_F_and_R",
-  //       editproduct?.specs?.Tyre_Specification_F_and_R
-  //     );
-  //     setFieldValue(
-  //       "specs.Suspension_F_and_R",
-  //       editproduct?.specs?.Suspension_F_and_R
-  //     );
-  //     setFieldValue("specs.Break_F_and_R", editproduct?.specs?.Break_F_and_R);
-  //     setFieldValue("feature.speed", editproduct?.feature?.speed);
-  //     setFieldValue("feature.Total_Range", editproduct?.feature?.Total_Range);
-  //     setFieldValue(
-  //       "feature.Charging_Time",
-  //       editproduct?.feature?.Charging_Time
-  //     );
-  //   }
-  // }, [editproduct]);
+  useEffect(() => {
+    dispatch(getProducts());
+    if (editproduct === null) {
+      return;
+    } else {
+      const keysToExclude = ["_id","createdAt","updatedAt","_v"];
+      const updatedData = {};
+      Object.keys(editproduct).forEach((fieldName) => {
+        if (!keysToExclude.includes(fieldName)) {
+          updatedData[fieldName] = editproduct[fieldName];
+        }
+      });
+      Object.keys(updatedData).forEach((fieldName) => {
+        setFieldValue(fieldName, updatedData[fieldName]);
+      });
+    }
+  }, [editproduct]);
 
   //TODO This part of code is wriiten to  drag the images in upload images
   const handleDragStart = (index) => (event) => {
@@ -228,11 +200,10 @@ const AddProduct = () => {
                 <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
                   <label>Item Code</label>
                   <input
-                    type="number"
+                    type="text"
                     name="itemCode"
                     value={values.itemCode}
                     onChange={handleChange}
-                    required
                     className="form-control"
                     placeholder="Enter Item Code"
                   />
@@ -241,8 +212,8 @@ const AddProduct = () => {
                   <label>HSN Code</label>
                   <input
                     type="number"
-                    name="perpiece"
-                    value={values.perpiece}
+                    name="hsnCode"
+                    value={values.hsnCode}
                     onChange={handleChange}
                     required
                     className="form-control"
@@ -268,7 +239,6 @@ const AddProduct = () => {
                     name="meausrement"
                     value={values.meausrement}
                     onChange={handleChange}
-                    required
                     className="form-control"
                     placeholder="Enter Measurement"
                   />
@@ -328,25 +298,24 @@ const AddProduct = () => {
                     name="datasheet"
                     value={values.datasheet}
                     onChange={handleChange}
-                    required
                     className="form-control"
                     placeholder="Enter Price"
                   />
                 </div>
                 <div className="mb-4 h-32">
-                  <label >Discription </label>
+                  <label>Discription </label>
                   <ReactQuill
                     theme="snow"
-                    name="content"
-                    onChange={handleChange("content")}
-                    value={values.content}
+                    name="mindiscription"
+                    onChange={handleChange("mindiscription")}
+                    value={values.mindiscription}
                     required
                     className="h-24"
                   />
                 </div>
               </div>
 
-              <div className="mb-6 border-2 border-dotted rounded">
+              <div className="my-6 border-2 border-dotted rounded">
                 <Dropzone
                   onDrop={(acceptedFiles) => handleimgUpload(acceptedFiles)}
                 >
@@ -427,7 +396,8 @@ const AddProduct = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full text-white bg-sky-600 rounded border border-[skyblue] p-2 transition hover:bg-opacity-90 "
+                  className="w-full text-white rounded border border-[skyblue] p-2 transition hover:bg-opacity-90 "
+                  style={{ background: site?.primarybg }}
                 >
                   {editproduct === null ? "Add" : "Update"} Product
                 </button>

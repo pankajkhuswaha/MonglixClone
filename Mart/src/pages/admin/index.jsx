@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./index.css";
 import Dashboard from "./pages/Dashboard";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { base_url } from "../../utils/baseUrl";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -13,6 +13,7 @@ import Homepage from "./pages/website/Homepage";
 import ListProducts from "./pages/products/ListProducts";
 import AddProduct from "./pages/products/AddProduct";
 import "datatables.net-dt/css/jquery.dataTables.css";
+import { config } from "../../utils/axiosConfig";
 
 const Admin = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -20,18 +21,18 @@ const Admin = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
   const sidetoggle =
-    "col-12 fixed col-md-2 bg-white h-full shadow transition-all w-[3.3rem] z-[9] top-0 delay-600 -left-[105vw]";
+    "col-12 fixed col-md-2 bg-white h-full shadow transition-all w-[3.3rem] z-[9] top-[50px] delay-600 -left-[105vw]";
   const sidenottoggle =
-    "col-12 fixed col-md-2 bg-white h-full shadow transition-all delay-600 z-[99] top-0 left-0";
+    "col-12 fixed col-md-2 bg-white h-full shadow transition-all delay-600 z-[99] top-[50px] left-0";
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isAdmin, setadmin] = useState(false);
+  const site = useSelector((st) => st.site.data);
 
   const checkAdmin = async () => {
-    const email = JSON.parse(localStorage.getItem("user"))?.email || null;
     try {
-      const res = await axios.post(`${base_url}user/isadmin`, { email });
+      const res = await axios.get(`${base_url}user/isadmin`, config);
       setadmin(res.data.admin);
     } catch (error) {
       setadmin(false);
@@ -45,27 +46,34 @@ const Admin = () => {
     checkAdmin();
   }, [dispatch]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+    toast.success("logout Successfull");
+  };
+
   if (isAdmin) {
     return (
       <div className=" relative">
-        <nav
-          style={isSidebarOpen ? { width: "83.33%" } : { width: "100%" }}
-          className="transition-all flex h-14 bg-white z-[999] items-center fixed right-0 border shadow-sm top-0 gap-4 justify-between px-4"
-        >
+        <nav className="transition-all flex h-14 w-full bg-white z-[999] items-center fixed right-0 border shadow-sm top-0 gap-4 justify-between px-4">
           <div className="flex gap-2  items-center">
             <AiOutlineMenu
               onClick={toggleSidebar}
               className="cursor-pointer"
               fontSize={30}
             />
-            <Link to={"/"}>
-              {/* <img src={logo} alt="" className="w-24 ml-4" /> */}
+            <Link
+              to={"/"}
+              style={{ color: site.primarybg }}
+              className="text-[20px] font-bold text-start pl-3 py-2"
+            >
+              {site.name}
             </Link>
           </div>
           <button
             className="btn btn-outline-danger"
             onClick={() => {
-              //   dispatch(logout());
+              handleLogout();
               navigate("/login");
             }}
           >
@@ -100,6 +108,7 @@ const Admin = () => {
                 <Route path="/custom-homepage" element={<Homepage />} />
                 <Route path="/products" element={<ListProducts />} />
                 <Route path="/add-products" element={<AddProduct />} />
+                <Route path="/update-products/:id" element={<AddProduct />} />
                 <Route path="/" element={<Dashboard />} />
               </Routes>
             </div>

@@ -14,6 +14,18 @@ export const getProducts = createAsyncThunk("product", async () => {
   return res.data;
 });
 
+export const addAProduct = createAsyncThunk(
+  "product/add-products",
+  async (data,thunkAPI) => {
+    try {
+      const response = await axios.post(`${base_url}product/add`, data, config);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const deleteProduct = createAsyncThunk(
   "product/delete",
   async (payload) => {
@@ -49,6 +61,26 @@ export const productSlice = createSlice({
       })
       .addCase(deleteProduct.pending, (state) => {
         state.loading = true;
+      })
+      
+      .addCase(addAProduct.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addAProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.loading = false;
+        console.log(action.payload)
+        if (action.payload.success) {
+          toast.success(action.payload.message);
+        } else {
+          toast.error(action.payload.message);
+        }
+      })
+      .addCase(addAProduct.rejected, (state) => {
+        state.loading = false;
+        state.loading = true;
+
+        toast.error("Add Product Failed");
       });
   },
 });

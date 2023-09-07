@@ -91,8 +91,8 @@ const createUser = asyncHandler(async (req, res) => {
 });
 
 const isAdminuser = asyncHandler(async (req, res) => {
-  console.log(req.body);
-  const { email } = req.body;
+ 
+  const { email } = req.user;
   const adminUser = await User.findOne({ email });
   if (adminUser.role !== "admin") {
     throw new Error("You are not an admin");

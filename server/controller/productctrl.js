@@ -39,17 +39,12 @@ const addProduct = asyncHandle(async (req, res) => {
   }
 });
 
-const getallProduct = asyncHandle(async (req, res) => {
-  const Product = await ProductModel.find();
-  res.json(Product);
-});
-
 const deleteProduct = asyncHandle(async (req, res) => {
   const _id = req.params.id;
   if (_id) {
     try {
       await ProductModel.findByIdAndDelete({ _id });
-      res.json({ success: true, message: "Deleted Sucessfully" ,_id});
+      res.json({ success: true, message: "Deleted Sucessfully", _id });
     } catch (error) {
       res.json({ error: error.message });
     }
@@ -68,10 +63,46 @@ const updateproduct = asyncHandle(async (req, res) => {
     }
   } else res.json("invalid Operation");
 });
+const searchProduct = asyncHandle(async (req, res) => {
+  try {
+    const { search, category, subcategory, brand } = req.query;
+    const filter = {};
+    if (search) {
+      filter.$or = [
+        { name: { $regex: new RegExp(search, "i") } },
+        { category: { $regex: new RegExp(search, "i") } },
+        { brand: { $regex: new RegExp(search, "i") } },
+      ];
+    }
+    if (category) {
+      filter.category = category;
+    }
+    if (subcategory) {
+      filter.subcategory = subcategory;
+    }
+    if (brand) {
+      filter.brand = brand;
+    }
+    const products = await ProductModel.find(filter);
+    res.json(products);
+  } catch (error) {
+    console.error("Error searching products:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+const getallProduct = asyncHandle(async (req, res, next) => {
+  const Product = await ProductModel.find();
+  if (req.query) {
+    next();
+  } else {
+    res.json(Product);
+  }
+});
 
 module.exports = {
   addProduct,
   getallProduct,
   deleteProduct,
   updateproduct,
+  searchProduct,
 };

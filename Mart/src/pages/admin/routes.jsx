@@ -41,13 +41,7 @@ export const routes = [
           icon: <FaProductHunt fontSize={16} />,
           txt: "Home Page",
           element:<Homepage/>
-        },
-        {
-          path: "/admin/add-home",
-          icon: <FaProductHunt fontSize={16} />,
-          txt: "Add Products",
-          element:<Homepage/>
-        },
+        }
       ],
     },
   ];

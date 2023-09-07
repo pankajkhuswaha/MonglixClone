@@ -1,11 +1,9 @@
 // import React from 'react';
-import { Link, NavLink, useLocation } from "react-router-dom";
+import {  NavLink, useLocation } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import { routes } from "../routes";
-import { useSelector } from "react-redux";
 
 const Sidebar = () => {
-  const site = useSelector((st) => st.site.data);
   const path = useLocation().pathname;    
   return (
     <div
@@ -13,7 +11,7 @@ const Sidebar = () => {
       className="sidebar min-h-screen overflow-hidden border-r  hover:bg-white hover:shadow-lg"
     >
       <div className="flex h-screen flex-col gap-[2px] pt-2 pb-6">
-        <Link to={"/admin"} style={{color:site.textCol}} className="text-[20px] text-start pl-3 py-2 font-thin">{site.name}  Pannel</Link>
+       
         {routes.map((itm, i) => (
           <div className=" cursor-pointer" key={i}>
             {itm.children ? (
