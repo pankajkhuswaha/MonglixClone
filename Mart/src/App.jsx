@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import Layout from "./layout/Layout";
 import Errorpage from "./pages/404/Errorpage";
-import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Stack } from "@mui/material";
+import { SearchProductApi } from "./features/productFilterSlice";
 import { Route, Routes } from "react-router-dom";
 import { getProducts } from "./features/ProductSlice";
 import { userCart } from "./features/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Routess } from "./routes/Routes";
 import { VerifyApi } from "./features/authSlice";
 import Loading from "./features/loading/Loader";
@@ -37,6 +37,7 @@ const App = () => {
     dispatch(getProducts());
     dispatch(userCart());
     dispatch(getSiteConfig());
+    dispatch(SearchProductApi());
   }, [dispatch]);
 
   return (

@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { SearchProductApi } from "../../features/productFilterSlice";
 const SearchComponent = () => {
+  const dispatch = useDispatch();
+  const FilterData = useSelector((state) => state.filter.filterProducts);
+  console.log(FilterData);
   const [search, setSearch] = useState("");
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
+    dispatch(SearchProductApi(event.target.value));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-  const site = useSelector(st=>st.site.data)
-
+  const site = useSelector((st) => st.site.data);
 
   return (
     <div>
@@ -34,7 +39,7 @@ const SearchComponent = () => {
                                 ? " bg-[#f8436a]"
                                 : "bg-[#FF4268] cursor-not-allowed "
                             }`}
-                            style={{background:site.primarybg}}
+            style={{ background: site.primarybg }}
             disabled={search.length === 0}
             onClick={handleSubmit}
           >
