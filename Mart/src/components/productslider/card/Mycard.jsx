@@ -20,7 +20,6 @@ const Mycard = ({ data, load }) => {
   };
   const site = useSelector((st) => st.site.data);
 
-
   return (
     <>
       {load ? (
@@ -32,7 +31,9 @@ const Mycard = ({ data, load }) => {
               <div className="imgcontainer">
                 <img src={data.images[0]} alt="" width={140} height={140} />
               </div>
-              <p className="text-sm ">{data.name.slice(0, 29)}</p>
+              <p className="text-md font-bold  text-gray-600 ">
+                {`${data.name.slice(0, 18)}..`}
+              </p>
               <p className="font-bold text-md">{numberFormat(data.price)}</p>
             </Link>
 

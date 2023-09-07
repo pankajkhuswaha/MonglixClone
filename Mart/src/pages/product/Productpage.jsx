@@ -8,7 +8,7 @@ import {
   MenuItem,
   Select,
   Stack,
-} from "@mui/material"; // Keep Stack from MUI for layout
+} from "@mui/material";
 
 export default function Productpage() {
   const dispatch = useDispatch();

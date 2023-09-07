@@ -13,6 +13,7 @@ const ProductLayout = (props) => {
         <Stack
           p={2}
           borderRadius={2}
+          alignItems={"center"}
           sx={{ backgroundColor: site.secondarybg }}
           flexDirection={"row"}
           justifyContent={"space-between"}
@@ -25,7 +26,7 @@ const ProductLayout = (props) => {
             </h1>
           )}
 
-          <Buttonele  title={"See All"} />
+          <Buttonele title={"See All"} />
         </Stack>
         <br />
         {props.children}
