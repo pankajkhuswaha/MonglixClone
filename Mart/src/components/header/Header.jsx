@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 const Header = () => {
   const cart = useSelector((state) => state.cart.carts);
   const site = useSelector((st) => st.site.data);
+    const isUser = useSelector((state) => state.auth.token);
 
   const CartCount = cart.products?.length;
 
@@ -86,12 +87,19 @@ const Header = () => {
             )}
             <SearchComponent />
             <Stack flexDirection={"row"} gap={4} alignItems={"center"}>
-              <Link to={"/checkout"}>
-                <Badge badgeContent={CartCount} color="primary">
-                  <ShoppingBagOutlinedIcon />
-                </Badge>
-              </Link>
-
+              {isUser ? (
+                <Link to={"/checkout"}>
+                  <Badge badgeContent={CartCount} color="primary">
+                    <ShoppingBagOutlinedIcon />
+                  </Badge>
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <Badge badgeContent={CartCount} color="primary">
+                    <ShoppingBagOutlinedIcon />
+                  </Badge>
+                </Link>
+              )}
               {currentuser ? (
                 <button onClick={handleLogout}>
                   <p>{currentuser}</p>{" "}
