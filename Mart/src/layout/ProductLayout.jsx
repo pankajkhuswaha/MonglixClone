@@ -1,5 +1,6 @@
 import React from "react";
 import { Stack } from "@mui/material";
+import { Link } from "react-router-dom";
 import Buttonele from "../components/button/Buttonele";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
@@ -25,8 +26,9 @@ const ProductLayout = (props) => {
               {props.title}
             </h1>
           )}
-
-          <Buttonele title={"See All"} />
+          <Link to={"/product"}>
+            <Buttonele title={"See All"} />
+          </Link>
         </Stack>
         <br />
         {props.children}

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 const initialState = {
   products: [],
+  filterData: [],
   loading: true,
   error: false,
 };
@@ -16,7 +17,7 @@ export const getProducts = createAsyncThunk("product", async () => {
 
 export const addAProduct = createAsyncThunk(
   "product/add-products",
-  async (data,thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
       const response = await axios.post(`${base_url}product/add`, data, config);
       return response.data;
@@ -33,6 +34,27 @@ export const deleteProduct = createAsyncThunk(
     return res.data;
   }
 );
+
+// fiterration
+
+export const SearchProductApi = createAsyncThunk(
+  "Searchproduct",
+  async (payload) => {
+    const res = await axios.get(`${base_url}product?search=${payload}`);
+    console.log(res.data);
+    return res.data;
+  }
+);
+export const FilterProductApi = createAsyncThunk(
+  "Filterproduct",
+  async (payload) => {
+    const { type, value } = payload;
+    const res = await axios.get(`${base_url}product?${type}=${value}`);
+    console.log(res.data);
+    return res.data;
+  }
+);
+
 export const productSlice = createSlice({
   name: "product",
   initialState,
@@ -54,7 +76,9 @@ export const productSlice = createSlice({
         state.loading = false;
         if (action.payload.success) {
           toast.success(action.payload.message);
-          state.products = state.products.filter((product) => product._id !== action.payload._id);
+          state.products = state.products.filter(
+            (product) => product._id !== action.payload._id
+          );
         } else {
           toast.error(action.payload.error);
         }
@@ -62,14 +86,14 @@ export const productSlice = createSlice({
       .addCase(deleteProduct.pending, (state) => {
         state.loading = true;
       })
-      
+
       .addCase(addAProduct.pending, (state) => {
         state.loading = true;
       })
       .addCase(addAProduct.fulfilled, (state, action) => {
         state.loading = false;
         state.loading = false;
-        console.log(action.payload)
+        console.log(action.payload);
         if (action.payload.success) {
           toast.success(action.payload.message);
         } else {
@@ -81,6 +105,20 @@ export const productSlice = createSlice({
         state.loading = true;
 
         toast.error("Add Product Failed");
+      })
+      // fiteration begins
+      .addCase(SearchProductApi.fulfilled, (state, action) => {
+        state.filterData = action.payload;
+        console.log(action.payload);
+      })
+
+      .addCase(SearchProductApi.rejected, (state, action) => {
+        console.log(action.payload);
+        toast.error("Internal Server Error!");
+      })
+      .addCase(FilterProductApi.fulfilled, (state, action) => {
+        state.filterData = action.payload;
+        console.log(action.payload);
       });
   },
 });

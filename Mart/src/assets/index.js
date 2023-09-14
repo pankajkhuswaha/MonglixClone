@@ -1,0 +1,1 @@
+export {default as aboutimg} from './mogli-chat.gif'

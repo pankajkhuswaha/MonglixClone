@@ -1,15 +1,38 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
+
+  const Links = [
+    {
+      name: "Contact Us",
+      links: "/contact",
+    },
+
+    {
+      name: "About Us",
+      links: "/about",
+    },
+  ];
+
+
   const site = useSelector(st=>st.site.data)
   return (
     <>
-      <footer style={{background:site.footerCol}}>
+      <footer style={{ background: site.footerCol }}>
         <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
-              <h1>{site.name}</h1>
+              <img
+                src={site.logo}
+                alt=""
+                style={{
+                  width: "50%",
+                  height: "40%",
+                  mixBlendMode: "darken",
+                }}
+              />
 
               <div className="flex mt-8 space-x-6 text-gray-600">
                 <p className="hover:opacity-75">
@@ -105,12 +128,22 @@ const Footer = () => {
                 </div>
               </div>
               <div>
-                <p className="font-medium">Helpful Links</p>
-                <div className=" text-gray-500">
-                  <p className="hover:opacity-75"> Contact </p>
-                  <p className="hover:opacity-75"> FAQs </p>
-                  <p className="hover:opacity-75"> Live Chat </p>
-                </div>
+                <p className="font-bold text-black">Helpful Links</p>
+                {
+                  Links.map((elem,id) => {
+                    return (
+                      <Link to={elem.links} key={id}>
+                        <div className=" text-gray-500">
+                          <p className="hover:text-[#ff4268]  ">
+                            {elem.name}
+                          </p>
+                        </div>
+                        
+                      </Link>
+                    );
+                  })
+                }
+           
               </div>
               <div>
                 <p className="font-medium">Legal</p>

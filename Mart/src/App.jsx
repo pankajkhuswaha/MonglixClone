@@ -4,7 +4,6 @@ import Errorpage from "./pages/404/Errorpage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Stack } from "@mui/material";
-import { SearchProductApi } from "./features/productFilterSlice";
 import { Route, Routes } from "react-router-dom";
 import { getProducts } from "./features/ProductSlice";
 import { userCart } from "./features/cartSlice";
@@ -37,7 +36,6 @@ const App = () => {
     dispatch(getProducts());
     dispatch(userCart());
     dispatch(getSiteConfig());
-    dispatch(SearchProductApi());
   }, [dispatch]);
 
   return (
