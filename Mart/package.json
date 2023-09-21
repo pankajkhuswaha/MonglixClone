@@ -21,6 +21,7 @@
     "datatables.net-dt": "^1.13.6",
     "formik": "^2.4.3",
     "heroicons": "^2.0.18",
+    "html-react-parser": "^4.2.2",
     "jquery": "^3.7.0",
     "lodash": "^4.17.21",
     "rc-slider": "^10.2.1",

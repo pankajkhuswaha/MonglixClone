@@ -22,7 +22,7 @@ const SearchComponent = () => {
       console.log(values);
       debouncedSearch(values.search);
       navigate("/product");
-      console.log(FilterData);
+  
     },
   });
   useEffect(() => {

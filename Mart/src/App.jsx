@@ -45,7 +45,7 @@ const App = () => {
         <Errorpage />
       ) : (
         <Layout>
-          <Stack padding={"20px"}>
+          <Stack  sx={{padding:{sm:'12px',md:'30px'}}}>
             <Routes>
               {Routess.map((ele, id) => {
                 return (

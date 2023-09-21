@@ -13,7 +13,7 @@ const initialState = {
   error: false,
   loading: true,
   user: {},
-  token,
+  token:null,
 };
 
 export const LoginApi = createAsyncThunk("login", async (payload) => {

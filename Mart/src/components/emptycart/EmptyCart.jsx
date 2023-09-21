@@ -385,7 +385,7 @@ const EmptyCart = () => {
           You don't have any Product
         </h1>
 
-        <Link className="Links" to={"/"}>
+        <Link className="Links" to={"/product"}>
           <Button>
             <h2>Continue Shopping</h2>
           </Button>

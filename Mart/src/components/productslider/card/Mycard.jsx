@@ -79,17 +79,19 @@ import { IconButton, Stack } from "@mui/material";
 
 const Mycard = ({ data, load }) => {
   const isUser = useSelector((state) => state.auth.token);
+  console.log(isUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const site = useSelector((st) => st.site.data);
 
   const handleCart = ({ id, qty }) => {
-    if (!isUser) {
-      navigate("/login");
+    if (isUser !==undefined) {
+  navigate("/login");
+   
     } else {
-      dispatch(addCart({ id, qty }));
-      navigate("/checkout");
-      dispatch(userCart());
+             dispatch(addCart({ id, qty }));
+             navigate("/checkout");
+             dispatch(userCart());
     }
   };
 

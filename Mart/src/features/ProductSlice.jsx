@@ -45,11 +45,28 @@ export const SearchProductApi = createAsyncThunk(
     return res.data;
   }
 );
-export const FilterProductApi = createAsyncThunk(
-  "Filterproduct",
+export const fILTERProductApibycategory = createAsyncThunk(
+  "fILTERProductApibycategory",
   async (payload) => {
-    const { type, value } = payload;
-    const res = await axios.get(`${base_url}product?${type}=${value}`);
+    const res = await axios.get(`${base_url}product?category=${payload}`);
+    console.log(res.data);
+    return res.data;
+  }
+);
+
+export const fILTERProductApibrand = createAsyncThunk(
+  "fILTERProductApibrand",
+  async (payload) => {
+    const res = await axios.get(`${base_url}product?brand=${payload}`);
+    console.log(res.data);
+    return res.data;
+  }
+);
+
+export const fILTERProductApisubcategory = createAsyncThunk(
+  "fILTERProductApisubcategory",
+  async (payload) => {
+    const res = await axios.get(`${base_url}product?subcategory=${payload}`);
     console.log(res.data);
     return res.data;
   }
@@ -107,6 +124,18 @@ export const productSlice = createSlice({
         toast.error("Add Product Failed");
       })
       // fiteration begins
+      .addCase(fILTERProductApibycategory.fulfilled, (state, action) => {
+        state.filterData = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(fILTERProductApibrand.fulfilled, (state, action) => {
+        state.filterData = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(fILTERProductApisubcategory.fulfilled, (state, action) => {
+        state.filterData = action.payload;
+        console.log(action.payload);
+      })
       .addCase(SearchProductApi.fulfilled, (state, action) => {
         state.filterData = action.payload;
         console.log(action.payload);
@@ -115,11 +144,8 @@ export const productSlice = createSlice({
       .addCase(SearchProductApi.rejected, (state, action) => {
         console.log(action.payload);
         toast.error("Internal Server Error!");
-      })
-      .addCase(FilterProductApi.fulfilled, (state, action) => {
-        state.filterData = action.payload;
-        console.log(action.payload);
       });
+  
   },
 });
 export default productSlice.reducer;

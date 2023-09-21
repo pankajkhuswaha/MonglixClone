@@ -10,9 +10,9 @@ const ProductLayout = (props) => {
 
   return (
     <div className="container">
-      <Stack p={4}>
+      <Stack p={{ xs: 2, md: 4 }}>
         <Stack
-          p={2}
+          p={{ xs: 1, md: 4 }}
           borderRadius={2}
           alignItems={"center"}
           sx={{ backgroundColor: site.secondarybg }}
@@ -22,7 +22,7 @@ const ProductLayout = (props) => {
           {props.load ? (
             <Skeleton width="20%" />
           ) : (
-            <h1 className="text-[24px] text-gray-700 font-bold">
+            <h1 className="md:text-[24px] text-[18px] text-gray-700 font-bold">
               {props.title}
             </h1>
           )}

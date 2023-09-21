@@ -24,15 +24,17 @@ const Footer = () => {
         <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
-              <img
-                src={site.logo}
-                alt=""
-                style={{
-                  width: "50%",
-                  height: "40%",
-                  mixBlendMode: "darken",
-                }}
-              />
+              <Link to={"/"}>
+                <img
+                  src={site.logo}
+                  alt=""
+                  style={{
+                    width: "50%",
+                    height: "40%",
+                    mixBlendMode: "darken",
+                  }}
+                />
+              </Link>
 
               <div className="flex mt-8 space-x-6 text-gray-600">
                 <p className="hover:opacity-75">
@@ -110,12 +112,16 @@ const Footer = () => {
             </div>
             <div className="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
               <div>
-                <p className="font-medium">Company</p>
-                <div className=" text-gray-500">
-                  <p className="hover:opacity-75">Meet the Team</p>
-                  <p className="hover:opacity-75"> History </p>
-                  <p className="hover:opacity-75"> Careers </p>
-                </div>
+                <p className="font-bold text-black">Company</p>
+                {Links.map((elem, id) => {
+                  return (
+                    <Link to={elem.links} key={id}>
+                      <div className=" text-gray-500">
+                        <p className="hover:text-[#ff4268]  ">{elem.name}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
               <div>
                 <p className="font-medium">Services</p>
@@ -127,24 +133,7 @@ const Footer = () => {
                   <p className="hover:opacity-75"> SEO Optimisation </p>
                 </div>
               </div>
-              <div>
-                <p className="font-bold text-black">Helpful Links</p>
-                {
-                  Links.map((elem,id) => {
-                    return (
-                      <Link to={elem.links} key={id}>
-                        <div className=" text-gray-500">
-                          <p className="hover:text-[#ff4268]  ">
-                            {elem.name}
-                          </p>
-                        </div>
-                        
-                      </Link>
-                    );
-                  })
-                }
-           
-              </div>
+             
               <div>
                 <p className="font-medium">Legal</p>
                 <div className=" text-gray-500">
