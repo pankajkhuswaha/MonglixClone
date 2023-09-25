@@ -52,7 +52,7 @@ const Header = () => {
       }}
     >
       <div className="container">
-        <Stack display={"flex"} padding={site.logo ? "0px" : "14px"}>
+        <Stack display={"flex"} padding={site.logo ? "4px" : "14px"}>
           <Stack
             display={"flex"}
             flexDirection={"row"}
@@ -63,8 +63,8 @@ const Header = () => {
               <Link to={"/"}>
                 <img
                   style={{
-                    width: "80px",
-                    height: "80px",
+                    width: "160px",
+                    height: "70px",
                     mixBlendMode: "darken",
                   }}
                   src={site.logo}

@@ -5,9 +5,10 @@ import { useSelector } from "react-redux";
 const Viewpage = () => {
   const data = useSelector((state) => state.products.products);
   const loading = useSelector((state) => state.products.loading);
-  console.log(data);
-  const categories = [...new Set(data.map((item) => item.category))];
-  console.log(categories);
+  let categories = [...new Set(data.map((item) => item.category))];
+  // const indexofWelding = categories.indexOf("Welding Equipment")
+  // categories.splice(indexofWelding,1)
+  // categories.unshift("Welding Equipment")
 
   return (
     <div>

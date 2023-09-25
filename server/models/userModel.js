@@ -67,7 +67,22 @@ const userSchema = new mongoose.Schema(
     },
     order: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
     address: {
-      type: Array,
+      adr:{
+        type:String,
+        required:true
+      },
+      city:{
+        type:String,
+        required:true
+      },
+      pincode:{
+        type:String,
+        required:true
+      },      
+      state:{
+        type:String,
+        required:true
+      }
     },
     refreshToken: {
       type: String,

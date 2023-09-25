@@ -54,8 +54,8 @@ const ListProducts = () => {
                       <td className="px-4 py-4">{e.category}</td>
                       <td className="px-4 py-4">{e.price}</td>
                       <td className="px-4 py-4">{e.brand}</td>
-                      <td className="px-4 py-4">
-                        <div className="flex justify-end gap-4">
+                      <td className="px-4 py-4 flex">
+                        <div className="flex justify-center gap-4">
                           <p className="text-danger cursor-pointer" onClick={()=>dispatch(deleteProduct(e._id))}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

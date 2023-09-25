@@ -30,6 +30,10 @@ export const RegisterApi = createAsyncThunk("register", async (payload) => {
   const res = await axios.post(`${base_url}user/register`, payload);
   return res.data;
 });
+export const addAddress = createAsyncThunk("user/address", async (payload) => {
+  const res = await axios.post(`${base_url}user/adr`, payload, config);
+  return res.data;
+});
 
 export const authSlice = createSlice({
   name: "authentication",
@@ -37,7 +41,7 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(RegisterApi.fulfilled, (state, action) => {
+      .addCase(RegisterApi.fulfilled, (state) => {
         state.success = true;
       })
       .addCase(RegisterApi.rejected, (state, action) => {
@@ -60,6 +64,12 @@ export const authSlice = createSlice({
       })
       .addCase(VerifyApi.rejected, (state, action) => {
         (state.error = true), console.log(action.payload);
+      })
+      .addCase(addAddress.fulfilled, () => {
+        toast.success("Address is added sucessfully");
+      })
+      .addCase(addAddress.rejected, (state, action) => {
+        toast.error(action.payload.response.data);
       });
   },
 });
