@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import numberFormat from "../../essentail/numberFormat";
 import { useFormik } from "formik";
@@ -20,9 +19,10 @@ const Address = () => {
       state: "",
     },
     onSubmit: (values) => {
-      dispatch(addAddress({address:values}))
+      dispatch(addAddress({ address: values }));
     },
   });
+  const adress = user?.address;
   return (
     <div>
       <div className="relative mx-auto w-full">
@@ -32,102 +32,111 @@ const Address = () => {
               <h1 className="relative text-2xl font-medium text-gray-700 sm:text-3xl">
                 Secure Checkout
               </h1>
-              <form className="w-full rounded" onSubmit={handleSubmit}>
-                <p className="text-gray-800 font-medium">
-                  Customer information
-                </p>
-                <div className="mt-3">
-                  <label className="block text-sm text-gray-00">Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    readOnly
-                    value={values.name}
-                    className="form-control"
-                    placeholder="Enter Product name"
-                  />
-                </div>
-                <div className="row">
-                  <div className="mt-3 col-12 col-md-6">
-                    <label className="block text-sm text-gray-00">Email</label>
+              <p className="text-gray-800 font-medium">Customer information</p>
+              {adress?.length < 0 && (
+                <form className="w-full rounded" onSubmit={handleSubmit}>
+                  <div className="mt-3">
+                    <label className="block text-sm text-gray-00">Name</label>
                     <input
                       type="text"
-                      name="email"
-                      readOnly
-                      value={values.email}
+                      name="name"
+                      value={values.name}
+                      onChange={handleChange}
                       className="form-control"
-                      id="productname"
                       placeholder="Enter Product name"
                     />
                   </div>
-                  <div className="mt-3 col-12 col-md-6">
-                    <label className="block text-sm text-gray-00">Mobile</label>
+                  <div className="row">
+                    <div className="mt-3 col-12 col-md-6">
+                      <label className="block text-sm text-gray-00">
+                        Email
+                      </label>
+                      <input
+                        type="text"
+                        name="email"
+                        value={values.email}
+                        onChange={handleChange}
+                        className="form-control"
+                        placeholder="Enter Product name"
+                      />
+                    </div>
+                    <div className="mt-3 col-12 col-md-6">
+                      <label className="block text-sm text-gray-00">
+                        Mobile
+                      </label>
+                      <input
+                        type="number"
+                        name="mobile"
+                        value={values.mobile}
+                        onChange={handleChange}
+                        className="form-control"
+                        placeholder="Enter Product name"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-3">
+                    <label className="block text-sm text-gray-600">
+                      Adress
+                    </label>
                     <input
-                      type="number"
-                      name="mobile"
-                      readOnly
-                      value={values.mobile}
                       className="form-control"
-                      id="productname"
-                      placeholder="Enter Product name"
+                      type="text"
+                      name="adr"
+                      value={values.adr}
+                      onChange={handleChange}
+                      placeholder="Your Adderss"
                     />
                   </div>
-                </div>
-                <div className="mt-3">
-                  <label className="block text-sm text-gray-600">Adress</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    name="adr"
-                    value={values.adr}
-                    onChange={handleChange}
-                    placeholder="Your Adderss"
-                  />
-                </div>
 
-                <div className="mt-3">
-                  <label className="text-sm block text-gray-600">City</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    name="city"
-                    value={values.city}
-                    onChange={handleChange}
-                    required
-                    placeholder="Enter your city"
-                  />
-                </div>
-                <div className="inline-block mt-3 w-1/2 pr-1">
-                  <label className="block text-sm text-gray-600">State</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    name="state"
-                    value={values.state}
-                    onChange={handleChange}
-                    placeholder="Enter your state"
-                    required
-                  />
-                </div>
-                <div className="inline-block mt-3 -mx-1 pl-1 w-1/2">
-                  <label className="block text-sm text-gray-600">Pincode</label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name="pincode"
-                    value={values.pincode}
-                    onChange={handleChange}
-                    placeholder="Enter your pincode"
-                    required
-                  />
-                </div>
-                <button
-                  className="btn btn-primary text-white mt-4"
-                  style={{ borderColor: site.primarybg, background: site.primarybg }}
-                >
-                  Add Address
-                </button>
-              </form>
+                  <div className="mt-3">
+                    <label className="text-sm block text-gray-600">City</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="city"
+                      value={values.city}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter your city"
+                    />
+                  </div>
+                  <div className="inline-block mt-3 w-1/2 pr-1">
+                    <label className="block text-sm text-gray-600">State</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="state"
+                      value={values.state}
+                      onChange={handleChange}
+                      placeholder="Enter your state"
+                      required
+                    />
+                  </div>
+                  <div className="inline-block mt-3 -mx-1 pl-1 w-1/2">
+                    <label className="block text-sm text-gray-600">
+                      Pincode
+                    </label>
+                    <input
+                      className="form-control"
+                      type="number"
+                      name="pincode"
+                      value={values.pincode}
+                      onChange={handleChange}
+                      placeholder="Enter your pincode"
+                      required
+                    />
+                  </div>
+                  <button
+                    className="btn btn-primary text-white mt-4"
+                    style={{
+                      borderColor: site.primarybg,
+                      background: site.primarybg,
+                    }}
+                  >
+                    Add Address
+                  </button>
+                </form>
+              )}
             </div>
           </div>
           <div className="relative col-span-full flex flex-col py-6 pl-8 pr-4 sm:py-12 lg:col-span-4 lg:py-24">

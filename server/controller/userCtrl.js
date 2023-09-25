@@ -179,7 +179,20 @@ const loginAdmin = asyncHandler(async (req, res) => {
 });
 const addnewAddress = asyncHandler(async (req, res) => {
   const { _id } = req.user;
-  res.json(req.user);
+  console.log(req.body)
+  try {
+    const user = await User.findById(_id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.address.push(req.body.address);
+    await user.save();
+    console.log(user);
+    res.status(201).json({ message: "Address added successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 // handle refresh token

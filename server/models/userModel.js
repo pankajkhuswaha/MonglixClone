@@ -63,23 +63,37 @@ const userSchema = new mongoose.Schema(
           total: Number,
         },
       ],
-      totalValue:Number
+      totalValue: Number,
     },
     order: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
-    address: {
-      adr:{
-        type:String,
+    address: [
+      {
+        name: {
+          type: String,
+        },
+        email: {
+          type: String,
+        },
+        mobile: {
+          type: String,
+          unique:true          
+        },
+        adr: {
+          type: String,
+          unique:true
+        },
+        city: {
+          type: String,
+        },
+        pincode: {
+          type: String,
+        },
+        state: {
+          type: String,
+
+        },
       },
-      city:{
-        type:String,
-      },
-      pincode:{
-        type:String,
-      },      
-      state:{
-        type:String,
-      }
-    },
+    ],
     refreshToken: {
       type: String,
     },
