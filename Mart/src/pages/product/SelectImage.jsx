@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Stack, CardContent } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addCart } from "../../features/cartSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
-const SelectImage = ({ img }) => {
+const SelectImage = ({ img, data }) => {
+  const navigate=useNavigate()
+  const dispatch = useDispatch();
   const users = useSelector((state) => state.auth.user);
   const currentuser = users.user?.name;
   const [selectedPic, setSelectedPic] = useState(img && img[0]);
@@ -10,7 +15,18 @@ const SelectImage = ({ img }) => {
   const handleImageClick = (ele) => {
     setSelectedPic(ele);
   };
-
+ const handleCart = ({ id, qty }) => {
+   if (!users) {
+     navigate("/login");
+   } else {
+     dispatch(addCart({ id, qty }))
+       .then(unwrapResult)
+       .then(() => {
+         navigate("/checkout");
+         dispatch(userCart());
+       });
+   }
+ };
   return (
     <>
       <Stack justifyContent={"space-between"} p={3}>
@@ -107,7 +123,10 @@ const SelectImage = ({ img }) => {
                   Add to Cart
                 </span>
               </button>
-              <button className="text-white text-[15px] bg-[#9F2089]  flex align-center justify-center gap-2 border-1 p-3 rounded-md border-[#9F2089] w-[200px]">
+              <button
+                onClick={() => handleCart({ id: data._id, qty: 1 })}
+                className="text-white text-[15px] bg-[#9F2089]  flex align-center justify-center gap-2 border-1 p-3 rounded-md border-[#9F2089] w-[200px]"
+              >
                 <svg
                   className="mt-[4px]"
                   width="20"

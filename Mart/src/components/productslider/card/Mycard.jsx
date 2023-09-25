@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import numberFormat from "../../../essentail/numberFormat";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Buttonele from "../../button/Buttonele";
 import Loader from "../loader/Loader";
@@ -12,6 +12,8 @@ import { IconButton, Stack } from "@mui/material";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 const Mycard = ({ data, load }) => {
+  const pathname = useLocation().pathname;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const users = useSelector((state) => state.auth?.user?.user);
@@ -30,11 +32,23 @@ const Mycard = ({ data, load }) => {
   };
 
   return (
-    <div className="flex justify-center w-[180px]">
+    <div
+      className={
+        pathname.includes("product")
+          ? "flex justify-center w-[180px]"
+          : "flex justify-center"
+      }
+    >
       {load ? (
         <Loader />
       ) : (
-        <div className="mycard min-w-[170px] max-w-[200px] md:min-w-[148px] hover:shadow-xl rounded-b-lg border border-[#e5e7eb] mx-2 my-4">
+        <div
+          className={
+            pathname.includes("product")
+              ? "mycard max-sm:w-[180px]  hover:shadow-xl rounded-b-lg border border-[#e5e7eb] mx-2 my-4"
+              : "mycard w-[210px] hover:shadow-xl rounded-b-lg border border-[#e5e7eb] mx-2 my-4"
+          }
+        >
           <div className="p-3">
             <Link to={`/products/${data._id}`} state={data}>
               <div className="imgcontainer">

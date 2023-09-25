@@ -186,8 +186,8 @@ export default function Productpage() {
         </Stack>
       )}
 
-      <Stack flex={7} >
-        <div className="flex mt-4 p-3 justify-between items-center">
+      <Stack flex={7}>
+        <div className="flex  justify-between items-center">
           <h1
             className="text-gray-800 text-md flex items-center cursor-pointer gap-1"
             onClick={() => setOpen(!open)}
