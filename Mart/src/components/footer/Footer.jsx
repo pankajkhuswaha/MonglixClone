@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Stack } from "@mui/material";
 
 const Footer = () => {
-
   const Links = [
     {
       name: "Contact Us",
@@ -16,12 +16,14 @@ const Footer = () => {
     },
   ];
 
+  const site = useSelector((st) => st.site.data);
+  const data = useSelector((state) => state.products.products);
+  const categories = ["All", ...new Set(data.map((item) => item.category))];
 
-  const site = useSelector(st=>st.site.data)
   return (
     <>
       <footer style={{ background: site.footerCol }}>
-        <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
               <Link to={"/"}>
@@ -124,16 +126,18 @@ const Footer = () => {
                 })}
               </div>
               <div>
-                <p className="font-medium">Services</p>
+                <p className="font-medium">Categories</p>
                 <div div className=" text-gray-500">
-                  <p className="hover:opacity-75"> 1on1 Coaching </p>
-                  <p className="hover:opacity-75"> Company Review </p>
-                  <p className="hover:opacity-75"> Accounts Review </p>
-                  <p className="hover:opacity-75"> HR Consulting </p>
-                  <p className="hover:opacity-75"> SEO Optimisation </p>
+                  {categories.map((ele, i) => {
+                    return (
+                      <Link to={"/product"} key={i}>
+                        <p className=" hover:text-[#ff4268]  ">{ele}</p>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
-             
+
               <div>
                 <p className="font-medium">Legal</p>
                 <div className=" text-gray-500">

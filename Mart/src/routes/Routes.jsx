@@ -5,6 +5,7 @@ import {
   Productpage,
   ProductDetail,
   Checkout,
+  UserDetails,
   About,
 } from "../pages";
 import Admin from "../pages/admin";
@@ -38,6 +39,10 @@ export const Routess = [
   {
     path: "/about",
     Element: <About />,
+  },
+  {
+    path: "/users/*",
+    Element: <UserDetails />,
   },
   {
     path: "*",

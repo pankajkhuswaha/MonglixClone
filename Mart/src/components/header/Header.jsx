@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Stack, Badge } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useLocation, Link } from "react-router-dom";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -14,11 +15,7 @@ const Header = () => {
 
   const CartCount = cart.products?.length;
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/";
-    toast.success("logout Successfull");
-  };
+ 
   const users = useSelector((state) => state.auth.user);
   const currentuser = users.user?.name;
   const location = useLocation();
@@ -101,9 +98,13 @@ const Header = () => {
                 </Link>
               )}
               {currentuser ? (
-                <button onClick={handleLogout}>
-                  <p>{currentuser}</p>{" "}
-                </button>
+           <Link  to={'/users'}>
+<AccountCircleIcon/>
+           </Link>   
+
+                // <button onClick={handleLogout}>
+                //   <p>{currentuser}</p>{" "}
+                // </button>
               ) : (
                 <Link to={"/login"}>
                   <AccountBoxIcon />
