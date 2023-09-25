@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
@@ -31,7 +32,10 @@ export default function BtmDrawer() {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      sx={{
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
+   
+      }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -68,9 +72,9 @@ export default function BtmDrawer() {
     <div>
       {["bottom"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>
+          <button onClick={toggleDrawer(anchor, true)}>
             <MenuOpenIcon />
-          </Button>
+          </button>
           <SwipeableDrawer
             anchor={anchor}
             open={state[anchor]}

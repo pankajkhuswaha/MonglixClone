@@ -19,7 +19,7 @@ import {
 
 export default function Productpage() {
   const dispatch = useDispatch();
-  const [open,setOpen]=useState(false)
+  const [open, setOpen] = useState(false);
   const data = useSelector((state) => state.products.products);
   const Filterdata = useSelector((state) => state.products.filterData);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -27,9 +27,9 @@ export default function Productpage() {
   const [selectedSubcategories, setSelectedSubcategories] = useState([]);
   const [sortByPrice, setSortByPrice] = useState(""); // State for sorting by price
 
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getProducts());
+  // }, []);
 
   const handleCategoryChange = (category) => {
     if (selectedCategories.includes(category)) {
@@ -51,7 +51,6 @@ export default function Productpage() {
     }
   };
 
-  // Function to handle subcategory selection
   const handleSubcategoryChange = (subcategory) => {
     if (selectedSubcategories.includes(subcategory)) {
       setSelectedSubcategories((prevSubcategories) =>
@@ -72,18 +71,23 @@ export default function Productpage() {
   };
 
   useEffect(() => {
-    dispatch(fILTERProductApibycategory(selectedCategories));
-  }, [dispatch, selectedCategories]);
+    if (selectedCategories.length != 0) {
+      dispatch(fILTERProductApibycategory(selectedCategories));
+    }
+  }, [selectedCategories]);
 
   useEffect(() => {
-    dispatch(fILTERProductApibrand(selectedBrands));
-  }, [dispatch, selectedBrands]);
+    if (selectedBrands.length != 0) {
+      dispatch(fILTERProductApibrand(selectedBrands));
+    }
+  }, [selectedBrands]);
 
   useEffect(() => {
-    dispatch(fILTERProductApisubcategory(selectedSubcategories));
-  }, [dispatch, selectedSubcategories]);
+    if (selectedSubcategories.length != 0) {
+      dispatch(fILTERProductApisubcategory(selectedSubcategories));
+    }
+  }, [selectedSubcategories]);
 
-  // Function to sort products by price
   const sortProductsByPrice = (products, order) => {
     const sortedProducts = [...products];
     sortedProducts.sort((a, b) => {
@@ -163,7 +167,7 @@ export default function Productpage() {
                 </div>
               )
             )}
-          
+
             <hr />
             <h2 className="text-gray-800 font-bolder mb-2 text-lg">Brands</h2>
             {[...new Set(data.map((product) => product.brand))].map((brand) => (
@@ -183,8 +187,8 @@ export default function Productpage() {
         </Stack>
       )}
 
-      <Stack flex={7}>
-        <div className="flex justify-between items-center">
+      <Stack flex={7} >
+        <div className="flex mt-4 p-3 justify-between items-center">
           <h1
             className="text-gray-800 text-md flex items-center cursor-pointer gap-1"
             onClick={() => setOpen(!open)}

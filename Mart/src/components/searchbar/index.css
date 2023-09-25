@@ -1,0 +1,8 @@
+.searchbar{
+    display: block;
+}
+@media screen and (max-width:500px) {
+    .searchbar{
+    display: none;
+}
+}

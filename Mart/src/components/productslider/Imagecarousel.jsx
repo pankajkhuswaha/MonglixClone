@@ -54,17 +54,17 @@ export default function Imagecarousel({ products, load }) {
       {
         breakpoint: 390,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
     ],
   };
   return (
-    <div className="container ">
-      <Slider {...settings}>
+    <div className="container px-8  ">
+      <Slider {...settings}  >
       {products.map((ele, i) => {
-        return <Mycard key={i} data={ele} load={load} />;
+        return  <Mycard key={i} data={ele} load={load}  />;
       })}
     </Slider>
     </div>
