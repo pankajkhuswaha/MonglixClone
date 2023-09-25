@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { base_url } from "../utils/baseUrl";
+
 import axios from "axios";
 import { config } from "../utils/axiosConfig";
 import { toast } from "react-toastify";
@@ -130,15 +131,15 @@ export const productSlice = createSlice({
       })
       .addCase(fILTERProductApibrand.fulfilled, (state, action) => {
         state.filterData = action.payload;
-        console.log(action.payload);
+        // console.log(action.payload);
       })
       .addCase(fILTERProductApisubcategory.fulfilled, (state, action) => {
         state.filterData = action.payload;
-        console.log(action.payload);
+        // console.log(action.payload);
       })
       .addCase(SearchProductApi.fulfilled, (state, action) => {
         state.filterData = action.payload;
-        console.log(action.payload);
+        // console.log(action.payload);
       })
 
       .addCase(SearchProductApi.rejected, (state, action) => {

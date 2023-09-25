@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Stack, Badge } from "@mui/material";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import TopDrawer from "../bottomdrawer/TopDrawer";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useLocation, Link } from "react-router-dom";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -10,8 +11,8 @@ import { SearchComponent, BtmDrawer } from "../Index";
 const Header = () => {
   const cart = useSelector((state) => state.cart.carts);
   const site = useSelector((st) => st.site.data);
-  const CartCount = cart.products?.length; 
-  const users = useSelector((state) => state.auth?.user?.user);
+  const CartCount = cart.products?.length;
+  const users = useSelector((state) => state.auth.user?.user);
   const currentuser = users?.name;
   const location = useLocation();
   const data = useSelector((state) => state.products.products);
@@ -77,8 +78,24 @@ const Header = () => {
                 {site.name}
               </Link>
             )}
-            <SearchComponent />
-            <Stack flexDirection={"row"} gap={4} alignItems={"center"}>
+            <Stack display={{ xs: "none ", md: "block" }}>
+              <SearchComponent />
+            </Stack>
+
+            <Stack
+              flexDirection={"row"}
+              gap={{ xs: 2, md: 4 }}
+              alignItems={"center"}
+            >
+              <Stack
+                direction={"row"}
+                gap={{ xs: 2, md: 4 }}
+                display={{ sm: "block", md: "none" }}
+              >
+                <BtmDrawer />
+                <TopDrawer />
+              </Stack>
+
               {users ? (
                 <Link to={"/checkout"}>
                   <Badge badgeContent={CartCount} color="primary">
@@ -93,28 +110,21 @@ const Header = () => {
                 </Link>
               )}
               {currentuser ? (
-           <Link  to={'/users'}>
-<AccountCircleIcon/>
-           </Link>   
-
-                // <button onClick={handleLogout}>
-                //   <p>{currentuser}</p>{" "}
-                // </button>
+                <Link to={"/users"}>
+                  <AccountCircleIcon />
+                </Link>
               ) : (
                 <Link to={"/login"}>
                   <AccountBoxIcon />
                 </Link>
               )}
-
-              <Stack display={{ sx: "block", md: "none" }}>
-                <BtmDrawer />
-              </Stack>
             </Stack>
           </Stack>
           {location.pathname === "/" && (
             <div
               className="b"
               style={{
+                overflowX: "auto",
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
@@ -126,6 +136,7 @@ const Header = () => {
                 background: "#F8FAFC",
                 padding: "10px",
                 position: "fixed",
+                margin: "0px 8px",
                 top: 68,
                 right: 0,
                 width: "100%",
@@ -138,6 +149,7 @@ const Header = () => {
                     <Stack
                       flexDirection={"row"}
                       gap={3}
+                      sx={{ overflowX: "auto" }}
                       justifyContent={"center"}
                     >
                       <Stack
@@ -145,7 +157,12 @@ const Header = () => {
                         alignItems={"center"}
                         gap={1}
                       >
-                        <p className=" text-gray-600 text-[17px]">{ele}</p>
+                        <p
+                          style={{ textWrap: "nowrap" }}
+                          className=" px-1 text-gray-600 text-[17px]"
+                        >
+                          {ele}
+                        </p>
                       </Stack>
                     </Stack>
                   </Link>
@@ -159,4 +176,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header
