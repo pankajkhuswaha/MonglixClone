@@ -31,7 +31,7 @@ const SelectImage = ({ img }) => {
               width={62}
               flexDirection={{ xs: "row-reverse", sm: "column" }}
               gap={2}
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "contain" }}
             >
               {img &&
                 img.map((ele, index) => {
@@ -54,12 +54,12 @@ const SelectImage = ({ img }) => {
                 })}
             </Stack>
           </CardContent>
-          <div className="w-[350px] h-[490px] border-1 rounded-sm">
+          <div className="w-[350px] h-[490px] border-1 rounded-sm bg-white">
             <img
               src={selectedPic && selectedPic}
               width={"100%"}
               height={"80%"}
-              style={{ objectFit: "cover", height: "100%" }}
+              style={{ objectFit: "contain", height: "100%" }}
             />
           </div>
         </Stack>

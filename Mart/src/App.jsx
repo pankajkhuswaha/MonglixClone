@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import Layout from "./layout/Layout";
 import Errorpage from "./pages/404/Errorpage";
-import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Stack } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import { getProducts } from "./features/ProductSlice";
 import { userCart } from "./features/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Routess } from "./routes/Routes";
 import { VerifyApi } from "./features/authSlice";
 import Loading from "./features/loading/Loader";
@@ -19,7 +18,6 @@ const App = () => {
   const dispatch = useDispatch();
   const { error, success } = useSelector((state) => state.auth);
   const isLoading = useSelector((state) => state.loading.show);
-  // console.log(site.title);
 
   const verifyToken = () => {
     dispatch(VerifyApi());
@@ -46,7 +44,7 @@ const App = () => {
         <Errorpage />
       ) : (
         <Layout>
-          <Stack padding={"20px"}>
+          <Stack  sx={{padding:{sm:'12px',md:'30px'}}}>
             <Routes>
               {Routess.map((ele, id) => {
                 return (

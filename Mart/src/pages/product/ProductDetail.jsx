@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Stack } from "@mui/material";
 import numberFormat from "../../essentail/numberFormat";
 import Checkout from "./Checkout";
+import parse from "html-react-parser"; 
 import SelectImage from "./SelectImage";
 
 const ProductDetail = () => {
@@ -43,7 +44,7 @@ const ProductDetail = () => {
                 Product Details
               </p>
               <p className="text-lg font-[400] text-gray-500">
-                {SingleProductData.mindiscription}
+                {parse(SingleProductData.mindiscription)}
               </p>
             </div>
           </Stack>

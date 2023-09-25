@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Stack, Badge } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useLocation, Link } from "react-router-dom";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -10,14 +11,11 @@ import { toast } from "react-toastify";
 const Header = () => {
   const cart = useSelector((state) => state.cart.carts);
   const site = useSelector((st) => st.site.data);
+    const isUser = useSelector((state) => state.auth.token);
 
   const CartCount = cart.products?.length;
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/";
-    toast.success("logout Successfull");
-  };
+ 
   const users = useSelector((state) => state.auth.user);
   const currentuser = users.user?.name;
   const location = useLocation();
@@ -54,6 +52,7 @@ const Header = () => {
       <div className="container">
         <Stack display={"flex"} padding={site.logo ? "4px" : "14px"}>
           <Stack
+            className="a"
             display={"flex"}
             flexDirection={"row"}
             alignItems={"center"}
@@ -63,8 +62,8 @@ const Header = () => {
               <Link to={"/"}>
                 <img
                   style={{
-                    width: "160px",
-                    height: "70px",
+                    width: "120px",
+                    height: "60px",
                     mixBlendMode: "darken",
                   }}
                   src={site.logo}
@@ -85,16 +84,27 @@ const Header = () => {
             )}
             <SearchComponent />
             <Stack flexDirection={"row"} gap={4} alignItems={"center"}>
-              <Link to={"/checkout"}>
-                <Badge badgeContent={CartCount} color="primary">
-                  <ShoppingBagOutlinedIcon />
-                </Badge>
-              </Link>
-
+              {isUser ? (
+                <Link to={"/checkout"}>
+                  <Badge badgeContent={CartCount} color="primary">
+                    <ShoppingBagOutlinedIcon />
+                  </Badge>
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <Badge badgeContent={CartCount} color="primary">
+                    <ShoppingBagOutlinedIcon />
+                  </Badge>
+                </Link>
+              )}
               {currentuser ? (
-                <button onClick={handleLogout}>
-                  <p>{currentuser}</p>{" "}
-                </button>
+           <Link  to={'/users'}>
+<AccountCircleIcon/>
+           </Link>   
+
+                // <button onClick={handleLogout}>
+                //   <p>{currentuser}</p>{" "}
+                // </button>
               ) : (
                 <Link to={"/login"}>
                   <AccountBoxIcon />
@@ -106,9 +116,9 @@ const Header = () => {
               </Stack>
             </Stack>
           </Stack>
-
           {location.pathname === "/" && (
             <div
+              className="b"
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -118,10 +128,10 @@ const Header = () => {
                 boxShadow: "0 12px 15px rgba(0,0,0,.15)",
                 transition: "0.2s",
                 opacity: showDivOnScroll ? 1 : 0,
-                backgroundColor: "white",
+                background: "#F8FAFC",
                 padding: "10px",
                 position: "fixed",
-                top: 78,
+                top: 68,
                 right: 0,
                 width: "100%",
                 zIndex: 9,

@@ -1,15 +1,42 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Stack } from "@mui/material";
 
 const Footer = () => {
-  const site = useSelector(st=>st.site.data)
+  const Links = [
+    {
+      name: "Contact Us",
+      links: "/contact",
+    },
+
+    {
+      name: "About Us",
+      links: "/about",
+    },
+  ];
+
+  const site = useSelector((st) => st.site.data);
+  const data = useSelector((state) => state.products.products);
+  const categories = ["All", ...new Set(data.map((item) => item.category))];
+
   return (
     <>
-      <footer style={{background:site.footerCol}}>
-        <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+      <footer style={{ background: site.footerCol }}>
+        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
-              <h1>{site.name}</h1>
+              <Link to={"/"}>
+                <img
+                  src={site.logo}
+                  alt=""
+                  style={{
+                    width: "50%",
+                    height: "40%",
+                    mixBlendMode: "darken",
+                  }}
+                />
+              </Link>
 
               <div className="flex mt-8 space-x-6 text-gray-600">
                 <p className="hover:opacity-75">
@@ -87,31 +114,30 @@ const Footer = () => {
             </div>
             <div className="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
               <div>
-                <p className="font-medium">Company</p>
-                <div className=" text-gray-500">
-                  <p className="hover:opacity-75">Meet the Team</p>
-                  <p className="hover:opacity-75"> History </p>
-                  <p className="hover:opacity-75"> Careers </p>
-                </div>
+                <p className="font-bold text-black">Company</p>
+                {Links.map((elem, id) => {
+                  return (
+                    <Link to={elem.links} key={id}>
+                      <div className=" text-gray-500">
+                        <p className="hover:text-[#ff4268]  ">{elem.name}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
               <div>
-                <p className="font-medium">Services</p>
+                <p className="font-medium">Categories</p>
                 <div div className=" text-gray-500">
-                  <p className="hover:opacity-75"> 1on1 Coaching </p>
-                  <p className="hover:opacity-75"> Company Review </p>
-                  <p className="hover:opacity-75"> Accounts Review </p>
-                  <p className="hover:opacity-75"> HR Consulting </p>
-                  <p className="hover:opacity-75"> SEO Optimisation </p>
+                  {categories.map((ele, i) => {
+                    return (
+                      <Link to={"/product"} key={i}>
+                        <p className=" hover:text-[#ff4268]  ">{ele}</p>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
-              <div>
-                <p className="font-medium">Helpful Links</p>
-                <div className=" text-gray-500">
-                  <p className="hover:opacity-75"> Contact </p>
-                  <p className="hover:opacity-75"> FAQs </p>
-                  <p className="hover:opacity-75"> Live Chat </p>
-                </div>
-              </div>
+
               <div>
                 <p className="font-medium">Legal</p>
                 <div className=" text-gray-500">
