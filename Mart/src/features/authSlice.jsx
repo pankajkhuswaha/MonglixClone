@@ -45,25 +45,28 @@ export const authSlice = createSlice({
         state.success = true;
       })
       .addCase(RegisterApi.rejected, (state, action) => {
-        console.log(action.payload), (state.error = true);
+       (state.error = true);
       })
       .addCase(LoginApi.fulfilled, (state, action) => {
         state.success = true;
         if (action.payload._id) {
           toast.success("Login Success");
+          if(action.payload.role==="admin"){
+           return window.location.href = "/admin";
+          }
           window.location.href = "/";
         } else {
           toast.error(action.payload);
         }
       })
       .addCase(LoginApi.rejected, (state, action) => {
-        (state.error = true), console.log(action.payload);
+        (state.error = true);
       })
       .addCase(VerifyApi.fulfilled, (state, action) => {
         (state.success = true), (state.user = action.payload);
       })
       .addCase(VerifyApi.rejected, (state, action) => {
-        (state.error = true), console.log(action.payload);
+        (state.error = true);
       })
       .addCase(addAddress.fulfilled, () => {
         toast.success("Address is added sucessfully");

@@ -5,7 +5,7 @@ import "./login.css";
 
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RegisterApi, LoginApi } from "../../features/authSlice";
 
 const Login = () => {

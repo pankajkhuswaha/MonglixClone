@@ -42,7 +42,6 @@ export const SearchProductApi = createAsyncThunk(
   "Searchproduct",
   async (payload) => {
     const res = await axios.get(`${base_url}product?search=${payload}`);
-    console.log(res.data);
     return res.data;
   }
 );
@@ -50,7 +49,6 @@ export const fILTERProductApibycategory = createAsyncThunk(
   "fILTERProductApibycategory",
   async (payload) => {
     const res = await axios.get(`${base_url}product?category=${payload}`);
-    console.log(res.data);
     return res.data;
   }
 );
@@ -59,7 +57,6 @@ export const fILTERProductApibrand = createAsyncThunk(
   "fILTERProductApibrand",
   async (payload) => {
     const res = await axios.get(`${base_url}product?brand=${payload}`);
-    console.log(res.data);
     return res.data;
   }
 );
@@ -68,7 +65,6 @@ export const fILTERProductApisubcategory = createAsyncThunk(
   "fILTERProductApisubcategory",
   async (payload) => {
     const res = await axios.get(`${base_url}product?subcategory=${payload}`);
-    console.log(res.data);
     return res.data;
   }
 );
@@ -88,7 +84,6 @@ export const productSlice = createSlice({
       })
       .addCase(getProducts.rejected, (state) => {
         state.error = true;
-        console.log(state.error);
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.loading = false;
@@ -111,7 +106,6 @@ export const productSlice = createSlice({
       .addCase(addAProduct.fulfilled, (state, action) => {
         state.loading = false;
         state.loading = false;
-        console.log(action.payload);
         if (action.payload.success) {
           toast.success(action.payload.message);
         } else {
@@ -127,7 +121,6 @@ export const productSlice = createSlice({
       // fiteration begins
       .addCase(fILTERProductApibycategory.fulfilled, (state, action) => {
         state.filterData = action.payload;
-        console.log(action.payload);
       })
       .addCase(fILTERProductApibrand.fulfilled, (state, action) => {
         state.filterData = action.payload;
@@ -143,7 +136,6 @@ export const productSlice = createSlice({
       })
 
       .addCase(SearchProductApi.rejected, (state, action) => {
-        console.log(action.payload);
         toast.error("Internal Server Error!");
       });
   

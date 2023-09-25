@@ -7,17 +7,13 @@ import { useLocation, Link } from "react-router-dom";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { SearchComponent, BtmDrawer } from "../Index";
-import { toast } from "react-toastify";
 
 const Header = () => {
   const cart = useSelector((state) => state.cart.carts);
   const site = useSelector((st) => st.site.data);
-  const isUser = useSelector((state) => state.auth.token);
-
   const CartCount = cart.products?.length;
-
-  const users = useSelector((state) => state.auth.user);
-  const currentuser = users.user?.name;
+  const users = useSelector((state) => state.auth.user?.user);
+  const currentuser = users?.name;
   const location = useLocation();
   const data = useSelector((state) => state.products.products);
   const categories = ["All", ...new Set(data.map((item) => item.category))];
@@ -100,7 +96,7 @@ const Header = () => {
                 <TopDrawer />
               </Stack>
 
-              {isUser ? (
+              {users ? (
                 <Link to={"/checkout"}>
                   <Badge badgeContent={CartCount} color="primary">
                     <ShoppingBagOutlinedIcon />
@@ -180,4 +176,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header

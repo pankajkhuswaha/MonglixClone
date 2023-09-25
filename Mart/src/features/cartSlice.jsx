@@ -51,7 +51,6 @@ export const cartSlice = createSlice({
         state.loading = true;
       })
       .addCase(addCart.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.loading = false;
       })
       .addCase(addCart.pending, (state) => {
