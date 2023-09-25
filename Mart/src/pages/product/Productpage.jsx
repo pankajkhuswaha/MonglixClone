@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 import {
-  getProducts,
   fILTERProductApibycategory,
   fILTERProductApibrand,
   fILTERProductApisubcategory,
