@@ -1,18 +1,17 @@
-import  { useEffect, } from "react";
+import { useEffect } from "react";
 import "./checkout.css";
 import EmptyCart from "../../components/emptycart/emptyCart";
 import numberFormat from "../../essentail/numberFormat";
 import { deleteCart, updateCart, userCart } from "../../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 const Checkout = () => {
-
-    const cart = useSelector((state) => state.cart.carts);
-
-
+  const cart = useSelector((state) => state.cart.carts);
+  const site = useSelector((st) => st.site.data);
   const CartCount = cart.products?.length;
-  console.log(CartCount);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(userCart());
   }, [dispatch]);
@@ -29,9 +28,12 @@ const Checkout = () => {
             <div className="flex justify-between  flex-wrap ">
               <div className="rounded-lg md:w-[60%] mt-[12px]">
                 {carts.products?.map((value, index) => {
-                  const { url, name, price, count, _id } = value;
+                  const { url, name, price, count, _id ,discount,total} = value;
                   return (
-                    <div key={index} className="justify-between mb-4 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+                    <div
+                      key={index}
+                      className="justify-between mb-4 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start"
+                    >
                       <img
                         src={url}
                         alt="product-image"
@@ -43,7 +45,10 @@ const Checkout = () => {
                             {name}
                           </h2>
                           <p className="mt-1 text-md text-gray-700">
-                            {numberFormat(price)}
+                            <span className="text-danger"><del>{numberFormat(price)}</del> <sup>{discount}%</sup> </span>{" "}
+                            <span className="text-primary">
+                               {numberFormat(price)}
+                            </span>
                           </p>
                         </div>
                         <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
@@ -79,9 +84,9 @@ const Checkout = () => {
                             </span>
                           </div>
                           <div className="flex items-center space-x-4">
-                            <p className="text-sm">
+                            <p className="text-md font-bold">
                               {" "}
-                              {numberFormat(price * count)}{" "}
+                              {numberFormat(total)}{" "}
                             </p>
                             <svg
                               onClick={() => dispatch(deleteCart(_id))}
@@ -167,8 +172,7 @@ const Checkout = () => {
                             </svg>
                             <h4> Cart</h4>
                           </Stack>
-
-                          <span id="CartAmtFirst"> Items</span>
+                          <span id="CartAmtFirst"> {CartCount} Items</span>
                         </li>
                         <li>
                           <span id="CartAmtFirst">
@@ -176,44 +180,30 @@ const Checkout = () => {
                           </span>
                         </li>
                         <li>
-                          <h4>Refundable Deposit</h4>
-                          <span id="CartSAmtFirst">
-                            <i className="rupees-symbol">₹</i> 500.00
-                          </span>
-                        </li>
-                        <li>
-                          <h4>Taxes</h4>
-                          <span id="gstTaxValFirst">
-                            <i className="rupees-symbol">₹</i> 100.00{" "}
-                          </span>
-                        </li>
-                        <li className="d-none">
-                          <h4>GST (28 %)</h4>
-                          <span id="gstTaxValFirst_28">
-                            <i className="rupees-symbol">₹</i> 0.00{" "}
-                          </span>
-                        </li>
-                        <li>
                           <h4>Total</h4>
-                          <span
-                            id="CartCartGAmtFirst"
-                            style={{ fontWeight: "bold" }}
-                          >
-                            <i className="rupees-symbol"></i>{" "}
-                            {numberFormat(carts.totalCartValue)}
-                          </span>
+                          <div>
+                            <p style={{ fontWeight: "bold" }}>
+                              {numberFormat(carts.totalCartValue)} <del className="text-danger">{carts.totalProductPrice}₹</del>
+                            </p>
+                            <p className="text-success">
+                              You Saved{" "}
+                              {carts.totalProductPrice - carts.totalCartValue} ₹ <br></br>on this purchase
+                            </p>
+                          </div>
                         </li>
                       </ul>
                       <button
                         style={{
-                          background: "#0D6EFD",
-                          color: "white",
+                          background: site?.primarybg,
+                          color: "white !important",
                           padding: "12px",
                           borderRadius: "10px",
                           width: " 100%",
+                          marginTop: "4px",
                         }}
+                        onClick={() => navigate("/checkout-details")}
                       >
-                        <p>CheckOut</p>
+                        CheckOut
                       </button>
                     </div>
                   </div>

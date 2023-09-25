@@ -51,6 +51,9 @@ export const authSlice = createSlice({
         state.success = true;
         if (action.payload._id) {
           toast.success("Login Success");
+          if(action.payload.role==="admin"){
+           return window.location.href = "/admin";
+          }
           window.location.href = "/";
         } else {
           toast.error(action.payload);
