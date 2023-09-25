@@ -23,7 +23,7 @@ const ProductDetail = () => {
       {SingleProductData ? (
         <Stack display={"flex"} flexWrap={"wrap"} flexDirection={"row"}>
           <Stack flex={5}>
-            <SelectImage img={images} />
+            <SelectImage img={images} data={SingleProductData} />
           </Stack>
           <Stack position={"sticky"} flex={5} p={3}>
             <div className="p-3 border-1 rounded-md">
