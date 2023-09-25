@@ -31,19 +31,19 @@ export const routes = [
         },
       ],
     },
-    {
-      path: "/admin/cus",
-      icon: <CgWebsite fontSize={22} color="skyblue"  />,
-      txt: "Customize Website",
-      children: [
-        {
-          path: "/admin/custom-homepage",
-          icon: <FaProductHunt fontSize={16} />,
-          txt: "Home Page",
-          element:<Homepage/>
-        }
-      ],
-    },
+    // {
+    //   path: "/admin/cus",
+    //   icon: <CgWebsite fontSize={22} color="skyblue"  />,
+    //   txt: "Customize Website",
+    //   children: [
+    //     {
+    //       path: "/admin/custom-homepage",
+    //       icon: <FaProductHunt fontSize={16} />,
+    //       txt: "Home Page",
+    //       element:<Homepage/>
+    //     }
+    //   ],
+    // },
   ];
 export const  AdminRoute = [
   {

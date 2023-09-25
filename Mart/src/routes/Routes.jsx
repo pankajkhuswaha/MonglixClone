@@ -10,6 +10,7 @@ import {
 } from "../pages";
 import Admin from "../pages/admin";
 import ContactUs from "../pages/admin/pages/contactus/ContactUs";
+import Address from "../pages/product/Address";
 
 export const Routess = [
   {
@@ -31,6 +32,10 @@ export const Routess = [
   {
     path: "/checkout",
     Element: <Checkout />,
+  },
+  {
+    path: "/checkout-details",
+    Element: <Address />,
   },
   {
     path: "/contact",

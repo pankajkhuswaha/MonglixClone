@@ -41,7 +41,7 @@ const verifyUser = asyncHandler(async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded?.id);
         req.user = user;
-        res.json({ success: true ,user});
+        res.json({ success: true, user });
       }
     } catch (error) {
       res.json("Not Authorized token expired, Please Login again");
@@ -91,7 +91,6 @@ const createUser = asyncHandler(async (req, res) => {
 });
 
 const isAdminuser = asyncHandler(async (req, res) => {
- 
   const { email } = req.user;
   const adminUser = await User.findOne({ email });
   if (adminUser.role !== "admin") {
@@ -177,6 +176,10 @@ const loginAdmin = asyncHandler(async (req, res) => {
   } else {
     throw new Error("Invalid Credentials");
   }
+});
+const addnewAddress = asyncHandler(async (req, res) => {
+  const { _id } = req.user;
+  res.json(req.user);
 });
 
 // handle refresh token
@@ -445,4 +448,5 @@ module.exports = {
   checkSignup,
   checkresetPasswordUser,
   verifyUser,
+  addnewAddress,
 };
