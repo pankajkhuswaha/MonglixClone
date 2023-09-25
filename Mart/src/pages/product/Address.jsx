@@ -7,7 +7,6 @@ import { addAddress } from "../../features/authSlice";
 const Address = () => {
   const site = useSelector((st) => st.site.data);
   const user = useSelector((st) => st.auth.user)?.user;
-  console.log(user);
   const { carts } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const { values, handleSubmit, handleChange, resetForm } = useFormik({
@@ -22,7 +21,6 @@ const Address = () => {
     },
     onSubmit: (values) => {
       dispatch(addAddress({address:values}))
-      console.log(values);
     },
   });
   return (

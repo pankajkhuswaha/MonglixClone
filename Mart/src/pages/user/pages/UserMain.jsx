@@ -1,10 +1,7 @@
-import React from "react";
 
 import { useSelector } from "react-redux";
 const UserMain = () => {
   const user = useSelector((state) => state.auth.user?.user);
-  console.log(user);
-
   return (
     <>
       <section className=" bg-blueGray-50">

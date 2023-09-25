@@ -42,7 +42,6 @@ export const configSlice = createSlice({
         state.loading = false;
       })
       .addCase(updateSiteConfig.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.loading = false;
       })
       .addCase(updateSiteConfig.pending, (state) => {

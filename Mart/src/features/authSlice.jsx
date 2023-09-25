@@ -45,7 +45,7 @@ export const authSlice = createSlice({
         state.success = true;
       })
       .addCase(RegisterApi.rejected, (state, action) => {
-        console.log(action.payload), (state.error = true);
+       (state.error = true);
       })
       .addCase(LoginApi.fulfilled, (state, action) => {
         state.success = true;
@@ -60,13 +60,13 @@ export const authSlice = createSlice({
         }
       })
       .addCase(LoginApi.rejected, (state, action) => {
-        (state.error = true), console.log(action.payload);
+        (state.error = true);
       })
       .addCase(VerifyApi.fulfilled, (state, action) => {
         (state.success = true), (state.user = action.payload);
       })
       .addCase(VerifyApi.rejected, (state, action) => {
-        (state.error = true), console.log(action.payload);
+        (state.error = true);
       })
       .addCase(addAddress.fulfilled, () => {
         toast.success("Address is added sucessfully");
