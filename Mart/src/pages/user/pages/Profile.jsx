@@ -1,7 +1,35 @@
 import React from "react";
 import Buttonele from "../../../components/button/Buttonele";
-
+import { ProfileResetApi } from "../../../features/userSlice";
+import { VerifyApi } from "../../../features/authSlice";
+import { useFormik } from "formik";
+ import { toast } from "react-toastify";
+import { useDispatch ,useSelector } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 const Profile = () => {
+  const data = useSelector((state) => state.user.value);
+  console.log(data);
+  const dispatch = useDispatch();
+
+ const formik = useFormik({
+   initialValues: {
+     name: "",
+     email: "",
+     number: "",
+   },
+   onSubmit: (values) => {
+     dispatch(ProfileResetApi(values))
+       .then(unwrapResult)
+       .then(() => {
+         toast.success("Profile Updated Successfully!");
+         formik.resetForm();
+         dispatch(VerifyApi())
+       })
+   },
+ });
+
+
+
   return (
     <>
       <section className=" bg-blueGray-50">
@@ -14,7 +42,7 @@ const Profile = () => {
             </div>
             <hr className="mx-6 border-b-1 border-blueGray-300" />
             <div className="flex-auto mt-3 px-4 lg:px-10 py-10 pt-0">
-              <form>
+              <form onSubmit={formik.handleSubmit}>
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
@@ -26,6 +54,9 @@ const Profile = () => {
                       </label>
                       <input
                         type="text"
+                        name="name"
+                        onChange={formik.handleChange}
+                        value={formik.values.name}
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Enter Name"
                       />
@@ -41,6 +72,9 @@ const Profile = () => {
                       </label>
                       <input
                         type="email"
+                        name="email"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Enter Email "
                       />
@@ -55,6 +89,9 @@ const Profile = () => {
                         Mobile Number
                       </label>
                       <input
+                        name="number"
+                        onChange={formik.handleChange}
+                        value={formik.values.number}
                         type="number"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Enter Mobile Number "
@@ -62,7 +99,7 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-[20%] mx-auto pt-3 ">
+                <div type='submit' className="w-[20%] mx-auto pt-3 ">
                   <Buttonele title={"Save"} />
                 </div>
               </form>
