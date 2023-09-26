@@ -25,7 +25,7 @@ const About = () => {
         ></path>
       </svg>
       <p className="text-white text-xl md:text-4xl font-bold text-center mt-4 relative md:top-4 top-[-10px]">
-        ABOUT US
+        ABOUT US 
       </p>
       <div className="shadow-sm m-12 relative module">
         <div
