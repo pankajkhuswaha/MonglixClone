@@ -23,7 +23,7 @@ const App = () => {
     dispatch(VerifyApi());
 
     if (success) {
-      toast.success("sucesss");
+      return
     } else if (error) {
       toast.error("error");
     }

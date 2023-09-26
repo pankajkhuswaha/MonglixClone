@@ -1,12 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import numberFormat from "../../essentail/numberFormat";
 import { useFormik } from "formik";
-import { addAddress } from "../../features/authSlice";
+import { VerifyApi, addAddress } from "../../features/authSlice";
+import { useState } from "react";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const Address = () => {
   const site = useSelector((st) => st.site.data);
   const user = useSelector((st) => st.auth.user)?.user;
   const { carts } = useSelector((state) => state.cart);
+  const adress = user?.address;
+  const [selctedAdr, setselctedAdr] = useState(null);
+  const [viewform, setviewform] = useState(adress?.length > 0 ? false : true);
+
   const dispatch = useDispatch();
   const { values, handleSubmit, handleChange, resetForm } = useFormik({
     initialValues: {
@@ -19,10 +25,14 @@ const Address = () => {
       state: "",
     },
     onSubmit: (values) => {
-      dispatch(addAddress({ address: values }));
+      dispatch(addAddress({ address: values })).then(unwrapResult).then(()=>{
+        dispatch(VerifyApi())
+        resetForm()
+        setviewform(!viewform)
+      });
     },
   });
-  const adress = user?.address;
+  
   return (
     <div>
       <div className="relative mx-auto w-full">
@@ -33,7 +43,46 @@ const Address = () => {
                 Secure Checkout
               </h1>
               <p className="text-gray-800 font-medium">Customer information</p>
-              {adress?.length < 0 && (
+              <div className="flex flex-col gap-3 mt-2">
+                {adress?.map((adrr, i) => {
+                  const { _id, name, mobile, adr, city, state, pincode } = adrr;
+                  const isSelected = _id === selctedAdr?._id;
+                  return (
+                    <div
+                      key={_id}
+                      className={`flex gap-2 items-start border ${
+                        (selctedAdr ? isSelected : i == 0)
+                          ? "bg-red-50"
+                          : "bg-white"
+                      } p-2 rounded shadow-sm`}
+                    >
+                      <input
+                        type="radio"
+                        name="address"
+                        className="mt-2"
+                        checked={selctedAdr ? isSelected : i == 0}
+                        style={{ accentColor: "#ff4268" }}
+                        onChange={() => setselctedAdr(adrr)}
+                      />
+                      <div className="text-gray-600 font-semibold">
+                        <p>
+                          <span>{name}</span> <span>{mobile}</span>
+                        </p>
+                        <span className="rPNEXT Br27Zz">
+                          {adr}, {city},{state} -{" "}
+                          <span className="">{pincode}</span>
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="btn mt-2 bg-[#ff4268] text-white hover:bg-[#ff4268]"
+              onClick={()=>setviewform(!viewform)}
+              >
+                Add New Address
+              </button>
+              {(adress?.length < 0 || viewform) && (
                 <form className="w-full rounded" onSubmit={handleSubmit}>
                   <div className="mt-3">
                     <label className="block text-sm text-gray-00">Name</label>
@@ -200,29 +249,6 @@ const Address = () => {
                 </button>
               </div>
             </div>
-            {/* <div className="relative mt-3">
-              <h3 className="mb-2 text-lg font-bold">Support</h3>
-              <p className="text-sm font-semibold">
-                +01 653 235 211{" "}
-                <span className="font-light">(International)</span>
-              </p>
-              <p className="mt-1 text-sm font-semibold">
-                support@nanohair.com <span className="font-light">(Email)</span>
-              </p>
-              <p className="mt-2 text-xs font-medium">
-                Call us now for payment related issues
-              </p>
-            </div>
-            <div className="relative mt-2 flex">
-              <p className="flex flex-col">
-                <span className="text-sm font-bold">
-                  Money Back Guarantee
-                </span>
-                <span className="text-xs font-medium">
-                  within 30 days of purchase
-                </span>
-              </p>
-            </div> */}
           </div>
         </div>
       </div>
