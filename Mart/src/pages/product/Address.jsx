@@ -11,7 +11,7 @@ const Address = () => {
   const { carts } = useSelector((state) => state.cart);
   const adress = user?.address;
   const [selctedAdr, setselctedAdr] = useState(null);
-  const [viewform, setviewform] = useState(adress?.length > 0 ? false : true);
+  const [viewform, setviewform] = useState(false);
 
   const dispatch = useDispatch();
   const { values, handleSubmit, handleChange, resetForm } = useFormik({
@@ -25,19 +25,21 @@ const Address = () => {
       state: "",
     },
     onSubmit: (values) => {
-      dispatch(addAddress({ address: values })).then(unwrapResult).then(()=>{
-        dispatch(VerifyApi())
-        resetForm()
-        setviewform(!viewform)
-      });
+      dispatch(addAddress({ address: values }))
+        .then(unwrapResult)
+        .then(() => {
+          dispatch(VerifyApi());
+          resetForm();
+          setviewform(!viewform);
+        });
     },
   });
-  
+
   return (
     <div>
       <div className="relative mx-auto w-full">
         <div className="grid grid-cols-10">
-          <div className="col-span-full py-6 px-4 sm:py-12 lg:col-span-6 lg:py-24">
+          <div className="col-span-full py-6 px-4 sm:py-12 lg:col-span-6 lg:py-10">
             <div className="mx-auto w-full max-w-lg">
               <h1 className="relative text-2xl font-medium text-gray-700 sm:text-3xl">
                 Secure Checkout
@@ -77,12 +79,22 @@ const Address = () => {
                   );
                 })}
               </div>
-              <button className="btn mt-2 bg-[#ff4268] text-white hover:bg-[#ff4268]"
-              onClick={()=>setviewform(!viewform)}
-              >
-                Add New Address
-              </button>
-              {(adress?.length < 0 || viewform) && (
+              <div className="flex justify-between">
+                
+                <button
+                  className="btn mt-2 bg-[#ff4268] text-white hover:bg-[#ff4268]"
+                  onClick={() => setviewform(!viewform)}
+                >
+                  Add New Address
+                </button>
+                {viewform&&<button
+                  className="btn mt-2 btn-danger text-xl rounded-full flex items-center pb-2 justify-center w-8 h-8"
+                  onClick={() => setviewform(!viewform)}
+                >
+                  x
+                </button>}
+              </div>
+              {viewform && (
                 <form className="w-full rounded" onSubmit={handleSubmit}>
                   <div className="mt-3">
                     <label className="block text-sm text-gray-00">Name</label>
@@ -188,7 +200,7 @@ const Address = () => {
               )}
             </div>
           </div>
-          <div className="relative col-span-full flex flex-col py-6 pl-8 pr-4 sm:py-12 lg:col-span-4 lg:py-24">
+          <div className="sticky col-span-full flex flex-col py-6 pl-8 pr-4 sm:py-12 lg:col-span-4 lg:py-24">
             <div className=" border text-dark p-4 rounded shadow">
               <h2
                 className="font-bold border-b-2 w-fit text-center  pb-1 mb-3"
@@ -200,21 +212,19 @@ const Address = () => {
               <ul className="space-y-5">
                 <li className="flex flex-wrap gap-4">
                   {carts.products?.map((ele, i) => {
-                    const { url, name, price, count } = ele;
+                    const { url, name, total } = ele;
 
                     return (
-                      <div key={i} className="flex justify-between">
-                        <div className="inline-flex">
+                      <div key={i} className="flex justify-between w-full">
+                        <div className="flex gap-2">
                           <img src={url} alt="" className="max-h-16 w-16" />
-                          <div className="ml-3">
-                            <p className="font-semibold mr-4 text-muted text-sm">
-                              {name}
-                            </p>
-                          </div>
-                          <p className="text-sm font-semibold">
-                            {numberFormat(price * count)}{" "}
+                          <p className="font-semibold mr-4 text-muted text-sm">
+                            {name}
                           </p>
                         </div>
+                        <p className="text-sm font-semibold">
+                          {numberFormat(total)}{" "}
+                        </p>
                       </div>
                     );
                   })}
@@ -226,8 +236,13 @@ const Address = () => {
               ></div>
               <div className="space-y-2">
                 <p className="flex justify-between text-lg font-bold">
-                  <span>Total Payable:</span>
-                  <span>{numberFormat(carts.totalCartValue)}</span>
+                  <p>Total Payable:</p>
+                  <p style={{ fontWeight: "bold" }}>
+                    {numberFormat(carts.totalCartValue)}{" "}
+                    <del className="text-danger">
+                      {carts.totalProductPrice}₹
+                    </del>
+                  </p>
                 </p>
               </div>
               <div>
@@ -245,7 +260,7 @@ const Address = () => {
                   style={{ background: site.primarybg }}
                   className="mt-4 inline-flex w-full items-center justify-center rounded  py-2.5 px-4 text-base font-semibold tracking-wide text-white text-opacity-80 outline-none ring-offset-2 transition hover:text-opacity-100 focus:ring-2  sm:text-lg"
                 >
-                  Place Order
+                  Confirm Order
                 </button>
               </div>
             </div>

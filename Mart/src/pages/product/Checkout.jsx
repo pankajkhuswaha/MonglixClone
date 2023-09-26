@@ -28,7 +28,8 @@ const Checkout = () => {
             <div className="flex justify-between  flex-wrap ">
               <div className="rounded-lg md:w-[60%] mt-[12px]">
                 {carts.products?.map((value, index) => {
-                  const { url, name, price, count, _id ,discount,total} = value;
+                  const { url, name, price, count, _id, discount, total } =
+                    value;
                   return (
                     <div
                       key={index}
@@ -45,9 +46,12 @@ const Checkout = () => {
                             {name}
                           </h2>
                           <p className="mt-1 text-md text-gray-700">
-                            <span className="text-danger"><del>{numberFormat(price)}</del> <sup>{discount}%</sup> </span>{" "}
+                            <span className="text-danger">
+                              <del>{numberFormat(price)}</del>{" "}
+                              <sup>{discount}%</sup>{" "}
+                            </span>{" "}
                             <span className="text-primary">
-                               {numberFormat(price)}
+                              {numberFormat(price)}
                             </span>
                           </p>
                         </div>
@@ -183,11 +187,15 @@ const Checkout = () => {
                           <h4>Total</h4>
                           <div>
                             <p style={{ fontWeight: "bold" }}>
-                              {numberFormat(carts.totalCartValue)} <del className="text-danger">{carts.totalProductPrice}₹</del>
+                              {numberFormat(carts.totalCartValue)}{" "}
+                              <del className="text-danger">
+                                {carts.totalProductPrice}₹
+                              </del>
                             </p>
                             <p className="text-success">
                               You Saved{" "}
-                              {carts.totalProductPrice - carts.totalCartValue} ₹ <br></br>on this purchase
+                              {carts.totalProductPrice - carts.totalCartValue} ₹{" "}
+                              <br></br>on this purchase
                             </p>
                           </div>
                         </li>
