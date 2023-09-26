@@ -35,7 +35,7 @@ const Mycard = ({ data, load }) => {
     <div
       className={
         pathname.includes("product")
-          ? "flex justify-center w-[180px]"
+          ? "flex justify-center w-[180px] md:w-[220px]"
           : "flex justify-center"
       }
     >

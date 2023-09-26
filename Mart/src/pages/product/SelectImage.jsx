@@ -81,7 +81,7 @@ const SelectImage = ({ img, data }) => {
         </Stack>
 
         {currentuser && (
-          <div className="p-5">
+          <div className="p-5 ">
             <Stack
               display={"flex"}
               flexDirection={"row"}
@@ -98,13 +98,13 @@ const SelectImage = ({ img, data }) => {
                   stroke="transparent"
                   btnType="ghost"
                   icon="[object Object]"
-                  iconSize="20"
+                  iconsize="20"
                   fill="#9F2089"
                 >
                   <g
-                    clip-path="url(#go-to-cart_svg__a)"
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    clipPath="url(#go-to-cart_svg__a)"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                   >
                     <path d="M.75 1.5A.75.75 0 0 1 1.5.75h2.084a1.75 1.75 0 0 1 1.68 1.262L6.05 4.72h12.625a1.75 1.75 0 0 1 1.683 2.23L18.661 12.9a1.75 1.75 0 0 1-1.683 1.27H8.303a1.75 1.75 0 0 1-1.695-1.315l-1.845-7.19-.94-3.236a.25.25 0 0 0-.24-.18H1.5a.75.75 0 0 1-.75-.75Zm5.703 4.719 1.608 6.264a.25.25 0 0 0 .242.188h8.675a.25.25 0 0 0 .24-.181l1.698-5.952a.25.25 0 0 0-.24-.319H6.452ZM9.923 16.238a.5.5 0 0 0-.493.506.5.5 0 0 0 .493.506.5.5 0 0 0 .493-.506.5.5 0 0 0-.493-.506Zm-1.993.506a2 2 0 0 1 1.993-2.006 2 2 0 0 1 1.993 2.006 2 2 0 0 1-1.993 2.006 2 2 0 0 1-1.993-2.006ZM15.72 16.238a.5.5 0 0 0-.493.506.5.5 0 0 0 .493.506.5.5 0 0 0 .493-.506.5.5 0 0 0-.493-.506Zm-1.993.506a2 2 0 0 1 1.993-2.006 2 2 0 0 1 1.993 2.006 2 2 0 0 1-1.993 2.006 2 2 0 0 1-1.993-2.006Z"></path>
                   </g>
@@ -138,17 +138,17 @@ const SelectImage = ({ img, data }) => {
                   stroke="#ffffff"
                   btnType="solid"
                   icon="[object Object]"
-                  iconSize="20"
+                  iconsize="20"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M3.927 3.28A.956.956 0 0 0 2.576 4.63l5.437 5.438-5.3 5.3a.956.956 0 1 0 1.352 1.351l5.43-5.43a1.727 1.727 0 0 0-.032-2.474L3.927 3.28Z"
                     fill="#fff"
                   ></path>
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M11.631 3.28A.956.956 0 1 0 10.28 4.63l5.437 5.438-5.3 5.3a.956.956 0 1 0 1.352 1.351l5.43-5.43a1.727 1.727 0 0 0-.032-2.474L11.631 3.28Z"
                     fill="#fff"
                   ></path>
