@@ -1,5 +1,5 @@
-
 import { useSelector } from "react-redux";
+
 const UserMain = () => {
   const user = useSelector((state) => state.auth.user?.user);
   return (
@@ -33,7 +33,8 @@ const UserMain = () => {
                       </label>
                       <input
                         type="text"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" disabled
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        disabled
                         placeholder={user?.name}
                       />
                     </div>
@@ -64,7 +65,8 @@ const UserMain = () => {
                       </label>
                       <input
                         type="number"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" disabled
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        disabled
                         placeholder={user?.mobile}
                       />
                     </div>
