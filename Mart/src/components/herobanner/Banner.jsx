@@ -1,10 +1,9 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import Slider from "react-slick";
 import { NextBtn, PreviousBtn } from "../productslider/Imagecarousel";
 
 const Banner = () => {
-  const banner = useSelector((st) => st.site.data.homepageBanner);
+  const banner = ["/banner.png"];
   const settings = {
     dots: false,
     infinite: true,
