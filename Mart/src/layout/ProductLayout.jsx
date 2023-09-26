@@ -24,9 +24,9 @@ const ProductLayout = (props) => {
 
   return (
     <div className="container">
-      <Stack p={{ xs: 1, md: 4 }}>
+      <Stack p={{ xs: 1, md: 3 }}>
         <Stack
-          p={{ xs: 1, md: 4 }}
+          p={{ xs: 1, md: 3 }}
           borderRadius={2}
           alignItems={"center"}
           sx={{ backgroundColor: site.secondarybg }}
@@ -40,11 +40,13 @@ const ProductLayout = (props) => {
               {props.title}
             </h1>
           )}
-       
-            <button style={{width:'80px'}} onClick={handleSeeAllClick} disabled={loading}>
-              <Buttonele title={"See All"} />
-            </button>
-      
+
+          <Buttonele
+            width={'80%'}
+            title={"See All"}
+            onClick={handleSeeAllClick}
+            disabled={loading}
+          />
         </Stack>
         <br />
         {props.children}

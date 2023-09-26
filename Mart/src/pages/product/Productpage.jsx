@@ -18,7 +18,7 @@ import {
 
 export default function Productpage() {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const data = useSelector((state) => state.products.products);
   const Filterdata = useSelector((state) => state.products.filterData);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -26,9 +26,6 @@ export default function Productpage() {
   const [selectedSubcategories, setSelectedSubcategories] = useState([]);
   const [sortByPrice, setSortByPrice] = useState(""); // State for sorting by price
 
-  // useEffect(() => {
-  //   dispatch(getProducts());
-  // }, []);
 
   const handleCategoryChange = (category) => {
     if (selectedCategories.includes(category)) {

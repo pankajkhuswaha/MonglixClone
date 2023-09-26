@@ -59,7 +59,7 @@ const ProductDetail = () => {
                 Product Details
               </p>
               <p className="text-lg font-[400] text-gray-500">
-                {parse(SingleProductData.mindiscription)}
+                {parse(SingleProductData.mindiscription.replace(/<\/?p>/g, ""))}
               </p>
             </div>
           </Stack>
