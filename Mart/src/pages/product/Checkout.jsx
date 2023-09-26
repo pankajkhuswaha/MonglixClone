@@ -112,7 +112,7 @@ const Checkout = () => {
               </div>
 
               {/*  */}
-              <div className="col-sm-4 ">
+              <div className="md:w-[400px] w-full ">
                 <div
                   className="MuiBox-root "
                   style={{
