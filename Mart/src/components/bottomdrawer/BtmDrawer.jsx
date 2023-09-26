@@ -1,19 +1,15 @@
-
 import * as React from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Button from "@mui/material/Button";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import { useSelector } from "react-redux";
+import { Stack } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function BtmDrawer() {
+  const data = useSelector((state) => state.products.products);
+  const categories = ["All", ...new Set(data.map((item) => item.category))];
+
   const [state, setState] = React.useState({
     bottom: false,
   });
@@ -34,37 +30,45 @@ export default function BtmDrawer() {
     <Box
       sx={{
         width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
-   
       }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <div
+        className=" "
+        style={{
+          overflowX: "auto",
+          display: "flex",
+
+          flexDirection: "column",
+          marginRight: "12px",
+          gap: "24px",
+          padding: "10px",
+          alignItems: "flex-start",
+        }}
+      >
+        <hr />
+        <h1 className="text-lg font-bold  ">All Categories</h1>
+   
+        {categories.map((ele, i) => {
+          return (
+            <Link to={"/product"} key={i}>
+              <Stack flexDirection={"row"} gap={3} justifyContent={"center"}>
+                <Stack flexDirection={"row"} alignItems={"center"} gap={1}>
+                  <p
+                    style={{ textWrap: "nowrap" }}
+                    className=" px-1 text-gray-600 text-[17px]"
+                  >
+                    {ele}
+                  </p>
+                </Stack>
+              </Stack>
+            </Link>
+          );
+        })}
+        <hr />
+      </div>
     </Box>
   );
 

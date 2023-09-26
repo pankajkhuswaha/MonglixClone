@@ -27,3 +27,9 @@
   width: 40px !important;
   z-index: 1 !important;
 }
+.slick-next {
+    right: -8px !important;
+}
+.slick-prev {
+    left: -8px !important;
+}

@@ -122,10 +122,10 @@ const Header = () => {
           </Stack>
           {location.pathname === "/" && (
             <div
-              className="b"
+              className="hidden md:flex "
               style={{
                 overflowX: "auto",
-                display: "flex",
+               
                 flexDirection: "row",
                 justifyContent: "center",
                 gap: "24px",

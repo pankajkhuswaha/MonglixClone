@@ -23,6 +23,16 @@ const ContactUs = () => {
             is why the culture of customer feedback and satisfaction ranks high
             on our agenda. We are happy to help you round the clock to the best
             of our ability.
+            <br />
+            <span className="text-xl"> To get in touch with our customer support,</span>
+            <br />
+            Call us at
+            <span className="text-black  font-bold">+91-7678536510</span>
+            <br />
+            Email:-
+            <span className="text-black font-bold">
+              contact@eprocuretech.com
+            </span>
           </p>
         </div>
         <div className="w-[50%] flex justify-center ">
@@ -112,15 +122,6 @@ const ContactUs = () => {
                     </div>
                   </div>
                   <button className="submit-btn">Submit</button>
-                </div>
-                <div className=" social-media-links text-center w-full">
-                  <p className="text-md font-bold text-gray-900">
-                    To get in touch with our customer support,
-                    <br />
-                    call us at +91 8448233444
-                    <br />
-                    Call Timings:-9:00 AM to 6:00 PM (Mon to Sat)
-                  </p>
                 </div>
               </form>
             </div>

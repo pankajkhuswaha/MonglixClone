@@ -23,10 +23,10 @@ const ProductLayout = (props) => {
   };
 
   return (
-    <div className="container">
+    <div className="container p-0">
       <Stack p={{ xs: 1, md: 3 }}>
         <Stack
-          p={{ xs: 1, md: 3 }}
+          p={{ xs: 1, md: 2 }}
           borderRadius={2}
           alignItems={"center"}
           sx={{ backgroundColor: site.secondarybg }}
@@ -48,7 +48,7 @@ const ProductLayout = (props) => {
             disabled={loading}
           />
         </Stack>
-        <br />
+  
         {props.children}
       </Stack>
     </div>
