@@ -1,10 +1,12 @@
 import React from "react";
 import "./contact.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const ContactUs = () => {
   const [selectedOption, setSelectedOption] = useState("Rate Query");
   const [customReason, setCustomReason] = useState("");
+  const site = useSelector((st) => st.site.data);
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
@@ -13,7 +15,12 @@ const ContactUs = () => {
     <>
       <div className="flex justify-between flex-col-reverse md:flex-row gap-4 md:gap-0 items-center p-4   md:p-5">
         <div className="md:w-[50%] w-full ">
-          <p className="text-[#ff4268] text-4xl font-semibold">Contact Us</p>
+          <p
+            style={{ color: site?.primarybg }}
+            className="text-[#ff4268] text-4xl font-semibold"
+          >
+            Contact Us
+          </p>
           <p className="text-[#636060] text-xl font-semibold mt-2">
             Support team ready to help
           </p>
@@ -24,13 +31,19 @@ const ContactUs = () => {
             on our agenda. We are happy to help you round the clock to the best
             of our ability.
             <br />
-            <span className="text-xl"> To get in touch with our customer support,</span>
+            <br />
+            <span  className="text-xl">
+              {" "}
+              To get in touch with our customer support,
+            </span>
             <br />
             Call us at
-            <span className="text-black  font-bold">+91-7678536510</span>
+            <span style={{ color: site?.primarybg }} className=" font-bold">
+              +91-7678536510
+            </span>
             <br />
             Email:-
-            <span className="text-black font-bold">
+            <span style={{ color: site?.primarybg }} className="font-bold">
               contact@eprocuretech.com
             </span>
           </p>
@@ -47,7 +60,12 @@ const ContactUs = () => {
             <div className="responsive-container-block container">
               <form className="form-box">
                 <div className="container-block form-wrapper">
-                  <p className="text-blk contactus-head">Get in Touch</p>
+                  <p
+                    style={{ color: site?.primarybg }}
+                    className="text-blk contactus-head"
+                  >
+                    Get in Touch
+                  </p>
                   <p className="text-blk contactus-subhead">
                     Feel Free to Contact
                   </p>
@@ -121,7 +139,12 @@ const ContactUs = () => {
                       )}
                     </div>
                   </div>
-                  <button className="submit-btn">Submit</button>
+                  <button
+                    style={{ backgroundColor: site?.primarybg }}
+                    className="submit-btn"
+                  >
+                    Submit
+                  </button>
                 </div>
               </form>
             </div>

@@ -3,7 +3,7 @@
 import numberFormat from "../../../essentail/numberFormat";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Buttonele from "../../button/Buttonele";
+
 import Loader from "../loader/Loader";
 import { addCart, userCart } from "../../../features/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -114,7 +114,7 @@ const Mycard = ({ data, load }) => {
                     </span>
                   )}
                   {user?.role == "platinum" && (
-                    <span className="text-green-700 text-sm">
+                    <span className="text-red-700 text-sm">
                       {" "}
                       {platinumdiscount}% Off
                     </span>

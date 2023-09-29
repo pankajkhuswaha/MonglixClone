@@ -6,6 +6,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
 const SelectImage = ({ img, data }) => {
+  const site = useSelector((st) => st.site.data);
   const navigate=useNavigate()
   const dispatch = useDispatch();
   const users = useSelector((state) => state.auth.user);
@@ -87,8 +88,17 @@ const SelectImage = ({ img, data }) => {
               flexDirection={"row"}
               justifyContent={"space-evenly"}
             >
-              <button className="text-[15px]  text-[#9F2089] flex align-center justify-center gap-2 border-1 p-3 rounded-md border-[#9F2089]  w-[200px]">
+              <button
+                style={{
+                  color: site?.primarybg,
+                  borderColor: site?.primarybg,
+                }}
+                className="text-[15px]   flex align-center justify-center gap-2 border-1 p-3 rounded-md border-[#9F2089]  w-[200px]"
+              >
                 <svg
+                  style={{
+                    fill: site?.primarybg,
+                  }}
                   className="relative top-[3px]"
                   width="21"
                   height="20"
@@ -99,7 +109,6 @@ const SelectImage = ({ img, data }) => {
                   btnType="ghost"
                   icon="[object Object]"
                   iconsize="20"
-                  fill="#9F2089"
                 >
                   <g
                     clipPath="url(#go-to-cart_svg__a)"
@@ -124,8 +133,12 @@ const SelectImage = ({ img, data }) => {
                 </span>
               </button>
               <button
+                style={{
+                  backgroundColor: site?.primarybg,
+                  borderColor: site?.primarybg,
+                }}
                 onClick={() => handleCart({ id: data._id, qty: 1 })}
-                className="text-white text-[15px] bg-[#9F2089]  flex align-center justify-center gap-2 border-1 p-3 rounded-md border-[#9F2089] w-[200px]"
+                className="text-white text-[15px]  flex align-center justify-center gap-2 border-1 p-3 rounded-md border-[#9F2089] w-[200px]"
               >
                 <svg
                   className="mt-[4px]"
