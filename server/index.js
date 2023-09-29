@@ -40,17 +40,20 @@ app.use(notFound);
 app.use(errorHandler);
 const os = require("os");
 
-// app.listen(PORT, "127.0.0.1", () => {
-//   console.log(`Server listening on http://127.0.0.1:${PORT}`);
-// });
+app.listen(PORT, "127.0.0.1", () => {
+  console.log(`Server listening on http://127.0.0.1:${PORT}`);
+});
+
+
 
 const ipAddress = Object.values(os.networkInterfaces())
   .flat()
   .find(({ family, internal }) => family === "IPv4" && !internal).address;
 
-app.listen(PORT, ipAddress, () => {
-  console.log(`Server listening on http://${ipAddress}:${PORT}`);
-});
+
+// app.listen(PORT, ipAddress, () => {
+//   console.log(`Server listening on http://${ipAddress}:${PORT}`);
+// });
 
 
 // MONGODB_URL='mongodb+srv://deepnapsoftech:123@cluster0.8nn2kfa.mongodb.net/main'

@@ -5,6 +5,7 @@ import Productpage from "./product/Productpage";
 import ProductDetail from "./product/ProductDetail";
 import UserDetails from "./user/UserDetails";
 import Checkout from "./product/Checkout";
+import Bulk from "./bulk/Bulk";
 import About from "./about/About";
 export {
   Login,
@@ -13,6 +14,7 @@ export {
   Productpage,
   ProductDetail,
   Checkout,
+  Bulk,
   About,
   UserDetails
 };

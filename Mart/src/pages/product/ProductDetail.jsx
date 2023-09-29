@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 const ProductDetail = () => {
   const location = useLocation();
   const data = location.state;
+  const site = useSelector((st) => st.site.data);
   const SingleProductData = data || localStorage.getItem("SingleProductData");
   const user = useSelector((state) => state.auth?.user?.user);
   const {

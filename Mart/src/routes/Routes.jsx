@@ -7,10 +7,13 @@ import {
   Checkout,
   UserDetails,
   About,
+  Bulk
 } from "../pages";
 import Admin from "../pages/admin";
 import ContactUs from "../pages/admin/pages/contactus/ContactUs";
 import Address from "../pages/product/Address";
+import { Return, Accesibility, TC, PrivacyPolicy } from "../pages/Legal/index";
+
 
 export const Routess = [
   {
@@ -44,6 +47,26 @@ export const Routess = [
   {
     path: "/about",
     Element: <About />,
+  },
+  {
+    path: "/return",
+    Element: <Return />,
+  },
+  {
+    path: "/bulk",
+    Element: <Bulk />,
+  },
+  {
+    path: "/accesibility",
+    Element: <Accesibility />,
+  },
+  {
+    path: "/privacyPolicy",
+    Element: <PrivacyPolicy />,
+  },
+  {
+    path: "/tc",
+    Element: <TC />,
   },
   {
     path: "/users/*",

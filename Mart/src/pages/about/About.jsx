@@ -1,8 +1,11 @@
 import React from "react";
 import './index.css'
 import { AboutData } from "../../data/AboutData";
-
+import { useSelector } from "react-redux";
 const About = () => {
+  
+  const site = useSelector((st) => st.site.data);
+  console.log(site.primarybg);
   return (
     <div>
       <svg
@@ -25,12 +28,12 @@ const About = () => {
         ></path>
       </svg>
       <p className="text-white text-xl md:text-4xl font-bold text-center mt-4 relative md:top-4 top-[-10px]">
-        ABOUT US 
+        ABOUT US
       </p>
       <div className="shadow-sm m-12 relative module">
         <div
-          style={{ borderRadius: "0.375rem 0.375rem 0 0" }}
-          className="bg-red-500 p-[14px] rounded-md"
+          style={{ borderRadius: "0.375rem 0.375rem 0 0" ,backgroundColor:  site?.primarybg }}
+          className={`p-[14px] rounded-md`}
         ></div>
         <div
           style={{ borderRadius: "0 0 0.375rem 0.375rem " }}
@@ -53,7 +56,10 @@ const About = () => {
           {AboutData.map((ele, id) => {
             return (
               <div key={id} className="mt-3">
-                <p className="text-xl text-[#EF4444] font-bolder">
+                <p
+                  style={{ color: site?.primarybg}}
+                  className={`text-xl font-bolder`}
+                >
                   {ele.heading}
                 </p>
                 <span className="text-md text-gray-800 font-medium">

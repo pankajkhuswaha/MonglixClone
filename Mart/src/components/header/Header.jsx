@@ -9,6 +9,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { SearchComponent, BtmDrawer } from "../Index";
 
 const Header = () => {
+  const [icc, setIcc] = useState(true);
   const cart = useSelector((state) => state.cart.carts);
   const site = useSelector((st) => st.site.data);
   const CartCount = cart.products?.length;
@@ -95,7 +96,31 @@ const Header = () => {
                 <BtmDrawer />
                 <TopDrawer />
               </Stack>
+              <Link
+                to={"/bulk"} onMouseEnter={()=>setIcc(false)} onMouseLeave={()=>setIcc(true)}
+                style={{ backgroundColor: site.primarybg }}
+                className="p-2 flex text-white gap-2 items-center rounded-lg"
+              >
+                Bulk Order{" "}
+                {/* {icc ? (
+                  <p
+                    style={{ transform: "rotate(90deg)" }}
+                    className="text-xl text-white"
+                  >
+                    {"}:(]"}
 
+
+
+                  </p>
+                ) : (
+                  <p
+                    style={{ transform: "rotate(90deg)" }}
+                    className="text-xl text-white"
+                  >
+                    {"{:{)"}
+                  </p>
+                )} */}
+              </Link>
               {users ? (
                 <Link to={"/checkout"}>
                   <Badge badgeContent={CartCount} color="primary">
@@ -125,7 +150,7 @@ const Header = () => {
               className="hidden md:flex "
               style={{
                 overflowX: "auto",
-               
+
                 flexDirection: "row",
                 justifyContent: "center",
                 gap: "24px",
@@ -176,4 +201,4 @@ const Header = () => {
   );
 };
 
-export default Header
+export default Header;
