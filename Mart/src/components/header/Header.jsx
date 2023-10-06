@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Stack, Badge } from "@mui/material";
 import TopDrawer from "../bottomdrawer/TopDrawer";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useLocation, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { SearchComponent, BtmDrawer } from "../Index";
-
+import { handleSeeAllClick } from "../../layout/ProductLayout";
 const Header = () => {
   const [icc, setIcc] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart.carts);
   const site = useSelector((st) => st.site.data);
   const CartCount = cart.products?.length;
@@ -97,7 +101,9 @@ const Header = () => {
                 <TopDrawer />
               </Stack>
               <Link
-                to={"/bulk"} onMouseEnter={()=>setIcc(false)} onMouseLeave={()=>setIcc(true)}
+                to={"/bulk"}
+                onMouseEnter={() => setIcc(false)}
+                onMouseLeave={() => setIcc(true)}
                 style={{ backgroundColor: site.primarybg }}
                 className="p-2 flex text-white gap-2 items-center rounded-lg"
               >
@@ -150,7 +156,6 @@ const Header = () => {
               className="hidden md:flex "
               style={{
                 overflowX: "auto",
-
                 flexDirection: "row",
                 justifyContent: "center",
                 gap: "24px",
@@ -170,27 +175,25 @@ const Header = () => {
             >
               {categories.map((ele, i) => {
                 return (
-                  <Link to={"/product"} key={i}>
-                    <Stack
-                      flexDirection={"row"}
-                      gap={3}
-                      sx={{ overflowX: "auto" }}
-                      justifyContent={"center"}
-                    >
-                      <Stack
-                        flexDirection={"row"}
-                        alignItems={"center"}
-                        gap={1}
+                  <Stack
+                    key={i}
+                    flexDirection={"row"}
+                    gap={3}
+                    sx={{ overflowX: "auto" }}
+                    justifyContent={"center"}
+                  >
+                    <Stack flexDirection={"row"} alignItems={"center"} gap={1}>
+                      <p
+                        onClick={() =>
+                          handleSeeAllClick(dispatch, navigate, ele)
+                        }
+                        style={{ textWrap: "nowrap" }}
+                        className=" px-1 text-gray-600 text-[17px]"
                       >
-                        <p
-                          style={{ textWrap: "nowrap" }}
-                          className=" px-1 text-gray-600 text-[17px]"
-                        >
-                          {ele}
-                        </p>
-                      </Stack>
+                        {ele}
+                      </p>
                     </Stack>
-                  </Link>
+                  </Stack>
                 );
               })}
             </div>
