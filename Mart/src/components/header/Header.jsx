@@ -63,10 +63,9 @@ const Header = () => {
               <Link to={"/"}>
                 <img
                   style={{
-                    width: "120px",
-                    height: "60px",
                     mixBlendMode: "darken",
                   }}
+                  className="w-[100px] h-[50px] md:w-[120px] md:h-[60px]"
                   src={site.logo}
                   alt="logo"
                 />
@@ -104,6 +103,7 @@ const Header = () => {
                 to={"/bulk"}
                
                 style={{ backgroundColor: site.primarybg }}
+
                 className="p-2  md:block hidden text-white gap-2 items-center rounded-lg"
               >
                 Bulk Order{" "}
