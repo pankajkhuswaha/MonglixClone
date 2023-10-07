@@ -46,7 +46,7 @@ const Dashboard = () => {
   return (
     <div>
       <Helmet>
-        <title>f</title>
+        <title>Dashboard</title>
         <meta name="theme-color" content="#0d6efd" />
       </Helmet>
       {/* <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">

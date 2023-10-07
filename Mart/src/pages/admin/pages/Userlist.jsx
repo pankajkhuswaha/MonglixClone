@@ -1,4 +1,4 @@
-import DataTable from "../components/DataTable";
+// import DataTable from "../components/DataTable";
 import axios from "axios";
 import { base_url } from "../../../utils/baseUrl";
 import { config } from "../../../utils/axiosConfig";
@@ -8,7 +8,7 @@ import useViewModal from "../components/useViewModel";
 import ViewModal from "./../components/ViewModal";
 import { Helmet } from "react-helmet";
 const Userlist = () => {
-  const users = useSelector((st) => st.admin.data?.users);
+  // const users = useSelector((st) => st.admin.data?.users);
   const changeUserType = async (_id, e) => {
     try {
       await axios.put(
@@ -80,7 +80,7 @@ const Userlist = () => {
       <Helmet>
         <title>E-Procure Tech || Userlist</title>
       </Helmet>
-      <DataTable data={users} cols={columns} title={"User List"} />
+      {/* <DataTable data={users} cols={columns} title={"User List"} /> */}
       <ViewModal show={showModal} onHide={closeModal} data={selectedData} />
     </div>
   );
