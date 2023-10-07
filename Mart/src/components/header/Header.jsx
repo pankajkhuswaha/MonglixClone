@@ -102,10 +102,9 @@ const Header = () => {
               </Stack>
               <Link
                 to={"/bulk"}
-                onMouseEnter={() => setIcc(false)}
-                onMouseLeave={() => setIcc(true)}
+               
                 style={{ backgroundColor: site.primarybg }}
-                className="p-2 flex text-white gap-2 items-center rounded-lg"
+                className="p-2  md:block hidden text-white gap-2 items-center rounded-lg"
               >
                 Bulk Order{" "}
                 {/* {icc ? (
@@ -141,7 +140,7 @@ const Header = () => {
                 </Link>
               )}
               {currentuser ? (
-                <Link to={"/users"}>
+                <Link className="hidden md:block" to={"/users"}>
                   <AccountCircleIcon />
                 </Link>
               ) : (
