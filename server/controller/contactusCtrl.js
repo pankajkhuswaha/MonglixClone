@@ -1,7 +1,6 @@
 const asyncHandle = require("express-async-handler");
 const ContactUs = require("../models/contactUsModel");
 const addContactus = asyncHandle(async (req, res) => {
-  console.log(req.body)
   try { await ContactUs.create(req.body);
     const resp = {
       success: "You request is submitted sucessfully",     
@@ -12,7 +11,7 @@ const addContactus = asyncHandle(async (req, res) => {
       res.json({
         error: `Entered ${
           error.message.split("{")[1].split(":")[0]
-        } is already registered`,
+        } is already sent !`,
       });
     } else {
       res.json({ error: error.message });
@@ -21,13 +20,8 @@ const addContactus = asyncHandle(async (req, res) => {
 });
 const getallContactUs = asyncHandle(async (req, res) => {
   const test = await ContactUs.find();
-  const data = [];
-  for (let i = 0; i < test.length; i++) {
-    if (test[i].status !== "completed") {
-      data.push(test[i]);
-    }
-  }
-  res.json(data);
+  
+  res.json(test);
 });
 
 const deleteContact = asyncHandle(async(req,res)=>{

@@ -1,56 +1,59 @@
-.sidebar-acc .accordion-button.collapsed{
-    background: #ffffff;
-    color: #6b7280;
-  }
-  .sidebar-acc .accordion-button{
-    border: none;
-    display: flex;
-    background: rgba(187, 187, 187, 0);
-    box-shadow: none;
-    align-items: center;
-    color: #6b7280;
-    gap: 8px;
-    border-radius: none;
-    padding: 10px 1.3rem;
-  }
-  .sidebar-acc .accordion-item:first-of-type .accordion-button {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    color: #6b7280;
-  }
-  .sidebar-acc .collapse {
-    visibility: visible;
-  }
- 
-  #adminNav .navlink {
-    display: flex;
-    align-items: center;
-    padding-left: 1rem; 
-    padding-right: 1rem; 
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    color: #6b7280;
-    gap: 8px;
-    position: relative;
-    z-index: 9999999999999999;
-  }
+.sidebar-acc .accordion-button.collapsed {
+  background: #ffffff;
+  color: #6b7280;
+}
+.sidebar-acc .accordion-button {
+  border: none;
+  display: flex;
+  background: rgba(187, 187, 187, 0);
+  box-shadow: none;
+  align-items: center;
+  color: #6b7280;
+  gap: 8px;
+  border-radius: none;
+  padding: 10px 1.3rem;
+}
+.sidebar-acc .accordion-item:first-of-type .accordion-button {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  color: #6b7280;
+}
+.sidebar-acc .collapse {
+  visibility: visible;
+}
 
-  #adminNav .navlink.active {
-    display: flex;
-    align-items: center;
-    background: linear-gradient(to right, #0284c7, #22d3ee);
-    /* background: linear-gradient(to right, #e203ff, #fcd914); */
-    padding-left: 1rem; 
-    padding-right: 1rem; 
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    color: white;
-    gap: 8px;
-    position: relative;
-  }
-  label{
-    color: gray;
-    font-weight: 400;
-    margin-bottom: 3px;
-  }
-  
+#adminNav .navlink {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #6b7280;
+  gap: 8px;
+  position: relative;
+  z-index: 9999999999999999;
+}
+
+#adminNav .navlink.active {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, #0284c7, #22d3ee);
+  /* background: linear-gradient(to right, #e203ff, #fcd914); */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: white;
+  gap: 8px;
+  position: relative;
+}
+label {
+  color: gray;
+  font-weight: 400;
+  margin-bottom: 3px;
+}
+
+.admin input[type="search"]:focus{
+  box-shadow: none;
+}

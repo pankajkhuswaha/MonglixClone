@@ -49,13 +49,11 @@
   font-size: 28px;
 }
 .rfq .rfq-form-container {
-  width: 60%;
   margin-top: -70px !important;
   margin: auto;
   background: #fff;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.0784313725490196);
   border-radius: 8px;
-  padding: 30px 40px;
 }
 .rfq .rfq-form-container h2 {
   font-size: 18px;
@@ -79,7 +77,7 @@
   font-size: 14px;
   text-transform: capitalize;
 }
-.rfq .rfq-form-container .personal-details .form-pd-field input {
+.rfq .rfq-form-container .personal-details .form-pd-field input,select {
   height: 50px;
   padding: 0 10px;
   background: #fff 0 0 no-repeat padding-box;

@@ -1,10 +1,13 @@
 import { RxDashboard } from "react-icons/rx";
-import { FaProductHunt } from "react-icons/fa";
+import { FaProductHunt, FaUser } from "react-icons/fa";
 import { CgWebsite } from "react-icons/cg";
 import Dashboard from "./pages/Dashboard";
 import Homepage from "./pages/website/Homepage";
 import ListProducts from "./pages/products/ListProducts";
 import AddProduct from "./pages/products/AddProduct";
+import Userlist from "./pages/Userlist";
+import ContactUsList from "./pages/ContactUsList";
+import BulkList from "./pages/BulkReq";
 export const routes = [
     {
       path: "/admin/dashboard",
@@ -13,13 +16,31 @@ export const routes = [
       element:<Dashboard/>
     },
     {
+      path: "/admin/users",
+      icon: <FaUser fontSize={22} color="skyblue" />,
+      txt: "User",
+      element:<Userlist/>
+    },
+    {
+      path: "/admin/contact",
+      icon: <FaUser fontSize={22} color="skyblue" />,
+      txt: "Contact US",
+      element:<ContactUsList/>
+    },
+    {
+      path: "/admin/bulk-req",
+      icon: <FaUser fontSize={22} color="skyblue" />,
+      txt: "Bulk Request",
+      element:<BulkList/>
+    },
+    {
       path: "/admin/products",
-      icon: <FaProductHunt fontSize={16} />,
+      icon: <FaProductHunt fontSize={16} color="skyblue" />,
       txt: "Products",
       children: [
         {
           path: "/admin/products",
-          icon: <FaProductHunt fontSize={16} />,
+          icon: <FaProductHunt fontSize={16}  color="skyblue"/>,
           txt: "List Products",
           element:<ListProducts/>
         },

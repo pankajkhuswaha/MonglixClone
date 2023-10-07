@@ -1,7 +1,4 @@
 import * as React from "react";
-import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -13,24 +10,16 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width: 250,   
     },
   },
 };
 
-function getStyles(name, age, theme) {
-  return {
-    fontWeight:
-      age.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+
 
 export default function MultipleSelect() {
   const products = useSelector((state) => state.products?.products);
 
-  const theme = useTheme();
   const [age, setage] = React.useState([]);
 
   const handleChange = (event) => {
@@ -38,7 +27,6 @@ export default function MultipleSelect() {
       target: { value },
     } = event;
     setage(
-      // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
   };
@@ -53,9 +41,9 @@ export default function MultipleSelect() {
           onChange={handleChange}
           MenuProps={MenuProps}
         >
-          {products.map((ele) => {
+          {products.map((ele,i) => {
             return (
-              <MenuItem value={ele}>
+              <MenuItem key={i} value={ele}>
                 <div className="overflow-x-hidden">{ele.name}</div>{" "}
               </MenuItem>
             );

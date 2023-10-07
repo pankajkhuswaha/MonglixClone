@@ -20,7 +20,6 @@ const getcart = asyncHandle(async (req, res) => {
     }
     const data = user.cart.products.map((item) => {
       const product = item.product;
-      console.log(product)
       let discount = 0; // Default discount
       if (user?.role) {
         switch (user.role) {

@@ -53,7 +53,6 @@ const verifyUser = asyncHandler(async (req, res) => {
 
 const createUser = asyncHandler(async (req, res) => {
   const email = req.body.email;
-  console.log(req.body);
   const findUser = await User.findOne({ email: email });
   if (!findUser) {
     try {
@@ -187,7 +186,6 @@ const addnewAddress = asyncHandler(async (req, res) => {
     }
     user.address.push(req.body.address);
     await user.save();
-    console.log(user);
     res.status(201).json({ message: "Address added successfully" });
   } catch (error) {
     console.error(error);
@@ -219,7 +217,6 @@ const logout = asyncHandler(async (req, res) => {
     throw new Error("No Refresh Token in Cookies");
   const refreshToken = req.cookies.refreshToken;
   const user = await User.findOne({ refreshToken });
-  console.log(user);
   if (!user) {
     res.clearCookie("refreshToken", {
       httpOnly: true,

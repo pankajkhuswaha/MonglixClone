@@ -1,9 +1,14 @@
 const express = require("express");
-const { addContactus,getallContactUs,deleteContact,updateRemarkContact } = require("../controller/contactusCtrl");
+const {
+  addContactus,
+  getallContactUs,
+  deleteContact,
+  updateRemarkContact,
+} = require("../controller/contactusCtrl");
 
 const router = express.Router();
 router.get("/", getallContactUs);
-router.post("/add", addContactus);
-router.post("/update", updateRemarkContact);
-router.post("/del", deleteContact);
+router.post("/", addContactus);
+router.put("/", updateRemarkContact);
+router.delete("/", deleteContact);
 module.exports = router;

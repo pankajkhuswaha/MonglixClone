@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 const contactusShema = new mongoose.Schema(
   {
-    name: {
+    firstName: {
+      type: String,
+      require: true,
+    },
+    lastName: {
       type: String,
       require: true,
     },
@@ -9,15 +13,19 @@ const contactusShema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    number: {
+    mobile: {
+      type: String,
+      required: true,
+      unique:true
+    },
+    reason:{
       type: String,
       required: true,
     },
-    message:{
+    customReason:{
       type: String,
-      required: true,
     },
-    status: {
+    remarks: {
       type: String,
       default: "No Remarks",
     },

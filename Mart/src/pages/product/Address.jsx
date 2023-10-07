@@ -52,18 +52,19 @@ const Address = () => {
                   return (
                     <div
                       key={_id}
+                      onClick={() => setselctedAdr(adrr)}
                       className={`flex gap-2 items-start border ${
                         (selctedAdr ? isSelected : i == 0)
-                          ? "bg-red-50"
+                          ? "bg-blue-50"
                           : "bg-white"
-                      } p-2 rounded shadow-sm`}
+                      } p-2 rounded shadow-sm cursor-pointer`}
                     >
                       <input
                         type="radio"
                         name="address"
                         className="mt-2"
                         checked={selctedAdr ? isSelected : i == 0}
-                        style={{ accentColor: "#ff4268" }}
+                        style={{ accentColor: site.primarybg }}
                         onChange={() => setselctedAdr(adrr)}
                       />
                       <div className="text-gray-600 font-semibold">
@@ -82,8 +83,10 @@ const Address = () => {
               <div className="flex justify-between">
                 
                 <button
-                  className="btn mt-2 bg-[#ff4268] text-white hover:bg-[#ff4268]"
+                  className="btn mt-2 text-white"
                   onClick={() => setviewform(!viewform)}
+                  style={{ background: site.primarybg }}
+
                 >
                   Add New Address
                 </button>
