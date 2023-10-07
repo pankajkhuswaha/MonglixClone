@@ -1,7 +1,10 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { handleSeeAllClick } from "../../layout/ProductLayout";
 
 const Footer = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const Links = [
     {
       name: "Contact Us",
@@ -108,9 +111,13 @@ const Footer = () => {
               <div className=" text-gray-500">
                 {categories.map((ele, i) => {
                   return (
-                    <Link to={"/product"} key={i}>
-                      <p className=" hover:text-[#ff4268]  ">{ele}</p>
-                    </Link>
+                    <p
+                      key={i}
+                      onClick={() => handleSeeAllClick(dispatch, navigate, ele)}
+                      className=" hover:text-[#ff4268]  "
+                    >
+                      {ele}
+                    </p>
                   );
                 })}
               </div>

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { base_url } from "../utils/baseUrl";
+import { base_url } from "../utils/baseUrl"; 
 
 import axios from "axios";
 import { config } from "../utils/axiosConfig";
@@ -8,10 +8,10 @@ import { toast } from "react-toastify";
 const initialState = {
   products: [],
   filterData: [],
-  loading: true,
+  loading: false,
   error: false,
 };
-export const getProducts = createAsyncThunk("product", async () => {
+export const getProducts = createAsyncThunk("product", async (data, thu) => {
   const res = await axios.get(`${base_url}product`);
   return res.data;
 });
@@ -36,38 +36,18 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
-// fiterration
 
-export const SearchProductApi = createAsyncThunk(
-  "Searchproduct",
-  async (payload) => {
-    const res = await axios.get(`${base_url}product?search=${payload}`);
-    return res.data;
-  }
-);
-export const fILTERProductApibycategory = createAsyncThunk(
-  "fILTERProductApibycategory",
-  async (payload) => {
-    const res = await axios.get(`${base_url}product?category=${payload}`);
+
+export const AllFilterApi = createAsyncThunk(
+  "AllFilterApi",
+  async ({ type, value }) => {
+    const res = await axios.get(`${base_url}product?${type}=${value}`);
     return res.data;
   }
 );
 
-export const fILTERProductApibrand = createAsyncThunk(
-  "fILTERProductApibrand",
-  async (payload) => {
-    const res = await axios.get(`${base_url}product?brand=${payload}`);
-    return res.data;
-  }
-);
 
-export const fILTERProductApisubcategory = createAsyncThunk(
-  "fILTERProductApisubcategory",
-  async (payload) => {
-    const res = await axios.get(`${base_url}product?subcategory=${payload}`);
-    return res.data;
-  }
-);
+
 
 export const productSlice = createSlice({
   name: "product",
@@ -75,6 +55,16 @@ export const productSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(AllFilterApi.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(AllFilterApi.fulfilled, (state, action) => {
+        state.filterData = action.payload;
+        state.loading = false;
+      })
+      .addCase(AllFilterApi.rejected, (state, action) => {
+        state.loading = true;
+      })
       .addCase(getProducts.fulfilled, (state, action) => {
         state.products = action.payload;
         state.loading = false;
@@ -105,11 +95,11 @@ export const productSlice = createSlice({
       })
       .addCase(addAProduct.fulfilled, (state, action) => {
         state.loading = false;
-        state.loading = false;
+     
         if (action.payload.success) {
           toast.success(action.payload.message);
         } else {
-          toast.error(action.payload.message);
+          toString.error(action.payload.message);
         }
       })
       .addCase(addAProduct.rejected, (state) => {
@@ -118,27 +108,9 @@ export const productSlice = createSlice({
 
         toast.error("Add Product Failed");
       })
-      // fiteration begins
-      .addCase(fILTERProductApibycategory.fulfilled, (state, action) => {
-        state.filterData = action.payload;
-      })
-      .addCase(fILTERProductApibrand.fulfilled, (state, action) => {
-        state.filterData = action.payload;
-        // console.log(action.payload);
-      })
-      .addCase(fILTERProductApisubcategory.fulfilled, (state, action) => {
-        state.filterData = action.payload;
-        // console.log(action.payload);
-      })
-      .addCase(SearchProductApi.fulfilled, (state, action) => {
-        state.filterData = action.payload;
-        // console.log(action.payload);
-      })
 
-      .addCase(SearchProductApi.rejected, (state, action) => {
-        toast.error("Internal Server Error!");
-      });
-  
+
+    
   },
 });
 export default productSlice.reducer;

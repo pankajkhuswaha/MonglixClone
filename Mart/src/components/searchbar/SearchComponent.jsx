@@ -1,34 +1,35 @@
 /* eslint-disable react/prop-types */
 import  { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SearchProductApi } from "../../features/ProductSlice";
-import { debounce } from "lodash";
+import { AllFilterApi } from "../../features/ProductSlice";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const SearchComponent = ({ closeDrawer }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const site = useSelector((st) => st.site.data);
-
-  const debouncedSearch = debounce((value) => {
-    dispatch(SearchProductApi(value));
-  }, 300);
   const formik = useFormik({
     initialValues: {
       search: "",
     },
     onSubmit: (values) => {
-      debouncedSearch(values.search);
-      navigate("/product");
-      closeDrawer(); // Close the drawer when search is submitted
+   
+      const value = values.search;
+      const type = "search";
+      dispatch(AllFilterApi({ type, value }))
+        .then(unwrapResult)
+        .then(() => {
+       
+          navigate("/product");
+
+          closeDrawer();
+        });
     },
   });
-  useEffect(() => {
-    debouncedSearch(" ");
-  }, []);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -42,19 +43,13 @@ const SearchComponent = ({ closeDrawer }) => {
             value={formik.values.search}
             onChange={(e) => {
               formik.handleChange(e);
-              // Remove the closeDrawer() call from here
             }}
           />
         </div>
         <div>
           <button
             type="submit"
-            className={`flex items-center justify-center w-12 h-12 text-white md:rounded-r-lg
-                        ${
-                          formik.values.search.length > 0
-                            ? " bg-[#f8436a]"
-                            : "bg-[#FF4268] cursor-not-allowed "
-                        }`}
+            className={`flex items-center justify-center w-12 h-12 text-white md:rounded-r-lg`}
             style={{ background: site.primarybg }}
             disabled={formik.values.search.length === 0}
           >

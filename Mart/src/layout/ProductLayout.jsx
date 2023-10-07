@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Stack } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Buttonele from "../components/button/Buttonele";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector, useDispatch } from "react-redux";
-import { fILTERProductApibycategory } from "../features/ProductSlice";
+import { AllFilterApi } from "../features/ProductSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
+
+export const handleSeeAllClick = (dispatch, navigate, title) => {
+  const type = "category";
+  const value = title;
+  dispatch(AllFilterApi({ type, value }))
+    .then(unwrapResult)
+    .then(() => navigate("/product"));
+};
 
 const ProductLayout = (props) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { title } = props;
   const site = useSelector((st) => st.site.data);
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-
-  const handleSeeAllClick = () => {
-    setLoading(true);
-
-    const selectedCategory = title;
-
-    dispatch(fILTERProductApibycategory(selectedCategory));
-    navigate('/product')
-  };
 
   return (
     <div className="container p-0">
@@ -33,22 +32,20 @@ const ProductLayout = (props) => {
           flexDirection={"row"}
           justifyContent={"space-between"}
         >
-          {loading ? (
-            <Skeleton width="20%" />
-          ) : (
+      
             <h1 className="md:text-[24px] text-[18px] text-gray-700 font-bold">
-              {props.title}
+              {title}
             </h1>
-          )}
+    
 
           <Buttonele
-            width={'80%'}
+            width={"80%"}
             title={"See All"}
-            onClick={handleSeeAllClick}
-            disabled={loading}
+            onClick={() => handleSeeAllClick(dispatch, navigate, title)}
+
           />
         </Stack>
-  
+
         {props.children}
       </Stack>
     </div>
