@@ -63,10 +63,9 @@ const Header = () => {
               <Link to={"/"}>
                 <img
                   style={{
-                    width: "120px",
-                    height: "60px",
                     mixBlendMode: "darken",
                   }}
+                  className="w-[100px] h-[50px] md:w-[120px] md:h-[60px]"
                   src={site.logo}
                   alt="logo"
                 />
@@ -105,7 +104,7 @@ const Header = () => {
                 onMouseEnter={() => setIcc(false)}
                 onMouseLeave={() => setIcc(true)}
                 style={{ backgroundColor: site.primarybg }}
-                className="p-2 flex text-white gap-2 items-center rounded-lg"
+                className="p-2 hidden md:flex text-white gap-2 items-center rounded-lg"
               >
                 Bulk Order{" "}
                 {/* {icc ? (
