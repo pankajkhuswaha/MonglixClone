@@ -21,18 +21,18 @@ export const routes = [
       txt: "User",
       element:<Userlist/>
     },
-    // {
-    //   path: "/admin/contact",
-    //   icon: <FaUser fontSize={22} color="skyblue" />,
-    //   txt: "Contact US",
-    //   element:<ContactUsList/>
-    // },
-    // {
-    //   path: "/admin/bulk-req",
-    //   icon: <FaUser fontSize={22} color="skyblue" />,
-    //   txt: "Bulk Request",
-    //   element:<BulkList/>
-    // },
+    {
+      path: "/admin/contact",
+      icon: <FaUser fontSize={22} color="skyblue" />,
+      txt: "Contact US",
+      element:<ContactUsList/>
+    },
+    {
+      path: "/admin/bulk-req",
+      icon: <FaUser fontSize={22} color="skyblue" />,
+      txt: "Bulk Request",
+      element:<BulkList/>
+    },
     {
       path: "/admin/products",
       icon: <FaProductHunt fontSize={16} color="skyblue" />,

@@ -4,13 +4,14 @@ import { useFormik } from "formik";
 import { VerifyApi, addAddress } from "../../features/authSlice";
 import { useState } from "react";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { base_url } from "../../utils/baseUrl";
 
 const Address = () => {
   const site = useSelector((st) => st.site.data);
   const user = useSelector((st) => st.auth.user)?.user;
   const { carts } = useSelector((state) => state.cart);
   const adress = user?.address;
-  const [selctedAdr, setselctedAdr] = useState(null);
+  const [selctedAdr, setselctedAdr] = useState(adress[0] || null);
   const [viewform, setviewform] = useState(false);
 
   const dispatch = useDispatch();
@@ -81,21 +82,21 @@ const Address = () => {
                 })}
               </div>
               <div className="flex justify-between">
-                
                 <button
                   className="btn mt-2 text-white"
                   onClick={() => setviewform(!viewform)}
                   style={{ background: site.primarybg }}
-
                 >
                   Add New Address
                 </button>
-                {viewform&&<button
-                  className="btn mt-2 btn-danger text-xl rounded-full flex items-center pb-2 justify-center w-8 h-8"
-                  onClick={() => setviewform(!viewform)}
-                >
-                  x
-                </button>}
+                {viewform && (
+                  <button
+                    className="btn mt-2 btn-danger text-xl rounded-full flex items-center pb-2 justify-center w-8 h-8"
+                    onClick={() => setviewform(!viewform)}
+                  >
+                    x
+                  </button>
+                )}
               </div>
               {viewform && (
                 <form className="w-full rounded" onSubmit={handleSubmit}>
@@ -258,13 +259,27 @@ const Address = () => {
                     Terms and Conditions
                   </a>
                 </p>
-                <button
-                  type="submit"
-                  style={{ background: site.primarybg }}
-                  className="mt-4 inline-flex w-full items-center justify-center rounded  py-2.5 px-4 text-base font-semibold tracking-wide text-white text-opacity-80 outline-none ring-offset-2 transition hover:text-opacity-100 focus:ring-2  sm:text-lg"
+                <form
+                  action={`${base_url}payment/cod`}
+                  method="POST"
+                  className="navButtonss "
                 >
-                  Confirm Order
-                </button>
+                  <input
+                    type="hidden"
+                    name="amount"
+                    value={carts.totalProductPrice}
+                  />
+                  <input type="hidden" name="userid" value={localStorage.getItem('token')} />
+                  <input type="hidden" name="paymentMEthod" value="cod" />
+                  <input type="hidden" name="address" value={selctedAdr._id} />
+                  <button
+                    type="submit"
+                    style={{ background: site.primarybg }}
+                    className="mt-4 inline-flex w-full items-center justify-center rounded  py-2.5 px-4 text-base font-semibold tracking-wide text-white text-opacity-80 outline-none ring-offset-2 transition hover:text-opacity-100 focus:ring-2  sm:text-lg"
+                  >
+                    Confirm Order
+                  </button>
+                </form>
               </div>
             </div>
           </div>

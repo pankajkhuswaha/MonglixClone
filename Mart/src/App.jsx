@@ -19,6 +19,7 @@ const App = () => {
   const dispatch = useDispatch();
   const { error, success } = useSelector((state) => state.auth);
   const isLoading = useSelector((state) => state.products.loading);
+  const loader = useSelector((state) => state.loading.show);
 
   const verifyToken = () => {
     dispatch(VerifyApi());
@@ -39,7 +40,8 @@ const App = () => {
 
   return (
     <>
-      {isLoading && <Loading />}
+      {(isLoading) && <Loading />}            
+      {(loader) && <Loading />}            
 
       <ToastContainer />
       {error ? (

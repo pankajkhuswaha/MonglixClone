@@ -16,17 +16,18 @@ const otpRoute = require("./routes/otproute");
 const uploadimageRoute = require("./routes/uploadRoute");
 const websiteRoute = require("./routes/websiteRoute");
 const adminRoute = require("./routes/adminRoute");
+const orderRoute = require("./routes/orderRoute");
+const payRoute = require("./routes/paymentRoute");
 const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
-
 
 mongoose.set("strictQuery", true);
 dbConnect();
 app.use(morgan("dev"));
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ limit: 50, extended: true }));
+app.use(bodyParser.urlencoded({  extended: true }));
 app.use(cookieParser());
 app.use("/api/user", authRouter);
 app.use("/api/cart", cartRoute);
@@ -37,6 +38,8 @@ app.use("/api/bulk", bulkRoute);
 app.use("/api/product", productRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/config", websiteRoute);
+app.use("/api/order", orderRoute);
+app.use("/api/payment", payRoute);
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 app.use("/api/uploads", uploadimageRoute);
 
@@ -48,7 +51,7 @@ const ipAddress = Object.values(os.networkInterfaces())
   .flat()
   .find(({ family, internal }) => family === "IPv4" && !internal).address;
 
-  app.listen(PORT,ipAddress , () => {
-    console.log(`Server listening on http://${ipAddress}:${PORT}`);
-  });
-  // "127.0.0.1"
+app.listen(PORT, ipAddress, () => {
+  console.log(`Server listening on http://${ipAddress}:${PORT}`);
+});
+// "127.0.0.1"

@@ -1,15 +1,14 @@
 const express = require("express");
-const router = express.Router();
+
 const {
-  getOrder,
-  createOrder,
-  updateOrder,
-  removeOrder,
-} = require("../controller/orderCtrl");
+  authMiddleware,
+  isAdmin,
+  isSuper,
+} = require("../middlewares/authMiddleware");
+const { getOrders, getAdminProduct, editOrderStatus } = require("../controller/orderCtrl");
 
-router.get("/", getOrder);
-router.post("/", createOrder);
-router.put("/:orderId", updateOrder);
-router.delete("/:orderId", removeOrder);
-
+const router = express.Router();
+router.get("/",authMiddleware, getOrders);
+router.get("/admin",authMiddleware,isAdmin, getAdminProduct);
+router.post("/",authMiddleware,isAdmin, editOrderStatus);
 module.exports = router;

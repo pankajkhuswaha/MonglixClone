@@ -1,7 +1,7 @@
 const asyncHandle=require('express-async-handler');
 const nodemailer=require('nodemailer');
 require('dotenv').config();
-const sendEmail=asyncHandle(async(data,req,res)=>{
+const sendEmail=asyncHandle(async(data)=>{
     
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
