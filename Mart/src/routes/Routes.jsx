@@ -72,6 +72,7 @@ export const Routess = [
     path: "/users/*",
     Element: <UserDetails />,
   },
+  
   {
     path: "*",
     Element: <PageNotFound />,

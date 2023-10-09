@@ -1,6 +1,8 @@
 import React from "react";
 import { Stack } from "@mui/material";
 import { toast } from "react-toastify";
+import Success from "./pages/Success";
+import Error from "./pages/Error";
 import { Profile, Invoice, Order, Payment, Shipping, UserMain } from "./pages";
 import { userRoutes, logout } from "./UserRoutes";
 import { Link, Route, Routes } from "react-router-dom";
@@ -93,6 +95,8 @@ const UserDetails = () => {
           <Routes>
             <Route path="/" element={<UserMain />}></Route>
             <Route path="/orders" element={<Order />}></Route>
+
+            <Route path="/orders/:id" element={<Success />}></Route>
             <Route path="/payment" element={<Payment />}></Route>
             <Route path="/invoice" element={<Invoice />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
