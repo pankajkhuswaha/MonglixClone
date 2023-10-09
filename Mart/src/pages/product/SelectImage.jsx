@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Stack, CardContent } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { addCart } from "../../features/cartSlice";
+import { addCart, userCart } from "../../features/cartSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
@@ -106,7 +106,7 @@ const SelectImage = ({ img, data }) => {
                   ml="4"
                   mr="4"
                   stroke="transparent"
-                  btnType="ghost"
+          
                   icon="[object Object]"
                   iconsize="20"
                 >
@@ -149,7 +149,8 @@ const SelectImage = ({ img, data }) => {
                   ml="4"
                   mr="4"
                   stroke="#ffffff"
-                  btnType="solid"
+                
+                
                   icon="[object Object]"
                   iconsize="20"
                 >

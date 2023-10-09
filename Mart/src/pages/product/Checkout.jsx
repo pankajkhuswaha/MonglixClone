@@ -68,7 +68,10 @@ const Checkout = () => {
                             >
                               -
                             </span>
+                         
+
                             <input
+                              type="text"
                               className="h-8 w-8 border bg-white text-center text-xs outline-none"
                               disabled
                               defaultValue="1"

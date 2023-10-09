@@ -101,10 +101,10 @@ const Header = () => {
               </Stack>
               <Link
                 to={"/bulk"}
-                onMouseEnter={() => setIcc(false)}
-                onMouseLeave={() => setIcc(true)}
+               
                 style={{ backgroundColor: site.primarybg }}
-                className="p-2 hidden md:flex text-white gap-2 items-center rounded-lg"
+
+                className="p-2  md:block hidden text-white gap-2 items-center rounded-lg"
               >
                 Bulk Order{" "}
                 {/* {icc ? (
@@ -140,7 +140,7 @@ const Header = () => {
                 </Link>
               )}
               {currentuser ? (
-                <Link to={"/users"}>
+                <Link className="hidden md:block" to={"/users"}>
                   <AccountCircleIcon />
                 </Link>
               ) : (
@@ -187,7 +187,7 @@ const Header = () => {
                           handleSeeAllClick(dispatch, navigate, ele)
                         }
                         style={{ textWrap: "nowrap" }}
-                        className=" px-1 text-gray-600 text-[17px]"
+                        className=" cursor-pointer  px-1 text-gray-600 text-[17px]"
                       >
                         {ele}
                       </p>

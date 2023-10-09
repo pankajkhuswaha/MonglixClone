@@ -31,7 +31,7 @@ export function SideFilter() {
 
   return (
     <>
-      <div className="p-3 sticky rounded-lg bg-white h-[100vh]  shadow-md">
+      <div className="md:p-3 sticky rounded-lg bg-white h-[100vh]  md:shadow-md">
         <h1 className="text-lg text-black font-semibold mb-3">Category</h1>
         {categories.map((ele, id) => {
           const subcategories = data
