@@ -238,7 +238,7 @@ const Address = () => {
                 className="my-4 h-0.5 w-full bg-opacity-30"
               ></div>
               <div className="space-y-2">
-                <p className="flex justify-between text-lg font-bold">
+                <div className="flex justify-between text-lg font-bold">
                   <p>Total Payable:</p>
                   <p style={{ fontWeight: "bold" }}>
                     {numberFormat(carts.totalCartValue)}{" "}
@@ -246,7 +246,7 @@ const Address = () => {
                       {carts.totalProductPrice}₹
                     </del>
                   </p>
-                </p>
+                </div>
               </div>
               <div>
                 <p className="mt-10 text-center text-sm font-semibold text-gray-500">

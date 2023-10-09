@@ -63,59 +63,46 @@
 
 // export default App;
 
-import { alert } from '@material-tailwind/react';
-import React from 'react'
-import {Datatable} from  'react-ele2'
+
+
+
+import React, { useEffect } from 'react'
+import { useRef } from 'react'
 const App = () => {
-const columns = [
-  {
-    headerName: "Name",
-    field: "name",
-    width: 140,
-  },
-  {
-    headerName: "Email",
-    field: "email",
-    width: 200,
-  },
-];
-
-const data = [
-  { name: "John Doe", email: "john@example.com" },
-  { name: "Jane Doe", email: "jane@example.com" },
-  { name: "Alice Smith", email: "alice@example.com" },
-  { name: "Bob Johnson", email: "bob@example.com" },
-  { name: "Eva Williams", email: "eva@example.com" },
-  { name: "Charlie Brown", email: "charlie@example.com" },
-  { name: "Linda Davis", email: "linda@example.com" },
-  { name: "Michael Miller", email: "michael@example.com" },
-  { name: "Olivia Moore", email: "olivia@example.com" },
-  { name: "David Wilson", email: "david@example.com" },
-];
-
-return (
-  <div
-    style={{
-      display: "flex",
-      gap: "10px",
-      flexDirection: "column",
-      padding: "10px",
-    }}
-  >
-    <Datatable
-      data={data}
-      cols={columns}
-      pagination
-      actionButtons={{
-        onEditBtnCLick: (data) => {
-        window.alert(data)
-        }
-      }}
-      selection
-    />
-    {/* <Jhevbutton label={"add to cart"} /> */}
-  </div>
-);
+    useEffect(() => {
+      console.log("the component have been rendered");
+    });
+  const ref = useRef(4);
+  const handleClick = () => {
+    ref.current = ref.current + 1
+    console.log("You clicked " + ref.current + " times!");
+  }
+  return (
+    <>
+      <button onClick={handleClick}>clickme{ref.current}</button>
+    </>
+  );
 }
 
 export default App
+// import React, { useEffect, useState } from "react";
+
+// const App = () => {
+//    useEffect(() => {
+//      console.log("the component have been rendered");
+//    });
+//   const [count, setCount] = useState(0);
+
+//   const handleClick = () => {
+//     setCount(count + 1);
+//     console.log("You clicked " + count + " times!");
+//   };
+
+//   return (
+//     <>
+//       <button onClick={handleClick}>click me{count }</button>
+//     </>
+//   );
+// };
+
+// export default App;

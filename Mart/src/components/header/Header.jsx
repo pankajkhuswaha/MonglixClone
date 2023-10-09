@@ -187,7 +187,7 @@ const Header = () => {
                           handleSeeAllClick(dispatch, navigate, ele)
                         }
                         style={{ textWrap: "nowrap" }}
-                        className=" px-1 text-gray-600 text-[17px]"
+                        className=" cursor-pointer  px-1 text-gray-600 text-[17px]"
                       >
                         {ele}
                       </p>
