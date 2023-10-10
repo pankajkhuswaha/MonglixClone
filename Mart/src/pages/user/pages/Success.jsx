@@ -5,23 +5,23 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { OrderApi } from "../../../features/orderSlice";
 
-const Success = () => {
-    const dispatch = useDispatch();
+const Success = () => { 
+  const dispatch = useDispatch();
   const fail = useLocation().pathname.includes("fail");
   const navigate = useNavigate();
   useEffect(() => {
     if (fail) {
-        swal(
-            "Transaction Failed !",
-            'Your Order Request is failed',
-            "error"
-        ).then(() => dispatch(OrderApi()) , navigate("/users/orders"));
+      swal(
+        "Transaction Failed !",
+        "Your Order Request is failed",
+        "error"
+      ).then(() => navigate("/users/orders"));
     } else {
       swal(
         "Transaction Succesfull !",
         "Your Order is placed Successfully ",
         "success"
-      ).then(() => navigate("/users/orders"));
+      ).then(() => navigate("/users/orders"), dispatch(OrderApi()));
     }
   }, []);
 
