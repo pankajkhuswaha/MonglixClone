@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { base_url } from "../utils/baseUrl";
 import { config } from "../utils/axiosConfig";
@@ -26,9 +27,15 @@ export const VerifyApi = createAsyncThunk("Verify", async () => {
   return res.data;
 });
 
-export const RegisterApi = createAsyncThunk("register", async (payload) => {
-  const res = await axios.post(`${base_url}user/register`, payload);
-  return res.data;
+export const RegisterApi = createAsyncThunk("register", async (payload ,thunkApi) => {
+  try {
+    const res = await axios.post(`${base_url}user/register`, payload);
+    return res.data
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.response.data);
+  }
+        
+  
 });
 export const addAddress = createAsyncThunk("user/address", async (payload) => {
   const res = await axios.post(`${base_url}user/adr`, payload, config);
@@ -43,9 +50,12 @@ export const authSlice = createSlice({
     builder
       .addCase(RegisterApi.fulfilled, (state) => {
         state.success = true;
+        toast.success("You registerd Sucessfully")
+        window.location.href = "/";
       })
       .addCase(RegisterApi.rejected, (state, action) => {
-       (state.error = true);
+       state.loading = false;
+       toast.error(action.payload)
       })
       .addCase(LoginApi.fulfilled, (state, action) => {
         state.success = true;
@@ -54,12 +64,12 @@ export const authSlice = createSlice({
           if(action.payload.role==="admin"){
            return window.location.href = "/admin";
           }
-          window.location.href = "/";
+          window.location.href = "/users";
         } else {
           toast.error(action.payload);
         }
       })
-      .addCase(LoginApi.rejected, (state, action) => {
+      .addCase(LoginApi.rejected, (state,) => {
         (state.error = true);
       })
       .addCase(VerifyApi.fulfilled, (state, action) => {

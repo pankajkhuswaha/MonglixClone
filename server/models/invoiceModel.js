@@ -6,7 +6,7 @@ const otpSchema = new mongoose.Schema({
     required: true,
   },
   products: {
-    type: String,
+    type: Array,
     required: true,
   },
   invoice:{

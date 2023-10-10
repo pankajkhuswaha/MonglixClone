@@ -282,7 +282,6 @@ YESB0000083`;
         </tr>`;
     })
     .join("");
-  //   const totalPrice = "9000";
   const totalQty = "6";
   const alphabeticalPrice = convertToWords(parseInt(totalPrice));
   const htmlContent = `

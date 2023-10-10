@@ -8,6 +8,7 @@ import AddProduct from "./pages/products/AddProduct";
 import Userlist from "./pages/Userlist";
 import ContactUsList from "./pages/ContactUsList";
 import BulkList from "./pages/BulkReq";
+import OrderList from "./pages/OrderList";
 export const routes = [
     {
       path: "/admin/dashboard",
@@ -20,6 +21,12 @@ export const routes = [
       icon: <FaUser fontSize={22} color="skyblue" />,
       txt: "User",
       element:<Userlist/>
+    },
+    {
+      path: "/admin/order",
+      icon: <FaUser fontSize={22} color="skyblue" />,
+      txt: "Order",
+      element:<OrderList/>
     },
     {
       path: "/admin/contact",

@@ -60,7 +60,7 @@ const createUser = asyncHandler(async (req, res) => {
       res.json(newUser);
     } catch (error) {
       if (error.message.includes("duplicate")) {
-        res.json(
+        res.status(406).send(
           `Entered ${
             error.message.split("{")[1].split(":")[0]
           } no. is already in used`
@@ -69,23 +69,23 @@ const createUser = asyncHandler(async (req, res) => {
         error.message.includes("validation") &&
         error.message.includes("mobile")
       ) {
-        res.json(error.errors?.mobile?.message);
+        res.status(406).send(error.errors?.mobile?.message);
       } else if (
         error.message.includes("validation") &&
         error.message.includes("name")
       ) {
-        res.json(error.errors?.name?.message);
+        res.status(406).send(error.errors?.name?.message);
       } else if (
         error.message.includes("validation") &&
         error.message.includes("email")
       ) {
-        res.json(error.errors?.email?.message);
+        res.status(406).send(error.errors?.email?.message);
       } else {
-        res.json(error.message);
+        res.status(406).send(error.message);
       }
     }
   } else {
-    res.json("You are already registered with us !");
+    res.status(406).send("You are already registered with us !");
   }
 });
 

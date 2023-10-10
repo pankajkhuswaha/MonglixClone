@@ -51,7 +51,6 @@ const ViewModal = (props) => {
 
   const transformData = (data) => {
     if (!data) return null;
-    console.log(data);
     const transformedData = {};
     for (const [key, value] of Object.entries(data)) {
       const transformedKey = key.replace(/([a-z])([A-Z])/g, "$1 $2");
@@ -70,6 +69,8 @@ const ViewModal = (props) => {
         "cart",
         "id",
         "mindiscription",
+        // "products",
+        "transactionId"
       ];
       if (!excludedKeys.includes(key)) {
         if (
@@ -100,6 +101,9 @@ const ViewModal = (props) => {
               {value ? "Yes" : "No"}
             </Badge>
           );
+        } else if (transformedKey === "products") {
+          transformedData[transformedKey]  = <div className="flex flex-col ml-4 text-right">
+          {value.map((val,i)=><p key={i}>{val.product.name}</p>)}</div>
         } else if (
           typeof value === "string" &&
           /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(value)
@@ -137,7 +141,7 @@ const ViewModal = (props) => {
           <div>
             {Object.entries(transformedData).map(([key, value]) => (
               <div key={key} style={elementStyle}>
-                <strong className="text-capitalize text-primary">
+                <strong className="text-capitalize text-primary text-nowrap">
                   {key} :
                 </strong>{" "}
                 {value}

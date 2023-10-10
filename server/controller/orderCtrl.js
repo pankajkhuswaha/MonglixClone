@@ -2,7 +2,7 @@ const { decode } = require("jsonwebtoken");
 const Order = require("../models/orderModel");
 const Product = require("../models/productModel");
 const User = require("../models/userModel");
-const Invoice = require("../models/invoiceModel");
+const InvoiceModel = require("../models/invoiceModel");
 const jwt = require("jsonwebtoken");
 const { sendEmail } = require("./emailCtrl");
 const invoice = require("./invoiceCtrl");
@@ -61,18 +61,18 @@ const createOrder = async (req, res, next) => {
         productDetails: orderArr[0].products,
       };
       const data = {
-        to: "khuswahapankaj00@gmail.com",
+        to: req.user.email,
         subject: "Invoice Details",
         html: invoice(detail),
       };
       sendEmail(data).then(async () => {
-        const invoice = {
+        const invoiced = {
           invoiceNo: newOrder.invoiceNo,
           products: orderArr[0].products,
           invoice: invoice(detail),
           total: orderArr[0].total,
         };
-        await Invoice.create(invoice);
+        await InvoiceModel.create(invoiced);
         await User.findOneAndUpdate(
           { _id: req.user._id },
           {
@@ -83,7 +83,8 @@ const createOrder = async (req, res, next) => {
           },
           { new: true }
         );
-        res.redirect(`https://jhevmotors.com/success`);
+        // res.redirect(`https://eprocuretech.com/`);
+        res.redirect(`http://localhost:3001/users/orders/success`);
       });
     } else {
       res.status(500).send({ error: "No product found in user cart" });

@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { RegisterApi, LoginApi } from "../../features/authSlice";
 
 const Login = () => {
-  const { error, success } = useSelector((state) => state.auth);
-  const navigate = useNavigate();
+  // const { error, success } = useSelector((state) => state.auth);
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     values: rvalues,
@@ -26,19 +26,12 @@ const Login = () => {
     },
     onSubmit: (values) => {
       dispatch(RegisterApi(values));
-      rresetForm();
-      if (success) {
-        toast.success("sucesss");
-      }
-      if (error) {
-        toast.error("Error");
-      }
+      // rresetForm();
     },
   });
   const {
     values: lvalues,
     handleSubmit: lhandleSubmit,
-    resetForm: lresetForm,
     handleChange: lhandleChange,
   } = useFormik({
     initialValues: {
