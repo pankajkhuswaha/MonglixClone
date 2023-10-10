@@ -271,7 +271,7 @@ const Address = () => {
                   />
                   <input type="hidden" name="userid" value={localStorage.getItem('token')} />
                   <input type="hidden" name="paymentMEthod" value="cod" />
-                  <input type="hidden" name="address" value={selctedAdr._id} />
+                  <input type="hidden" name="address" value={selctedAdr?._id} />
                   <button
                     type="submit"
                     style={{ background: site.primarybg }}

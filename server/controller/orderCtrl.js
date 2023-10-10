@@ -12,22 +12,23 @@ function generateId() {
   const uniqueTransactionId = `MT${timestamp}${randomId}`;
   return uniqueTransactionId;
 }
+
 const createOrder = async (req, res, next) => {
   const user = req.user;
   let address = req.body.address;
   let adr;
   for (let i = 0; i < user.address.length; i++) {
+    console.log(JSON.stringify(user.address[i]._id) ,JSON.stringify(address));
     if (JSON.stringify(user.address[i]._id) === JSON.stringify(address)) {
       adr = `${user.address[i].adr} , ${user.address[i].city} , ${user.address[i].state} - ${user.address[i].pincode}`;
     }
   }
-  if (JSON.stringify)
     if (user.cart?.products?.length > 0) {
       const newOrder = {
         products: user.cart.products,
         total: parseInt(user.cart.totalValue),
         orderby: user._id,
-        address: adr,
+        address: address,
         transactionId: req.body.transactionId || generateId(),
         invoiceNo: generateId(),
       };
@@ -71,6 +72,7 @@ const createOrder = async (req, res, next) => {
           products: orderArr[0].products,
           invoice: invoice(detail),
           total: orderArr[0].total,
+          orderby:req.user._id
         };
         await InvoiceModel.create(invoiced);
         await User.findOneAndUpdate(
@@ -105,6 +107,7 @@ const checkUser = async (req, res, next) => {
   }
 };
 
+
 const getOrders = async (req, res) => {
   try {
     const orders = await Order.find({ orderby: req.user._id }).populate({
@@ -125,6 +128,16 @@ const getOrders = async (req, res) => {
     }));
 
     res.send(orderArr);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const getInvoices = async (req, res) => {
+  try {
+    const invoices = await InvoiceModel.find({ orderby: req.user._id });
+    res.send(invoices);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -172,10 +185,10 @@ const getAdminProduct = async (req, res) => {
 const editOrderStatus = async (req, res) => {
   try {
     const status = req.body.status;
-    const transactionId = req.body.id;
+    const invoiceNo = req.body.id;
 
     const order = await Order.findOneAndUpdate(
-      { transactionId },
+      { invoiceNo },
       { status },
       { new: true } // Return the modified document
     );
@@ -198,4 +211,5 @@ module.exports = {
   getAdminProduct,
   editOrderStatus,
   checkUser,
+  getInvoices
 };

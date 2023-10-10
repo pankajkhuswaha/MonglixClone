@@ -55,7 +55,7 @@ const Admin = () => {
   if (isAdmin) {
     return (
       <div className="admin">
-        <nav className="transition-all flex h-14 w-full bg-white z-[999] items-center fixed right-0 border shadow-sm top-0 gap-4 justify-between px-4">
+        <nav className="transition-all flex h-14 w-full m-h-[100vw] bg-white z-[999] items-center fixed right-0 border shadow-sm top-0 gap-4 justify-between px-4">
           <div className="flex gap-2  items-center">
             <AiOutlineMenu
               onClick={toggleSidebar}

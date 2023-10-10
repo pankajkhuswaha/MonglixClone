@@ -12,6 +12,10 @@ const otpSchema = new mongoose.Schema({
   invoice:{
     type:String
   },
+  orderby:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   total: {
     type: String,
     required: true,
