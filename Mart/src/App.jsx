@@ -40,8 +40,8 @@ const App = () => {
 
   return (
     <>
-      {(isLoading) && <Loading />}            
-      {(loader) && <Loading />}  
+      {(isLoading) && <Loading />}
+      {(loader) && <Loading />}
 
       <ToastContainer />
       {error ? (
@@ -64,6 +64,4 @@ const App = () => {
 };
 
 export default App;
-
-
 
