@@ -9,10 +9,8 @@ const Order = () => {
     dispatch(OrderApi());
   }, []);
 
-
   return (
     <>
-
       <p className="text-blueGray-700 text-xl font-bold">My Orders</p>
       <br />
       <div>
@@ -20,7 +18,7 @@ const Order = () => {
           const { products } = ele;
           return (
             <div className="border shadow-sm rounded-md p-3 mt-3 " key={id}>
-              <div className="">
+              <div>
                 <div className="flex justify-between items-center p-2">
                   <div>
                     <p className="text-xl font-semibold">
@@ -38,7 +36,7 @@ const Order = () => {
               {products.map((ele, index) => (
                 <div
                   className="flex justify-between items-center p-2"
-                  key={index}
+              key={index}
                 >
                   <div className="flex gap-2 items-center ">
                     <div className=" rounded-lg  border flex justify-center items-center p-2 bg-gray-100 w-24 h-20">
