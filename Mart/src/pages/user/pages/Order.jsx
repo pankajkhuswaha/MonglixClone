@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { OrderApi } from "../../../features/orderSlice";
+import swal from "sweetalert";
 const Order = () => {
   const dispatch = useDispatch();
   const data = useSelector((st) => st.userorder.orders);
+  console.log(data);
   useEffect(() => {
     dispatch(OrderApi());
   }, []);
@@ -13,7 +15,8 @@ const Order = () => {
     <>
       <p className="text-blueGray-700 text-xl font-bold">My Orders</p>
       <br />
-      <div>
+      {
+        data.length>0 ?  <div>
         {[...data].reverse().map((ele, id) => {
           const { products } = ele;
           return (
@@ -64,7 +67,13 @@ const Order = () => {
             </div>
           );
         })}
-      </div>
+        </div> :
+          <div className="shadow-md rounded-lg border p-4">
+          <p className="text-center font-semibold text-2xl text-gray-800">No Order Found !</p>
+          </div>
+   
+      }
+    
     </>
   );
 };
