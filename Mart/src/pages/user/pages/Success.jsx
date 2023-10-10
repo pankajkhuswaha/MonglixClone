@@ -15,13 +15,13 @@ const Success = () => {
             "Transaction Failed !",
             'Your Order Request is failed',
             "error"
-        ).then(() => dispatch(OrderApi()) , navigate("/users/orders"));
+        ).then(() =>navigate("/users/orders"));
     } else {
       swal(
         "Transaction Succesfull !",
         "Your Order is placed Successfully ",
         "success"
-      ).then(() => navigate("/users/orders"));
+      ).then(() => navigate("/users/orders"), dispatch(OrderApi()));
     }
   }, []);
 
