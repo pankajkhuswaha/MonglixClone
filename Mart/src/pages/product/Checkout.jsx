@@ -187,11 +187,11 @@ const Checkout = () => {
                           </span>
                         </li>
                         <li>
-                          <h4>Total</h4>
+                          <h4 className="text-lg font-semibold">Total</h4>
                           <div>
-                            <p style={{ fontWeight: "bold" }}>
+                            <p className="text-lg  text-gray-800 font-semibold" >
                               {numberFormat(carts.totalCartValue)}{" "}
-                              <del className="text-danger">
+                              <del className="text-danger text-sm">
                                 {carts.totalProductPrice}₹
                               </del>
                             </p>
