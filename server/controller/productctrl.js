@@ -48,7 +48,7 @@ const deleteProduct = asyncHandle(async (req, res) => {
     } catch (error) {
       res.json({ error: error.message });
     }
-  } else res.json({ error: error.message });
+  } else res.status(500).send({ error: error.message });
 });
 const updateproduct = asyncHandle(async (req, res) => {
   if (req.body._id) {

@@ -102,9 +102,9 @@ const Admin = () => {
                 : "col-12 flex justify-between pt-4"
             }
           >
-            <div className="mt-[20px] w-full ">
+            <div className="mt-[20px] w-full min-h-[84vh]">
               <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="*" element={<Dashboard />} />
                 {routes.map((route, i) => {
                   return (
                     <React.Fragment key={i}>

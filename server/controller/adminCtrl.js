@@ -5,14 +5,16 @@ const Contact = require("../models/contactUsModel");
 const Bulk = require("../models/bulkModel");
 const Order = require("../models/orderModel");
 const Invoices = require("../models/invoiceModel");
+const CouponCodes = require("../models/discountModel");
 
 const getAdminData = asyncHandle(async (req, res) => {
   try {
     const users = await User.find();
-    const products = (await Products.find()).reverse();
+    const products = await Products.find();
     const contacts = (await Contact.find()).reverse();
     const bulks = (await Bulk.find()).reverse();
     const invoices = (await Invoices.find()).reverse();
+    const codes = (await CouponCodes.find()).reverse();
     const orders = await Order.find().populate([
       {
         path: "products.product",
@@ -52,7 +54,8 @@ const getAdminData = asyncHandle(async (req, res) => {
       contacts,
       bulks,
       orders: orderArr,
-      invoices
+      invoices,
+      codes
     });
   } catch (error) {
     res.status(400).send(error);
