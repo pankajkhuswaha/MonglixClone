@@ -10,6 +10,7 @@ var orderSchema = new mongoose.Schema(
     },
     invoiceNo: {
       type: String,
+      require:true
     },
     products: [
       {
@@ -28,10 +29,11 @@ var orderSchema = new mongoose.Schema(
     },
     address: {
       type: String,
+      require:true
     },
     status: {
       type: String,
-      default: "booking intiated",
+      default: "Processing",
     },
   },
   {

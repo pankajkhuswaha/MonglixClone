@@ -62,7 +62,6 @@ const ViewModal = (props) => {
         "createdAt",
         "updatedAt",
         "refreshToken",
-        "address",
         "password",
         "super",
         "order",
@@ -96,14 +95,14 @@ const ViewModal = (props) => {
             </Badge>
           );
         } else  if (typeof value === "boolean") {
-          transformedData[transformedKey] = (
+          transformedData[transformedKey] = (   
             <Badge bg={value ? "success" : "danger"}>
               {value ? "Yes" : "No"}
             </Badge>
           );
         } else if (transformedKey === "products") {
           transformedData[transformedKey]  = <div className="flex flex-col ml-4 text-right">
-          {value.map((val,i)=><p key={i}>{val.product.name}</p>)}</div>
+          {value.map((val,i)=><p key={i}>{val.name} X {val.count}</p>)}</div>
         } else if (
           typeof value === "string" &&
           /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(value)
