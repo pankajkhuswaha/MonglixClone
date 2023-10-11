@@ -5,11 +5,6 @@ export const userRoutes = [
     img: "https://d3juy0zp6vqec8.cloudfront.net/images/my-orders.svg",
   },
   {
-    path: "payment",
-    name: "My Payment",
-    img: "https://d3juy0zp6vqec8.cloudfront.net/images/my-payments.svg",
-  },
-  {
     path: "invoice",
     name: "My Invoice",
     img: "https://d3juy0zp6vqec8.cloudfront.net/images/my-invoices.svg",

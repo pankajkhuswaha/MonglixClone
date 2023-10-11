@@ -6,7 +6,6 @@ import parse from "html-react-parser";
 const Invoice = () => {
     const dispatch = useDispatch();
     const data = useSelector((st) => st.userorder.invoice);
-    console.log(data);
     useEffect(() => {
       dispatch(invoiceApi());
     }, []);
