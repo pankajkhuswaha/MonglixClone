@@ -8,6 +8,8 @@ const TC = () => {
        '1.1. Welcome to EProcureTech.com ("the Website"). By accessing or using this Website, you agree to comply with and be bound by these Terms and Conditions of Use ("Terms"). If you do not agree to these Terms, please do not use the Website.'
          ],
        },
+       
+
        {
          heading: "2. Definitions",
          para: [
