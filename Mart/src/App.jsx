@@ -65,3 +65,69 @@ const App = () => {
 
 export default App;
 
+// import { useState } from "react";
+
+// export default function App() {
+//   const [timer, setTimer] = useState(0);
+
+//   const startTimer = () => {
+//     window.myTimer = setInterval(() => {
+//       setTimer((timer) => timer + 1);
+//     }, 1000);
+//   };
+//   const stopTimer = () => {
+//     clearInterval(window.myTimer);
+//   };
+//   const resetTimer = () => {
+//     clearInterval(window.myTimer);
+//     setTimer(0);
+//   };
+//   return (
+//     <div className="container">
+//       <h1>Timer</h1>
+//       <span>{Math.trunc(timer / 60)} mins </span>
+//       <span>{timer % 60} secs</span>
+//       <div>
+//         <button onClick={startTimer}>Start</button>
+//         <button onClick={stopTimer}>Stop</button>
+//         <button onClick={resetTimer}>Reset</button>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+// // import React from "react";
+
+// // export default function App() {
+// //   const [count, setCount] = React.useState(0);
+// //   const [timeLeft, setTimeLeft] = React.useState(10);
+// //   const id = React.useRef(null);
+
+// //   const clear = () => window.clearInterval(id.current);
+
+// //   React.useEffect(() => {
+// //     id.current = window.setInterval(() => {
+// //       setTimeLeft((time) => time - 1);
+// //     }, 1000);
+
+// //     return clear;
+// //   }, []);
+
+// //   React.useEffect(() => {
+// //     if (timeLeft === 0) {
+// //       clear();
+// //     }
+// //   }, [timeLeft]);
+
+// //   return (
+// //     <div className="App">
+// //       <h1>{count}</h1>
+// //       <h3>Time left: {timeLeft} seconds</h3>
+// //       {timeLeft === 0 ? null : (
+// //         <button onClick={() => setCount((c) => c + 1)}>+</button>
+// //       )}
+// //     </div>
+// //   );
+// // }
