@@ -1,5 +1,7 @@
 const axios = require("axios");
 const crypto = require("crypto");
+const CouponCode = require("../models/discountModel");
+const User = require("../models/userModel");
 require("dotenv").config();
 
 function generateId() {
@@ -16,7 +18,7 @@ const initializePayment = async (req, res) => {
       userid: req.body.userid,
       productid: req.body.productid,
       amount: parseInt(req.body.amount),
-      address:req.body.address
+      address: req.body.address,
     })
   ).toString("base64");
   const obj = {
@@ -64,18 +66,44 @@ const initializePayment = async (req, res) => {
   }
 };
 
-
-
-const checkPaymentStatus = async (req, res,next) => {
+const checkPaymentStatus = async (req, res, next) => {
   const { code } = req.body;
   const { detail } = req.query;
   const Details = JSON.parse(Buffer.from(detail, "base64").toString("utf-8"));
-  req.body = {...Details,...req.body}
+  req.body = { ...Details, ...req.body };
   if (code == "PAYMENT_SUCCESS") {
-    next()
+    next();
   } else {
-    res.redirect(`https://jhevmotors.com/fail`);
+    res.redirect(`https://eprocuretech.com/users/orders/fail`);
+
   }
 };
 
-module.exports = { initializePayment, checkPaymentStatus };
+const applyCode = async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+  const coupon = await CouponCode.findOne({ code: req.body.code });
+  if(user.cart.isCouponApplied.code){
+    return res.status(500).send("You already applied a coupon!")
+  }
+
+  if (coupon) {
+    let discountValue;
+    if (coupon.type == "Percentage") {
+      discountValue =
+        (user.cart.totalValue / 100) * coupon.discountValue;
+    } else {
+      discountValue = coupon.discountValue;
+    }
+    user.cart.totalValue = user.cart.totalValue-discountValue;
+    user.cart.isCouponApplied = {
+      code: coupon.code,
+      discountValue: discountValue,
+    };
+    await user.save();
+    res.send(user.cart);
+  } else {
+    res.status(500).send("The coupon code is invalid!");
+  }
+};
+
+module.exports = { initializePayment, checkPaymentStatus, applyCode };

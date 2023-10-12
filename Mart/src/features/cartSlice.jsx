@@ -25,6 +25,17 @@ export const updateCart = createAsyncThunk("updatecart", async (payload) => {
   const res = await axios.put(`${base_url}cart`, payload, config);
   return res.data;
 });
+export const applyCouponcode = createAsyncThunk(
+  "couponcode",
+  async (payload, thunkApi) => {
+    try {
+      const res = await axios.post(`${base_url}payment/couponcode`, payload, config);
+      return res.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -52,6 +63,14 @@ export const cartSlice = createSlice({
       })
       .addCase(addCart.fulfilled, (state, action) => {
         state.loading = false;
+      })
+      .addCase(applyCouponcode.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(applyCouponcode.rejected, (state, action) => {
+        state.loading = false;
+        console.log(action.payload);
+        toast.error(action.payload)
       })
       .addCase(addCart.pending, (state) => {
         state.loading = true;

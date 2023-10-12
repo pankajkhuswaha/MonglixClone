@@ -23,8 +23,8 @@ export default function LoadButele() {
           },
         }}
       >
-              <LoadingButton
-                  type="submit"
+        <LoadingButton
+          type="submit"
           size="small"
           onClick={handleClick}
           endIcon={<SendIcon />}

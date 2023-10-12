@@ -1,128 +1,9 @@
-// Example usage:
-
-const ones = [
-  "",
-  "One",
-  "Two",
-  "Three",
-  "Four",
-  "Five",
-  "Six",
-  "Seven",
-  "Eight",
-  "Nine",
-];
-const teens = [
-  "Eleven",
-  "Twelve",
-  "Thirteen",
-  "Fourteen",
-  "Fifteen",
-  "Sixteen",
-  "Seventeen",
-  "Eighteen",
-  "Nineteen",
-];
-const tens = [
-  "",
-  "",
-  "Twenty",
-  "Thirty",
-  "Forty",
-  "Fifty",
-  "Sixty",
-  "Seventy",
-  "Eighty",
-  "Ninety",
-];
-
-function convertToWords(num) {
-  if (num === 0) {
-    return "Zero";
-  }
-
-  function convertChunk(number) {
-    let result = "";
-
-    if (number >= 100) {
-      result += ones[Math.floor(number / 100)] + " Hundred ";
-      number %= 100;
-    }
-
-    if (number >= 11 && number <= 19) {
-      result += teens[number - 11] + " ";
-    } else if (number >= 20 || number === 10) {
-      result += tens[Math.floor(number / 10)] + " ";
-      number %= 10;
-    }
-
-    if (number >= 1 && number <= 9) {
-      result += ones[number] + " ";
-    }
-
-    return result;
-  }
-
-  let result = "";
-  let chunkCount = 0;
-
-  while (num > 0) {
-    const chunk = num % 1000;
-    if (chunk !== 0) {
-      result =
-        convertChunk(chunk) +
-        ["", "Thousand", "Million", "Billion"][chunkCount] +
-        " " +
-        result;
-    }
-    num = Math.floor(num / 1000);
-    chunkCount++;
-  }
-
-  return result.trim();
-}
-
-const createInvoice = ({
-  totalPrice,
-  invoiceno,
-  userName,
-  userAdress,
-  productDetails,
-  isCoupon,
-}) => {
-  const companyName = "E-Procure tech";
-  const compayAdderss =
-    "A-91, SECOND FLOOR,DERAWAL NAGAR.DELHI, NEW DELHI-110009";
-  const conatactNumbers = "8882758900, 7827730205";
-  const contactEmail = "shreenathjisai@gmail.com";
-  const placeOfSupply = "Delhi(09)";
-  const bankName = `BANK NAME:- YES BANK BRANCH:- B7 &amp; B8 Gujranwala Town New
-Delhi 110009 Account No:- 008363400002351 IFSC Code:-
-YESB0000083`;
-  const date = new Date();
-  const invoiceDate = JSON.stringify(date).split("T")[0].split('"')[1];
-  const products = productDetails
-    .map((pro,i) => {
-      return `<tr>
-          <td>${i + 1}</td>
-          <td>${pro.name}</td>
-          <td> ${pro.hsn || "-"}</td>
-          <td>${pro.count}</td>
-          <td>${pro.unit}</td>
-          <td> ${pro.total / pro.count}</td>
-          <td>${pro.total} ₹</td>
-        </tr>`;
-    })
-    .join("");
-  const totalQty = "6";
-  const alphabeticalPrice = convertToWords(parseInt(totalPrice));
-  const htmlContent = `
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-proccure Invoice</title>
+    <title>Document</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Roboto+Slab&family=Rubik&display=swap");
       body {
@@ -134,6 +15,7 @@ YESB0000083`;
       .mainContainer {
         border: 1px solid black;
         /* width: 100%; */
+        min-height: 98vh !important;
       }
       .nameContainer {
         border-bottom: 1px solid black;
@@ -256,21 +138,21 @@ YESB0000083`;
   </head>
   <body>
     <div class="mainContainer">
-      <div class="nameContainer flex-col">
+      <div class="nameContainer">
         <div class="gst w-full">
           <h5>GSTIN : <strong>07AERFS7014R1Z4</strong></h5>
           <h5>Original copy</h5>
         </div>
         <h4 class="m-0 underline pt-3 textc w-full pb h4">TAX INVOICE</h4>
-        <h2 class="textc w-full m-0 h2">${companyName}</h2>
+        <h2 class="textc w-full m-0 h2">Shreenathji Sai Company</h2>
         <h5 class="text-center h5">
-         ${compayAdderss}
+          A-91, SECOND FLOOR,DERAWAL NAGAR.DELHI, NEW DELHI-110009
         </h5>
       </div>
       <div class="dateCont border-b flex">
         <div class="w-50 border-r pb-4">
-          <h5 class="m-0 pb no h5"><span>Invoice No</span> : ${invoiceno}</h5>
-          <h5 class="m-0 no h5"><span>Dated</span> : ${invoiceDate}</h5>
+          <h5 class="m-0 pb no h5"><span>Invoice No</span> : 15/233434</h5>
+          <h5 class="m-0 no h5"><span>Dated</span> : 15/233434</h5>
         </div>
         <div class="w-50 border-l pb-4">
           <h5 class="m-0 pb no h5">
@@ -284,7 +166,9 @@ YESB0000083`;
           <h5 class="m-0 pb bill h5">
             <span>Billed to</span> :
             <strong>
-             ${userAdress}
+              MEMORA INDIA PVT LTD MEMORA INDIA PVT LTD C-55/2, WAZIRPUR INDL.
+              AREA, WAZIRPUR, C-55/2, WAZIRPUR INDL. AREA, WAZIRPUR, DELHI -
+              110052
             </strong>
           </h5>
         </div>
@@ -292,7 +176,9 @@ YESB0000083`;
           <h5 class="m-0 pb bill h5">
             <span>Shipped to</span> :
             <strong>
-             ${userAdress}
+              MEMORA INDIA PVT LTD MEMORA INDIA PVT LTD C-55/2, WAZIRPUR INDL.
+              AREA, WAZIRPUR, C-55/2, WAZIRPUR INDL. AREA, WAZIRPUR, DELHI -
+              110052
             </strong>
           </h5>
         </div>
@@ -308,14 +194,20 @@ YESB0000083`;
             <th>Price</th>
             <th>Amount (₹)</th>
           </tr>
-          ${products}
+          <tr>
+            <td>1</td>
+            <td>Description of Goods</td>
+            <td>HSN/SAC Code</td>
+            <td>Qty</td>
+            <td>Unit</td>
+            <td>Price</td>
+            <td>Amount (₹)</td>
+          </tr>
         </table>
-        ${
-          isCoupon ?
-          `<h4 class="text-end pb-10 m-0 h5"><span>Coupon Discount <span>(&nbsp;${isCoupon?.code}&nbsp;)</span> :</span > &nbsp;- ${isCoupon?.discountrs} ₹</h4>`:""
-        }
-        <h4 class="text-end border-b pb-9 m-0 h5"><span>Total :</span> &nbsp; ${totalPrice} ₹</h4>
-        <h5 class="border-b pb-4 m-0 h5"><span>Bank Details :</span> &nbsp; ${bankName}</h5>
+        <h4 class="text-end pb-10 m-0 h5"><span>Coupon Discount <span>(&nbsp;Newuser50&nbsp;)</span> :</span > &nbsp;- 10000 ₹</h4>
+        <h4 class="text-end border-b pb-9 m-0 h5"><span>Total :</span> &nbsp; 10000 ₹</h4>
+        <h5 class="border-b pb-4 m-0 h5"><span>Bank Details :</span> &nbsp; BANK NAME:- YES BANK BRANCH:- B7 & B8 Gujranwala Town New Delhi 110009
+            Account No:- 008363400002351 IFSC Code:- YESB0000083    </h5>
             <div class="shipp border-b flex mb-4">
                 <div class="w-50 border-r pb-4">
                   <h5 class="m-0 pb bill h5">
@@ -337,7 +229,7 @@ YESB0000083`;
                         <span>Receiver's Signature</span> :
 
                     </h5>
-                  <h3 class="text-end m-0 pb-4">For ${companyName}</h3>
+                  <h3 class="text-end m-0 pb-4">For Shreenathji Sai Company</h3>
                   <br>
                   <h5 class="text-end m-0 pb-4">Authorised Signatory</h5>
                 </div>
@@ -347,7 +239,3 @@ YESB0000083`;
     </div>
   </body>
 </html>
-`;
-  return htmlContent;
-};
-module.exports = createInvoice;

@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { OrderApi } from "../../../features/orderSlice";
-import swal from "sweetalert";
 const Order = () => {
   const dispatch = useDispatch();
   const data = useSelector((st) => st.userorder.orders);
   console.log(data);
   useEffect(() => {
     dispatch(OrderApi());
-  }, []);
+  },[]);
 
   return (
     <>
