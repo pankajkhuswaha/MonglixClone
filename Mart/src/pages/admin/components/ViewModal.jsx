@@ -7,7 +7,7 @@ const ViewModal = (props) => {
   if (remarks) {
     remarks = [...remarks].reverse();
   }
-  if (data?.type) {
+  if (data?.type=="remark") {
     return (
       <Modal
         aria-labelledby="contained-modal-title-vcenter"

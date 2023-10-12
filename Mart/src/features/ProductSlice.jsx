@@ -78,12 +78,9 @@ export const productSlice = createSlice({
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.loading = false;
         if (action.payload.success) {
-          toast.success(action.payload.message);
           state.products = state.products.filter(
             (product) => product._id !== action.payload._id
           );
-        } else {
-          toast.error(action.payload.error);
         }
       })
       .addCase(deleteProduct.pending, (state) => {

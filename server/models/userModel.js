@@ -64,6 +64,9 @@ const userSchema = new mongoose.Schema(
         },
       ],
       totalValue: Number,
+      isCoupon: {
+        type: Object,
+      },
     },
     order: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
     address: [
@@ -76,11 +79,11 @@ const userSchema = new mongoose.Schema(
         },
         mobile: {
           type: String,
-          unique:true          
+          unique: true,
         },
         adr: {
           type: String,
-          unique:true
+          unique: true,
         },
         city: {
           type: String,
@@ -90,7 +93,6 @@ const userSchema = new mongoose.Schema(
         },
         state: {
           type: String,
-
         },
       },
     ],

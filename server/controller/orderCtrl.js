@@ -18,79 +18,79 @@ const createOrder = async (req, res, next) => {
   let address = req.body.address;
   let adr;
   for (let i = 0; i < user.address.length; i++) {
-    console.log(JSON.stringify(user.address[i]._id) ,JSON.stringify(address));
-    if (JSON.stringify(user.address[i]._id) === JSON.stringify(address)) {
+    console.log(JSON.stringify(user.address[i]._id), JSON.stringify(address));
+    if (JSON.stringify(user.address[i]._id) == JSON.stringify(address)) {
       adr = `${user.address[i].adr} , ${user.address[i].city} , ${user.address[i].state} - ${user.address[i].pincode}`;
     }
   }
-    if (user.cart?.products?.length > 0) {
-      const newOrder = {
-        products: user.cart.products,
-        total: parseInt(user.cart.totalValue),
-        orderby: user._id,
-        address: address,
-        transactionId: req.body.transactionId || generateId(),
-        invoiceNo: generateId(),
-      };
-      const createdOrder = await Order.create(newOrder);
-      const orders = await Order.find({ _id: createdOrder._id }).populate({
-        path: "products.product",
-        model: "product", // Replace 'Product' with the actual name of your product model
-      });
+  if (user.cart?.products?.length > 0) {
+    const newOrder = {
+      products: user.cart.products,
+      total: parseInt(user.cart.totalValue),
+      orderby: user._id,
+      address: address,
+      transactionId: req.body.transactionId || generateId(),
+      invoiceNo: generateId(),
+    };
+    const createdOrder = await Order.create(newOrder);
+    const orders = await Order.find({ _id: createdOrder._id }).populate({
+      path: "products.product",
+      model: "product", // Replace 'Product' with the actual name of your product model
+    });
 
-      const orderArr = orders.map((order) => ({
-        transactionId: order.transactionId,
-        products: order.products.map((product) => {
-          return {
-            name: product.product.name,
-            image: product.product.images[0],
-            count: product.count,
-            total: product.total,
-            price: product.product.total,
-            hsn: product.product.hsnCode,
-            unit: product.product.unitMeausrement,
-          };
-        }),
-        total: order.total,
-        status: order.status,
-      }));
-      const detail = {
-        invoiceno: newOrder.invoiceNo,
-        userName: req.user.anme,
-        userAdress: adr,
-        totalPrice: orderArr[0].total,
-        productDetails: orderArr[0].products,
-      };
-      const data = {
-        to: req.user.email,
-        subject: "Invoice Details",
-        html: invoice(detail),
-      };
-      sendEmail(data).then(async () => {
-        const invoiced = {
-          invoiceNo: newOrder.invoiceNo,
-          products: orderArr[0].products,
-          invoice: invoice(detail),
-          total: orderArr[0].total,
-          orderby:req.user._id
+    const orderArr = orders.map((order) => ({
+      transactionId: order.transactionId,
+      products: order.products.map((product) => {
+        return {
+          name: product.product.name,
+          image: product.product.images[0],
+          count: product.count,
+          total: product.total,
+          price: product.product.total,
+          hsn: product.product.hsnCode,
+          unit: product.product.unitMeausrement,
         };
-        await InvoiceModel.create(invoiced);
-        await User.findOneAndUpdate(
-          { _id: req.user._id },
-          {
-            $set: {
-              "cart.products": [],
-              "cart.totalValue": 0,
-            },
+      }),
+      total: order.total,
+      status: order.status,
+    }));
+    const detail = {
+      invoiceno: newOrder.invoiceNo,
+      userName: req.user.name,
+      userAdress: adr,
+      totalPrice: orderArr[0].total,
+      productDetails: orderArr[0].products,
+    };
+    const data = {
+      to: req.user.email,
+      subject: "Invoice Details",
+      html: invoice(detail),
+    };
+    sendEmail(data).then(async () => {
+      const invoiced = {
+        invoiceNo: newOrder.invoiceNo,
+        products: orderArr[0].products,
+        invoice: invoice(detail),
+        total: orderArr[0].total,
+        orderby: req.user._id,
+      };
+      await InvoiceModel.create(invoiced);
+      await User.findOneAndUpdate(
+        { _id: req.user._id },
+        {
+          $set: {
+            "cart.products": [],
+            "cart.totalValue": 0,
           },
-          { new: true }
-        );
-        // res.redirect(`https://eprocuretech.com/`);
-        res.redirect(`http://localhost:3001/users/orders/success`);
-      });
-    } else {
-      res.status(500).send({ error: "No product found in user cart" });
-    }
+        },
+        { new: true }
+      );
+      // res.redirect(`https://eprocuretech.com/`);
+      res.redirect(`http://localhost:3001/users/orders/success`);
+    });
+  } else {
+    res.status(500).send({ error: "No product found in user cart" });
+  }
 };
 
 const checkUser = async (req, res, next) => {
@@ -106,7 +106,6 @@ const checkUser = async (req, res, next) => {
     res.json({ error: "Not Authorized token expired, Please Login again" });
   }
 };
-
 
 const getOrders = async (req, res) => {
   try {
@@ -211,5 +210,5 @@ module.exports = {
   getAdminProduct,
   editOrderStatus,
   checkUser,
-  getInvoices
+  getInvoices,
 };

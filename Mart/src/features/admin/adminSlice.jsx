@@ -27,6 +27,30 @@ export const addContactUs = createAsyncThunk(
     }
   }
 );
+
+export const addCoupon = createAsyncThunk(
+  "addCoupon",
+  async (contact, thunkAPI) => {
+    try {
+      const response = await axios.post(`${base_url}coupon`, contact, config);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.error);
+    }
+  }
+);
+export const delCoupon = createAsyncThunk(
+  "delCoupon",
+  async (_id, thunkAPI) => {
+    try {
+      const response = await axios.delete(`${base_url}coupon/${_id}`, config);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const addbulkUs = createAsyncThunk(
   "addbulk",
   async (bulk, thunkAPI) => {
@@ -71,6 +95,19 @@ const admin = createSlice({
         } else {
           toast.error(action.payload.error);
         }
+      }).addCase(addCoupon.fulfilled, (state) => {
+        state.loading = false; 
+      }).addCase(addCoupon.rejected, (state,action) => {
+        state.loading = false;
+        toast.error(action.payload) 
+      })
+      .addCase(delCoupon.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(delCoupon.rejected, (state,action) => {
+        state.loading = false;
+        console.log(action.payload)
+        toast.error(action.payload)
       })
       .addCase(addContactUs.rejected, (state, action) => {
         state.loading = false;

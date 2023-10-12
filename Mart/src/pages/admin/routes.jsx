@@ -9,6 +9,8 @@ import Userlist from "./pages/Userlist";
 import ContactUsList from "./pages/ContactUsList";
 import BulkList from "./pages/BulkReq";
 import OrderList from "./pages/OrderList";
+import AddCoupon from "./pages/coupon/AddCoupon";
+import Couponlist from "./pages/coupon/CouponList";
 export const routes = [
     {
       path: "/admin/dashboard",
@@ -21,6 +23,25 @@ export const routes = [
       icon: <FaUser fontSize={22} color="skyblue" />,
       txt: "User",
       element:<Userlist/>
+    },
+    {
+      path: "/admin/coupon",
+      icon: <FaUser fontSize={22} color="skyblue" />,
+      txt: "Coupon",
+      children: [
+        {
+          path: "/admin/coupon",
+          icon: <FaProductHunt fontSize={16}  color="skyblue"/>,
+          txt: "List coupon",
+          element:<Couponlist/>
+        },
+        {
+          path: "/admin/add-coupon",
+          icon: <FaProductHunt fontSize={16} />,
+          txt: "Add coupon",
+          element:<AddCoupon/>
+        },
+      ],
     },
     {
       path: "/admin/order",

@@ -11,6 +11,9 @@ import ViewModal from "../../components/ViewModal";
 import { Helmet } from "react-helmet";
 import useViewModal from "../../components/useViewModel";
 import { FaEye } from "react-icons/fa";
+import swal from "sweetalert"
+import { unwrapResult } from "@reduxjs/toolkit";
+
 
 const EditButtons = ({ data, openModal }) => {
   const dispatch = useDispatch();
@@ -21,7 +24,19 @@ const EditButtons = ({ data, openModal }) => {
       </button>
       <p
         className="text-danger cursor-pointer"
-        onClick={() => dispatch(deleteProduct(data._id))}
+        onClick={() => {swal({
+          title: "Are you sure?",
+          text: "Are you sure that you want delete this product?",
+          icon: "warning",
+          dangerMode: true,
+        })
+        .then(willDelete => {
+          if (willDelete) {
+            dispatch(deleteProduct(data._id)).then(unwrapResult).then(swal("Deleted!", "Your product has been deleted!", "success"))
+            ;
+          }
+        });
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
