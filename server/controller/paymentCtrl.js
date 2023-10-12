@@ -82,7 +82,7 @@ const checkPaymentStatus = async (req, res, next) => {
 const applyCode = async (req, res, next) => {
   const user = await User.findById(req.user._id);
   const coupon = await CouponCode.findOne({ code: req.body.code });
-  if(user.cart.isCouponApplied.code){
+  if(user.cart.isCouponApplied?.code){
     return res.status(500).send("You already applied a coupon!")
   }
 

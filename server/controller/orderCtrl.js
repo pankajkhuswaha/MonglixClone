@@ -16,10 +16,11 @@ function generateId() {
 const createOrder = async (req, res, next) => {
   const user = req.user;
   let address = req.body.address;
-  let adr;
+  let adr,placeofsup;
   for (let i = 0; i < user.address.length; i++) {
     if (JSON.stringify(user.address[i]._id) == JSON.stringify(address)) {
       adr = `${user.address[i].adr} , ${user.address[i].city} , ${user.address[i].state} - ${user.address[i].pincode}`;
+      placeofsup = user.address[i].city
     }
   }
   let totalValue = parseInt(user.cart.totalValue);
@@ -28,7 +29,6 @@ const createOrder = async (req, res, next) => {
   if (user.cart?.products?.length > 0) {
 
     if (user.cart.isCouponApplied.code) {
-      totalValue = parseInt(user.cart.isCouponApplied.discountValue);
       isCoupon = {
         code: user.cart.isCouponApplied.code,
         discountrs: parseInt(user.cart.isCouponApplied.discountValue),
@@ -74,6 +74,7 @@ const createOrder = async (req, res, next) => {
       totalPrice: totalValue,
       productDetails: orderArr[0].products,
       isCoupon,
+      placeofsup
     };    
     const invoiced = {
       invoiceNo: newOrder.invoiceNo,

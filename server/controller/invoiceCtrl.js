@@ -89,6 +89,7 @@ const createInvoice = ({
   userAdress,
   productDetails,
   isCoupon,
+  placeofsup
 }) => {
   const companyName = "E-Procure tech";
   const compayAdderss =
@@ -102,7 +103,7 @@ YESB0000083`;
   const date = new Date();
   const invoiceDate = JSON.stringify(date).split("T")[0].split('"')[1];
   const products = productDetails
-    .map((pro,i) => {
+    .map((pro, i) => {
       return `<tr>
           <td>${i + 1}</td>
           <td>${pro.name}</td>
@@ -252,49 +253,58 @@ YESB0000083`;
         padding: 4px 40px 10px 40px;
         box-sizing: border-box;
       }
+      .pt-2{
+        padding-top:4px;
+        padding-left:10px;
+      }
     </style>
   </head>
   <body>
     <div class="mainContainer">
       <div class="nameContainer flex-col">
         <div class="gst w-full">
-          <h5>GSTIN : <strong>07AERFS7014R1Z4</strong></h5>
-          <h5>Original copy</h5>
+          <p>GSTIN : <strong>07AERFS7014R1Z4</strong></p>
+          <p>Original copy</p>
         </div>
         <h4 class="m-0 underline pt-3 textc w-full pb h4">TAX INVOICE</h4>
         <h2 class="textc w-full m-0 h2">${companyName}</h2>
-        <h5 class="text-center h5">
+        <p class="text-center p">
          ${compayAdderss}
-        </h5>
+        </p>
+        <p class="text-center m-0">Tel. :${conatactNumbers} email : ${contactEmail}</p>
       </div>
       <div class="dateCont border-b flex">
         <div class="w-50 border-r pb-4">
-          <h5 class="m-0 pb no h5"><span>Invoice No</span> : ${invoiceno}</h5>
-          <h5 class="m-0 no h5"><span>Dated</span> : ${invoiceDate}</h5>
+          <p class="m-0 pb no p"><span>Invoice No</span> : ${invoiceno}</p>
+          <p class="m-0 no p"><span>Dated</span> : ${invoiceDate}</p>
         </div>
         <div class="w-50 border-l pb-4">
-          <h5 class="m-0 pb no h5">
-            <span>Place of Supply </span> : 15/233434
-          </h5>
-          <h5 class="m-0 no h5"><span>Revese Charges No</span> : N</h5>
+          <p class="m-0 pb no p">
+            <span>Place of Supply </span> : ${placeofsup}
+          </p>
+          <p class="m-0 no p"><span>Revese Charges No</span> : N</p>
         </div>
       </div>
       <div class="shipp border-b flex mb-4">
         <div class="w-50 border-r pb-4">
-          <h5 class="m-0 pb bill h5">
+          <p class="m-0 pb bill p">
             <span>Billed to</span> :
             <strong>
+             ${userName}
+             <br>
              ${userAdress}
             </strong>
-          </h5>
+          </p>
         </div>
         <div class="w-50 border-l pb-4">
-          <h5 class="m-0 pb bill h5">
+          <p class="m-0 pb bill p">
             <span>Shipped to</span> :
             <strong>
+            ${userName}
+             <br>
              ${userAdress}
             </strong>
-          </h5>
+          </p>
         </div>
       </div>
       <div class="">
@@ -311,14 +321,16 @@ YESB0000083`;
           ${products}
         </table>
         ${
-          isCoupon ?
-          `<h4 class="text-end pb-10 m-0 h5"><span>Coupon Discount <span>(&nbsp;${isCoupon?.code}&nbsp;)</span> :</span > &nbsp;- ${isCoupon?.discountrs} ₹</h4>`:""
+          isCoupon
+            ? `<h4 class="text-end pb-10 m-0 p"><span>Coupon Discount <span>(&nbsp;${isCoupon?.code}&nbsp;)</span> :</span > &nbsp;- ${isCoupon?.discountrs} ₹</h4>`
+            : ""
         }
-        <h4 class="text-end border-b pb-9 m-0 h5"><span>Total :</span> &nbsp; ${totalPrice} ₹</h4>
-        <h5 class="border-b pb-4 m-0 h5"><span>Bank Details :</span> &nbsp; ${bankName}</h5>
-            <div class="shipp border-b flex mb-4">
+        <h4 class="text-end pb-9 m-0 p"><span>Total :</span> &nbsp; ${totalPrice} ₹</h4>
+        <p class="text-end border-b pt-2 m-0 ">${alphabeticalPrice} Rupees only :-</p>
+        <p class="border-b pb-4 m-0 p"><span>Bank Details :</span> &nbsp; ${bankName}</p>
+            <div class="shipp border-b flex">
                 <div class="w-50 border-r pb-4">
-                  <h5 class="m-0 pb bill h5">
+                  <p class="m-0 pb bill p">
                     <span class="underline pb-1">Terms & Conditions</span> :
                     <strong>
                         E.& O.E.
@@ -330,16 +342,15 @@ YESB0000083`;
                         <br>
                         3. Subject to 'Delhi' Jurisdiction only.
                     </strong>
-                  </h5>
+                  </p>
                 </div>
                 <div class="w-50 border-l">
-                    <h5 class="border-b pb-4 m-0">
+                    <p class="border-b pb-4 m-0">
                         <span>Receiver's Signature</span> :
 
-                    </h5>
+                    </p>
                   <h3 class="text-end m-0 pb-4">For ${companyName}</h3>
-                  <br>
-                  <h5 class="text-end m-0 pb-4">Authorised Signatory</h5>
+                  <p class="text-end m-0 pb-4">Authorised Signatory</p>
                 </div>
               </div>
 
