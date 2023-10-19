@@ -21,7 +21,7 @@ const Sidebar = () => {
               >
                 <Accordion.Item className="w-full border-none" eventKey="1">
                   <Accordion.Header className="w-full">
-                  <div className="-ml-1 h-6 w-6">{itm.icon}</div>
+                  <div className="-ml-2 h-6 w-6">{itm.icon}</div>
                 <span className="-mr-1 font-medium mb-1 cursor-pointer">
                   {itm.txt}
                 </span>

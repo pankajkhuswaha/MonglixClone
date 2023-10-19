@@ -6,6 +6,8 @@ const { generateRefreshToken } = require("../config/refreshtoken");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const { sendEmail } = require("./emailCtrl");
+const { mongooseError } = require("../middlewares/errorHandler");
+
 
 // Create a User ----------------------------------------------
 const checkSignup = async (req, res) => {
@@ -59,33 +61,11 @@ const createUser = asyncHandler(async (req, res) => {
       const newUser = await User.create(req.body);
       res.json(newUser);
     } catch (error) {
-      if (error.message.includes("duplicate")) {
-        res.status(406).send(
-          `Entered ${
-            error.message.split("{")[1].split(":")[0]
-          } no. is already in used`
-        );
-      } else if (
-        error.message.includes("validation") &&
-        error.message.includes("mobile")
-      ) {
-        res.status(406).send(error.errors?.mobile?.message);
-      } else if (
-        error.message.includes("validation") &&
-        error.message.includes("name")
-      ) {
-        res.status(406).send(error.errors?.name?.message);
-      } else if (
-        error.message.includes("validation") &&
-        error.message.includes("email")
-      ) {
-        res.status(406).send(error.errors?.email?.message);
-      } else {
-        res.status(406).send(error.message);
-      }
-    }
+      console.log(error)
+      mongooseError(error,res)    }
   } else {
-    res.status(406).send("You are already registered with us !");
+    res.status(406)
+    throw new Error("You are already registered with us !");
   }
 });
 

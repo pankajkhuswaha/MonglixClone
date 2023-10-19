@@ -31,6 +31,7 @@ const Footer = () => {
                 <img
                   src={site.logo}
                   alt=""
+                  style={{mixBlendMode:"darken"}}
                   className="md:w-[150px] w-[200px]"
                 />
               </Link>

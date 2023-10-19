@@ -13,6 +13,7 @@ import useViewModal from "../../components/useViewModel";
 import { FaEye } from "react-icons/fa";
 import swal from "sweetalert"
 import { unwrapResult } from "@reduxjs/toolkit";
+import { getAdmindata } from "../../../../features/admin/adminSlice";
 
 
 const EditButtons = ({ data, openModal }) => {
@@ -34,6 +35,7 @@ const EditButtons = ({ data, openModal }) => {
           if (willDelete) {
             dispatch(deleteProduct(data._id)).then(unwrapResult).then(swal("Deleted!", "Your product has been deleted!", "success"))
             ;
+            dispatch(getAdmindata())
           }
         });
         }}

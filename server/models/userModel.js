@@ -28,12 +28,40 @@ const userSchema = new mongoose.Schema(
     mobile: {
       type: String,
       required: true,
+      unique:true,
       validate: {
         validator: function (value) {
           return /^[6-9]\d{9}$/.test(value);
         },
         message: (props) =>
           `${props.value} is not a valid Indian mobile number.`,
+      },
+    },
+    gstNo: {
+      type: String,
+      validate: {
+        validator: function (value) {
+          // GST number format validation
+          if(value){
+            return /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$/.test(
+              value
+            );
+          }
+        },
+        message: (props) => `${props.value} is not a valid GST number.`,
+      },
+    },
+
+    panNo: {
+      type: String,
+      validate: {
+        validator: function (value) {
+          // PAN number format validation
+         if(value){
+           return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value);
+         }
+        },
+        message: (props) => `${props.value} is not a valid PAN number.`,
       },
     },
     password: {

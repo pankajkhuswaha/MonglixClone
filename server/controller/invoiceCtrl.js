@@ -89,7 +89,8 @@ const createInvoice = ({
   userAdress,
   productDetails,
   isCoupon,
-  placeofsup
+  placeofsup,
+  gstNo,
 }) => {
   const companyName = "E-Procure tech";
   const compayAdderss =
@@ -295,6 +296,14 @@ YESB0000083`;
              ${userAdress}
             </strong>
           </p>
+          ${
+            gstNo
+              ? `<h4 class="m-0 pb bill h3 text-sm">
+            <span>GST NO.</span> :
+             ${gstNo}
+          </h4>`
+              : ""
+          }
         </div>
         <div class="w-50 border-l pb-4">
           <p class="m-0 pb bill p">
@@ -305,6 +314,14 @@ YESB0000083`;
              ${userAdress}
             </strong>
           </p>
+          ${
+            gstNo
+              ? `<h4 class="m-0 pb bill h3 text-sm">
+            <span>GST NO.</span> :
+             ${gstNo}
+          </h4>`
+              : ""
+          }
         </div>
       </div>
       <div class="">

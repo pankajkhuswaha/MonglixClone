@@ -59,6 +59,7 @@ const Homepage = () => {
     if (site?.name) {
       setFieldValue("name", site?.name);
       setFieldValue("logo", site?.logo);
+      setFieldValue("title", site?.title);
       setFieldValue("mainbg", site?.mainbg);
       setFieldValue("primarybg", site?.primarybg);
       setFieldValue("secondarybg", site?.secondarybg);

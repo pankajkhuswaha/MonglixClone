@@ -5,11 +5,9 @@ import { OrderApi } from "../../../features/orderSlice";
 const Order = () => {
   const dispatch = useDispatch();
   const data = useSelector((st) => st.userorder.orders);
-  console.log(data);
   useEffect(() => {
     dispatch(OrderApi());
   },[]);
-
   return (
     <>
       <p className="text-blueGray-700 text-xl font-bold">My Orders</p>

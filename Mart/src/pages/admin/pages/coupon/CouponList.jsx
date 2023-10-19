@@ -5,7 +5,7 @@ import useViewModal from "../../components/useViewModel";
 import ViewModal from "../../components/ViewModal";
 import { Helmet } from "react-helmet";
 import swal from "sweetalert"
-import { delCoupon } from "../../../../features/admin/adminSlice";
+import { delCoupon, getAdmindata } from "../../../../features/admin/adminSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 const Couponlist = () => {
   const codes = useSelector((st) => st.admin.data?.codes);
@@ -49,6 +49,7 @@ const Couponlist = () => {
               .then(willDelete => {
                 if (willDelete) {
                     dispatch(delCoupon(params.row._id)).then(unwrapResult).then(swal("Deleted!", "Your coupon has been deleted!", "success"))
+                    dispatch(getAdmindata())
                 }
               });
               

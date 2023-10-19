@@ -5,10 +5,6 @@ import { config } from "../utils/axiosConfig";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const token = localStorage.getItem("token")
-  ? localStorage.getItem("token")
-  : null;
-
 const initialState = {
   success: false,
   error: false,
@@ -50,12 +46,10 @@ export const authSlice = createSlice({
     builder
       .addCase(RegisterApi.fulfilled, (state) => {
         state.success = true;
-        toast.success("You registerd Sucessfully")
-        window.location.href = "/";
       })
       .addCase(RegisterApi.rejected, (state, action) => {
        state.loading = false;
-       toast.error(action.payload)
+       toast.error(action.payload.message)
       })
       .addCase(LoginApi.fulfilled, (state, action) => {
         state.success = true;
@@ -75,7 +69,7 @@ export const authSlice = createSlice({
       .addCase(VerifyApi.fulfilled, (state, action) => {
         (state.success = true), (state.user = action.payload);
       })
-      .addCase(VerifyApi.rejected, (state, action) => {
+      .addCase(VerifyApi.rejected, (state) => {
         (state.error = true);
       })
       .addCase(addAddress.fulfilled, () => {
