@@ -10,7 +10,8 @@ const initialState = {
   error: false,
   loading: true,
   user: {},
-  token:null,
+  signupdata: {},
+  token: null,
 };
 
 export const LoginApi = createAsyncThunk("login", async (payload) => {
@@ -23,16 +24,17 @@ export const VerifyApi = createAsyncThunk("Verify", async () => {
   return res.data;
 });
 
-export const RegisterApi = createAsyncThunk("register", async (payload ,thunkApi) => {
-  try {
-    const res = await axios.post(`${base_url}user/register`, payload);
-    return res.data
-  } catch (error) {
-    return thunkApi.rejectWithValue(error.response.data);
+export const RegisterApi = createAsyncThunk(
+  "register",
+  async (payload, thunkApi) => {
+    try {
+      const res = await axios.post(`${base_url}user/register`, payload);
+      return res.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.response.data);
+    }
   }
-        
-  
-});
+);
 export const addAddress = createAsyncThunk("user/address", async (payload) => {
   const res = await axios.post(`${base_url}user/adr`, payload, config);
   return res.data;
@@ -41,36 +43,40 @@ export const addAddress = createAsyncThunk("user/address", async (payload) => {
 export const authSlice = createSlice({
   name: "authentication",
   initialState,
-  reducers: {},
+  reducers: {
+    addSignupdata: (state, action) => {
+      state.signupdata = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(RegisterApi.fulfilled, (state) => {
         state.success = true;
       })
       .addCase(RegisterApi.rejected, (state, action) => {
-       state.loading = false;
-       toast.error(action.payload.message)
+        state.loading = false;
+        toast.error(action.payload.message);
       })
       .addCase(LoginApi.fulfilled, (state, action) => {
         state.success = true;
         if (action.payload._id) {
           toast.success("Login Success");
-          if(action.payload.role==="admin"){
-           return window.location.href = "/admin";
+          if (action.payload.role === "admin") {
+            return (window.location.href = "/admin");
           }
           window.location.href = "/users";
         } else {
           toast.error(action.payload);
         }
       })
-      .addCase(LoginApi.rejected, (state,) => {
-        (state.error = true);
+      .addCase(LoginApi.rejected, (state) => {
+        state.error = true;
       })
       .addCase(VerifyApi.fulfilled, (state, action) => {
         (state.success = true), (state.user = action.payload);
       })
       .addCase(VerifyApi.rejected, (state) => {
-        (state.error = true);
+        state.error = true;
       })
       .addCase(addAddress.fulfilled, () => {
         toast.success("Address is added sucessfully");
@@ -81,4 +87,6 @@ export const authSlice = createSlice({
   },
 });
 
+
+export const { addSignupdata } = authSlice.actions;
 export default authSlice.reducer;
