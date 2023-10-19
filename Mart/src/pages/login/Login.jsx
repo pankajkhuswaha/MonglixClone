@@ -1,21 +1,18 @@
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import "./login.css";
 
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { RegisterApi, LoginApi } from "../../features/authSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const Login = () => {
-  // const { error, success } = useSelector((state) => state.auth);
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     values: rvalues,
-    handleSubmit: rhandleSubmit,
     resetForm: rresetForm,
+    handleSubmit: rhandleSubmit,
     handleChange: rhandleChange,
   } = useFormik({
     initialValues: {
@@ -23,10 +20,18 @@ const Login = () => {
       email: "",
       mobile: "",
       password: "",
+      gstNo: "",
+      panNo: "",
     },
     onSubmit: (values) => {
-      dispatch(RegisterApi(values));
-      // rresetForm();
+      dispatch(RegisterApi(values))
+        .then(unwrapResult)
+        .then(() => {
+          toast.success("You registerd Sucessfully, Login To Continue");
+          const container = document.getElementById("container");
+          container.classList.remove("right-panel-active");
+          rresetForm();
+        });
     },
   });
   const {
@@ -88,6 +93,22 @@ const Login = () => {
               value={rvalues.mobile}
               type="mobile"
               placeholder="mobile"
+            />
+            <input
+              className="c"
+              name="gstNo"
+              onChange={rhandleChange}
+              value={rvalues.gstNo}
+              type="text"
+              placeholder="Enter Gst No (optional)"
+            />
+            <input
+              className="c"
+              name="panNo"
+              onChange={rhandleChange}
+              value={rvalues.panNo}
+              type="text"
+              placeholder="Enter Pan number (Optional)"
             />
             <input
               className="c"

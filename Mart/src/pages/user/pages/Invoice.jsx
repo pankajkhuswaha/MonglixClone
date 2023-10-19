@@ -1,31 +1,6 @@
-// import React, { useEffect } from 'react'
-// import { useDispatch, useSelector } from "react-redux";
-// import { invoiceApi } from "../../../features/orderSlice";
-// import parse from "html-react-parser";
 
-// const Invoice = () => {
-//     const dispatch = useDispatch();
-//     const data = useSelector((st) => st.userorder.invoice);
-//     useEffect(() => {
-//       dispatch(invoiceApi());
-//     }, []);
+import { useEffect, useState } from "react";
 
-//   return (
-//     <>
-//       <p className="text-blueGray-700 text-xl font-bold">Invoice</p>
-
-//       <div className='w-full'>
-//         {data.map((ele) => {
-//           return <p>{parse(ele.invoice)}</p>;
-//         })}
-//       </div>
-//     </>
-//   );
-// }
-
-// export default Invoice
-
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { invoiceApi } from "../../../features/orderSlice";
 import parse from "html-react-parser";
@@ -33,12 +8,11 @@ import parse from "html-react-parser";
 const Invoice = () => {
   const dispatch = useDispatch();
   const data = useSelector((st) => st.userorder.invoice);
-  console.log(data);
   const [displayInvoice, setDisplayInvoice] = useState(null);
 
   useEffect(() => {
     dispatch(invoiceApi());
-  }, []);
+  }, [dispatch]);
 
   const handleClick = (invoice) => {
     setDisplayInvoice(invoice);
@@ -51,7 +25,7 @@ const Invoice = () => {
       const popupWin = window.open("", "_blank");
       popupWin.document.open();
       popupWin.document.write(
-        `<html><head><title>Print Invoice</title></head><body>${invoiceContent.innerHTML}</body></html>`
+        `${invoiceContent.innerHTML}`
       );
       popupWin.document.close();
       popupWin.print();
@@ -109,6 +83,7 @@ const Invoice = () => {
 
 export default Invoice;
 
+<<<<<<< HEAD
 // import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { invoiceApi } from "../../../features/orderSlice";
@@ -194,3 +169,5 @@ export default Invoice;
 // };
 
 // export default Invoice;
+=======
+>>>>>>> 5d56b31b40e1719c024a5d48383ccc8485f3dac0

@@ -91,14 +91,11 @@ const Header = () => {
               gap={{ xs: 2, md: 4 }}
               alignItems={"center"}
             >
-              <Stack
-                direction={"row"}
-                gap={{ xs: 2, md: 4 }}
-                display={{ sm: "block", md: "none" }}
+              <div className="flex gap-2 md:hidden"
               >
                 <BtmDrawer />
                 <TopDrawer />
-              </Stack>
+              </div>
               <Link
                 to={"/bulk"}
                

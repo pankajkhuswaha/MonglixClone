@@ -14,15 +14,21 @@ const Banner = () => {
     prevArrow: <PreviousBtn />,
     nextArrow: <NextBtn />,
   };
+  const banners = useSelector((st) => st.site.data?.homepageBanner);
+
 
   return (
     <>
       <div className="w-full  ">
         <div className="container">
           <Slider {...settings}>
-            {banner?.map((ele, i) => (
-              <div  key={i}>
-                <img style={{ borderRadius: "10px"}} src={ele} alt={`banner${i + 1}`} />
+            {banners?.map((ele, i) => (
+              <div key={i}>
+                <img
+                  style={{ borderRadius: "10px" }}
+                  src={ele}
+                  alt={`banner${i + 1}`}
+                />
               </div>
             ))}
           </Slider>

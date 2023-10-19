@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from 'react-redux';
-import { addCoupon } from "../../../../features/admin/adminSlice";
+import { addCoupon, getAdmindata } from "../../../../features/admin/adminSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import swal from "sweetalert";
 import { useNavigate } from 'react-router-dom';
@@ -37,8 +37,9 @@ const AddCoupon = () => {
       validationSchema={CouponFormSchema}
       onSubmit={(values) => {
         dispatch(addCoupon(values)).then(unwrapResult).then(()=>{
-          swal("Deleted!", "Your coupon is added sucessfully!", "success");
+          swal("Created!", "Your coupon is added sucessfully!", "success");
           navigate("/admin/coupon")
+          dispatch(getAdmindata())
         })
       }}
     >

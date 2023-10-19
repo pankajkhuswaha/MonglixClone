@@ -31,7 +31,11 @@ const Footer = () => {
                 <img
                   src={site.logo}
                   alt=""
-                  className=" md:w-[150px] w-[200px]"
+
+
+                  style={{mixBlendMode:"darken"}}
+                  className="md:w-[150px] w-[200px]"
+
                 />
               </Link>
               <div className="flex mt-8 space-x-6 text-gray-600">

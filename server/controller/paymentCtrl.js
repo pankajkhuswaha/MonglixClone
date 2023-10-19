@@ -27,9 +27,9 @@ const initializePayment = async (req, res) => {
     merchantTransactionId: generateId(),
     amount: parseInt(req.body.amount) * 100,
     // redirectUrl: `http://127.0.0.1:8000/api/payment/check?detail=${detail}`,
-    redirectUrl: `https://jhev.deepmart.shop/api/payment/check?detail=${detail}`,
+    redirectUrl: `https://eprocuretech.com/api/payment/check?detail=${detail}`,
     redirectMode: "POST",
-    callbackUrl: `https://jhev.deepmart.shop/api/payment/check`,
+    callbackUrl: `https://eprocuretech.com/api/payment/check`,
     mobileNumber: "8510051511",
     paymentInstrument: {
       type: "PAY_PAGE",
@@ -82,7 +82,7 @@ const checkPaymentStatus = async (req, res, next) => {
 const applyCode = async (req, res, next) => {
   const user = await User.findById(req.user._id);
   const coupon = await CouponCode.findOne({ code: req.body.code });
-  if(user.cart.isCouponApplied.code){
+  if(user.cart.isCouponApplied?.code){
     return res.status(500).send("You already applied a coupon!")
   }
 
