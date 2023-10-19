@@ -136,11 +136,13 @@ const getOrders = async (req, res) => {
       products: order.products.map((product) => ({
         name: product.product.name,
         image: product.product.images[0],
+        category:product.product.category,
         count: product.count,
         total: product.total,
       })),
       total: order.total,
       status: order.status,
+      address:order.address
     }));
 
     res.send(orderArr);

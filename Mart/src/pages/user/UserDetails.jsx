@@ -1,12 +1,11 @@
-import React from "react";
 import { Stack } from "@mui/material";
 import { toast } from "react-toastify";
 import Success from "./pages/Success";
-import Error from "./pages/Error";
 import { Profile, Invoice, Order, Payment, Shipping, UserMain } from "./pages";
 import { userRoutes, logout } from "./UserRoutes";
 import { Link, Route, Routes } from "react-router-dom";
 import LftDrawer from "../../components/bottomdrawer/LftDrawer";
+import GenerateReport from "./pages/GenerateReport";
 
 export const UserSidebar = () => {
   const handleLogout = () => {
@@ -101,6 +100,7 @@ const UserDetails = () => {
             <Route path="/invoice" element={<Invoice />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/Shipping-Address" element={<Shipping />}></Route>
+            <Route path="/generate-reports" element={<GenerateReport />}></Route>
           </Routes>
         </Stack>
       </Stack>

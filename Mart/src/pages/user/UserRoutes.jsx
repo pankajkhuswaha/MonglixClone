@@ -1,5 +1,10 @@
 export const userRoutes = [
   {
+    path: "generate-reports",
+    name: "Report",
+    img: "https://d3juy0zp6vqec8.cloudfront.net/images/my-invoices.svg",
+  },
+  {
     path: "orders",
     name: "My orders",
     img: "https://d3juy0zp6vqec8.cloudfront.net/images/my-orders.svg",
@@ -9,7 +14,6 @@ export const userRoutes = [
     name: "My Invoice",
     img: "https://d3juy0zp6vqec8.cloudfront.net/images/my-invoices.svg",
   },
- 
 ];
 
 export const logout = [
