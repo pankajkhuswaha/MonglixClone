@@ -6,6 +6,11 @@ import * as XLSX from "xlsx";
 import TransactionTable from "./ttransaction";
 
 const GenerateReport = () => {
+  const user = useSelector((st) => st.auth.user?.user?.address);
+  console.log(user);
+
+ 
+
   const transactions = useSelector((st) => st.userorder.orders);
   const dispatch = useDispatch();
 
@@ -30,7 +35,6 @@ const GenerateReport = () => {
   const [addressReport, setAddressReport] = useState({});
 
   useEffect(() => {
-    // Extract unique categories, addresses, and generate initial reports
     const uniqueCategories = [
       ...new Set(
         transactions.flatMap((t) => t.products.map((p) => p.category))
@@ -40,12 +44,11 @@ const GenerateReport = () => {
     setCategories(uniqueCategories);
     setAddresses(uniqueAddresses);
 
-    // Generate initial reports
+    console.log(uniqueAddresses);
     generateReports(transactions);
   }, [transactions]);
 
   const generateReports = (data) => {
-    // Generate category report
     const categoryReportData = {};
     data.forEach((transaction) => {
       transaction.products.forEach((product) => {
@@ -76,33 +79,33 @@ const GenerateReport = () => {
     });
     setAddressReport(addressReportData);
   };
- const handleFilter = () => {
-   const filtered = transactions.filter(
-     (transaction) =>
-       (filterAddress === "" || transaction.address.includes(filterAddress)) &&
-       (filterCategory === "" ||
-         transaction.products.some((product) =>
-           product.category.includes(filterCategory)
-         ))
-   );
-   setFilteredTransactions(filtered);
+  const handleFilter = () => {
+    const filtered = transactions.filter(
+      (transaction) =>
+        (filterAddress === "" || transaction.address.includes(filterAddress)) &&
+        (filterCategory === "" ||
+          transaction.products.some((product) =>
+            product.category.includes(filterCategory)
+          ))
+    );
+    setFilteredTransactions(filtered);
 
-   // Generate reports based on filtered data
-   generateReports(filtered);
- };
+    // Generate reports based on filtered data
+    generateReports(filtered);
+  };
   return (
     <div>
       <div className="flex justify-between items-center mb-2">
-        <h1 className="h3 font-semibold">Genarate report</h1>
+        <h1 className="h1 text-blue-500 font-bold">Genarate report</h1>
         <button onClick={handleDownload} className="btn btn-outline-success">
           Download Report
         </button>
       </div>
-      <div className="mb-4">
-        <h2 className="text-xl font-bold mb-2">Category Report</h2>
+      <div className="mb-4 ">
+        <h2 className="text-2xl font-bold mb-2">Category Report</h2>
         <ul>
           {Object.entries(categoryReport).map(([category, count]) => (
-            <li key={category}>
+            <li className="text-gray-600 text-xl font-semibold" key={category}>
               {category}: {count} products
             </li>
           ))}
@@ -110,11 +113,11 @@ const GenerateReport = () => {
       </div>
 
       <div className="mb-4">
-        <h2 className="text-xl font-bold mb-2">Address Report</h2>
+        <h2 className="text-2xl font-bold mb-2">Address Report</h2>
         <ul>
           {Object.entries(addressReport).map(([address, count]) => (
-            <li key={address}>
-              {address}: {count} products
+            <li className="text-gray-500 text-xl font-semibold" key={address}>
+              {address}: <span className="text-blue-500 text-xl font-bold">  {count} products </span>
             </li>
           ))}
         </ul>
@@ -124,12 +127,21 @@ const GenerateReport = () => {
         <select
           value={filterAddress}
           onChange={(e) => setFilterAddress(e.target.value)}
-          className="mr-2 p-2 border border-gray-300"
+          className="mr-2 w-[50%] p-2 border border-gray-300"
         >
           <option value="">All Addresses</option>
-          {addresses.map((address) => (
-            <option key={address} value={address}>
-              {address}
+          {addresses?.map((address, ids) => (
+            <option key={ids} value={address}>
+              {
+                user.map((ele,id) => {
+                  return (
+                    <div key={id}>
+                      {ele.adr} ,{ele.pincode}, {ele.state}, {ele.city}
+                    </div>
+                  )
+                })
+              }
+              {/*  */}
             </option>
           ))}
         </select>
@@ -137,7 +149,7 @@ const GenerateReport = () => {
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className="mr-2 p-2 border border-gray-300"
+          className="mr-2 w-[50%] p-2 border border-gray-300"
         >
           <option value="">All Categories</option>
           {categories.map((category) => (
@@ -147,9 +159,9 @@ const GenerateReport = () => {
           ))}
         </select>
 
-        <button
+        <button style={{ textWrap: 'noWrap' }}
           onClick={handleFilter}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold  px-4 rounded"
         >
           Apply Filters
         </button>

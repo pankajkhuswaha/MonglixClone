@@ -16,30 +16,35 @@ const TransactionTable = ({ transactions }) => {
         <tbody>
           {transactions?.map((transaction) => (
             <tr key={transaction.transactionId}>
-              <td className="py-2 px-4 border-b">
+              <td className=" text-gray-800 font-bold py-2 px-4 border-b">
                 {transaction.transactionId}
               </td>
               <td className="py-2 px-4 border-b">
                 {transaction.products.map((product) => (
-                  <div key={product.name} className="mb-2">
+                  <div key={product.name} className="flex mb-2">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-8 h-8 mr-2 inline"
+                      className="w-14 h-auto mr-2 inline"
                     />
-                    {product.name} (x{product.count})
+                    <div className="text-gray-600 font-semibold">
+                      {product.name} (x{product.count})
+                    </div>
+                  
                   </div>
                 ))}
               </td>
-              <td className="py-2 px-4 border-b">{transaction.total}</td>
+              <td className="py-2 text-gray-600 font-semibold px-4 border-b">{transaction.total}</td>
               <td
-                className={`py-2 px-4 border-b ${
-                  transaction.status === "Processing"
-                    ? "text-blue-500"
-                    : "text-red-500"
-                }`}
+                className='py-2 px-4 border-b
+                '   
               >
-                {transaction.status}
+                <p className={`text-white p-2 rounded-lg ${transaction.status === "Processing"
+                  ? " bg-blue-400 "
+                    : " bg-red-400  "
+                  }`}>
+                  {transaction.status}
+                </p>  
               </td>
             </tr>
           ))}
