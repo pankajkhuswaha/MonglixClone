@@ -67,7 +67,8 @@ const Return = () => {
           <>
             <div className="titlesection">
               <h1>{ele.heading}</h1>
-              <p className="py-2">{ele.para}</p>
+              <p className="py-2">{ele.para[0]}</p>
+              <p className="py-2">{ele.para[1]}</p>
             </div>
 
             <div className="titlesection"></div>

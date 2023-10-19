@@ -31,7 +31,7 @@ const Footer = () => {
                 <img
                   src={site.logo}
                   alt=""
-                  className="md:w-[150px] w-[200px]"
+                  className=" md:w-[150px] w-[200px]"
                 />
               </Link>
               <div className="flex mt-8 space-x-6 text-gray-600">
@@ -108,13 +108,13 @@ const Footer = () => {
             </div>
             <div className="col-12 col-md-6 col-xl-3">
               <p className="font-medium">Categories</p>
-              <div className=" text-gray-500">
+              <div className=" cursor-pointer text-gray-500">
                 {categories.map((ele, i) => {
                   return (
                     <p
                       key={i}
                       onClick={() => handleSeeAllClick(dispatch, navigate, ele)}
-                      className=" hover:text-[#ff4268]  "
+                      className="  hover:text-[#ff4268]  "
                     >
                       {ele}
                     </p>
@@ -127,16 +127,16 @@ const Footer = () => {
               <p className="font-medium">Legal</p>
               <div className=" text-gray-500">
                 <Link to={"/privacyPolicy"}>
-                  <p className="hover:opacity-75"> Privacy Policy </p>
+                  <p      className=" hover:text-[#ff4268]  "> Privacy Policy </p>
                 </Link>
                 <Link to={"/tc"}>
-                  <p className="hover:opacity-75"> Terms &amp; Conditions </p>
+                  <p     className=" hover:text-[#ff4268]  "> Terms &amp; Conditions </p>
                 </Link>
                 <Link to={"/return"}>
-                  <p className="hover:opacity-75"> Return And Refund Policy </p>
+                  <p     className=" hover:text-[#ff4268]  "> Return And Refund Policy </p>
                 </Link>
                 <Link to={"/accesibility"}>
-                  <p className="hover:opacity-75"> Accessibility </p>
+                  <p     className=" hover:text-[#ff4268]  "> Accessibility </p>
                 </Link>
               </div>
             </div>

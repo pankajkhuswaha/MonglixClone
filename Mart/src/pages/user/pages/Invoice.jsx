@@ -25,7 +25,6 @@
 
 // export default Invoice
 
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { invoiceApi } from "../../../features/orderSlice";
@@ -97,7 +96,7 @@ const Invoice = () => {
                   className="bg-[#3D9BFF] mt-3 text-white p-2 rounded-md"
                   onClick={handlePrint}
                 >
-                  Print Invoice
+                  Print Invoices
                 </button>
               </div>
             )}
@@ -109,7 +108,6 @@ const Invoice = () => {
 };
 
 export default Invoice;
-
 
 // import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
