@@ -20,7 +20,9 @@ const Mycard = ({ data, load }) => {
      golddiscount,
      silverdiscount,
      retaildiscount,
-   } = data;
+     brand
+  } = data;
+  console.log(data);
   const pathname = useLocation().pathname;
   const user = useSelector((state) => state.auth?.user?.user);
   const navigate = useNavigate();
@@ -62,10 +64,14 @@ const Mycard = ({ data, load }) => {
             <Link to={`/products/${data._id}`} state={data}>
               <div className="imgcontainer">
                 <img src={data.images[0]} alt="" width={140} height={140} />
-              </div>
-              <p className="text-md  h-12 overflow-y-hidden text-gray-600 ">
-                {data.name}
-              </p>
+                </div>
+                <p  className="text-md BRAND mb-2  overflow-y-hidden text-gray-600 ">
+                  {data.brand}
+                </p>
+              <p  className="text-md   h-6 overflow-y-hidden text-gray-600 ">
+                {data.name.slice(0,24)}
+                </p>
+             
             </Link>
 
             <Stack
