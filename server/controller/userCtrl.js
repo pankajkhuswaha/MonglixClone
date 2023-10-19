@@ -8,17 +8,25 @@ const jwt = require("jsonwebtoken");
 const { sendEmail } = require("./emailCtrl");
 const { mongooseError } = require("../middlewares/errorHandler");
 
-
 // Create a User ----------------------------------------------
 const checkSignup = async (req, res) => {
-  const { name, email, mobile } = req.body;
+  const { name, email, mobile, gstNo, panNo } = req.body;
   const isNameValid = /^[a-zA-Z\s]+$/.test(name);
   const isMobileValid = /^[6-9]\d{9}$/.test(mobile);
+  const isGSTNoValid =
+    /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$/.test(
+      gstNo
+    );
+  const isPanNoValid = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(panNo);
 
   if (!isNameValid) {
-    res.json({ error: `${name} is not a vailid name.` });
+    res.json({ error: `${name} is not a valid name.` });
   } else if (!isMobileValid) {
-    res.json({ error: `${mobile} is not a vailid mobile number.` });
+    res.json({ error: `${mobile} is not a valid mobile number.` });
+  } else if (!isGSTNoValid && gstNo) {
+    res.json({ error: `${gstNo} is not a valid GST number.` });
+  } else if (!isPanNoValid && panNo) {
+    res.json({ error: `${panNo} is not a valid PAN number.` });
   } else {
     const findByEmail = await User.findOne({ email });
     const findByMobile = await User.findOne({ mobile });
@@ -61,10 +69,10 @@ const createUser = asyncHandler(async (req, res) => {
       const newUser = await User.create(req.body);
       res.json(newUser);
     } catch (error) {
-      console.log(error)
-      mongooseError(error,res)    }
+      mongooseError(error, res);
+    }
   } else {
-    res.status(406)
+    res.status(406);
     throw new Error("You are already registered with us !");
   }
 });
@@ -158,7 +166,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
 });
 const addnewAddress = asyncHandler(async (req, res) => {
   const { _id } = req.user;
-  console.log(req.body)
+  console.log(req.body);
   try {
     const user = await User.findById(_id);
     if (!user) {
@@ -370,10 +378,10 @@ const forgetPasswordToken = asyncHandler(async (req, res) => {
     const token = await user.createPasswordResetToken();
     console.log(token);
     await user.save();
-    const sendData = `<h1 style=\"color: #333; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; margin-bottom: 16px;\">Password Reset<\/h1>\r\n<p style=\"color: #666; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; margin-bottom: 8px;\">Hi there,<\/p>\r\n<p style=\"color: #666; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; margin-bottom: 16px;\">We received a request to reset your password. Please click the link below to reset your password:<\/p>\r\n<p style=\"margin-bottom: 16px;\"><a href='https://jhevmotors.com/reset-password/${token}' style=\"background-color: #007bff; border-radius: 4px; color: #fff; display: inline-block; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; padding: 10px 16px; text-decoration: none;\">Reset Password<\/a><\/p>\r\n<p style=\"color: #666; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; margin-bottom: 16px;\">If you did not request a password reset, you can ignore this email and your password will not be changed.<\/p>\r\n<p style=\"color: #666; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5;\">Thank you,<\/p>\r\n<p style=\"color: #666; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; margin-bottom: 0;\">The Example Team<\/p>\r\n`;
+    const sendData = `<h1 style=\"color: #333; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; margin-bottom: 16px;\">Password Reset<\/h1>\r\n<p style=\"color: #666; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; margin-bottom: 8px;\">Hi there,<\/p>\r\n<p style=\"color: #666; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; margin-bottom: 16px;\">We received a request to reset your password. Please click the link below to reset your password:<\/p>\r\n<p style=\"margin-bottom: 16px;\"><a href='https://eprocuretech.com/reset-password/${token}' style=\"background-color: #007bff; border-radius: 4px; color: #fff; display: inline-block; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; padding: 10px 16px; text-decoration: none;\">Reset Password<\/a><\/p>\r\n<p style=\"color: #666; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; margin-bottom: 16px;\">If you did not request a password reset, you can ignore this email and your password will not be changed.<\/p>\r\n<p style=\"color: #666; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5;\">Thank you,<\/p>\r\n<p style=\"color: #666; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; margin-bottom: 0;\">The E-procure Team<\/p>\r\n`;
     const data = {
       to: email,
-      subject: "Password Reset Link from Jhev Motors",
+      subject: "Password Reset Link from E-procure tech",
       html: sendData,
     };
     sendEmail(data);

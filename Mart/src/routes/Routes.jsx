@@ -13,6 +13,7 @@ import Admin from "../pages/admin";
 import ContactUs from "../pages/admin/pages/contactus/ContactUs";
 import Address from "../pages/product/Address";
 import { Return, Accesibility, TC, PrivacyPolicy } from "../pages/Legal/index";
+import SignUpOTP from "../pages/login/singnupOtp";
 
 
 export const Routess = [
@@ -23,6 +24,10 @@ export const Routess = [
   {
     path: "/login",
     Element: <Login />,
+  },
+  {
+    path: "/signup",
+    Element: <SignUpOTP />,
   },
   {
     path: "/product",
@@ -72,7 +77,7 @@ export const Routess = [
     path: "/users/*",
     Element: <UserDetails />,
   },
-  
+
   {
     path: "*",
     Element: <PageNotFound />,

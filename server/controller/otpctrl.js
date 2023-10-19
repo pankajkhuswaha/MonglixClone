@@ -11,12 +11,12 @@ const sendOtpOnMail = asyncHandle(async (req, res) => {
   const html = `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
   <div style="margin:50px auto;width:70%;padding:20px 0">
     <div style="border-bottom:1px solid #eee">
-      <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">JH EV Motors</a>
+      <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">E-procure Tech</a>
     </div>
     <p style="font-size:1.1em">Hi,</p>
-    <p>Thank you for choosing JH EV Motors. Use the following OTP to complete your to continue of submition. OTP is valid for 5 minutes only</p>
-    <h2 style="background: red;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>
-    <p style="font-size:0.9em;">Regards,<br />Jhev Motors</p>
+    <p>Thank you for choosing E-procure. Use the following OTP to complete your to continue of submition. OTP is valid for 5 minutes only</p>
+    <h2 style="background: blue;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>
+    <p style="font-size:0.9em;">Regards,<br />E-procure Tech team</p>
     <hr style="border:none;border-top:1px solid #eee" />
     
   </div>
@@ -38,7 +38,7 @@ const sendOtpOnMail = asyncHandle(async (req, res) => {
       let info = await transporter.sendMail({
         from: "<enquiry@jhevmotors.com>",
         to: email,
-        subject: "OTP verification by jhev motors",
+        subject: "OTP verification by E-procure Tech",
         // text: otp, // plain text body
         html: html,
       });

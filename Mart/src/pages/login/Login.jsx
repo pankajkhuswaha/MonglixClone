@@ -1,17 +1,25 @@
 import { toast } from "react-toastify";
-
 import "./login.css";
 
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { RegisterApi, LoginApi } from "../../features/authSlice";
+import { RegisterApi, LoginApi, addSignupdata } from "../../features/authSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { toggleLoading } from "../../features/loading/loadingSlice";
+import { config } from "../../utils/axiosConfig";
+import { base_url } from "../../utils/baseUrl";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const checkuserSignup = async (data) => {
+  const response = await axios.post(`${base_url}user/check`, data, config);
+  return response.data;
+};
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     values: rvalues,
-    resetForm: rresetForm,
     handleSubmit: rhandleSubmit,
     handleChange: rhandleChange,
   } = useFormik({
@@ -23,15 +31,28 @@ const Login = () => {
       gstNo: "",
       panNo: "",
     },
-    onSubmit: (values) => {
-      dispatch(RegisterApi(values))
-        .then(unwrapResult)
-        .then(() => {
-          toast.success("You registerd Sucessfully, Login To Continue");
-          const container = document.getElementById("container");
-          container.classList.remove("right-panel-active");
-          rresetForm();
-        });
+    onSubmit: async (values) => {
+      dispatch(toggleLoading(true));
+      const res = await checkuserSignup(values);
+      if (res.success) {
+        dispatch(addSignupdata(values));
+        try {
+          const res2 = await axios.post(`${base_url}otp/send`, {
+            email: values.email,
+          });
+          if (res2.data.success) {
+            toast.success(res2.data.success);
+            navigate("/signup");
+            dispatch(toggleLoading(false));
+          }
+        } catch (error) {
+          toast.error(error.mesage);
+          dispatch(toggleLoading(false));
+        }
+      } else {
+        toast.error(res.error);
+        dispatch(toggleLoading(false));
+      }
     },
   });
   const {
