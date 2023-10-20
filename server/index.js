@@ -19,9 +19,12 @@ const adminRoute = require("./routes/adminRoute");
 const orderRoute = require("./routes/orderRoute");
 const payRoute = require("./routes/paymentRoute");
 const couponRoute = require("./routes/couponRoute");
+const  ccavReqHandler = require("./controller/ccavenue/ccavRequestHandler");
+const  ccavResHandler = require("./controller/ccavenue/ccavResponseHandler");
 const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
+
 
 mongoose.set("strictQuery", true);
 dbConnect();
@@ -44,7 +47,19 @@ app.use("/api/payment", payRoute);
 app.use("/api/coupon", couponRoute);
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 app.use("/api/uploads", uploadimageRoute);
+app.use(express.static("public"));
+app.set("views", __dirname + "/public");
+app.engine("html", require("ejs").renderFile);
 
+app.get("/about", function (req, res) {
+  res.render("dataFrom.html");
+});
+app.post("/ccavRequestHandler", function (request, response) {
+  ccavReqHandler.postReq(request, response);
+});
+app.post("/ccavResponseHandler", function (request, response) {
+  ccavReqHandler.postReq(request, response);
+});
 app.use(notFound);
 app.use(errorHandler);
 const os = require("os");
@@ -53,10 +68,11 @@ const ipAddress = Object.values(os.networkInterfaces())
   .flat()
   .find(({ family, internal }) => family === "IPv4" && !internal).address;
 
-app.listen(PORT, ipAddress, () => {
-  console.log(`Server listening on http://${ipAddress}:${PORT}`);
-});  
-// app.listen(PORT, "127.0.0.1", () => {
-//   console.log(`Server listening on http://${"127.0.0.1"}:${PORT}`);
-// });
-// "127.0.0.1"
+// app.listen(PORT, ipAddress, () => {
+//   console.log(`Server listening on http://${ipAddress}:${PORT}`);
+// }); 
+
+
+app.listen(PORT, "127.0.0.1", () => {
+  console.log(`Server listening on http://${"127.0.0.1"}:${PORT}`);
+});
