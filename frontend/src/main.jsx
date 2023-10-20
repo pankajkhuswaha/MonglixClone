@@ -1,9 +1,8 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import ScrollToTop from "./essentail/scrolltotop.jsx";
+import ScrollToTop from "./essentail/ScrollToTop.jsx";
 import { store } from "./app/store.js";
 import "./index.css";
 
