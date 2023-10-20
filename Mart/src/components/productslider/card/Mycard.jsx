@@ -22,7 +22,7 @@ const Mycard = ({ data, load }) => {
      retaildiscount,
      brand
   } = data;
-  console.log(data);
+
   const pathname = useLocation().pathname;
   const user = useSelector((state) => state.auth?.user?.user);
   const navigate = useNavigate();

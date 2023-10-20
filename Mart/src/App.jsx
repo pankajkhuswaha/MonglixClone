@@ -4,7 +4,7 @@ import Errorpage from "./pages/404/Errorpage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Stack } from "@mui/material";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { getProducts } from "./features/ProductSlice";
 import { userCart } from "./features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,8 @@ import { getSiteConfig } from "./features/Website/configSlice";
 
 const App = () => {
   const dispatch = useDispatch();
+  const users = useSelector((state) => state.auth.user);
+console.log(users?.user);
   const { error, success } = useSelector((state) => state.auth);
   const isLoading = useSelector((state) => state.products.loading);
   const loader = useSelector((state) => state.loading.show);
@@ -55,8 +57,17 @@ const App = () => {
                   <Route key={id} path={ele.path} element={ele.Element}></Route>
                 );
               })}
-            </Routes>
-          </Stack>
+              </Routes>
+              {
+                users?.user?.role === "admin" &&
+                <Link to={'/admin'}>
+                  <button className="fixed bottom-10 p-3 shadow-xl text-white rounded-md font-bold bg-blue-500">Go To DashBoard →</button>
+                </Link>
+
+              }
+          
+         
+            </Stack>
         </Layout>
       )}
     </>

@@ -6,9 +6,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
 const SelectImage = ({ img, data }) => {
-  const site = useSelector((st) => st.site.data);
-  const navigate=useNavigate()
-  const dispatch = useDispatch();
+
   const users = useSelector((state) => state.auth.user);
   const currentuser = users.user?.name;
   const [selectedPic, setSelectedPic] = useState(img && img[0]);
@@ -16,18 +14,7 @@ const SelectImage = ({ img, data }) => {
   const handleImageClick = (ele) => {
     setSelectedPic(ele);
   };
- const handleCart = ({ id, qty }) => {
-   if (!users) {
-     navigate("/login");
-   } else {
-     dispatch(addCart({ id, qty }))
-       .then(unwrapResult)
-       .then(() => {
-         navigate("/checkout");
-         dispatch(userCart());
-       });
-   }
- };
+
   return (
     <>
       <Stack justifyContent={"space-between"} p={3}>
@@ -81,7 +68,7 @@ const SelectImage = ({ img, data }) => {
           </div>
         </Stack>
 
-        {currentuser && (
+        {/* {currentuser && (
           <div className="p-5 ">
             <Stack
               display={"flex"}
@@ -132,48 +119,12 @@ const SelectImage = ({ img, data }) => {
                   Add to Cart
                 </span>
               </button>
-              <button
-                style={{
-                  backgroundColor: site?.primarybg,
-                  borderColor: site?.primarybg,
-                }}
-                onClick={() => handleCart({ id: data._id, qty: 1 })}
-                className="text-white text-[15px]  flex align-center justify-center gap-2 border-1 p-3 rounded-md border-[#9F2089] w-[200px]"
-              >
-                <svg
-                  className="mt-[4px]"
-                  width="20"
-                  height="20"
-                  fill="transparent"
-                  xmlns="http://www.w3.org/2000/svg"
-                  ml="4"
-                  mr="4"
-                  stroke="#ffffff"
-                
-                
-                  icon="[object Object]"
-                  iconsize="20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M3.927 3.28A.956.956 0 0 0 2.576 4.63l5.437 5.438-5.3 5.3a.956.956 0 1 0 1.352 1.351l5.43-5.43a1.727 1.727 0 0 0-.032-2.474L3.927 3.28Z"
-                    fill="#fff"
-                  ></path>
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M11.631 3.28A.956.956 0 1 0 10.28 4.63l5.437 5.438-5.3 5.3a.956.956 0 1 0 1.352 1.351l5.43-5.43a1.727 1.727 0 0 0-.032-2.474L11.631 3.28Z"
-                    fill="#fff"
-                  ></path>
-                </svg>
-                <span className="text-[18px]">Buy Now</span>
-              </button>
+             
             </Stack>
             <br />
             <hr />
           </div>
-        )}
+        )} */}
       </Stack>
     </>
   );
