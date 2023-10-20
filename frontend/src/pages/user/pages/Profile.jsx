@@ -1,4 +1,3 @@
-import React from "react";
 import Buttonele from "../../../components/button/Buttonele";
 import { ProfileResetApi } from "../../../features/userSlice";
 import { VerifyApi } from "../../../features/authSlice";
