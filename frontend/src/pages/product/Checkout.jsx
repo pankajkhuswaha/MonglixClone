@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./checkout.css";
-import EmptyCart from "../../components/emptycart/emptyCart";
+import EmptyCart from "../../components/emptycart";
 import numberFormat from "../../essentail/numberFormat";
 import { deleteCart, updateCart, userCart } from "../../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -233,7 +233,7 @@ const Checkout = () => {
                     }}
                     onClick={() => navigate("/product")}
                   >
-                 'Continue Shopping '
+                 {"'Continue Shopping '"}
                   </button>
                 </div>
               

@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/no-unknown-property */
 import "./empty.css";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const EmptyCart = () => {
   return (
     <>
-      <div class="empty-cart">
+      <div className="empty-cart">
         <svg
           viewBox="656 573 264 182"
           version="1.1"
@@ -16,9 +16,9 @@ const EmptyCart = () => {
           <rect
             id="bg-line"
             stroke="none"
-            fill-opacity="0.2"
+            fillOpacity="0.2"
             fill="#FFE100"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             x="656"
             y="624"
             width="206"
@@ -28,9 +28,9 @@ const EmptyCart = () => {
           <rect
             id="bg-line"
             stroke="none"
-            fill-opacity="0.2"
+            fillOpacity="0.2"
             fill="#FFE100"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             x="692"
             y="665"
             width="192"
@@ -40,9 +40,9 @@ const EmptyCart = () => {
           <rect
             id="bg-line"
             stroke="none"
-            fill-opacity="0.2"
+            fillOpacity="0.2"
             fill="#FFE100"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             x="678"
             y="696"
             width="192"
@@ -52,9 +52,9 @@ const EmptyCart = () => {
           <g
             id="shopping-bag"
             stroke="none"
-            stroke-width="1"
+            strokeWidth="1"
             fill="none"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             transform="translate(721.000000, 630.000000)"
           >
             <polygon
@@ -79,7 +79,7 @@ const EmptyCart = () => {
             ></polygon>
             <polygon
               id="Fill-35"
-              fill-opacity="0.5"
+              fillOpacity="0.5"
               fill="#FFFFFF"
               points="2 107.846154 10 112 10 31 2 31"
             ></polygon>
@@ -92,15 +92,15 @@ const EmptyCart = () => {
               d="M122,97.4615385 L122,104.230231 C122,108.521154 118.534483,112 114.257931,112 L9.74206897,112 C5.46551724,112 2,108.521154 2,104.230231 L2,58"
               id="Stroke-4916"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
             <polyline
               id="Stroke-4917"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               points="2 41.5 2 29 122 29 122 79"
             ></polyline>
             <path
@@ -112,87 +112,87 @@ const EmptyCart = () => {
               d="M122,87 L122,89"
               id="Stroke-4919"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
             <polygon
               id="Stroke-4922"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               points="4 29 120 29 120 0 4 0"
             ></polygon>
             <path
               d="M87,46 L87,58.3333333 C87,71.9 75.75,83 62,83 L62,83 C48.25,83 37,71.9 37,58.3333333 L37,46"
               id="Stroke-4923"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
             <path
               d="M31,45 C31,41.686 33.686,39 37,39 C40.314,39 43,41.686 43,45"
               id="Stroke-4924"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
             <path
               d="M81,45 C81,41.686 83.686,39 87,39 C90.314,39 93,41.686 93,45"
               id="Stroke-4925"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
             <path
               d="M8,0 L20,12"
               id="Stroke-4928"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
             <path
               d="M20,12 L8,29"
               id="Stroke-4929"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
             <path
               d="M20,12 L20,29"
               id="Stroke-4930"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
             <path
               d="M115,0 L103,12"
               id="Stroke-4931"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
             <path
               d="M103,12 L115,29"
               id="Stroke-4932"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
             <path
               d="M103,12 L103,29"
               id="Stroke-4933"
               stroke="#000000"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             ></path>
           </g>
           <g
             id="glow"
             stroke="none"
-            stroke-width="1"
+            strokeWidth="1"
             fill="none"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             transform="translate(768.000000, 615.000000)"
           >
             <rect
@@ -245,28 +245,28 @@ const EmptyCart = () => {
             id="plus"
             stroke="none"
             fill="#7DBFEB"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             points="689.681239 597.614697 689.681239 596 690.771974 596 690.771974 597.614697 692.408077 597.614697 692.408077 598.691161 690.771974 598.691161 690.771974 600.350404 689.681239 600.350404 689.681239 598.691161 688 598.691161 688 597.614697"
           ></polygon>
           <polygon
             id="plus"
             stroke="none"
             fill="#EEE332"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             points="913.288398 701.226961 913.288398 699 914.773039 699 914.773039 701.226961 917 701.226961 917 702.711602 914.773039 702.711602 914.773039 705 913.288398 705 913.288398 702.711602 911 702.711602 911 701.226961"
           ></polygon>
           <polygon
             id="plus"
             stroke="none"
             fill="#FFA800"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             points="662.288398 736.226961 662.288398 734 663.773039 734 663.773039 736.226961 666 736.226961 666 737.711602 663.773039 737.711602 663.773039 740 662.288398 740 662.288398 737.711602 660 737.711602 660 736.226961"
           ></polygon>
           <circle
             id="oval"
             stroke="none"
             fill="#A5D6D3"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             cx="699.5"
             cy="579.5"
             r="1.5"
@@ -275,7 +275,7 @@ const EmptyCart = () => {
             id="oval"
             stroke="none"
             fill="#CFC94E"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             cx="712.5"
             cy="617.5"
             r="1.5"
@@ -284,7 +284,7 @@ const EmptyCart = () => {
             id="oval"
             stroke="none"
             fill="#8CC8C8"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             cx="692.5"
             cy="738.5"
             r="1.5"
@@ -293,7 +293,7 @@ const EmptyCart = () => {
             id="oval"
             stroke="none"
             fill="#3EC08D"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             cx="884.5"
             cy="657.5"
             r="1.5"
@@ -302,7 +302,7 @@ const EmptyCart = () => {
             id="oval"
             stroke="none"
             fill="#66739F"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             cx="918.5"
             cy="681.5"
             r="1.5"
@@ -311,7 +311,7 @@ const EmptyCart = () => {
             id="oval"
             stroke="none"
             fill="#C48C47"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             cx="903.5"
             cy="723.5"
             r="1.5"
@@ -320,7 +320,7 @@ const EmptyCart = () => {
             id="oval"
             stroke="none"
             fill="#A24C65"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             cx="760.5"
             cy="587.5"
             r="1.5"
@@ -328,7 +328,7 @@ const EmptyCart = () => {
           <circle
             id="oval"
             stroke="#66739F"
-            stroke-width="2"
+            strokeWidth="2"
             fill="none"
             cx="745"
             cy="603"
@@ -337,7 +337,7 @@ const EmptyCart = () => {
           <circle
             id="oval"
             stroke="#EFB549"
-            stroke-width="2"
+            strokeWidth="2"
             fill="none"
             cx="716"
             cy="597"
@@ -346,7 +346,7 @@ const EmptyCart = () => {
           <circle
             id="oval"
             stroke="#FFE100"
-            stroke-width="2"
+            strokeWidth="2"
             fill="none"
             cx="681"
             cy="751"
@@ -355,7 +355,7 @@ const EmptyCart = () => {
           <circle
             id="oval"
             stroke="#3CBC83"
-            stroke-width="2"
+            strokeWidth="2"
             fill="none"
             cx="896"
             cy="680"
@@ -364,9 +364,9 @@ const EmptyCart = () => {
           <polygon
             id="diamond"
             stroke="#C46F82"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             fill="none"
             points="886 705 889 708 886 711 883 708"
           ></polygon>
@@ -374,15 +374,15 @@ const EmptyCart = () => {
             d="M736,577 C737.65825,577 739,578.34175 739,580 C739,578.34175 740.34175,577 742,577 C740.34175,577 739,575.65825 739,574 C739,575.65825 737.65825,577 736,577 Z"
             id="bubble-rounded"
             stroke="#3CBC83"
-            stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             fill="none"
           ></path>
         </svg>
 
         <h1 style={{ fontWeight: "bold", fontSize: "20px" }}>
-          You don't have any Product
+          You {"don't"} have any Product
         </h1>
 
         <Link className="Links" to={"/product"}>
