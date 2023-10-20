@@ -30,7 +30,6 @@ const Address = () => {
       setShowm("")
     }
   }, [user]);
-  console.log(user?.cart?.isCouponApplied?.code);
 
 
   const dispatch = useDispatch();
@@ -43,6 +42,7 @@ const Address = () => {
       city: "",
       pincode: "",
       state: "",
+      gstNo:user?.gstNo
     },
     onSubmit: (values) => {
       dispatch(addAddress({ address: values }))
@@ -66,7 +66,7 @@ const Address = () => {
         dispatch(VerifyApi())
       });
   };
-  console.log(user?.cart);
+  console.log(user);
 
   return (
     <div className="container">
@@ -164,6 +164,17 @@ const Address = () => {
                     onChange={handleChange}
                     className="form-control"
                     placeholder="Enter Mobile Number"
+                  />
+                </div>
+                <div className="mt-3 col-12">
+                  <label className="block text-sm text-gray-00">Enter GST No.</label>
+                  <input
+                    type="text"
+                    name="gstNo"
+                    value={values.gstNo}
+                    onChange={handleChange}
+                    className="form-control"
+                    placeholder="Enter GST Number"
                   />
                 </div>
               </div>
@@ -272,31 +283,46 @@ const Address = () => {
                   onFocus={(e) => (e.target.style.outline = "none")}
                   placeholder="Apply Discount Coupon"
                 />
-                
+
                 <div className="w-[20%]">
-                <Buttonele
-                  onClick={(e) => handleCouponCode(e)}
-                  title={"submit"}
+                  <Buttonele
+                    onClick={(e) => handleCouponCode(e)}
+                    title={"submit"}
                   />
                 </div>
-                  {showm && <><p className="mb-0 text-green-600 -mt-2 text-start col-12 ml-3">{showm}</p></>}
+                {showm && (
+                  <>
+                    <p className="mb-0 text-green-600 -mt-2 text-start col-12 ml-3">
+                      {showm}
+                    </p>
+                  </>
+                )}
               </div>
-              {showm&&<div className="flex justify-between font-semibold">
-                <p>SubTotal:</p>
-                <p className="text-gray-800">
-                  {numberFormat(carts.totalCartValue)}{" "}
-                </p>
-              </div>}
-              {showm&&<div className="flex justify-between text-md  font-semibold">
-                <p>Coupon Discount:</p>
-                <p className="text-green-800" style={{ fontWeight: "semibold" }}>
-                  {numberFormat(carts.totalCartValue - user?.cart?.totalValue)}
-                </p>
-              </div>}
+              {showm && (
+                <div className="flex justify-between font-semibold">
+                  <p>SubTotal:</p>
+                  <p className="text-gray-800">
+                    {numberFormat(carts.totalCartValue)}{" "}
+                  </p>
+                </div>
+              )}
+              {showm && (
+                <div className="flex justify-between text-md  font-semibold">
+                  <p>Coupon Discount:</p>
+                  <p
+                    className="text-green-800"
+                    style={{ fontWeight: "semibold" }}
+                  >
+                    {numberFormat(
+                      carts.totalCartValue - user?.cart?.totalValue
+                    )}
+                  </p>
+                </div>
+              )}
               <div className="flex justify-between  font-semibold">
                 <p>Total Payable:</p>
                 <p className="text-gray-800" style={{ fontWeight: "semibold" }}>
-                  {numberFormat(user?.cart?.totalValue||carts.totalCartValue)}{" "}
+                  {numberFormat(user?.cart?.totalValue || carts.totalCartValue)}{" "}
                 </p>
               </div>
             </div>
@@ -328,9 +354,21 @@ const Address = () => {
                 <input type="hidden" name="paymentMEthod" value="cod" />
                 <input type="hidden" name="address" value={selctedAdr?._id} />
 
-                {selctedAdr ?<button className="w-full" type="submit">
-                  <LoadButele />
-                </button>:<p onClick={()=>toast.error("Please Select an address first")} className="btn btn-outline-primary w-full py-2 mt-2 rounded-none "> confirm Order</p>}
+                {selctedAdr ? (
+                  <button className="w-full" type="submit">
+                    <LoadButele />
+                  </button>
+                ) : (
+                  <p
+                    onClick={() =>
+                      toast.error("Please Select an address first")
+                    }
+                    className="btn btn-outline-primary w-full py-2 mt-2 rounded-none "
+                  >
+                    {" "}
+                    confirm Order
+                  </p>
+                )}
               </form>
             </div>
           </div>

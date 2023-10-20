@@ -110,7 +110,6 @@ const userSchema = new mongoose.Schema(
         },
         adr: {
           type: String,
-          unique: true,
         },
         city: {
           type: String,
@@ -121,6 +120,9 @@ const userSchema = new mongoose.Schema(
         state: {
           type: String,
         },
+        gstNo:{
+          type:String
+        }
       },
     ],
     refreshToken: {

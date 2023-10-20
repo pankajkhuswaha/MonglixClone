@@ -8,7 +8,6 @@ const BulkSchema = new mongoose.Schema(
     mobile: {
       type: String,
       require: true,
-      unique: true,
     },
     productName: {
       type: String,

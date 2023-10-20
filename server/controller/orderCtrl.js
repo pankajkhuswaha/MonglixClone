@@ -7,28 +7,28 @@ const jwt = require("jsonwebtoken");
 const { sendEmail } = require("./emailCtrl");
 const invoice = require("./invoiceCtrl");
 function generateId() {
- const timestamp = new Date().getTime();
- const randomDigits = Math.floor(10000000 + Math.random() * 90000000);// Random 8-digit number
+  const timestamp = new Date().getTime();
+  const randomDigits = Math.floor(10000000 + Math.random() * 90000000); // Random 8-digit number
 
- const orderId = `${timestamp}${randomDigits}`.substring(0, 8);
- return orderId;
+  const orderId = `${timestamp}${randomDigits}`.substring(0, 8);
+  return orderId;
 }
 
 const createOrder = async (req, res, next) => {
   const user = req.user;
   let address = req.body.address;
-  let adr,placeofsup;
+  let adr, placeofsup, gstNo;
   for (let i = 0; i < user.address.length; i++) {
     if (JSON.stringify(user.address[i]._id) == JSON.stringify(address)) {
       adr = `${user.address[i].adr} , ${user.address[i].city} , ${user.address[i].state} - ${user.address[i].pincode}`;
-      placeofsup = user.address[i].city
+      placeofsup = user.address[i].city;
+      gstNo = user.address[i].gstNo;
     }
   }
   let totalValue = parseInt(user.cart.totalValue);
   let isCoupon = false;
   console.log(user.cart);
   if (user.cart?.products?.length > 0) {
-
     if (user.cart.isCouponApplied?.code) {
       isCoupon = {
         code: user.cart.isCouponApplied.code,
@@ -76,8 +76,8 @@ const createOrder = async (req, res, next) => {
       productDetails: orderArr[0].products,
       isCoupon,
       placeofsup,
-      gstNo: user?.gstNo,
-    };    
+      gstNo: gstNo,
+    };
     const invoiced = {
       invoiceNo: newOrder.invoiceNo,
       products: orderArr[0].products,
@@ -136,13 +136,13 @@ const getOrders = async (req, res) => {
       products: order.products.map((product) => ({
         name: product.product.name,
         image: product.product.images[0],
-        category:product.product.category,
+        category: product.product.category,
         count: product.count,
         total: product.total,
       })),
       total: order.total,
       status: order.status,
-      address:order.address
+      address: order.address,
     }));
 
     res.send(orderArr);

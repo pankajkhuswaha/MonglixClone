@@ -25,7 +25,7 @@ const getAdminData = asyncHandle(async (req, res) => {
       await Promise.all(
         orders.map(async (order) => {
           const user = await User.findById(order.orderby);
-          const address = user.address?.find(
+          const address = user?.address?.find(
             (adr) => JSON.stringify(adr._id) == JSON.stringify(order.address)
           );
 
@@ -58,6 +58,7 @@ const getAdminData = asyncHandle(async (req, res) => {
       codes
     });
   } catch (error) {
+    console.log(error)
     res.status(400).send(error);
   }
 });
