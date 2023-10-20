@@ -7,7 +7,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Loader from "../loader/Loader";
 import { addCart, userCart } from "../../../features/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
-import "./mycard.css";
+import "./myCard.css";
 import { IconButton, Stack } from "@mui/material";
 import { unwrapResult } from "@reduxjs/toolkit";
 
