@@ -125,6 +125,7 @@ const Checkout = () => {
                   style={{
                     boxSizing: "border-box",
                     padding: "0",
+             
                     margin: "0",
                     marginTop: "12px",
                   }}
@@ -206,8 +207,9 @@ const Checkout = () => {
                       <button
                         style={{
                           background: site?.primarybg,
-                          color: "white !important",
-                          padding: "12px",
+                        
+                            padding: "12px",
+                            color: 'white',
                           borderRadius: "10px",
                           width: " 100%",
                           marginTop: "4px",
@@ -218,8 +220,23 @@ const Checkout = () => {
                       </button>
                     </div>
                   </div>
+                  </div>
+                  <button className="mt-5"
+                    style={{
+                      background: site?.primarybg,
+
+                      padding: "12px",
+                      color: 'white',
+                      borderRadius: "10px",
+                      width: " 100%",
+                      marginTop: "4px",
+                    }}
+                    onClick={() => navigate("/product")}
+                  >
+                 'Continue Shopping '
+                  </button>
                 </div>
-              </div>
+              
             </div>
           </div>
         </section>

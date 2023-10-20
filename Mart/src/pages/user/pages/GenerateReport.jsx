@@ -9,8 +9,6 @@ const GenerateReport = () => {
   const user = useSelector((st) => st.auth.user?.user?.address);
   console.log(user);
 
- 
-
   const transactions = useSelector((st) => st.userorder.orders);
   const dispatch = useDispatch();
 
@@ -97,9 +95,9 @@ const GenerateReport = () => {
     <div>
       <div className="flex justify-between items-center mb-2">
         <h1 className="h1 text-blue-500 font-bold">Genarate report</h1>
-        <button onClick={handleDownload} className="btn btn-outline-success">
+        {/* <button onClick={handleDownload} className="btn btn-outline-success">
           Download Report
-        </button>
+        </button> */}
       </div>
       <div className="mb-4 ">
         <h2 className="text-2xl font-bold mb-2">Category Report</h2>
@@ -115,11 +113,19 @@ const GenerateReport = () => {
       <div className="mb-4">
         <h2 className="text-2xl font-bold mb-2">Address Report</h2>
         <ul>
-          {Object.entries(addressReport).map(([address, count]) => (
-            <li className="text-gray-500 text-xl font-semibold" key={address}>
-              {address}: <span className="text-blue-500 text-xl font-bold">  {count} products </span>
-            </li>
-          ))}
+          {Object.entries(addressReport).map(([address, count]) => {
+            const addre = user?.find((ele) => ele._id === address)
+            const frmtadr = `${addre?.adr} ${addre?.city} ${addre?.pincode} ${addre?.state}`
+            return (
+              <li className="text-gray-500 text-xl font-semibold" key={address}>
+                {frmtadr}:{" "}
+                <span className="text-blue-500 text-xl font-bold">
+                  {" "}
+                  {count} products{" "}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
@@ -130,18 +136,12 @@ const GenerateReport = () => {
           className="mr-2 w-[50%] p-2 border border-gray-300"
         >
           <option value="">All Addresses</option>
-          {addresses?.map((address, ids) => (
-            <option key={ids} value={address}>
-              {
-                user.map((ele,id) => {
-                  return (
-                    <div key={id}>
-                      {ele.adr} ,{ele.pincode}, {ele.state}, {ele.city}
-                    </div>
-                  )
-                })
-              }
-              {/*  */}
+          {user?.map((address, ids) => (
+            <option key={ids} value={address._id}>
+              <div>
+                {address.adr} ,{address.pincode}, {address.state},{" "}
+                {address.city}
+              </div>
             </option>
           ))}
         </select>
@@ -159,7 +159,8 @@ const GenerateReport = () => {
           ))}
         </select>
 
-        <button style={{ textWrap: 'noWrap' }}
+        <button
+          style={{ textWrap: "noWrap" }}
           onClick={handleFilter}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold  px-4 rounded"
         >
