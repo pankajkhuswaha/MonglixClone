@@ -2,9 +2,27 @@ import  { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { OrderApi } from "../../../features/orderSlice";
+import { useNavigate } from "react-router-dom";
+import { addCart } from "../../../features/cartSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
 const Order = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const data = useSelector((st) => st.userorder.orders);
+  console.log(data);
+
+  const handleCart = ({ id, qty }) => {
+
+      dispatch(addCart({ id, qty }))
+        .then(unwrapResult)
+        .then(() => {
+          navigate("/checkout");
+          dispatch(userCart());
+        });
+    
+  };
+
+
   useEffect(() => {
     dispatch(OrderApi());
   },[]);
@@ -59,6 +77,7 @@ const Order = () => {
                   <div className="text-lg text-gray-900 font-semibold">
                     <p>Rs:{ele.total}</p>
                   </div>
+                  <button onClick={() => handleCart({id:ele.id,qty:ele.count})} className="bg-blue-500 p-1 rounded-md text-white">Order Again</button>
                 </div>
               ))}
             </div>

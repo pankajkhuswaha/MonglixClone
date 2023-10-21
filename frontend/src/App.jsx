@@ -18,7 +18,7 @@ import { getSiteConfig } from "./features/Website/configSlice";
 const App = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.auth.user);
-console.log(users?.user);
+  console.log(users?.user);
   const { error, success } = useSelector((state) => state.auth);
   const isLoading = useSelector((state) => state.products.loading);
   const loader = useSelector((state) => state.loading.show);
@@ -33,6 +33,8 @@ console.log(users?.user);
     }
   };
 
+
+  
   useEffect(() => {
     verifyToken();
     dispatch(getProducts());
@@ -57,17 +59,17 @@ console.log(users?.user);
                   <Route key={id} path={ele.path} element={ele.Element}></Route>
                 );
               })}
-              </Routes>
-              {
-                users?.user?.role === "admin" &&
-                <Link to={'/admin'}>
-                  <button className="fixed bottom-10 p-3 shadow-xl text-white rounded-md font-bold bg-blue-500">Go To DashBoard →</button>
-                </Link>
+            </Routes>
+            {
+              users?.user?.role === "admin" &&
+              <Link to={'/admin'}>
+                <button className="fixed bottom-10 p-3 shadow-xl text-white rounded-md font-bold bg-blue-500">Go To DashBoard →</button>
+              </Link>
 
-              }
-          
-         
-            </Stack>
+            }
+
+
+          </Stack>
         </Layout>
       )}
     </>
