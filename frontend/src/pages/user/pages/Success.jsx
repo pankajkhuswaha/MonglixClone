@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import swal from "sweetalert";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";

@@ -5,9 +5,8 @@ const sendEmail=asyncHandle(async(data)=>{
     
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    host: "smtpout.secureserver.net",
+    port: 465,
     auth: {
       user: process.env.MAIL_ID, // generated ethereal user
       pass: process.env.MP, // generated ethereal password

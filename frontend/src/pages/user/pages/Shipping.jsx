@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Buttonele from "../../../components/button/Buttonele";
 import { VerifyApi, addAddress } from "../../../features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
