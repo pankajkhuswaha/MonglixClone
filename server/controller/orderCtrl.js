@@ -135,6 +135,7 @@ const getOrders = async (req, res) => {
       transactionId: order.transactionId,
       products: order.products.map((product) => ({
         name: product.product.name,
+        id: product.product._id,
         image: product.product.images[0],
         category: product.product.category,
         count: product.count,

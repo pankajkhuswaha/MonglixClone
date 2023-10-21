@@ -27,16 +27,15 @@ const sendOtpOnMail = asyncHandle(async (req, res) => {
     try {
       await OTP.create({ email, otp });
       let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false, // true for 465, false for other ports
+        host: "smtpout.secureserver.net",
+        port: 465,
         auth: {
           user: process.env.MAIL_ID,
           pass: process.env.MP,
         },
       });
       let info = await transporter.sendMail({
-        from: "<enquiry@jhevmotors.com>",
+        from: "<no-reply@eprocuretech.com>",
         to: email,
         subject: "OTP verification by E-procure Tech",
         // text: otp, // plain text body

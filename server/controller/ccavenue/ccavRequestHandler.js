@@ -10,9 +10,9 @@ exports.postReq = async function (request, response) {
   try {
     // Parse JSON from the request body
     const data = {
+      currency: "INR",
       merchant_id: "2948076",
       order_id: "93587658",
-      currency: "INR",
       amount: "1.00",
       redirect_url: "http://127.0.0.1:7006/ccavResponseHandler",
       cancel_url: "http://127.0.0.1:7006/ccavResponseHandler",
@@ -33,10 +33,11 @@ exports.postReq = async function (request, response) {
       delivery_country: "India",
       delivery_tel: "0123456789",
     };
-    const requestData = JSON.stringify(request.body);
+    const requestData = JSON.stringify(data);
 
     // Encrypt the request data
     const encRequest = ccav.encrypt(requestData, workingKey);
+    console.log(encRequest)
 
     // Prepare form body
     const formBody = {
