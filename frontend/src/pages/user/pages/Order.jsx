@@ -73,11 +73,13 @@ const Order = () => {
                       </p>
                     </div>
                   </div>
+                  <div >
 
-                  <div className="text-lg text-gray-900 font-semibold">
-                    <p>Rs:{ele.total}</p>
-                  </div>
-                  <button onClick={() => handleCart({id:ele.id,qty:ele.count})} className="bg-blue-500 p-1 rounded-md text-white">Order Again</button>
+                    <div className="text-lg m-1 text-gray-900 font-semibold">
+                      <p>Rs:{ele.total}</p>
+                    </div>
+                    <button onClick={() => handleCart({ id: ele.id, qty: ele.count })} className="bg-blue-500 p-1 rounded-md text-white">Order Again</button>  
+</div>
                 </div>
               ))}
             </div>
