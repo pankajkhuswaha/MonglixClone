@@ -28,6 +28,8 @@ const ProductDetail = () => {
     }
   };
   const SingleProductData = data || localStorage.getItem("SingleProductData");
+  console.log(SingleProductData);
+
   const user = useSelector((state) => state.auth?.user?.user);
   const {
     images,
@@ -36,6 +38,7 @@ const ProductDetail = () => {
     golddiscount,
     silverdiscount,
     retaildiscount,
+    datasheet,
   } = SingleProductData;
   return (
     <div>
@@ -80,8 +83,15 @@ const ProductDetail = () => {
               <p className="text-lg font-[400] text-gray-500">
                 {parse(SingleProductData.mindiscription.replace(/<\/?p>/g, ""))}
               </p>
-              
+              {
+                datasheet && <a  href={datasheet} target="blank" className="text-danger font-semibold text-lg mt-2 ">
+                  View Detail Description
+                </a>
+              }
+
+
             </div>
+
             <button
               style={{
                 backgroundColor: site?.primarybg,
@@ -119,15 +129,17 @@ const ProductDetail = () => {
               </svg>
               <span className="text-[18px]">Buy Now</span>
             </button>
+
+
           </Stack>
         </Stack>
 
-        
+
       ) : (
         <div>Loading...</div>
       )}
 
-    
+
     </div>
 
   );
