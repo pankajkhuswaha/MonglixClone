@@ -128,7 +128,7 @@ const getOrders = async (req, res) => {
   try {
     const orders = await Order.find({ orderby: req.user._id }).populate({
       path: "products.product",
-      model: "product", // Replace 'Product' with the actual name of your product model
+      model: "product",
     });
 
     const orderArr = orders.map((order) => ({
