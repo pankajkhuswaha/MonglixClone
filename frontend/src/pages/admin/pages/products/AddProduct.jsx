@@ -9,11 +9,12 @@ import { uploadFiles } from "../../../../utils/uploadimg";
 import { toggleLoading } from "../../../../features/loading/loadingSlice";
 import { addAProduct, getProducts } from "../../../../features/ProductSlice";
 import { useEffect } from "react";
+import axios from "axios";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
   const editproduct = useLocation().state;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const site = useSelector((st) => st.site.data);
   const { values, handleSubmit, handleChange, resetForm, setFieldValue } =
     useFormik({
@@ -42,8 +43,8 @@ const AddProduct = () => {
         } else {
           dispatch(addAProduct(values));
           dispatch(getProducts());
-          if(editproduct){
-            navigate("/admin/products")
+          if (editproduct) {
+            navigate("/admin/products");
           }
           resetForm();
         }
@@ -72,7 +73,7 @@ const AddProduct = () => {
     if (editproduct === null) {
       return;
     } else {
-      const keysToExclude = ["_id","createdAt","updatedAt","_v"];
+      const keysToExclude = ["_id", "createdAt", "updatedAt", "_v"];
       const updatedData = {};
       Object.keys(editproduct).forEach((fieldName) => {
         if (!keysToExclude.includes(fieldName)) {
@@ -84,6 +85,16 @@ const AddProduct = () => {
       });
     }
   }, [editproduct]);
+
+  const handleChangeDataSheet = async (e) => {
+    const file = [e.target.files[0]];
+    try {
+      const res = await uploadFiles(file);
+      setFieldValue("datasheet", res[0]);
+    } catch (error) {
+      toast.error("Error in uploading datasheet");
+    }
+  };
 
   //TODO This part of code is wriiten to  drag the images in upload images
   const handleDragStart = (index) => (event) => {
@@ -109,6 +120,7 @@ const AddProduct = () => {
     updatedImages.splice(imageIndex, 1);
     setFieldValue("images", updatedImages);
   };
+
   //* -------------------End of Code---------------------------------------
 
   return (
@@ -296,8 +308,7 @@ const AddProduct = () => {
                   <input
                     type="file"
                     name="datasheet"
-                    value={values.datasheet}
-                    onChange={handleChange}
+                    onChange={handleChangeDataSheet}
                     className="form-control"
                     placeholder="Enter Price"
                   />
