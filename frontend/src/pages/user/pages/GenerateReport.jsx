@@ -94,7 +94,7 @@ const GenerateReport = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-2">
-        <h1 className="h1 text-blue-500 font-bold">Genarate report</h1>
+        <h1 className="h1 text-blue-500 font-bold">Generate report</h1>
         {/* <button onClick={handleDownload} className="btn btn-outline-success">
           Download Report
         </button> */}

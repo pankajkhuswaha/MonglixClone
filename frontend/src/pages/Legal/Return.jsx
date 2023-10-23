@@ -5,7 +5,7 @@ const Return = () => {
     {
       heading: "Returns",
       para: [
-        "1.1. We want you to be completely satisfied with your purchase from EProcureTech.com but return is acceptable only against manufacturing defect withing 2 days of receiving your order.",
+        "1.1. We want you to be completely satisfied with your purchase from EProcureTech.com but return is acceptable only against manufacturing defect within 2 days of receiving your order.",
         "1.2. Products must be returned in their original condition, including all packaging materials and accessories. We reserve the right to refuse returns of any product that does not meet these conditions.",
       ],
     },
