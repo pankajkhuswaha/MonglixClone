@@ -14,7 +14,7 @@ exports.postReq = async function (request, response) {
       merchant_id: "2948076",
       order_id: "93587658",
       amount: "1.00",
-      redirect_url: "http://127.0.0.1:7006/ccavResponseHandler",
+      redirect_url: "http://192.168.1.3:7006/ccavResponseHandler",
       cancel_url: "http://127.0.0.1:7006/ccavResponseHandler",
       language: "EN",
       billing_name: "Peter",
