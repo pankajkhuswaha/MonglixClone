@@ -1,0 +1,139 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Management</title>
+</head>
+<body>
+
+    <h2>Cookie Management</h2>
+
+    <button onclick="setCookie('cookie1')">Set Cookie1</button>
+    <button onclick="getCookie('cookie1')">Get Cookie1</button>
+    <button onclick="deleteCookie('cookie1')">Delete Cookie1</button>
+    <br>
+    <br>
+    <button onclick="setCookie('cookie2')">Set Cookie2</button>
+    <button onclick="getCookie('cookie2')">Get Cookie2</button>
+    <button onclick="deleteCookie('cookie2')">Delete Cookie2</button>
+    <br>
+    <br>
+
+    <button onclick="showAllCookies()">Show All Cookies</button>
+
+    <script>
+        function setCookie(cookieName) {
+            const cookieValue = prompt(`Enter value for ${cookieName}:`);
+            document.cookie = `${cookieName}=${cookieValue}`;
+            alert(`${cookieName} set successfully!`);
+        }
+
+        function getCookie(cookieName) {
+            const cookies = document.cookie.split(';');
+            for (const cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === cookieName) {
+                    alert(`${cookieName}: ${value}`);
+                    return;
+                }
+            }
+            alert(`${cookieName} not found.`);
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+            alert(`${cookieName} deleted.`);
+        }
+
+        function showAllCookies() {
+            const cookies = document.cookie;
+            alert(`All Cookies:\n${cookies}`);
+        }
+    </script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Satisfaction Survey</title>
+</head>
+<body>
+
+    <h2>Patient Satisfaction Survey</h2>
+
+    <form id="surveyForm" onsubmit="submitForm(event)">
+    <label for="patientName">Patient's Name:</label>
+    <input type="text" id="patientName" name="patientName" required><br>
+
+    <label for="patientFile">Patient's File:</label>
+    <input type="text" id="patientFile" name="patientFile" required><br>
+
+    <label for="hospitalUnit">Hospital Unit:</label>
+    <select id="hospitalUnit" name="hospitalUnit" required>
+        <option value="" disabled selected>Select Unit</option>
+        <option value="Surgery">Surgery</option>
+        <option value="Medicine">Medicine</option>
+        <!-- Add other units as needed -->
+    </select><br>
+
+    <label for="overallSatisfaction">Overall Treatment Satisfaction:</label>
+    <select id="overallSatisfaction" name="overallSatisfaction" required>
+        <option value="" disabled selected>Select</option>
+        <option value="Very Satisfied">Very Satisfied</option>
+        <option value="Not Satisfied">Not Satisfied</option>
+    </select><br>
+
+    <label for="medicalFacilities">Medical Facilities Satisfaction:</label>
+    <select id="medicalFacilities" name="medicalFacilities" required>
+        <option value="" disabled selected>Select</option>
+        <option value="Very Satisfied">Very Satisfied</option>
+        <option value="Satisfied">Satisfied</option>
+    </select><br>
+
+    <label for="overallComments">Overall Comments:</label>
+    <br>
+    <textarea id="overallComments" name="overallComments"></textarea><br>
+
+    <div class="error" id="errorMessage"></div>
+
+    <button type="submit">Submit</button>
+    <button type="button" onclick="resetForm()">Reset</button>
+</form>
+
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            const form = document.getElementById("surveyForm");
+            const errorMessage = document.getElementById("errorMessage");
+
+            // Validate if any text field is left blank
+            const inputs = form.querySelectorAll("input[type=text], textarea, select");
+            for (const input of inputs) {
+                if (!input.value.trim()) {
+                    errorMessage.textContent = "Please fill in all fields.";
+                    return;
+                }
+            }
+
+            // If all fields are filled, you can proceed to submit the form to the database
+            errorMessage.textContent = "Form submitted successfully!";
+            // Add your code to submit the form data to the database here
+        }
+
+        function resetForm() {
+            const form = document.getElementById("surveyForm");
+            form.reset();
+            const errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = "";
+        }
+    </script>
+
+</body>
+</html>
+

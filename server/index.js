@@ -55,10 +55,10 @@ const ipAddress = Object.values(os.networkInterfaces())
   .flat()
   .find(({ family, internal }) => family === "IPv4" && !internal).address;
 
-// app.listen(PORT, ipAddress, () => {
-//   console.log(`Server listening on http://${ipAddress}:${PORT}`);
-// });
-
-app.listen(PORT, "127.0.0.1", () => {
-  console.log(`Server listening on http://${"127.0.0.1"}:${PORT}`);
+app.listen(PORT, ipAddress, () => {
+  console.log(`Server listening on http://${ipAddress}:${PORT}`);
 });
+
+// app.listen(PORT, "127.0.0.1", () => {
+//   console.log(`Server listening on http://${"127.0.0.1"}:${PORT}`);
+// });

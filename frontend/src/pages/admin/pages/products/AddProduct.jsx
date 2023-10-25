@@ -9,7 +9,6 @@ import { uploadFiles } from "../../../../utils/uploadimg";
 import { toggleLoading } from "../../../../features/loading/loadingSlice";
 import { addAProduct, getProducts } from "../../../../features/ProductSlice";
 import { useEffect } from "react";
-import axios from "axios";
 
 const AddProduct = () => {
   const dispatch = useDispatch();

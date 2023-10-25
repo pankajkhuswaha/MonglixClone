@@ -12,7 +12,8 @@ const getcart = asyncHandle(async (req, res) => {
   try {
     const user = await User.findOne({ _id }).populate({
       path: "cart.products.product",
-      select: "_id name price images retaildiscount silverdiscount golddiscount platinumdiscount",
+      select:
+        "_id name price images retaildiscount silverdiscount golddiscount platinumdiscount",
     });
 
     if (!user) {
@@ -65,7 +66,6 @@ const getcart = asyncHandle(async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 
 const addItemToCart = asyncHandle(async (req, res) => {
   const { _id } = req.user;
@@ -167,7 +167,7 @@ const removeAnItem = asyncHandle(async (req, res) => {
 const updatecart = asyncHandle(async (req, res) => {
   const { _id } = req.user;
   const { id, type } = req.body;
-
+console.log(req.body)
   try {
     const product = await Product.findById(id);
     if (!product) {
@@ -189,7 +189,9 @@ const updatecart = asyncHandle(async (req, res) => {
     let previousQty = cartItem.count;
 
     if (type === "inc") {
-        previousQty = previousQty + 1;
+      console.log(previousQty);
+      previousQty = previousQty + 1;
+      console.log(previousQty);
     }
 
     if (type === "dec") {
@@ -198,6 +200,12 @@ const updatecart = asyncHandle(async (req, res) => {
       } else {
         return res.send({ error: "Quantity Should not be less than 1" });
       }
+    }
+    if (type === "value") {
+      if (!isNaN(parseInt(req.body.value))) {
+        previousQty = parseInt(req.body.value);
+      }
+
     }
 
     let discount = 0;
@@ -230,52 +238,55 @@ const updatecart = asyncHandle(async (req, res) => {
     );
 
     await user.save();
-    await user.populate({
-      path: "cart.products.product",
-      select: "_id name price images",
-    });
 
-    const data = user.cart.products.map((item) => {
-      const product = item.product;
-      let dc;
-      if (user?.role) {
-        switch (user.role) {
-          case "user":
-            dc = parseInt(product.retaildiscount);
-            break;
-          case "silver":
-            dc = parseInt(product.silverdiscount);
-            break;
-          case "gold":
-            dc = parseInt(product.golddiscount);
-            break;
-          case "platinum":
-            dc = parseInt(product.platinumdiscount);
-            break;
-          default:
-            break;
-        }
-      }
-      return {
-        _id: product._id,
-        name: product.name, // Include product name
-        price: product.price,
-        url: product.images[0],
-        count: item.count,
-        total: item.total,
-        discount: dc,
-      };
-    });
+    // await user.populate({
+    //   path: "cart.products.product",
+    //   select: "_id name price images",
+    // });
 
-    const totalProductPrice = user.cart.products.reduce(
-      (total, item) => total + item.product.price * item.count,
-      0
-    );
-    res.json({
-      products: data,
-      totalCartValue: user.cart.totalValue,
-      totalProductPrice,
-    });
+    // const data = user.cart.products.map((item) => {
+    //   const product = item.product;
+    //   let dc;
+    //   if (user?.role) {
+    //     switch (user.role) {
+    //       case "user":
+    //         dc = parseInt(product.retaildiscount);
+    //         break;
+    //       case "silver":
+    //         dc = parseInt(product.silverdiscount);
+    //         break;
+    //       case "gold":
+    //         dc = parseInt(product.golddiscount);
+    //         break;
+    //       case "platinum":
+    //         dc = parseInt(product.platinumdiscount);
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    //   }
+    //   return {
+    //     _id: product._id,
+    //     name: product.name, // Include product name
+    //     price: product.price,
+    //     url: product.images[0],
+    //     count: item.count,
+    //     total: item.total,
+    //     discount: dc,
+    //   };
+    // });
+
+    // const totalProductPrice = user.cart.products.reduce(
+    //   (total, item) => total + item.product.price * item.count,
+    //   0
+    // );
+    // res.json({
+    //   products: data,
+    //   totalCartValue: user.cart.totalValue,
+    //   totalProductPrice,
+    // });
+    
+    res.send("Qty Updated Sucessfully")
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
