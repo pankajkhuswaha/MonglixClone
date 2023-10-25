@@ -72,6 +72,9 @@ const ViewModal = (props) => {
         "transactionId"
       ];
       if (!excludedKeys.includes(key)) {
+        if (data?.cart) {
+          delete data["address"]
+        }
         if (
           Array.isArray(value) &&
           value.every(
