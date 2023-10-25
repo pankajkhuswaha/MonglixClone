@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 const UserMain = () => {
   const user = useSelector((state) => state.auth.user?.user);
+  console.log(user);
   return (
     <>
       <section className=" bg-blueGray-50">
@@ -71,8 +72,43 @@ const UserMain = () => {
                       />
                     </div>
                   </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        GST Number
+                      </label>
+                      <input
+                        type="number"
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        disabled
+                        placeholder={user?.gstNo}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        PAN Number
+                      </label>
+                      <input
+                        type="number"
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        disabled
+                        placeholder={user?.panNo}
+                      />
+                    </div>
+                  </div>
                 </div>
               </form>
+                      
+           
+              
             </div>
           </div>
         </div>
