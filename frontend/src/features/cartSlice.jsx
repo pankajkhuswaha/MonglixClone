@@ -53,8 +53,6 @@ export const cartSlice = createSlice({
       .addCase(updateCart.fulfilled, (state, action) => {
         if (action.payload.error) {
           toast.error(action.payload.error);
-        } else {
-          state.carts = action.payload;
         }
         state.loading = false;
       })

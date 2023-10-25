@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import Loading from "../../../features/loading/Loader";
 
 import numberFormat from "../../../essentail/numberFormat";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -6,21 +6,23 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import Loader from "../loader/Loader";
 import { addCart, userCart } from "../../../features/cartSlice";
+
 import { useSelector, useDispatch } from "react-redux";
 import "./myCard.css";
+
 import { IconButton, Stack } from "@mui/material";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 
 const Mycard = ({ data, load }) => {
    const {
-     images,
+  
      price,
      platinumdiscount,
      golddiscount,
      silverdiscount,
      retaildiscount,
-     brand
+
   } = data;
 
   const pathname = useLocation().pathname;
@@ -29,6 +31,7 @@ const Mycard = ({ data, load }) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.auth?.user?.user);
   const site = useSelector((st) => st.site.data);
+ 
   const handleCart = ({ id, qty }) => {
     if (!users) {
       navigate("/login");

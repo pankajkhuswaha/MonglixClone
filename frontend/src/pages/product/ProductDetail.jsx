@@ -5,13 +5,14 @@ import parse from "html-react-parser";
 import SelectImage from "./SelectImage";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { addCart } from "../../features/cartSlice";
+import { addCart, userCart } from "../../features/cartSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 const ProductDetail = () => {
   const location = useLocation();
   const data = location.state;
-  const users = useSelector((state) => state.auth.user);
+  const users = useSelector((state) => state.auth.user?.user);
+  console.log(users);
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const site = useSelector((st) => st.site.data);
