@@ -11,9 +11,11 @@ import {
 } from "../pages";
 import Admin from "../pages/admin";
 import ContactUs from "../pages/admin/pages/contactus/ContactUs";
+import ForgotPasswordPage from "../pages/login/ForgotPasswordPage";
 import Address from "../pages/product/Address";
 import { Return, Accesibility, TC, PrivacyPolicy } from "../pages/Legal/index";
 import SignUpOTP from "../pages/login/singnupOtp";
+import ResetPassword from "../pages/login/ResetPassword";
 
 
 export const Routess = [
@@ -77,7 +79,15 @@ export const Routess = [
     path: "/users/*",
     Element: <UserDetails />,
   },
-
+       
+{
+  path: "/forgot-password",
+  Element:<ForgotPasswordPage/>
+  },
+  {
+    path: "/reset-password/:id",
+    Element: <ResetPassword />
+  },
   {
     path: "*",
     Element: <PageNotFound />,
