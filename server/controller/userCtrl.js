@@ -398,7 +398,9 @@ const checkresetPasswordUser = asyncHandler(async (req, res) => {
     },
   });
 
-  if (!user) res.json({ error: "Token  Expired Please Try again" });
+  if (!user) {
+    return res.json({ error: "Token  Expired Please Try again" });
+  }
   res.json(user.email);
 });
 

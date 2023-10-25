@@ -222,7 +222,7 @@ const AddProduct = () => {
                 <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
                   <label>HSN Code</label>
                   <input
-                    type="number"
+                    type="text"
                     name="hsnCode"
                     value={values.hsnCode}
                     onChange={handleChange}

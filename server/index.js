@@ -47,6 +47,19 @@ app.use("/api/coupon", couponRoute);
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 app.use("/api/uploads", uploadimageRoute);
 
+app.use(express.static("public"));
+app.set("views", __dirname + "/public");
+app.engine("html", require("ejs").renderFile);
+
+app.get("/about", function (req, res) {
+  res.render("dataFrom.html");
+});
+
+app.post("/ccavRequestHandler", function (request, response) {
+  ccavReqHandler.postReq(request, response);
+});
+
+
 app.use(notFound);
 app.use(errorHandler);
 const os = require("os");

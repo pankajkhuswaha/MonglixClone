@@ -1,60 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookie Management</title>
-</head>
-<body>
 
-    <h2>Cookie Management</h2>
 
-    <button onclick="setCookie('cookie1')">Set Cookie1</button>
-    <button onclick="getCookie('cookie1')">Get Cookie1</button>
-    <button onclick="deleteCookie('cookie1')">Delete Cookie1</button>
-    <br>
-    <br>
-    <button onclick="setCookie('cookie2')">Set Cookie2</button>
-    <button onclick="getCookie('cookie2')">Get Cookie2</button>
-    <button onclick="deleteCookie('cookie2')">Delete Cookie2</button>
-    <br>
-    <br>
-
-    <button onclick="showAllCookies()">Show All Cookies</button>
-
-    <script>
-        function setCookie(cookieName) {
-            const cookieValue = prompt(`Enter value for ${cookieName}:`);
-            document.cookie = `${cookieName}=${cookieValue}`;
-            alert(`${cookieName} set successfully!`);
-        }
-
-        function getCookie(cookieName) {
-            const cookies = document.cookie.split(';');
-            for (const cookie of cookies) {
-                const [name, value] = cookie.trim().split('=');
-                if (name === cookieName) {
-                    alert(`${cookieName}: ${value}`);
-                    return;
-                }
-            }
-            alert(`${cookieName} not found.`);
-        }
-
-        function deleteCookie(cookieName) {
-            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
-            alert(`${cookieName} deleted.`);
-        }
-
-        function showAllCookies() {
-            const cookies = document.cookie;
-            alert(`All Cookies:\n${cookies}`);
-        }
-    </script>
-
-</body>
-</html>
-<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,4 +80,4 @@
 
 </body>
 </html>
- -->
+

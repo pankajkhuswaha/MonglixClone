@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// import { CheckResetPasswordUser, resetUserPassword } from "../../apis";
+import { CheckResetPasswordUser, resetUserPassword } from "./apis";
 
 const ResetPassword = () => {
     const [password, setPassword] = useState("");
