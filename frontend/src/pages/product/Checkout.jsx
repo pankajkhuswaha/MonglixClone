@@ -11,9 +11,9 @@ import { useNavigate } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
 const Checkout = () => {
   const cart = useSelector((state) => state.cart.carts);
+ ;
   const site = useSelector((st) => st.site.data);
   const productLoading = useSelector((st) => st.cart.loading);
-  console.log(productLoading);
   const CartCount = cart.products?.length;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,6 +22,10 @@ const Checkout = () => {
   }, [dispatch]);
 
   const { carts } = useSelector((state) => state.cart);
+  if (carts?.products) {
+    console.log(carts?.products[0]?.count);
+    
+  }
 
   return (
     <>
@@ -37,6 +41,7 @@ const Checkout = () => {
                     {carts.products?.map((value, index) => {
                       const { url, name, price, count, _id, discount, total } =
                         value;
+                      let qty = count;
                       return (
                         <div
                           key={index}
@@ -68,7 +73,7 @@ const Checkout = () => {
                                   onClick={() => {
 
                                     dispatch(
-                                      updateCart({ id: _id, type: "dec" })
+                                      updateCart({ id: _id, type: "dec", })
                                     ).then(unwrapResult).then(dispatch(userCart()))
                                   }}
                                   className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
@@ -78,11 +83,16 @@ const Checkout = () => {
 
 
                                 <input
-                                  type="text"
+                                  type="number"
                                   className="h-8 w-8 border bg-white text-center text-xs outline-none"
-                                  disabled
-                                  defaultValue="1"
-                                  value={count}
+                                  onChange={(e) => {
+                                    qty = e.target.value
+                                    alert(qty)
+                                    dispatch(
+                                      updateCart({ id: _id, type: "value", value:qty})
+                                    ).then(unwrapResult).then(()=>dispatch(userCart()))
+                                  }}
+                                  value={qty}
                                   name="quantity"
                                 />
                                 <span
@@ -242,7 +252,7 @@ const Checkout = () => {
                       }}
                       onClick={() => navigate("/product")}
                     >
-                      {"'Continue Shopping '"}
+                      {"Continue Shopping "}
                     </button>
                   </div>
 

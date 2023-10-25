@@ -15,6 +15,8 @@ const Profile = () => {
      name: "",
      email: "",
      number: "",
+     gstNo: "",
+     panNo:"",
    },
    onSubmit: (values) => {
      dispatch(ProfileResetApi(values))
@@ -94,6 +96,45 @@ const Profile = () => {
                         type="number"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow w-full ease-linear transition-all duration-150"
                         placeholder="Enter Mobile Number "
+                      />
+                    </div>
+                
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        GST Number
+                      </label>
+                      <input
+
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow  w-full ease-linear transition-all duration-150"
+                        placeholder="Enter GST Number"
+                        type="text"
+                        name="gstNo"
+                        onChange={formik.handleChange}
+                        value={formik.values.gstNo}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        PAN Number
+                      </label>
+                      <input
+
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow  w-full ease-linear transition-all duration-150"
+                        type="text"
+                        name="panNo"
+                        placeholder="Enter PAN Number"
+                        onChange={formik.handleChange}
+                        value={formik.values.panNo}
                       />
                     </div>
                   </div>
