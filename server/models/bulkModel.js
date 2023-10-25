@@ -10,7 +10,7 @@ const BulkSchema = new mongoose.Schema(
       require: true,
     },
     productName: {
-      type: String,
+      type: Array,
       require: true,
     },
     quantity: {
