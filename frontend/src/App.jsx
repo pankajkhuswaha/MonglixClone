@@ -14,6 +14,7 @@ import { VerifyApi } from "./features/authSlice";
 import Loading from "./features/loading/Loader";
 import "react-quill/dist/quill.snow.css";
 import { getSiteConfig } from "./features/Website/configSlice";
+import { Test } from "./pages/user/pages/testPayment";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ const App = () => {
                   <Route key={id} path={ele.path} element={ele.Element}></Route>
                 );
               })}
+                  <Route  path={"/test"} element={<Test/>}></Route>
             </Routes>
             {
               users?.user?.role === "admin" &&
