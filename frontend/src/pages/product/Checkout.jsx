@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
 const Checkout = () => {
   const cart = useSelector((state) => state.cart.carts);
- ;
+  ;
   const site = useSelector((st) => st.site.data);
   const productLoading = useSelector((st) => st.cart.loading);
   const CartCount = cart.products?.length;
@@ -24,7 +24,7 @@ const Checkout = () => {
   const { carts } = useSelector((state) => state.cart);
   if (carts?.products) {
     console.log(carts?.products[0]?.count);
-    
+
   }
 
   return (
@@ -41,7 +41,7 @@ const Checkout = () => {
                     {carts.products?.map((value, index) => {
                       const { url, name, price, count, _id, discount, total } =
                         value;
-                      let qty = count;
+                      let newQty = count;
                       return (
                         <div
                           key={index}
@@ -80,9 +80,41 @@ const Checkout = () => {
                                 >
                                   -
                                 </span>
-
-
                                 <input
+                                  type="text"  // Use text type so that empty input is accepted
+                                  className="h-8 w-8 border bg-white text-center text-xs outline-none"
+                                  onBlur={(e) => {
+
+                                    newQty = e.target.value;
+                                    if (newQty === '' || (/^\d{0,2}$/.test(newQty) && parseInt(newQty) >= 1)) {
+                                      // Allow empty input or input with a maximum of 2 digits and greater than or equal to 1
+                                      dispatch(updateCart({ id: _id, type: "value", value: newQty }))
+                                        .then(unwrapResult)
+                                        .then(() => dispatch(userCart()));
+                                    }
+                                  }}
+                                  // value={newQty}
+                                  name="quantity"
+                                  maxLength="2" // Limit the input to 2 characters
+                                />
+
+                                {/* 
+                                <input
+                                  type="number"
+                                  className="h-8 w-8 border bg-white text-center text-xs outline-none"
+                                  onChange={(e) => {
+                                    const newQty = parseInt(e.target.value, 10); // Parse the input to an integer
+                                    if (!isNaN(newQty) && newQty >= 1) {
+                                      // Check if the input is a valid positive number
+                                      dispatch(updateCart({ id: _id, type: "value", value: newQty }))
+                                        .then(unwrapResult)
+                                        .then(() => dispatch(userCart()));
+                                    }
+                                  }}
+                                  value={qty}
+                                  name="quantity"
+                                /> */}
+                                {/* <input
                                   type="number"
                                   className="h-8 w-8 border bg-white text-center text-xs outline-none"
                                   onChange={(e) => {
@@ -94,7 +126,7 @@ const Checkout = () => {
                                   }}
                                   value={qty}
                                   name="quantity"
-                                />
+                                /> */}
                                 <span
                                   className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
                                   onClick={() => {
@@ -265,9 +297,9 @@ const Checkout = () => {
         </div>
       }
 
-    
 
-</>
+
+    </>
 
   );
 };
