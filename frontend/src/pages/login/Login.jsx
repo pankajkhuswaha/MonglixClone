@@ -9,7 +9,7 @@ import { toggleLoading } from "../../features/loading/loadingSlice";
 import { config } from "../../utils/axiosConfig";
 import { base_url } from "../../utils/baseUrl";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const checkuserSignup = async (data) => {
   const response = await axios.post(`${base_url}user/check`, data, config);
   return response.data;
@@ -176,7 +176,10 @@ const Login = () => {
               type="password"
               placeholder="Password"
             />
-            Forgot your password? <button>Sign In</button>
+            <Link to="/forgot-password" className="text-black hover:text-red-600"> Forgot your password?</Link>
+
+            
+            <button>Sign In</button>
             <p className="hides">
               Does not Have an Account?{" "}
               <span

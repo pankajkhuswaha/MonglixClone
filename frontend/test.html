@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -53,8 +53,8 @@
     </script>
 
 </body>
-</html> -->
-
+</html>
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +78,7 @@
         <option value="" disabled selected>Select Unit</option>
         <option value="Surgery">Surgery</option>
         <option value="Medicine">Medicine</option>
-        <!-- Add other units as needed -->
+  
     </select><br>
 
     <label for="overallSatisfaction">Overall Treatment Satisfaction:</label>
@@ -112,7 +112,7 @@
             const form = document.getElementById("surveyForm");
             const errorMessage = document.getElementById("errorMessage");
 
-            // Validate if any text field is left blank
+          
             const inputs = form.querySelectorAll("input[type=text], textarea, select");
             for (const input of inputs) {
                 if (!input.value.trim()) {
@@ -121,9 +121,8 @@
                 }
             }
 
-            // If all fields are filled, you can proceed to submit the form to the database
             errorMessage.textContent = "Form submitted successfully!";
-            // Add your code to submit the form data to the database here
+          
         }
 
         function resetForm() {
@@ -136,4 +135,4 @@
 
 </body>
 </html>
-
+ -->
