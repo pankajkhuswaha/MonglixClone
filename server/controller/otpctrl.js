@@ -35,7 +35,7 @@ const sendOtpOnMail = asyncHandle(async (req, res) => {
         },
       });
       let info = await transporter.sendMail({
-        from: "<no-reply@eprocuretech.com>",
+        from: "<no-reply@ecommerce.deepmart.shop>",
         to: email,
         subject: "OTP verification by E-procure Tech",
         // text: otp, // plain text body

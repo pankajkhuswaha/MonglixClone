@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const dbConnect = require("./config/dbConnect");
 const { notFound, errorHandler } = require("./middlewares/errorHandler");
 const app = express();
-const PORT = 7006;
+const PORT = 8009;
 const cookieParser = require("cookie-parser");
 const authRouter = require("./routes/authRoute");
 const contactusRoute = require("./routes/contactRoute");
@@ -64,14 +64,14 @@ app.use(notFound);
 app.use(errorHandler);
 const os = require("os");
 
-const ipAddress = Object.values(os.networkInterfaces())
-  .flat()
-  .find(({ family, internal }) => family === "IPv4" && !internal).address;
+// const ipAddress = Object.values(os.networkInterfaces())
+//   .flat()
+//   .find(({ family, internal }) => family === "IPv4" && !internal).address;
 
-app.listen(PORT, ipAddress, () => {
-  console.log(`Server listening on http://${ipAddress}:${PORT}`);
-});
-
-// app.listen(PORT, "127.0.0.1", () => {
-//   console.log(`Server listening on http://${"127.0.0.1"}:${PORT}`);
+// app.listen(PORT, ipAddress, () => {
+//   console.log(`Server listening on http://${ipAddress}:${PORT}`);
 // });
+
+app.listen(PORT, "127.0.0.1", () => {
+  console.log(`Server listening on http://${"127.0.0.1"}:${PORT}`);
+});

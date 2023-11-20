@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import { NextBtn, PreviousBtn } from "../productslider/Imagecarousel";
 
 const Banner = () => {
-  const banner = ["/banner.png"];
   const settings = {
     dots: false,
     infinite: true,
@@ -16,22 +15,38 @@ const Banner = () => {
   };
   const banners = useSelector((st) => st.site.data?.homepageBanner);
 
-
   return (
     <>
       <div className="w-full  ">
         <div className="container">
-          <Slider {...settings}>
-            {banners?.map((ele, i) => (
-              <div key={i}>
+          <div className="flex  gap-2">
+            <div className="flex-[6]">
+              <Slider {...settings}>
+                {banners?.map((ele, i) => (
+                  <div key={i}>
+                    <img
+                      style={{ borderRadius: "10px" }}
+                      src={ele}
+                      alt={`banner${i + 1}`}
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+            <div className="flex-[4]">
+              <div className="flex flex-col">
                 <img
-                  style={{ borderRadius: "10px" }}
-                  src={ele}
-                  alt={`banner${i + 1}`}
+                  src="https://beta.apinouthemes.com/uploads/promotion_1_d6deb591f0.jpeg"
+                  alt=""
+                
+                />
+                <img
+                  src="https://beta.apinouthemes.com/uploads/promotion_2_d252453586.jpeg"
+                  alt=""
                 />
               </div>
-            ))}
-          </Slider>
+            </div>
+          </div>
         </div>
       </div>
     </>

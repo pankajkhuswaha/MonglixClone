@@ -16,6 +16,16 @@ import "react-quill/dist/quill.snow.css";
 import { getSiteConfig } from "./features/Website/configSlice";
 import { Test } from "./pages/user/pages/testPayment";
 
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
+
+
+
 const App = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.auth.user);

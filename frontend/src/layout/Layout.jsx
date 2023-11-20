@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Header, Footer } from "../components/Index";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";

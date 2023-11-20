@@ -5,12 +5,15 @@ import TopDrawer from "../bottomdrawer/TopDrawer";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useLocation, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { SearchComponent, BtmDrawer } from "../Index";
 import { handleSeeAllClick } from "../../layout/ProductLayout";
+import { SideFilter } from "../SideFilter/SideFilter";
+import { SideFilter2 } from "../SideFilter/SideFilter2";
 const Header = () => {
-  const [icc, setIcc] = useState(true);
+  // const [icc, setIcc] = useState(true);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -42,9 +45,10 @@ const Header = () => {
   return (
     <div
       style={{
-        background: site.headerCol,
+        background: site.primarybg,
         boxShadow: "0 2px 15px rgba(0,0,0,.15)",
         width: "100%",
+        padding: "8px",
         position: "sticky",
         top: 0,
         zIndex: 99,
@@ -91,39 +95,15 @@ const Header = () => {
               gap={{ xs: 2, md: 4 }}
               alignItems={"center"}
             >
-              <div className="flex gap-2 md:hidden"
-              >
+              <div className="flex gap-2 md:hidden">
                 <BtmDrawer />
                 <TopDrawer />
               </div>
-              <Link
-                to={"/bulk"}
-               
-                style={{ backgroundColor: site.primarybg }}
-
-                className="p-2  md:block hidden text-white gap-2 items-center rounded-lg"
-              >
-                Bulk Order{" "}
-                {/* {icc ? (
-                  <p
-                    style={{ transform: "rotate(90deg)" }}
-                    className="text-xl text-white"
-                  >
-                    {"}:(]"}
-
-
-
-                  </p>
-                ) : (
-                  <p
-                    style={{ transform: "rotate(90deg)" }}
-                    className="text-xl text-white"
-                  >
-                    {"{:{)"}
-                  </p>
-                )} */}
-              </Link>
-              {users ? (
+              <div className="p-2  md:block hidden gap-2 items-center rounded-lg">
+                <p className=" text-white">Customer Services</p>
+                <p className=" text-white text-bold text-xl">(800) 060-0730</p>
+              </div>
+              {/* {users ? (
                 <Link to={"/checkout"}>
                   <Badge badgeContent={CartCount} color="primary">
                     <ShoppingBagOutlinedIcon />
@@ -132,21 +112,30 @@ const Header = () => {
               ) : (
                 <Link to="/login">
                   <Badge badgeContent={CartCount} color="primary">
-                    <ShoppingBagOutlinedIcon />
+                    <ShoppingBagOutlinedIcon  style={{fontSize:'36px',color:site.primarybg}} />
                   </Badge>
                 </Link>
-              )}
-              {currentuser ? (
+              )} */}
+              {/* {currentuser ? (
                 <Link className="hidden md:block" to={"/users"}>
                   <AccountCircleIcon />
                 </Link>
               ) : (
                 <Link to={"/login"}>
-                  <AccountBoxIcon />
+                  <div className="flex flex-row">
+                  <PersonOutlineIcon className="text-blue-700" style={{fontSize:'46px',}}/>
+                  <div className="font-bold ">
+                    <p className="text-blue-700"> Login  </p>
+                    <p className="relative text-blue-700 bottom-1">Register</p>
+                  </div>
+                  </div>
+                 
                 </Link>
-              )}
+                
+              )} */}
             </Stack>
           </Stack>
+
           {location.pathname === "/" && (
             <div
               className="hidden md:flex "
@@ -155,21 +144,65 @@ const Header = () => {
                 flexDirection: "row",
                 justifyContent: "center",
                 gap: "24px",
-                borderTop: "1px solid #E8F0FE",
+                opacity: showDivOnScroll ? 1 : 0,
+
                 boxShadow: "0 12px 15px rgba(0,0,0,.15)",
                 transition: "0.2s",
-                opacity: showDivOnScroll ? 1 : 0,
-                background: "#F8FAFC",
+
+                background: site.primarybg,
                 padding: "10px",
                 position: "fixed",
                 margin: "0px 8px",
-                top: 68,
+                top: 89,
                 right: 0,
                 width: "100%",
                 zIndex: 9,
               }}
             >
-              {categories.map((ele, i) => {
+              <SideFilter2/>
+              <div className="flex gap-8">
+                <Link to={"/"}>
+                  <p className="text-white">Home</p>
+                </Link>
+                <Link to={"/"}>
+                  <p className="text-white">About</p>
+                </Link>
+                <Link to={"/"}>
+                  <p className="text-white">Contact Us</p>
+                </Link>
+                <Link to={"/"}>
+                  <p className="text-white"> Store</p>
+                </Link>
+              </div>
+              {users ? (
+                <Link to={"/checkout"}>
+                  <Badge badgeContent={CartCount} color="primary">
+                    <ShoppingBagOutlinedIcon className="text-white" />
+                  </Badge>
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <Badge badgeContent={CartCount} color="primary">
+                    <ShoppingBagOutlinedIcon className="text-white" style={{ fontSize: "26px" }} />
+                  </Badge>
+                </Link>
+              )}
+              {currentuser ? (
+                <Link className="hidden md:block" to={"/users"}>
+                  <AccountCircleIcon className="text-white" />
+                </Link>
+              ) : (
+                <Link to={"/login"}>
+                  <div className="flex flex-row">
+                    <PersonOutlineIcon
+                      className="text-white"
+                      style={{ fontSize: "28px" }}
+                    />
+                  </div>
+                </Link>
+              )}
+              
+              {/* {categories.map((ele, i) => {
                 return (
                   <Stack
                     key={i}
@@ -191,7 +224,7 @@ const Header = () => {
                     </Stack>
                   </Stack>
                 );
-              })}
+              })} */}
             </div>
           )}
         </Stack>

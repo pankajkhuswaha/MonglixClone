@@ -1,10 +1,10 @@
-import React from 'react'
+
 
 export const Test = () => {
   return (
     <div>
       <form
-        action={`https://eprocuretechbackend.deepmart.shop/ccavRequestHandler`}
+        action={`https://ecommercebackend.deepmart.shop/ccavRequestHandler`}
       >
         <button>click me</button>
       </form>
