@@ -9,54 +9,59 @@ import { getProducts } from "./features/ProductSlice";
 import { userCart } from "./features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Routess } from "./routes/Routes";
-import { VerifyApi } from "./features/authSlice";
+// import { VerifyApi } from "./features/authSlice";
 
 import Loading from "./features/loading/Loader";
 import "react-quill/dist/quill.snow.css";
 import { getSiteConfig } from "./features/Website/configSlice";
 import { Test } from "./pages/user/pages/testPayment";
 
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
 
+import { VerifyApi } from "./utils/Apis";
 
+import { useQuery } from "react-query";
 
 const App = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.auth.user);
   console.log(users?.user);
   const { error, success } = useSelector((state) => state.auth);
-  const isLoading = useSelector((state) => state.products.loading);
+  const isLoadings = useSelector((state) => state.products.loading);
   const loader = useSelector((state) => state.loading.show);
 
-  const verifyToken = () => {
-    dispatch(VerifyApi());
 
-    if (success) {
-      return;
-    } else if (error) {
-      toast.error("error");
-    }
-  };
+const {isLoading,isError}=useQuery({
+  queryFn:()=>VerifyApi(),
+  queryKey:["Verify"]
+})
 
 
-  
+  // const verifyToken = () => {
+  //   dispatch(VerifyApi());
+
+  //   if (success) {
+  //     return;
+  //   } else if (error) {
+  //     toast.error("error");
+  //   }
+  // };
+
   useEffect(() => {
-    verifyToken();
+    // verifyToken();
     dispatch(getProducts());
     dispatch(userCart());
     dispatch(getSiteConfig());
   }, []);
-
+  if (isLoading) {
+    return <Loading/>
+  }
+  if (isError) {
+    return  <Errorpage />
+  }
   return (
     <>
-      {(isLoading) && <Loading />}
-      {(loader) && <Loading />}
+      {isLoadings && <Loading />}
+      {loader && <Loading />}
 
       <ToastContainer />
       {error ? (
@@ -70,17 +75,15 @@ const App = () => {
                   <Route key={id} path={ele.path} element={ele.Element}></Route>
                 );
               })}
-                  <Route  path={"/test"} element={<Test/>}></Route>
+              <Route path={"/test"} element={<Test />}></Route>
             </Routes>
-            {
-              users?.user?.role === "admin" &&
-              <Link to={'/admin'}>
-                <button className="fixed bottom-10 p-3 shadow-xl text-white rounded-md font-bold bg-blue-500">Go To DashBoard →</button>
+            {users?.user?.role === "admin" && (
+              <Link to={"/admin"}>
+                <button className="fixed bottom-10 p-3 shadow-xl text-white rounded-md font-bold bg-blue-500">
+                  Go To DashBoard →
+                </button>
               </Link>
-
-            }
-
-
+            )}
           </Stack>
         </Layout>
       )}

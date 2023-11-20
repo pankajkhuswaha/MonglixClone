@@ -55,13 +55,16 @@ const Dummyfeature = () => {
   ];
   return (
     <>
-      <div style={{borderColor:'gray'}} className="border rounded-md mt-2 p-4 flex flex-row justify-between flex-wrap">
+      <div style={{borderColor:'gray'}} className="border rounded-md mt-2 gap-7 md:gap-6 p-4 flex flex-row justify-between flex-wrap">
         {data.map((ele, id) => {
         return(
-            <div key={id} className="pr-[55px]" style={{borderRight: '2px solid GRAY'}}>
+            <div key={id} className="pr-[55px] md:flex-none flex gap-3 items-center ">
             {ele.icon}
-            <p className="text-2xl font-bold text-gray-600">{ele.head}</p>
+            <div className='flex flex-col'>
+
+            <p className="md:text-2xl text-xl font-bold text-gray-600">{ele.head}</p>
             <p className="text-sm  text-gray-600"> {ele.para}</p>
+            </div>
           </div>
         )  
       

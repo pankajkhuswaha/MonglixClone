@@ -99,9 +99,9 @@ const Header = () => {
                 <BtmDrawer />
                 <TopDrawer />
               </div>
-              <div className="p-2  md:block hidden gap-2 items-center rounded-lg">
+              <div className="p-2  md:flex flex-col items-center hidden   rounded-lg">
                 <p className=" text-white">Customer Services</p>
-                <p className=" text-white text-bold text-xl">(800) 060-0730</p>
+                <p className=" text-white text-bold text-xl">+917678536510</p>
               </div>
               {/* {users ? (
                 <Link to={"/checkout"}>
@@ -136,7 +136,7 @@ const Header = () => {
             </Stack>
           </Stack>
 
-          {location.pathname === "/" && (
+         
             <div
               className="hidden md:flex "
               style={{
@@ -164,13 +164,13 @@ const Header = () => {
                 <Link to={"/"}>
                   <p className="text-white">Home</p>
                 </Link>
-                <Link to={"/"}>
+                <Link to={"/about"}>
                   <p className="text-white">About</p>
                 </Link>
-                <Link to={"/"}>
+                <Link to={"/contact"}>
                   <p className="text-white">Contact Us</p>
                 </Link>
-                <Link to={"/"}>
+                <Link to={"/product"}>
                   <p className="text-white"> Store</p>
                 </Link>
               </div>
@@ -226,7 +226,7 @@ const Header = () => {
                 );
               })} */}
             </div>
-          )}
+         
         </Stack>
       </div>
     </div>

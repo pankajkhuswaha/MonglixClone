@@ -19,7 +19,7 @@ const Banner = () => {
     <>
       <div className="w-full  ">
         <div className="container">
-          <div className="flex  gap-2">
+          <div className="flex flex-wrap  gap-2">
             <div className="flex-[6]">
               <Slider {...settings}>
                 {banners?.map((ele, i) => (
@@ -34,14 +34,14 @@ const Banner = () => {
               </Slider>
             </div>
             <div className="flex-[4]">
-              <div className="flex flex-col">
+              <div className="flex  md:flex-col">
                 <img
-                  src="https://beta.apinouthemes.com/uploads/promotion_1_d6deb591f0.jpeg"
+                  src="/bannner3.png"
                   alt=""
                 
                 />
                 <img
-                  src="https://beta.apinouthemes.com/uploads/promotion_2_d252453586.jpeg"
+                  src="/banner2.png"
                   alt=""
                 />
               </div>

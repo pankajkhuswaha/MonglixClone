@@ -10,7 +10,7 @@ const Viewpage = () => {
   return (
     <div>
       <Banner />
-<Dummyfeature/>
+      <Dummyfeature />
       {categories.map((ele, id) => {
         return (
           <ProductLayout key={id} title={ele} load={loading}>
