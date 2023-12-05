@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unknown-property */
 import { useLocation, useNavigate } from "react-router-dom";
-import { Stack } from "@mui/material";
 import numberFormat from "../../essentail/numberFormat";
 import parse from "html-react-parser";
 import SelectImage from "./SelectImage";
@@ -8,13 +7,14 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addCart, userCart } from "../../features/cartSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { useState } from "react";
 
 const ProductDetail = () => {
   const location = useLocation();
   const data = location.state;
   const users = useSelector((state) => state.auth.user?.user);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const site = useSelector((st) => st.site.data);
   const handleCart = ({ id, qty }) => {
@@ -30,32 +30,37 @@ const ProductDetail = () => {
     }
   };
   const SingleProductData = data || localStorage.getItem("SingleProductData");
-
-
+  console.log(SingleProductData);
+  const [VarientData, setVarientData] = useState();
+  console.log(VarientData);
   const user = useSelector((state) => state.auth?.user?.user);
   const {
     images,
     price,
     platinumdiscount,
+    subItems,
     golddiscount,
     silverdiscount,
     retaildiscount,
     datasheet,
   } = SingleProductData;
+
+  const Data = VarientData || SingleProductData;
+  console.log(Data);
+  console.log(VarientData?.length);
+
   return (
     <div>
-      {SingleProductData ? (
-        <Stack display={"flex"} flexWrap={"wrap"} flexDirection={"row"}>
-          <Stack flex={5}>
-            <SelectImage img={images} data={SingleProductData} />
-          </Stack>
-          <Stack position={"sticky"} flex={5} p={3}>
-            <div className="p-3 border-1 rounded-md">
-              <p className="text-xl font-[600] text-gray-500">
-                {SingleProductData.name}
-              </p>
-              {/* price - (price * discountPercentage) / 100 */}
-              <p className="text-3xl py-2 font-bold text-[#353543]">
+      {Data ? (
+        <div className="flex flex-wrap gap-2 flex-row">
+          <div className="flex-[3] border-1 rounded-md bg-white">
+            <SelectImage img={images} data={Data} />
+          </div>
+          <div className="flex-[5] border-1 bg-white rounded-md p-3">
+            <div className="p-3 ">
+              <p className="lghead py-2">{Data.name}</p>
+
+              <p className="text-2xl py-2 font-semibold text-[#54546b]">
                 {!user && numberFormat(price - (price * retaildiscount) / 100)}
                 {(user?.role == "user" || user?.role == "admin") &&
                   numberFormat(price - (price * retaildiscount) / 100)}
@@ -66,8 +71,8 @@ const ProductDetail = () => {
                 {user?.role == "platinum" &&
                   numberFormat(price - (price * platinumdiscount) / 100)}
               </p>
-              <p className="text-lg text-danger font-bold">
-                <del>{numberFormat(price)}</del>
+              <p className="para text-gray-500">
+                MRP <del> {numberFormat(price)}</del>
                 {!user && <sup> {retaildiscount}%</sup>}
                 {(user?.role == "user" || user?.role == "admin") && (
                   <sup> {retaildiscount}%</sup>
@@ -79,19 +84,32 @@ const ProductDetail = () => {
             </div>
 
             <div className="p-3 border-1 rounded-md my-6">
-              <p className="text-2xl font-[600] py-2 text-[#353543]">
-                Product Details
+              <p className="smhead">Product Details</p>
+              <p className="para ">
+                {Data &&
+                  Data.mindiscription &&
+                  parse(Data.mindiscription.replace(/<\/?p>/g, ""))}
               </p>
-              <p className="text-lg font-[400] text-gray-500">
-                {parse(SingleProductData.mindiscription.replace(/<\/?p>/g, ""))}
-              </p>
-              {
-                datasheet && <a  href={datasheet} target="blank" className="text-danger font-semibold text-lg mt-2 ">
+              {datasheet && (
+                <a
+                  href={datasheet}
+                  target="blank"
+                  className="text-danger font-semibold text-lg mt-2 "
+                >
                   View Detail Description
                 </a>
-              }
+              )}
+            </div>
+            <div className="p-3 rounded-md">
+              <p className="smhead"> Select Varients</p>
 
-
+              {subItems.map((ele, id) => {
+                return (
+                  <div key={id}>
+                    <p onClick={() => setVarientData(ele)}> {ele.name} </p>
+                  </div>
+                );
+              })}
             </div>
 
             <button
@@ -99,7 +117,7 @@ const ProductDetail = () => {
                 backgroundColor: site?.primarybg,
                 borderColor: site?.primarybg,
               }}
-              onClick={() => handleCart({ id: SingleProductData._id, qty: 1 })}
+              onClick={() => handleCart({ id: Data._id, qty: 1 })}
               className="text-white text-[15px]  flex align-center justify-center gap-2 border-1 p-3 rounded-md border-[#9F2089] w-[200px]"
             >
               <svg
@@ -111,8 +129,6 @@ const ProductDetail = () => {
                 ml="4"
                 mr="4"
                 stroke="#ffffff"
-
-
                 icon="[object Object]"
                 iconSize="20"
               >
@@ -131,19 +147,12 @@ const ProductDetail = () => {
               </svg>
               <span className="text-[18px]">Buy Now</span>
             </button>
-
-
-          </Stack>
-        </Stack>
-
-
+          </div>
+        </div>
       ) : (
         <div>Loading...</div>
       )}
-
-
     </div>
-
   );
 };
 

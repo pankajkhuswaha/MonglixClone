@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OrderApi } from "../../../features/orderSlice";
 import { useNavigate } from "react-router-dom";
-import { addCart } from "../../../features/cartSlice";
+import { addCart, userCart } from "../../../features/cartSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 const Order = () => {
   const dispatch = useDispatch();
@@ -97,4 +97,3 @@ const Order = () => {
 };
 
 export default Order;
-]
