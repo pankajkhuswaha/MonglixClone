@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Stack, CardContent } from "@mui/material";
 
 const SelectImage = ({ img }) => {
   const [selectedPic, setSelectedPic] = useState(img && img[0]);
@@ -11,23 +10,20 @@ const SelectImage = ({ img }) => {
 
   return (
     <>
-      <Stack justifyContent={"space-between"} p={3}>
-        <Stack
-          direction={{ xs: "column-reverse", sm: "row" }}
-          gap={{ sx: 1, sm: 1, md: 1 }}
-          flexWrap={"wrap"}
-        >
-          <CardContent
-            sx={{
-              width: "120px",
-              position: "relative",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Stack
-              flexDirection={{ xs: "row-reverse", sm: "column" }}
-              gap={2}
+      <div className="justify-between p-3">
+        <div className="flex flex-col items-center gap-2 ">
+          <div className="w-[250px] h-[350px] flex rounded-sm bg-white">
+            <img
+            loading="lazy"
+              src={selectedPic && selectedPic}
+              width={"100%"}
+              height={"80%"}
+              style={{ objectFit: "contain", height: "100%" }}
+            />
+          </div>
+       
+            <div className="flex w-full"
+             
               style={{ objectFit: "contain" }}
             >
               {img &&
@@ -43,6 +39,7 @@ const SelectImage = ({ img }) => {
                   return (
                     <div className="w-[100px]  h-[100px]" key={index}>
                       <img
+                      loading="lazy"
                         style={imageStyle}
                         className="w-[70px]  object-contain h-[70px]"
                         src={ele}
@@ -51,18 +48,10 @@ const SelectImage = ({ img }) => {
                     </div>
                   );
                 })}
-            </Stack>
-          </CardContent>
-          <div className="w-[350px] h-[490px] border-1 rounded-sm bg-white">
-            <img
-              src={selectedPic && selectedPic}
-              width={"100%"}
-              height={"80%"}
-              style={{ objectFit: "contain", height: "100%" }}
-            />
-          </div>
-        </Stack>
-      </Stack>
+            </div>
+     
+        </div>
+      </div>
     </>
   );
 };
