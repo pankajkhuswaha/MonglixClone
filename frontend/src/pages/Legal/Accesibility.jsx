@@ -1,5 +1,4 @@
-import React from "react";
-import './legal.css'
+import "./legal.css";
 const Accesibility = () => {
   return (
     <div className="container">
@@ -32,8 +31,8 @@ const Accesibility = () => {
           </li>
           <li>3. Maintaining a logical and consistent navigation structure.</li>
           <li>
-            4. Regularly testing our website using assistive technologies and user
-            feedback to identify and address accessibility issues.
+            4. Regularly testing our website using assistive technologies and
+            user feedback to identify and address accessibility issues.
           </li>
         </ul>
         <h1>Accessibility Assistance</h1>
@@ -63,7 +62,7 @@ const Accesibility = () => {
           We are actively working to ensure that our website complies with
           applicable accessibility standards and guidelines. Accessibility is an
           ongoing commitment, and we are dedicated to maintaining and improving
-          our website's accessibility for all users.
+          our {`website's`} accessibility for all users.
         </p>
         <h1>Third-Party Content</h1>
         <p>

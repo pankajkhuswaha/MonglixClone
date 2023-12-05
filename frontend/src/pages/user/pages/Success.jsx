@@ -23,7 +23,7 @@ const Success = () => {
         "success"
       ).then(() => navigate("/users/orders"), dispatch(OrderApi()));
     }
-  }, []);
+  }, [dispatch, fail, navigate]);
 
   return <></>;
 };

@@ -138,11 +138,6 @@ const Bulk = () => {
                               ))}
                             </Select>
                           </FormControl>
-                          <ErrorMessage
-                            name="productName"
-                            component="div"
-                            className="error"
-                          />
                         </div>
                         <div className="w-full md:w-1/2  form-pd-field">
                           <label htmlFor="quantity">Quantity</label>

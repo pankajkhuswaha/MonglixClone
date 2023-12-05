@@ -1,7 +1,7 @@
-import React from "react";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
-const ImageDrager = ({ images, setFieldValue, handleDeleteImage, filed }) => {
+const ImageDrager = ({ images, setvalue, handleDeleteImage, feild }) => {
   const handleDragStart = (index) => (event) => {
     event.dataTransfer.setData("text/plain", index.toString());
   };
@@ -16,11 +16,9 @@ const ImageDrager = ({ images, setFieldValue, handleDeleteImage, filed }) => {
     const updatedImages = [...images];
     const [movedImage] = updatedImages.splice(sourceIndex, 1);
     updatedImages.splice(index, 0, movedImage);
-    setFieldValue(filed, updatedImages);
+    console.log(setvalue(feild, updatedImages));
   };
   const site = useSelector((st) => st.site.data);
-
-
   return (
     <div
       className="container flex-wrap bg-white d-flex justify-content-center p-4 align-items-center rounded shadow-sm mb-3"
@@ -37,13 +35,13 @@ const ImageDrager = ({ images, setFieldValue, handleDeleteImage, filed }) => {
         >
           <p
             className="px-2 rounded-full text-white py-1 position-absolute right-0 text-sm"
-            style={{background:site.primarybg}}
+            style={{ background: site.primarybg }}
             onClick={() => handleDeleteImage(index)}
           >
             X
           </p>
           <img
-            style={{ width: filed.includes("Banner")?1000:200 }}
+            style={{ width: feild?.includes("Banner") ? 1000 : 200 }}
             className="rounded"
             src={image}
             alt={`Image ${index}`}
@@ -53,5 +51,10 @@ const ImageDrager = ({ images, setFieldValue, handleDeleteImage, filed }) => {
     </div>
   );
 };
-
+ImageDrager.propTypes = {
+  images: PropTypes.array.isRequired,
+  setvalue: PropTypes.func,
+  handleDeleteImage: PropTypes.func.isRequired,
+  feild: PropTypes.string.isRequired,
+};
 export default ImageDrager;

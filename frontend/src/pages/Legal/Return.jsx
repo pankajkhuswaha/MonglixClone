@@ -1,5 +1,3 @@
-import React from "react";
-
 const Return = () => {
   const data = [
     {
@@ -46,7 +44,6 @@ const Return = () => {
       heading: "7. Contact Information",
       para: [
         "7.1. For all return and refund inquiries, please contact our customer support team at:",
-        ,
         " Email: contact@ecommerce.deepmart.shop",
       ],
     },
@@ -75,8 +72,6 @@ const Return = () => {
           </>
         );
       })}
-
-     
     </div>
   );
 };

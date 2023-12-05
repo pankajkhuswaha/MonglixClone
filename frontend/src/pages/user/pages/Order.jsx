@@ -1,37 +1,33 @@
 import { useEffect } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-import { OrderApi } from "../../../features/orderSlice";
-import { useNavigate } from "react-router-dom";
-import { addCart } from "../../../features/cartSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addCart, userCart } from "../../../features/cartSlice";
+import { OrderApi } from "../../../features/orderSlice";
+
 const Order = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((st) => st.userorder.orders);
-  console.log(data);
 
   const handleCart = ({ id, qty }) => {
-
     dispatch(addCart({ id, qty }))
       .then(unwrapResult)
       .then(() => {
         navigate("/checkout");
         dispatch(userCart());
       });
-
   };
-
 
   useEffect(() => {
     dispatch(OrderApi());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <p className="text-blueGray-700 text-xl font-bold">My Orders</p>
       <br />
-      {
-        data.length > 0 ? <div>
+      {data.length > 0 ? (
+        <div>
           {[...data].reverse().map((ele, id) => {
             const { products } = ele;
             return (
@@ -42,7 +38,9 @@ const Order = () => {
                       <p className="text-xl font-semibold">
                         Transaction ID: {ele.transactionId}{" "}
                       </p>
-                      <p className="mt-2 text-green-400">status: {ele.status}</p>
+                      <p className="mt-2 text-green-400">
+                        status: {ele.status}
+                      </p>
                     </div>
 
                     <div className="text-lg text-gray-900 font-semibold">
@@ -73,28 +71,34 @@ const Order = () => {
                         </p>
                       </div>
                     </div>
-                    <div >
-
+                    <div>
                       <div className="text-lg m-1 text-gray-900 font-semibold">
                         <p>Rs:{ele.total}</p>
                       </div>
-                      <button onClick={() => handleCart({ id: ele.id, qty: ele.count })} className="bg-blue-500 p-1 rounded-md text-white">Order Again</button>
+                      <button
+                        onClick={() =>
+                          handleCart({ id: ele.id, qty: ele.count })
+                        }
+                        className="bg-blue-500 p-1 rounded-md text-white"
+                      >
+                        Order Again
+                      </button>
                     </div>
                   </div>
                 ))}
               </div>
             );
           })}
-        </div> :
-          <div className="shadow-md rounded-lg border p-4">
-            <p className="text-center font-semibold text-2xl text-gray-800">No Order Found !</p>
-          </div>
-
-      }
-
+        </div>
+      ) : (
+        <div className="shadow-md rounded-lg border p-4">
+          <p className="text-center font-semibold text-2xl text-gray-800">
+            No Order Found !
+          </p>
+        </div>
+      )}
     </>
   );
 };
 
 export default Order;
-]

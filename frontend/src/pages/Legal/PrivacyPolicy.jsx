@@ -1,5 +1,4 @@
-import React from 'react';
-import './legal.css';
+import "./legal.css";
 const PrivacyPolicy = () => {
   return (
     <div className="container">
@@ -26,9 +25,9 @@ const PrivacyPolicy = () => {
           An anonymized string created from your email address (also called a
           hash) may be provided to the Gravatar service to see if you are using
           it. The Gravatar service privacy policy is available here:
-          https://www.ecommerce.deepmart.shop/privacy/. After approval of your comment,
-          your profile picture is visible to the public in the context of your
-          comment.
+          https://www.ecommerce.deepmart.shop/privacy/. After approval of your
+          comment, your profile picture is visible to the public in the context
+          of your comment.
         </p>
         <h1>Media</h1>
         <p>
@@ -67,7 +66,7 @@ const PrivacyPolicy = () => {
           We are actively working to ensure that our website complies with
           applicable accessibility standards and guidelines. Accessibility is an
           ongoing commitment, and we are dedicated to maintaining and improving
-          our website's accessibility for all users.
+          our {`website's `}accessibility for all users.
         </p>
         <h1>Third-Party Content</h1>
         <p>
@@ -122,6 +121,6 @@ const PrivacyPolicy = () => {
       </div>
     </div>
   );
-}
+};
 
-export default PrivacyPolicy
+export default PrivacyPolicy;

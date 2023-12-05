@@ -1,8 +1,10 @@
 const asyncHandle = require("express-async-handler");
 const ProductModel = require("../models/productModel");
 const addProduct = asyncHandle(async (req, res) => {
-  const product = req.body;
+  let product = req.body;
   const alreadyavail = await ProductModel.findOne({ name: product.name });
+  const subproducts = req.body.subItems?.map((ele) => ele?._id);
+  product.subItems = subproducts;
   if (alreadyavail) {
     try {
       const updateproduct = await ProductModel.findOneAndUpdate(
@@ -83,7 +85,7 @@ const searchProduct = asyncHandle(async (req, res) => {
     if (brand) {
       filter.brand = brand;
     }
-    const products = await ProductModel.find(filter);
+    const products = await ProductModel.find(filter).populate("subItems");
     res.json(products);
   } catch (error) {
     console.error("Error searching products:", error);
@@ -91,7 +93,7 @@ const searchProduct = asyncHandle(async (req, res) => {
   }
 });
 const getallProduct = asyncHandle(async (req, res, next) => {
-  const Product = await ProductModel.find();
+  const Product = await ProductModel.find().populate("subItems");
   if (req.query) {
     next();
   } else {

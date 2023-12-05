@@ -67,6 +67,7 @@ const ViewModal = (props) => {
         "order",
         "cart",
         "id",
+        "subItems",
         "mindiscription",
         // "products",
         "transactionId"

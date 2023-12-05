@@ -13,7 +13,8 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false, // default: true
     },
   },
-})
+});
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>

@@ -21,9 +21,12 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    subItems:{
-      type: String,
-    },
+    subItems: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "product",
+      },
+    ],
     brand: {
       type: String,
     },
@@ -46,43 +49,63 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       validate: {
         validator: function (value) {
-          return /^\d+(\.\d+)?$/.test(value) && parseFloat(value) >= 0 && parseFloat(value) <= 100;
+          return (
+            /^\d+(\.\d+)?$/.test(value) &&
+            parseFloat(value) >= 0 &&
+            parseFloat(value) <= 100
+          );
         },
-        message: props => `${props.value} is not a valid discount percentage.`,
+        message: (props) =>
+          `${props.value} is not a valid discount percentage.`,
       },
     },
     silverdiscount: {
       type: String,
       validate: {
         validator: function (value) {
-          return /^\d+(\.\d+)?$/.test(value) && parseFloat(value) >= 0 && parseFloat(value) <= 100;
+          return (
+            /^\d+(\.\d+)?$/.test(value) &&
+            parseFloat(value) >= 0 &&
+            parseFloat(value) <= 100
+          );
         },
-        message: props => `${props.value} is not a valid discount percentage.`,
+        message: (props) =>
+          `${props.value} is not a valid discount percentage.`,
       },
     },
     golddiscount: {
       type: String,
       validate: {
         validator: function (value) {
-          return /^\d+(\.\d+)?$/.test(value) && parseFloat(value) >= 0 && parseFloat(value) <= 100;
+          return (
+            /^\d+(\.\d+)?$/.test(value) &&
+            parseFloat(value) >= 0 &&
+            parseFloat(value) <= 100
+          );
         },
-        message: props => `${props.value} is not a valid discount percentage.`,
+        message: (props) =>
+          `${props.value} is not a valid discount percentage.`,
       },
     },
     platinumdiscount: {
       type: String,
       validate: {
         validator: function (value) {
-          return /^\d+(\.\d+)?$/.test(value) && parseFloat(value) >= 0 && parseFloat(value) <= 100;
+          return (
+            /^\d+(\.\d+)?$/.test(value) &&
+            parseFloat(value) >= 0 &&
+            parseFloat(value) <= 100
+          );
         },
-        message: props => `${props.value} is not a valid discount percentage.`,
+        message: (props) =>
+          `${props.value} is not a valid discount percentage.`,
       },
     },
-    mindiscription:{
-      type:String
+    mindiscription: {
+      type: String,
     },
-    datasheet:{
-      type:String
+    datasheet: {
+      type: String,
     },
   },
   {

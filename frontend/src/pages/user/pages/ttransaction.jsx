@@ -1,6 +1,4 @@
-// TransactionTable.jsx
-
-
+/* eslint-disable react/prop-types */
 const TransactionTable = ({ transactions }) => {
   return (
     <div id="transaction-table" className="rounded mx-auto">
@@ -30,21 +28,25 @@ const TransactionTable = ({ transactions }) => {
                     <div className="text-gray-600 font-semibold">
                       {product.name} (x{product.count})
                     </div>
-                  
                   </div>
                 ))}
               </td>
-              <td className="py-2 text-gray-600 font-semibold px-4 border-b">{transaction.total}</td>
+              <td className="py-2 text-gray-600 font-semibold px-4 border-b">
+                {transaction.total}
+              </td>
               <td
-                className='py-2 px-4 border-b
-                '   
+                className="py-2 px-4 border-b
+                "
               >
-                <p className={`text-white p-2 rounded-lg ${transaction.status === "Processing"
-                  ? " bg-blue-400 "
-                    : " bg-red-400  "
-                  }`}>
+                <p
+                  className={`text-white p-2 rounded-lg ${
+                    transaction.status === "Processing"
+                      ? " bg-blue-400 "
+                      : " bg-red-400  "
+                  }`}
+                >
                   {transaction.status}
-                </p>  
+                </p>
               </td>
             </tr>
           ))}

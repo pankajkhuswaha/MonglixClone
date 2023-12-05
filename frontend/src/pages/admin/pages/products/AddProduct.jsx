@@ -9,6 +9,12 @@ import { uploadFiles } from "../../../../utils/uploadimg";
 import { toggleLoading } from "../../../../features/loading/loadingSlice";
 import { addAProduct, getProducts } from "../../../../features/ProductSlice";
 import { useEffect } from "react";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Chip from "@mui/material/Chip";
+import Box from "@mui/material/Box";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
@@ -23,6 +29,7 @@ const AddProduct = () => {
         perpiece: "",
         category: "",
         subcategory: "",
+        subItems: [],
         brand: "",
         itemCode: "",
         hsnCode: "",
@@ -36,16 +43,21 @@ const AddProduct = () => {
         images: [],
         datasheet: "",
       },
-      onSubmit: (values) => {
+      onSubmit: async (values) => {
         if (values.images.length < 1) {
           toast.error("Please select at least 1 product images.");
         } else {
-          dispatch(addAProduct(values));
-          dispatch(getProducts());
-          if (editproduct) {
-            navigate("/admin/products");
+          try {
+            const res = await dispatch(addAProduct(values));
+            unwrapResult(res);
+            dispatch(getProducts());
+            if (editproduct) {
+              navigate("/admin/products");
+            }
+            resetForm();
+          } catch (error) {
+            toast.error("Error in product add");
           }
-          resetForm();
         }
       },
     });
@@ -95,7 +107,7 @@ const AddProduct = () => {
     }
   };
 
-  //TODO This part of code is wriiten to  drag the images in upload images
+  // * This part of code is wriiten to  drag the images in upload images
   const handleDragStart = (index) => (event) => {
     event.dataTransfer.setData("text/plain", index.toString());
   };
@@ -120,8 +132,26 @@ const AddProduct = () => {
     setFieldValue("images", updatedImages);
   };
 
-  //* -------------------End of Code---------------------------------------
+  const renderInput = (name, labeltxt, type, customhandlechange, required) => {
+    return (
+      <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
+        <label>{labeltxt}</label>
+        <input
+          type={type ? type : "text"}
+          name={name}
+          onChange={customhandlechange ? customhandlechange : handleChange}
+          required={required || true}
+          value={values[name]}
+          className="form-control"
+          id="productname"
+          placeholder="Enter Product Category"
+        />
+      </div>
+    );
+  };
 
+  //* -------------------End of Code---------------------------------------
+  const allProducts = useSelector((st) => st.products.products);
   return (
     <>
       <div className="col-12">
@@ -132,176 +162,20 @@ const AddProduct = () => {
             </h3>
             <form onSubmit={handleSubmit}>
               <div className="row justify-between">
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Product Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    onChange={handleChange}
-                    required
-                    value={values.name}
-                    className="form-control"
-                    id="productname"
-                    placeholder="Enter Product name"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Product Category</label>
-                  <input
-                    type="text"
-                    name="category"
-                    onChange={handleChange}
-                    required
-                    value={values.category}
-                    className="form-control"
-                    id="productname"
-                    placeholder="Enter Product Category"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Product Sub-Category</label>
-                  <input
-                    type="text"
-                    name="subcategory"
-                    onChange={handleChange}
-                    required
-                    value={values.subcategory}
-                    className="form-control"
-                    id="productname"
-                    placeholder="Enter Product Sub Category"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Product Brand</label>
-                  <input
-                    type="text"
-                    name="brand"
-                    onChange={handleChange}
-                    required
-                    value={values.brand}
-                    className="form-control"
-                    id="productname"
-                    placeholder="Enter Product Brand"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Price</label>
-                  <input
-                    type="number"
-                    name="price"
-                    value={values.price}
-                    onChange={handleChange}
-                    required
-                    className="form-control"
-                    placeholder="Enter Price"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Price Per Pieces</label>
-                  <input
-                    type="number"
-                    name="perpiece"
-                    value={values.perpiece}
-                    onChange={handleChange}
-                    required
-                    className="form-control"
-                    placeholder="Enter Price per Pieces"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Item Code</label>
-                  <input
-                    type="text"
-                    name="itemCode"
-                    value={values.itemCode}
-                    onChange={handleChange}
-                    className="form-control"
-                    placeholder="Enter Item Code"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>HSN Code</label>
-                  <input
-                    type="text"
-                    name="hsnCode"
-                    value={values.hsnCode}
-                    onChange={handleChange}
-                    required
-                    className="form-control"
-                    placeholder="Enter HSN Code"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Unit Of Measurement</label>
-                  <input
-                    type="text"
-                    name="unitMeausrement"
-                    value={values.unitMeausrement}
-                    onChange={handleChange}
-                    required
-                    className="form-control"
-                    placeholder="Enter Unit Of Measurement"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Measurement</label>
-                  <input
-                    type="number"
-                    name="meausrement"
-                    value={values.meausrement}
-                    onChange={handleChange}
-                    className="form-control"
-                    placeholder="Enter Measurement"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Retail Discount</label>
-                  <input
-                    type="number"
-                    name="retaildiscount"
-                    value={values.retaildiscount}
-                    onChange={handleChange}
-                    required
-                    className="form-control"
-                    placeholder="Enter Retail Discount"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Silver Discount</label>
-                  <input
-                    type="number"
-                    name="silverdiscount"
-                    value={values.silverdiscount}
-                    onChange={handleChange}
-                    required
-                    className="form-control"
-                    placeholder="Enter Silver Discount"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Gold Discount</label>
-                  <input
-                    type="number"
-                    name="golddiscount"
-                    value={values.golddiscount}
-                    onChange={handleChange}
-                    required
-                    className="form-control"
-                    placeholder="Enter Gold Discount"
-                  />
-                </div>
-                <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
-                  <label>Platinum Discount</label>
-                  <input
-                    type="number"
-                    name="platinumdiscount"
-                    value={values.platinumdiscount}
-                    onChange={handleChange}
-                    required
-                    className="form-control"
-                    placeholder="Enter Platinum Discount"
-                  />
-                </div>
+                {renderInput("name", "Product Name")}
+                {renderInput("category", "Product Category")}
+                {renderInput("subcategory", "Product Sub-Category")}
+                {renderInput("brand", "Product Brand")}
+                {renderInput("price", "Product Price", "number")}
+                {renderInput("perpiece", "Price Per Pieces")}
+                {renderInput("itemCode", "Item Code")}
+                {renderInput("hsnCode", "HSN Code")}
+                {renderInput("unitMeausrement", "Unit Of Measurement")}
+                {renderInput("meausrement", "Measurement")}
+                {renderInput("retaildiscount", "Retail Discount", "number")}
+                {renderInput("silverdiscount", "Silver Discount", "number")}
+                {renderInput("golddiscount", "Gold Discount", "number")}
+                {renderInput("platinumdiscount", "Platinum Discount", "number")}
                 <div className="mb-6 max-sm:w-[100%] md:w-[33.3%]">
                   <label>Upload DataSheet</label>
                   <input
@@ -312,17 +186,65 @@ const AddProduct = () => {
                     placeholder="Enter Price"
                   />
                 </div>
-                <div className="mb-4 h-32">
-                  <label>Discription </label>
-                  <ReactQuill
-                    theme="snow"
-                    name="mindiscription"
-                    onChange={handleChange("mindiscription")}
-                    value={values.mindiscription}
-                    required
-                    className="h-24"
-                  />
-                </div>
+              </div>
+              <div className="mb-3">
+                <label>Select Variant products</label>
+
+                <FormControl fullWidth variant="outlined">
+                  <Select
+                    labelId="product-type-label"
+                    id="subItems"
+                    name="subItems"
+                    multiple
+                    value={values.subItems}
+                    onChange={handleChange}
+                    renderValue={(selected) => {
+                      return (
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            gap: 0.5,
+                          }}
+                        >
+                          {selected.map((value, i) => (
+                            <Chip key={i} label={value.name} />
+                          ))}
+                        </Box>
+                      );
+                    }}
+                  >
+                    {allProducts?.map((product) => {
+                      const { _id, name } = product;
+                      return (
+                        <MenuItem
+                          key={name}
+                          value={{ _id, name }}
+                          style={{
+                            fontWeight:
+                              values.subItems.indexOf(name) !== -1
+                                ? "bold"
+                                : "normal",
+                          }}
+                        >
+                          {name}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              </div>
+
+              <div className="mb-12 h-40">
+                <label>Discription </label>
+                <ReactQuill
+                  theme="snow"
+                  name="mindiscription"
+                  onChange={handleChange("mindiscription")}
+                  value={values.mindiscription}
+                  required
+                  className="h-32"
+                />
               </div>
 
               <div className="my-6 border-2 border-dotted rounded">
@@ -383,25 +305,6 @@ const AddProduct = () => {
                   ))}
                 </div>
               )}
-              {/* <div className="col-12 mb-6">
-                <label htmlFor="banner-img">Upload Banner Image</label>
-                <input
-                  type="file"
-                  name="banner-img"
-                  onChange={(e) => handleBannerImage(e)}
-                  required={editproduct === null ? true : false}
-                  className="form-control"
-                />
-              </div>
-              {values.bannerimg && (
-                <div className="row mb-6 p-2 items-center justify-center">
-                  <img
-                    src={values.bannerimg}
-                    alt="product image"
-                    className="rounded h-auto"
-                  />
-                </div>
-              )} */}
 
               <div>
                 <button
