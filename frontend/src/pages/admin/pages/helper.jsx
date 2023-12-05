@@ -16,7 +16,7 @@ const monthNames = {
   12: "Dec",
 };
 
-export const ChartByMonth = ({ rawData }) => {
+export const ChartByMonth = ({ rawData ,txt}) => {
   let data = [
     {
       type: "Jan",
@@ -80,7 +80,7 @@ export const ChartByMonth = ({ rawData }) => {
   const state = {
     series: [
       {
-        name: "sales",
+        name: txt||"series",
         data: data?.map((d) => d.val),
       },
     ],
