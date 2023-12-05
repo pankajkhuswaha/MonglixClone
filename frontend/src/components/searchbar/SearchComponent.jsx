@@ -37,7 +37,7 @@ const SearchComponent = ({ closeDrawer }) => {
           <input
             type="search"
             name="search"
-            className="w-full px-4 text-gray-800 rounded-full focus:outline-none"
+            className="w-full px-4 py-2 text-gray-800 rounded-sm focus:outline-none"
             placeholder="Search Product, Category, Brand.."
             value={formik.values.search}
             onChange={(e) => {

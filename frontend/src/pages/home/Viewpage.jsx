@@ -8,7 +8,7 @@ const Viewpage = () => {
   let categories = [...new Set(data.map((item) => item.category))];
 
   return (
-    <div>
+    <div className="relative   max-sm:top-0 top-[45px]">
       <Banner />
       <Dummyfeature />
       {categories.map((ele, id) => {

@@ -27,9 +27,9 @@ const initializePayment = async (req, res) => {
     merchantTransactionId: generateId(),
     amount: parseInt(req.body.amount) * 100,
     // redirectUrl: `http://127.0.0.1:8000/api/payment/check?detail=${detail}`,
-    redirectUrl: `https://ecommerce.deepmart.shop/api/payment/check?detail=${detail}`,
+    redirectUrl: `https://eprocuretech.com/api/payment/check?detail=${detail}`,
     redirectMode: "POST",
-    callbackUrl: `https://ecommerce.deepmart.shop/api/payment/check`,
+    callbackUrl: `https://eprocuretech.com/api/payment/check`,
     mobileNumber: "8510051511",
     paymentInstrument: {
       type: "PAY_PAGE",
@@ -74,7 +74,7 @@ const checkPaymentStatus = async (req, res, next) => {
   if (code == "PAYMENT_SUCCESS") {
     next();
   } else {
-    res.redirect(`https://ecommerce.deepmart.shop/users/orders/fail`);
+    res.redirect(`https://eprocuretech.com/users/orders/fail`);
 
   }
 };

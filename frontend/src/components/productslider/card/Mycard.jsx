@@ -1,4 +1,4 @@
-import Loading from "../../../features/loading/Loader";
+/* eslint-disable react/prop-types */
 
 import numberFormat from "../../../essentail/numberFormat";
 import { Link, useLocation, useNavigate } from "react-router-dom";

@@ -9,13 +9,6 @@ const initialState = {
   loading: true,
   error: false,
 };
-export const getSiteConfig = createAsyncThunk(
-  "getSiteConfiguration",
-  async () => {
-    const res = await axios.get(`${base_url}config/`, config);
-    return res.data;
-  }
-);
 export const updateSiteConfig = createAsyncThunk(
   "updateSiteConfiguration",
   async (siteCfg) => {
@@ -28,19 +21,13 @@ export const updateSiteConfig = createAsyncThunk(
 export const configSlice = createSlice({
   name: "WebsiteConfiguration",
   initialState,
-  reducers: {},
+  reducers: {
+    webconfig:(state,action)=>{
+      state.data=action.payload
+    }
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(getSiteConfig.fulfilled, (state, action) => {
-        state.data = action.payload;
-        state.loading = false;
-      })
-      .addCase(getSiteConfig.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(getSiteConfig.rejected, (state) => {
-        state.loading = false;
-      })
       .addCase(updateSiteConfig.fulfilled, (state, action) => {
         state.loading = false;
       })
@@ -52,4 +39,5 @@ export const configSlice = createSlice({
       });
   },
 });
+export const {webconfig} =configSlice.actions;
 export default configSlice.reducer;

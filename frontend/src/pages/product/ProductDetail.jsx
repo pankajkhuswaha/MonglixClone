@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { useLocation, useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import numberFormat from "../../essentail/numberFormat";
@@ -12,7 +13,7 @@ const ProductDetail = () => {
   const location = useLocation();
   const data = location.state;
   const users = useSelector((state) => state.auth.user?.user);
-  console.log(users);
+
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const site = useSelector((st) => st.site.data);
@@ -29,7 +30,7 @@ const ProductDetail = () => {
     }
   };
   const SingleProductData = data || localStorage.getItem("SingleProductData");
-  console.log(SingleProductData);
+
 
   const user = useSelector((state) => state.auth?.user?.user);
   const {
@@ -113,7 +114,7 @@ const ProductDetail = () => {
 
 
                 icon="[object Object]"
-                iconsize="20"
+                iconSize="20"
               >
                 <path
                   fillRule="evenodd"

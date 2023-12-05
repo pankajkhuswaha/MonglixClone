@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+
 import Slider from "react-slick";
 import "./Imagecarousel.css";
 import "slick-carousel/slick/slick.css";

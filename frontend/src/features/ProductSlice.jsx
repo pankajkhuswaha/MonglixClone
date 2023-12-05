@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { base_url } from "../utils/baseUrl"; 
 
@@ -11,7 +12,8 @@ const initialState = {
   loading: false,
   error: false,
 };
-export const getProducts = createAsyncThunk("product", async (data, thu) => {
+
+export const getProducts = createAsyncThunk("product", async () => {
   const res = await axios.get(`${base_url}product`);
   return res.data;
 });
@@ -52,17 +54,21 @@ export const AllFilterApi = createAsyncThunk(
 export const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    includeProducts:(state,action)=>{
+      state.products=action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(AllFilterApi.pending, (state, action) => {
+      .addCase(AllFilterApi.pending, (state) => {
         state.loading = true;
       })
       .addCase(AllFilterApi.fulfilled, (state, action) => {
         state.filterData = action.payload;
         state.loading = false;
       })
-      .addCase(AllFilterApi.rejected, (state, action) => {
+      .addCase(AllFilterApi.rejected, (state) => {
         state.loading = true;
       })
       .addCase(getProducts.fulfilled, (state, action) => {
@@ -110,4 +116,6 @@ export const productSlice = createSlice({
     
   },
 });
+
+export const {includeProducts} = productSlice.actions;
 export default productSlice.reducer;
