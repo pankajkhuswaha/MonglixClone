@@ -35,8 +35,7 @@ const ProductDetail = () => {
 
   const user = useSelector((state) => state.auth?.user?.user);
   const {
-    images,
-    price,
+  
     platinumdiscount,
     subItems,
     golddiscount,
@@ -106,7 +105,7 @@ const ProductDetail = () => {
             <div className="p-3 rounded-md">
               <p className="smhead"> Select Varients</p>
 
-              {subItems.map((ele, id) => {
+              {subItems?.map((ele, id) => {
                 return (
                   <div key={id}>
                     <p
