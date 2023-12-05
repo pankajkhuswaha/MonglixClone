@@ -30,9 +30,9 @@ const ProductDetail = () => {
     }
   };
   const SingleProductData = data || localStorage.getItem("SingleProductData");
-  console.log(SingleProductData);
+
   const [VarientData, setVarientData] = useState();
-  console.log(VarientData);
+
   const user = useSelector((state) => state.auth?.user?.user);
   const {
     images,
@@ -46,33 +46,36 @@ const ProductDetail = () => {
   } = SingleProductData;
 
   const Data = VarientData || SingleProductData;
-  console.log(Data);
-  console.log(VarientData?.length);
+
+
 
   return (
     <div>
       {Data ? (
         <div className="flex flex-wrap gap-2 flex-row">
           <div className="flex-[3] border-1 rounded-md bg-white">
-            <SelectImage img={images} data={Data} />
+            <SelectImage img={Data.images} data={Data} />
           </div>
           <div className="flex-[5] border-1 bg-white rounded-md p-3">
             <div className="p-3 ">
               <p className="lghead py-2">{Data.name}</p>
 
               <p className="text-2xl py-2 font-semibold text-[#54546b]">
-                {!user && numberFormat(price - (price * retaildiscount) / 100)}
+                {!user &&
+                  numberFormat(
+                    Data.price - (Data.price * retaildiscount) / 100
+                  )}
                 {(user?.role == "user" || user?.role == "admin") &&
-                  numberFormat(price - (price * retaildiscount) / 100)}
+                  numberFormat(Data.price - (Data.price * retaildiscount) / 100)}
                 {user?.role == "silver" &&
-                  numberFormat(price - (price * silverdiscount) / 100)}
+                  numberFormat(Data.price - (Data.price * silverdiscount) / 100)}
                 {user?.role == "gold" &&
-                  numberFormat(price - (price * golddiscount) / 100)}
+                  numberFormat(Data.price - (Data.price * golddiscount) / 100)}
                 {user?.role == "platinum" &&
-                  numberFormat(price - (price * platinumdiscount) / 100)}
+                  numberFormat(Data.price - (Data.price * platinumdiscount) / 100)}
               </p>
               <p className="para text-gray-500">
-                MRP <del> {numberFormat(price)}</del>
+                MRP <del> {numberFormat(Data.price)}</del>
                 {!user && <sup> {retaildiscount}%</sup>}
                 {(user?.role == "user" || user?.role == "admin") && (
                   <sup> {retaildiscount}%</sup>
@@ -106,7 +109,16 @@ const ProductDetail = () => {
               {subItems.map((ele, id) => {
                 return (
                   <div key={id}>
-                    <p onClick={() => setVarientData(ele)}> {ele.name} </p>
+                    <p
+                      className={`cursor-pointer p-2 w-fit my-1 rounded-lg ${
+                        ele === VarientData
+                          ? "border-1 border-blue-500 text-blue-500"
+                          : "border-1" 
+                      }`}
+                      onClick={() => setVarientData(ele)}
+                    >
+                      {ele.name}
+                    </p>
                   </div>
                 );
               })}
