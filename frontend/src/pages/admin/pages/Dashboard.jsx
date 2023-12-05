@@ -8,14 +8,24 @@ import { Link } from "react-router-dom";
 import { ChartByMonth } from "./helper";
 
 const DashboardCard = ({ txt, icon, data, path }) => (
-  <Link
-    to={path}
-    className="flex w-full md:w-[48%] items-center justify-between p-3 m-2 bg-white rounded shadow"
-  >
-      <div className="flex items-center pt-1 w-full">
-        <ChartByMonth rawData={data}  />
+  <div className="flex flex-col w-full md:w-[48%] items-center justify-between p-3 m-2 bg-white rounded shadow">
+    <div className="w-full  justify-between mb-3 flex items-center">
+      <div className=" flex items-center gap-2">
+        <div className="text-2xl rounded-full border p-2 bg-blue-600 text-white">
+          {icon}
+        </div>
+        <p className="h4 mb-0">
+          {txt} - {data?.length}
+        </p>
       </div>
-  </Link>
+      <Link to={path} className="btn btn-primary">
+        view
+      </Link>
+    </div>
+    <div className="flex items-center pt-1 w-full">
+      <ChartByMonth txt={txt} rawData={data} />
+    </div>
+  </div>
 );
 
 const Dashboard = () => {
@@ -25,25 +35,25 @@ const Dashboard = () => {
     {
       path: "/admin/users",
       txt: "Users",
-      icon: <FiUsers fontSize={40} />,
+      icon: <FiUsers />,
       data: admin?.users,
     },
     {
       path: "/admin/products",
       txt: "Products",
-      icon: <FaProductHunt fontSize={40} />,
+      icon: <FaProductHunt />,
       data: admin?.products,
     },
     {
       path: "/admin/contact",
       txt: "Contact us",
-      icon: <FaUser fontSize={40} />,
+      icon: <FaUser />,
       data: admin?.contacts,
     },
     {
       path: "/admin/bulk-req",
       txt: "Bulk Request",
-      icon: <FaShirtsinbulk fontSize={40} />,
+      icon: <FaShirtsinbulk />,
       data: admin?.bulks,
     },
   ];
@@ -54,7 +64,7 @@ const Dashboard = () => {
         <title>Dashboard</title>
         {/* <meta name="theme-color" content="#0d6efd" /> */}
       </Helmet>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-between">
         {cards.map((card, index) => (
           <DashboardCard key={index} {...card} />
         ))}
