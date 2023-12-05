@@ -33,8 +33,8 @@
 
 .registration-tab button {
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background-color: #ff4b2b;
+  border: 1px solid #3B9BFF;
+  background-color: #3B9BFF;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -49,7 +49,7 @@
 }
 
 .registration-tab button:focus {
-  outline: none;
+  outline     : none;
 }
 
 .registration-tab button.ghost {
@@ -148,9 +148,9 @@
 }
 
 .registration-tab .overlay {
-  background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: #3B9BFF;
+  background: -webkit-linear-gradient(to right, #3B9BFF, #3B9BFF);
+  background: linear-gradient(to right, #3B9BFF, #3B9BFF);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

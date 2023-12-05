@@ -1,7 +1,6 @@
 
 import axios from "axios";
 import { toast } from "react-toastify";
-import { base_url } from "./baseUrl";
 
 export const uploadFiles = async (data) => {
   const formData = new FormData();

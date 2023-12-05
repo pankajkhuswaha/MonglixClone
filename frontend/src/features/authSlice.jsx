@@ -47,6 +47,10 @@ export const authSlice = createSlice({
     addSignupdata: (state, action) => {
       state.signupdata = action.payload;
     },
+    adduser:(state,action)=>{
+      console.log(state);
+      state.user = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -72,12 +76,12 @@ export const authSlice = createSlice({
       .addCase(LoginApi.rejected, (state) => {
         state.error = true;
       })
-      .addCase(VerifyApi.fulfilled, (state, action) => {
-        (state.success = true), (state.user = action.payload);
-      })
-      .addCase(VerifyApi.rejected, (state) => {
-        state.error = true;
-      })
+      // .addCase(VerifyApi.fulfilled, (state, action) => {
+      //   (state.success = true), (state.user = action.payload);
+      // })
+      // .addCase(VerifyApi.rejected, (state) => {
+      //   state.error = true;
+      // })
       .addCase(addAddress.fulfilled, () => {
         toast.success("Address is added sucessfully");
       })
@@ -88,5 +92,5 @@ export const authSlice = createSlice({
 });
 
 
-export const { addSignupdata } = authSlice.actions;
+export const { addSignupdata ,adduser} = authSlice.actions;
 export default authSlice.reducer;
