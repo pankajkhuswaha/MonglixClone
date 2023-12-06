@@ -35,7 +35,6 @@ const ProductDetail = () => {
 
   const user = useSelector((state) => state.auth?.user?.user);
   const {
-  
     platinumdiscount,
     subItems,
     golddiscount,
@@ -45,8 +44,6 @@ const ProductDetail = () => {
   } = SingleProductData;
 
   const Data = VarientData || SingleProductData;
-
-
 
   return (
     <div>
@@ -65,13 +62,19 @@ const ProductDetail = () => {
                     Data.price - (Data.price * retaildiscount) / 100
                   )}
                 {(user?.role == "user" || user?.role == "admin") &&
-                  numberFormat(Data.price - (Data.price * retaildiscount) / 100)}
+                  numberFormat(
+                    Data.price - (Data.price * retaildiscount) / 100
+                  )}
                 {user?.role == "silver" &&
-                  numberFormat(Data.price - (Data.price * silverdiscount) / 100)}
+                  numberFormat(
+                    Data.price - (Data.price * silverdiscount) / 100
+                  )}
                 {user?.role == "gold" &&
                   numberFormat(Data.price - (Data.price * golddiscount) / 100)}
                 {user?.role == "platinum" &&
-                  numberFormat(Data.price - (Data.price * platinumdiscount) / 100)}
+                  numberFormat(
+                    Data.price - (Data.price * platinumdiscount) / 100
+                  )}
               </p>
               <p className="para text-gray-500">
                 MRP <del> {numberFormat(Data.price)}</del>
@@ -102,26 +105,28 @@ const ProductDetail = () => {
                 </a>
               )}
             </div>
-            <div className="p-3 rounded-md">
-              <p className="smhead"> Select Varients</p>
+            {Data?.subItems && (
+              <div className="p-3 rounded-md">
+                <p className="smhead"> Select Varients</p>
 
-              {subItems?.map((ele, id) => {
-                return (
-                  <div key={id}>
-                    <p
-                      className={`cursor-pointer p-2 w-fit my-1 rounded-lg ${
-                        ele === VarientData
-                          ? "border-1 border-blue-500 text-blue-500"
-                          : "border-1" 
-                      }`}
-                      onClick={() => setVarientData(ele)}
-                    >
-                      {ele.name}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+                {subItems?.map((ele, id) => {
+                  return (
+                    <div key={id}>
+                      <p
+                        className={`cursor-pointer p-2 w-fit my-1 rounded-lg ${
+                          ele === VarientData
+                            ? "border-1 border-blue-500 text-blue-500"
+                            : "border-1"
+                        }`}
+                        onClick={() => setVarientData(ele)}
+                      >
+                        {ele.name}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
             <button
               style={{
