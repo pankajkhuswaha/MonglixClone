@@ -106,6 +106,7 @@ const ProductDetail = () => {
               )}
             </div>
             {subItems?.length > 0 && (
+            {Data?.subItems && (
               <div className="p-3 rounded-md">
                 <p className="smhead"> Select Varients</p>
 
