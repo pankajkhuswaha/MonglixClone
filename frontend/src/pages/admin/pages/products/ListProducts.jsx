@@ -1,9 +1,6 @@
-/* eslint-disable react/prop-types */
-// import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import $ from "jquery";
 import "datatables.net";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { deleteProduct, getProducts } from "../../../../features/ProductSlice";
 import { Link } from "react-router-dom";
 import DataTable from "../../components/DataTable";
@@ -11,10 +8,10 @@ import ViewModal from "../../components/ViewModal";
 import { Helmet } from "react-helmet";
 import useViewModal from "../../components/useViewModel";
 import { FaEye } from "react-icons/fa";
-import swal from "sweetalert"
+import swal from "sweetalert";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { getAdmindata } from "../../../../features/admin/adminSlice";
-
+import { PropTypes } from "prop-types";
 
 const EditButtons = ({ data, openModal }) => {
   const dispatch = useDispatch();
@@ -25,19 +22,22 @@ const EditButtons = ({ data, openModal }) => {
       </button>
       <p
         className="text-danger cursor-pointer"
-        onClick={() => {swal({
-          title: "Are you sure?",
-          text: "Are you sure that you want delete this product?",
-          icon: "warning",
-          dangerMode: true,
-        })
-        .then(willDelete => {
-          if (willDelete) {
-            dispatch(deleteProduct(data._id)).then(unwrapResult).then(swal("Deleted!", "Your product has been deleted!", "success"))
-            ;
-            dispatch(getAdmindata())
-          }
-        });
+        onClick={() => {
+          swal({
+            title: "Are you sure?",
+            text: "Are you sure that you want delete this product?",
+            icon: "warning",
+            dangerMode: true,
+          }).then((willDelete) => {
+            if (willDelete) {
+              dispatch(deleteProduct(data._id))
+                .then(unwrapResult)
+                .then(
+                  swal("Deleted!", "Your product has been deleted!", "success")
+                );
+              dispatch(getAdmindata());
+            }
+          });
         }}
       >
         <svg
@@ -78,18 +78,18 @@ const EditButtons = ({ data, openModal }) => {
     </div>
   );
 };
+EditButtons.propTypes = {
+  data: PropTypes.object,
+  openModal: PropTypes.func,
+};
 
-const ListProducts = () => {
+const ListProducts = ({ newData }) => {
   const productData = useSelector((st) => st.products.products);
-  const tableRef = useRef(null);
   const dispatch = useDispatch();
-  useEffect(() => {
-    $(tableRef.current).DataTable();
-  }, [productData]);
 
   useEffect(() => {
     dispatch(getProducts());
-  }, []);
+  }, [dispatch]);
   const { showModal, selectedData, openModal, closeModal } = useViewModal();
   const columns = [
     {
@@ -133,55 +133,18 @@ const ListProducts = () => {
       <Helmet>
         <title>E-Procure Tech || Userlist</title>
       </Helmet>
-      <DataTable data={productData} cols={columns} title={"Product List"} />
+      <DataTable
+        data={newData || productData}
+        cols={columns}
+        title={"Product List"}
+      />
       <ViewModal show={showModal} onHide={closeModal} data={selectedData} />
-      {/* {productData.length !== 0 ? (
-        <div className=" overflow-x-auto  mt-4">
-          <table ref={tableRef} className="w-full border-collapse bg-white text-left text-sm text-gray-500">
-            <thead className="bg-gray-50">
-              <tr>
-                <th scope="col" className="px-4 py-2 font-medium text-gray-900">
-                  Product Name
-                </th>
-                <th scope="col" className="px-4 py-2 font-medium text-gray-900">
-                  Category
-                </th>
-                <th scope="col" className="px-4 py-2 font-medium text-gray-900">
-                  Price
-                </th>
-                <th scope="col" className="px-4 py-2 font-medium text-gray-900">
-                  Brand
-                </th>
-                <th scope="col" className="px-4 py-4 font-medium text-gray-900">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-              {productData &&
-                productData.map((e, i) => {
-                  return (
-                    <tr key={i} className="hover:bg-gray-50">
-                      <td className="px-4 py-4">{e.name.slice(0, 30)}...</td>
-                      <td className="px-4 py-4">{e.category}</td>
-                      <td className="px-4 py-4">{e.price}</td>
-                      <td className="px-4 py-4">{e.brand}</td>
-                      <td className="px-4 py-4 flex">
-                        <div className="flex justify-center gap-4">
-                          
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        "Please Wait Product is Loading"
-      )} */}
     </div>
   );
+};
+
+ListProducts.propTypes = {
+  newData: PropTypes.object,
 };
 
 export default ListProducts;

@@ -1,5 +1,9 @@
 const asyncHandle = require("express-async-handler");
 const ProductModel = require("../models/productModel");
+const expressAsyncHandler = require("express-async-handler");
+const exceljs = require("exceljs");
+const xlsx = require("xlsx");
+
 const addProduct = asyncHandle(async (req, res) => {
   let product = req.body;
   const alreadyavail = await ProductModel.findOne({ name: product.name });
@@ -52,6 +56,7 @@ const deleteProduct = asyncHandle(async (req, res) => {
     }
   } else res.status(500).send({ error: error.message });
 });
+
 const updateproduct = asyncHandle(async (req, res) => {
   if (req.body._id) {
     const { _id } = req.body;
@@ -65,6 +70,7 @@ const updateproduct = asyncHandle(async (req, res) => {
     }
   } else res.json("invalid Operation");
 });
+
 const searchProduct = asyncHandle(async (req, res) => {
   try {
     const { search, category, subcategory, brand } = req.query;
@@ -92,6 +98,7 @@ const searchProduct = asyncHandle(async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 const getallProduct = asyncHandle(async (req, res, next) => {
   const Product = await ProductModel.find().populate("subItems");
   if (req.query) {
@@ -101,10 +108,79 @@ const getallProduct = asyncHandle(async (req, res, next) => {
   }
 });
 
+const ValidateSchema = expressAsyncHandler(async (data) => {
+  const errors = {};
+
+  const productInstance = new ProductModel(data);
+
+  productInstance.validateSync();
+
+  const validationErrors = productInstance.errors;
+
+  if (validationErrors) {
+    Object.keys(validationErrors).forEach((key) => {
+      errors[key] = validationErrors[key].message;
+    });
+  }
+
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors,
+  };
+});
+const uploadBulkProduct = expressAsyncHandler(async (req, res) => {
+  const workbook = xlsx.readFile(req?.file?.path);
+  const sheetName = workbook.SheetNames[0];
+  const sheet = workbook.Sheets[sheetName];
+  const excelData = xlsx.utils.sheet_to_json(sheet);
+  const validProducts = [];
+  const invalidProducts = [];
+
+  for (let i = 0; i < excelData.length; i++) {
+    const row = excelData[i];
+
+    const productData = {
+      name: row["name"],
+      images: row["images"]?.split(","),
+      price: row["price"],
+      category: row["category"],
+      subcategory: row["subcategory"],
+      brand: row["brand"],
+      itemCode: row["itemcode"],
+      hsnCode: row["hsncode"],
+      perpiece: row["priceperpiece"],
+      unitMeausrement: row["unitofmeasurement"],
+      measurement: row["meausrement"],
+      retaildiscount: row["retaildiscount"],
+      silverdiscount: row["silverdiscount"],
+      golddiscount: row["golddiscount"],
+      platinumdiscount: row["platinumdiscount"],
+      mindiscription: row["minidiscription"],
+      datasheet: row["datasheet"],
+    };
+
+    const validationResult = await ValidateSchema(productData);
+    console.log(validationResult);
+
+    if (validationResult.isValid) {
+      validProducts.push(productData);
+    } else {
+      invalidProducts.push({
+        rowIndex: i,
+        validationError: validationResult?.errors,
+      });
+    }
+  }
+
+  res.send({ validProducts, invalidProducts });
+  console.log("first");
+});
+
 module.exports = {
   addProduct,
   getallProduct,
   deleteProduct,
   updateproduct,
   searchProduct,
+  uploadBulkProduct,
 };

@@ -24,7 +24,6 @@ const ccavResHandler = require("./controller/ccavenue/ccavResponseHandler");
 const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
-
 mongoose.set("strictQuery", true);
 dbConnect();
 app.use(morgan("dev"));
@@ -32,17 +31,18 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.use("/api/user", authRouter);
 app.use("/api/cart", cartRoute);
 app.use("/api/otp", otpRoute);
 app.use("/api/contact", contactusRoute);
 app.use("/api/blog", blogRoute);
 app.use("/api/bulk", bulkRoute);
-app.use("/api/product", productRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/config", websiteRoute);
 app.use("/api/order", orderRoute);
 app.use("/api/payment", payRoute);
+app.use("/api/product", productRoute);
 app.use("/api/coupon", couponRoute);
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 app.use("/api/uploads", uploadimageRoute);

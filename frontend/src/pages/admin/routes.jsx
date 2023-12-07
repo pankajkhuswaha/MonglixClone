@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { RxDashboard } from "react-icons/rx";
 import { FaProductHunt, FaUser, FaShirtsinbulk } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
@@ -13,6 +14,7 @@ import BulkList from "./pages/BulkReq";
 import OrderList from "./pages/OrderList";
 import AddCoupon from "./pages/coupon/AddCoupon";
 import Couponlist from "./pages/coupon/CouponList";
+import BulkUpload from "./pages/products/BulkUpload";
 export const routes = [
   {
     path: "/admin/dashboard",
@@ -79,6 +81,12 @@ export const routes = [
         icon: <FaProductHunt fontSize={16} />,
         txt: "Add Products",
         element: <AddProduct />,
+      },
+      {
+        path: "/admin/bulk-products",
+        icon: <FaProductHunt fontSize={16} />,
+        txt: "Bulk Add",
+        element: <BulkUpload />,
       },
     ],
   },

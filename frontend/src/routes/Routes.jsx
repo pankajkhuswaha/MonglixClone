@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import {
   Login,
   Viewpage,
@@ -7,16 +8,20 @@ import {
   Checkout,
   UserDetails,
   About,
-  Bulk
+  Bulk,
 } from "../pages";
-import Admin from "../pages/admin";
-import ContactUs from "../pages/admin/pages/contactus/ContactUs";
-import ForgotPasswordPage from "../pages/login/ForgotPasswordPage";
-import Address from "../pages/product/Address";
-import { Return, Accesibility, TC, PrivacyPolicy } from "../pages/Legal/index";
-import SignUpOTP from "../pages/login/singnupOtp";
-import ResetPassword from "../pages/login/ResetPassword";
 
+import { Return, Accesibility, TC, PrivacyPolicy } from "../pages/Legal/index";
+
+const Admin = lazy(() => import("../pages/admin"));
+const ContactUs = lazy(() => import("../pages/admin/pages/contactus"));
+const ForgotPasswordPage = lazy(() =>
+  import("../pages/login/ForgotPasswordPage")
+);
+const Address = lazy(() => import("../pages/product/Address"));
+
+const SignUpOTP = lazy(() => import("../pages/login/singnupOtp"));
+const ResetPassword = lazy(() => import("../pages/login/ResetPassword"));
 
 export const Routess = [
   {
@@ -79,14 +84,14 @@ export const Routess = [
     path: "/users/*",
     Element: <UserDetails />,
   },
-       
-{
-  path: "/forgot-password",
-  Element:<ForgotPasswordPage/>
+
+  {
+    path: "/forgot-password",
+    Element: <ForgotPasswordPage />,
   },
   {
     path: "/reset-password/:id",
-    Element: <ResetPassword />
+    Element: <ResetPassword />,
   },
   {
     path: "*",

@@ -19,7 +19,7 @@ export default function DataTable({ data, cols,title }) {
     datas = filteredData.map((obj, index) => ({ ...obj, id: index + 1 }));
 
     return (
-      <div className="flex flex-col items-center justify-center shadow">
+      <div className="flex w-full flex-col items-center justify-center shadow">
         <div className="w-full flex justify-between items-center p-2 my-2">
           <h1 className="font-semibold h5">{title ? title : "Datatable"}</h1>
           <div>

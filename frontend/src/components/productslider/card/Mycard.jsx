@@ -71,8 +71,8 @@ const Mycard = ({ data, load }) => {
                 <p  className="text-md BRAND mb-2  overflow-y-hidden text-gray-600 ">
                   {data.brand}
                 </p>
-              <p  className="text-md   h-6 overflow-y-hidden text-gray-600 ">
-                {data.name.slice(0,24)}
+                <p className="text-md whitespace-nowrap text-ellipsis overflow-hidden text-gray-600 ">
+                  {data.name}
                 </p>
              
             </Link>
