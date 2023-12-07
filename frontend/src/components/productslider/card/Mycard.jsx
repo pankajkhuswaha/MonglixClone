@@ -15,13 +15,13 @@ import { unwrapResult } from "@reduxjs/toolkit";
 
 
 const Mycard = ({ data, load }) => {
-   const {
-  
-     price,
-     platinumdiscount,
-     golddiscount,
-     silverdiscount,
-     retaildiscount,
+  const {
+
+    price,
+    platinumdiscount,
+    golddiscount,
+    silverdiscount,
+    retaildiscount,
 
   } = data;
 
@@ -31,7 +31,7 @@ const Mycard = ({ data, load }) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.auth?.user?.user);
   const site = useSelector((st) => st.site.data);
- 
+
   const handleCart = ({ id, qty }) => {
     if (!users) {
       navigate("/login");
@@ -47,11 +47,7 @@ const Mycard = ({ data, load }) => {
 
   return (
     <div
-      className={
-        pathname.includes("product")
-          ? "flex justify-center w-[180px]"
-          : "flex justify-center"
-      }
+      className="flex w-fit"
     >
       {load ? (
         <Loader />
@@ -59,7 +55,7 @@ const Mycard = ({ data, load }) => {
         <div
           className={
             pathname.includes("product")
-              ? "mycard max-sm:w-[180px]  hover:shadow-xl rounded-b-lg border mx-1 border-[#e5e7eb]  my-4"
+                ? "mycard w-[160px] md:w-[210px] my-2 hover:shadow-xl rounded-b-lg border border-[#e5e7eb]"
               : "mycard w-[210px] hover:shadow-xl shadow-md rounded-b-lg mr-2 my-4"
           }
         >
@@ -68,13 +64,13 @@ const Mycard = ({ data, load }) => {
               <div className="imgcontainer">
                 <img src={data.images[0]} alt="" width={140} height={140} />
                 </div>
-                <p  className="text-md BRAND mb-2  overflow-y-hidden text-gray-600 ">
+                <p className="text-md BRAND mb-2  overflow-y-hidden text-gray-600 ">
                   {data.brand}
                 </p>
                 <p className="text-md whitespace-nowrap text-ellipsis overflow-hidden text-gray-600 ">
                   {data.name}
                 </p>
-             
+
             </Link>
 
             <Stack

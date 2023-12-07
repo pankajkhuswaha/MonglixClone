@@ -103,15 +103,12 @@ export default function Productpage() {
             </FormControl>
           </div>
 
-          <Stack
-            flexDirection={"row"}
-            justifyContent={"center"}
-            flexWrap={"wrap"}
+          <div className="row justify-center"
           >
             {Products.map((ele, i) => {
               return <Mycard data={ele} key={i} />;
             })}
-          </Stack>
+          </div>
         </Stack>
       </Stack>
     </div>

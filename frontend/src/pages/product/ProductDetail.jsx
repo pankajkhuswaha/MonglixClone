@@ -106,7 +106,6 @@ const ProductDetail = () => {
               )}
             </div>
             {subItems?.length > 0 && (
-            {Data?.subItems && (
               <div className="p-3 rounded-md">
                 <p className="smhead"> Select Varients</p>
 
@@ -114,11 +113,10 @@ const ProductDetail = () => {
                   return (
                     <div key={id}>
                       <p
-                        className={`cursor-pointer p-2 w-fit my-1 rounded-lg ${
-                          ele === VarientData
+                        className={`cursor-pointer p-2 w-fit my-1 rounded-lg ${ele === VarientData
                             ? "border-1 border-blue-500 text-blue-500"
                             : "border-1"
-                        }`}
+                          }`}
                         onClick={() => setVarientData(ele)}
                       >
                         {ele.name}
