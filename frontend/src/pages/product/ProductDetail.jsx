@@ -44,7 +44,7 @@ const ProductDetail = () => {
   } = SingleProductData;
 
   const Data = VarientData || SingleProductData;
-
+  console.log(Data);
   return (
     <div>
       {Data ? (
@@ -53,39 +53,46 @@ const ProductDetail = () => {
             <SelectImage img={Data.images} data={Data} />
           </div>
           <div className="flex-[5] border-1 bg-white rounded-md p-3">
-            <div className="p-3 ">
-              <p className="lghead py-2">{Data.name}</p>
+            <div className="relative">
+              <div className="text-md BRAND w-[34%]  p-1 overflow-y-hidden text-gray-600 ">
+                {data.brand}
+              </div>
+              <div className="p-3  ">
+                <p className="lghead py-2">{Data.name}</p>
 
-              <p className="text-2xl py-2 font-semibold text-[#54546b]">
-                {!user &&
-                  numberFormat(
-                    Data.price - (Data.price * retaildiscount) / 100
+                <p className="text-2xl py-2 font-semibold text-[#54546b]">
+                  {!user &&
+                    numberFormat(
+                      Data.price - (Data.price * retaildiscount) / 100
+                    )}
+                  {(user?.role == "user" || user?.role == "admin") &&
+                    numberFormat(
+                      Data.price - (Data.price * retaildiscount) / 100
+                    )}
+                  {user?.role == "silver" &&
+                    numberFormat(
+                      Data.price - (Data.price * silverdiscount) / 100
+                    )}
+                  {user?.role == "gold" &&
+                    numberFormat(
+                      Data.price - (Data.price * golddiscount) / 100
+                    )}
+                  {user?.role == "platinum" &&
+                    numberFormat(
+                      Data.price - (Data.price * platinumdiscount) / 100
+                    )}
+                </p>
+                <p className="para text-gray-500">
+                  MRP <del> {numberFormat(Data.price)}</del>
+                  {!user && <sup> {retaildiscount}%</sup>}
+                  {(user?.role == "user" || user?.role == "admin") && (
+                    <sup> {retaildiscount}%</sup>
                   )}
-                {(user?.role == "user" || user?.role == "admin") &&
-                  numberFormat(
-                    Data.price - (Data.price * retaildiscount) / 100
-                  )}
-                {user?.role == "silver" &&
-                  numberFormat(
-                    Data.price - (Data.price * silverdiscount) / 100
-                  )}
-                {user?.role == "gold" &&
-                  numberFormat(Data.price - (Data.price * golddiscount) / 100)}
-                {user?.role == "platinum" &&
-                  numberFormat(
-                    Data.price - (Data.price * platinumdiscount) / 100
-                  )}
-              </p>
-              <p className="para text-gray-500">
-                MRP <del> {numberFormat(Data.price)}</del>
-                {!user && <sup> {retaildiscount}%</sup>}
-                {(user?.role == "user" || user?.role == "admin") && (
-                  <sup> {retaildiscount}%</sup>
-                )}
-                {user?.role == "silver" && <sup> {silverdiscount}%</sup>}
-                {user?.role == "gold" && <sup> {golddiscount}%</sup>}
-                {user?.role == "platinum" && <sup> {platinumdiscount}%</sup>}
-              </p>
+                  {user?.role == "silver" && <sup> {silverdiscount}%</sup>}
+                  {user?.role == "gold" && <sup> {golddiscount}%</sup>}
+                  {user?.role == "platinum" && <sup> {platinumdiscount}%</sup>}
+                </p>
+              </div>
             </div>
 
             <div className="p-3 border-1 rounded-md my-6">
@@ -104,7 +111,34 @@ const ProductDetail = () => {
                   View Detail Description
                 </a>
               )}
+
+          
+
+              <div className="flex border-dotted mt-4  border-1 justify-between">
+                <div className=" flex-[6]  font-bolder capitalize  border-dotted border-2">
+                <div className="para p-2  my-1">brand</div>
+                <p className="para  bg-blue-100 p-2 my-1 ">category</p>
+                <p className="para  p-2 my-1 ">category</p>
+
+                  <p className="para p-2  bg-blue-100 my-1">Quantity In</p>
+                  <p className="para p-2 my-1">HSN Code</p>
+                  <p className="para p-2 bg-blue-100 my-1">Item Code</p>
+                  <p className="para p-2 my-1">Item per piece</p>
+                </div>
+                <div className=" flex-[4]  border-dotted border-1">
+                  <p className="para  p-2 my-1 ">{data.brand}</p>
+                  <p className="para  bg-blue-100 p-2 my-1 ">{data.category}</p>
+                  <p className="para  p-2 my-1 ">{data.subcategory}</p>
+
+                  <p className="para p-2  bg-blue-100 my-1 ">{data.meausrement} {data.unitMeausrement}</p>
+                  <p className="para  p-2 my-1 ">{data.hsnCode}</p>
+                  <p className="para p-2  bg-blue-100 my-1 ">{data.itemCode}</p>
+                  <p className="para  p-2 my-1 ">{data.perpiece} Rs</p>
+
+                </div>
+              </div>
             </div>
+
             {subItems?.length > 0 && (
               <div className="p-3 rounded-md">
                 <p className="smhead"> Select Varients</p>
@@ -113,10 +147,11 @@ const ProductDetail = () => {
                   return (
                     <div key={id}>
                       <p
-                        className={`cursor-pointer p-2 w-fit my-1 rounded-lg ${ele === VarientData
+                        className={`cursor-pointer p-2 w-fit my-1 rounded-lg ${
+                          ele === VarientData
                             ? "border-1 border-blue-500 text-blue-500"
                             : "border-1"
-                          }`}
+                        }`}
                         onClick={() => setVarientData(ele)}
                       >
                         {ele.name}
