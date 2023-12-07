@@ -15,6 +15,7 @@ import OrderList from "./pages/OrderList";
 import AddCoupon from "./pages/coupon/AddCoupon";
 import Couponlist from "./pages/coupon/CouponList";
 import BulkUpload from "./pages/products/BulkUpload";
+import BulkImages from "./pages/products/BulkImages";
 export const routes = [
   {
     path: "/admin/dashboard",
@@ -82,11 +83,17 @@ export const routes = [
         txt: "Add Products",
         element: <AddProduct />,
       },
+      // {
+      //   path: "/admin/bulk-products",
+      //   icon: <FaProductHunt fontSize={16} />,
+      //   txt: "Bulk Add",
+      //   element: <BulkUpload />,
+      // },
       {
-        path: "/admin/bulk-products",
+        path: "/admin/bulk-images",
         icon: <FaProductHunt fontSize={16} />,
-        txt: "Bulk Add",
-        element: <BulkUpload />,
+        txt: "Add Images",
+        element: <BulkImages />,
       },
     ],
   },
@@ -104,10 +111,10 @@ export const routes = [
   //   ],
   // },
 ];
-export const  AdminRoute = [
+export const AdminRoute = [
   {
     path: "/dashboard",
     txt: "Dashboard",
-    element:<Dashboard/>
+    element: <Dashboard />
   },
 ]

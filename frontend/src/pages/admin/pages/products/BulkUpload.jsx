@@ -92,6 +92,7 @@ const BulkUpload = () => {
         </label>
         <p className="text-center text-blue-400">Make sure before upload your excel file that your excel is written in right format. <br />if it not fomat in correct way it will not uplaoded !!
           <br /> Here is reference excel file download it and start uploading</p>
+        <p className="text-danger">** Make a comma sepration in image field in excel to add multiple mages</p>
         <a href="/bulkproduct.xlsx" download className="btn btn-primary">Download Excel</a>
         {isPending && (
           <>
@@ -115,11 +116,11 @@ const BulkUpload = () => {
               previous product
             </p>
             <button
-              className="btn btn-outline-primary mt-3 absolute top-60 right-12"
+              className="btn btn-outline-primary mt-3 absolute  right-12"
               type="submit"
               onClick={handleproductUpload}
             >
-              Upload Products
+              Confirm Upload
             </button>
           </>
         )}
