@@ -26,7 +26,6 @@ const ResetPassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password === confirm) {
-            console.log(password);
             try {
                 const res = await resetUserPassword({ token, password });
                 if (res.error) {

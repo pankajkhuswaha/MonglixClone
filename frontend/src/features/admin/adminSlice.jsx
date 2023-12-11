@@ -106,7 +106,6 @@ const admin = createSlice({
       })
       .addCase(delCoupon.rejected, (state,action) => {
         state.loading = false;
-        console.log(action.payload)
         toast.error(action.payload)
       })
       .addCase(addContactUs.rejected, (state, action) => {

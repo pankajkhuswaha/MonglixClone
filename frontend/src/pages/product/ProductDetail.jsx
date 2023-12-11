@@ -44,7 +44,6 @@ const ProductDetail = () => {
   } = SingleProductData;
 
   const Data = VarientData || SingleProductData;
-  console.log(Data);
   return (
     <div>
       {Data ? (

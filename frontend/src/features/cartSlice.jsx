@@ -71,7 +71,6 @@ export const cartSlice = createSlice({
       })
       .addCase(applyCouponcode.rejected, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
         toast.error(action.payload)
       })
       .addCase(addCart.pending, (state) => {

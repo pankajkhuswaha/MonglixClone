@@ -7,7 +7,6 @@ import TransactionTable from "./ttransaction";
 
 const GenerateReport = () => {
   const user = useSelector((st) => st.auth.user?.user?.address);
-  console.log(user);
 
   const transactions = useSelector((st) => st.userorder.orders);
   const dispatch = useDispatch();
@@ -42,7 +41,6 @@ const GenerateReport = () => {
     setCategories(uniqueCategories);
     setAddresses(uniqueAddresses);
 
-    console.log(uniqueAddresses);
     generateReports(transactions);
   }, [transactions]);
 

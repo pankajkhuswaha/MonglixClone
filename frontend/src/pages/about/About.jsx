@@ -1,11 +1,10 @@
-import React from "react";
+/* eslint-disable react/no-unescaped-entities */
 import './index.css'
 import { AboutData } from "../../data/AboutData";
 import { useSelector } from "react-redux";
 const About = () => {
   
   const site = useSelector((st) => st.site.data);
-  console.log(site.primarybg);
   return (
     <div>
       <svg
