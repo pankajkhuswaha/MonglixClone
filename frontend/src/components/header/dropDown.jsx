@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const DropDownHeaDER = () => {
+const DropDownHeader = () => {
   const dispatch = useDispatch();
   const [isShown, setIsShown] = useState(false);
   const navigate = useNavigate();
@@ -65,4 +65,4 @@ const DropDownHeaDER = () => {
   );
 };
 
-export default DropDownHeaDER;
+export default DropDownHeader;

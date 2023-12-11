@@ -1,4 +1,4 @@
-import Header from "./header/Header";
+import Header from "./header";
 import Footer from "./footer/Footer";
 import SearchComponent from "./searchbar/SearchComponent";
 import Imagecarousel from "./productslider/Imagecarousel";
