@@ -15,7 +15,6 @@ export const ProfileResetApi = createAsyncThunk(
       payload,
       config
     );
-    console.log(res);
     return res.data;
   }
 );

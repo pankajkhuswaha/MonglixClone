@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-const ImageDrager = ({ images, setvalue, handleDeleteImage, feild }) => {
+const ImageDrager = ({ images, handleDeleteImage, feild }) => {
   const handleDragStart = (index) => (event) => {
     event.dataTransfer.setData("text/plain", index.toString());
   };
@@ -16,7 +16,6 @@ const ImageDrager = ({ images, setvalue, handleDeleteImage, feild }) => {
     const updatedImages = [...images];
     const [movedImage] = updatedImages.splice(sourceIndex, 1);
     updatedImages.splice(index, 0, movedImage);
-    console.log(setvalue(feild, updatedImages));
   };
   const site = useSelector((st) => st.site.data);
   return (

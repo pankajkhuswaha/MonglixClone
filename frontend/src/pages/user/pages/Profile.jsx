@@ -7,7 +7,6 @@ import { useDispatch ,useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 const Profile = () => {
   const data = useSelector((state) => state.user.value);
-  console.log(data);
   const dispatch = useDispatch();
 
  const formik = useFormik({

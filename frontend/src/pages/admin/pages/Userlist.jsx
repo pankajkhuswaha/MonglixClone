@@ -77,7 +77,7 @@ const Userlist = () => {
       field: "action",
       width: 100,
       renderCell: (params) => (
-        <div onClick={()=>console.log(params.row)} className="w-full flex justify-center items-center">
+        <div className="w-full flex justify-center items-center">
           <button onClick={() => openModal(params.row)}>
             <FaEye size={20} style={{ color: "blue" }} />
           </button>

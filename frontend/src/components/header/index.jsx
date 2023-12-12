@@ -8,7 +8,9 @@ import './index.css'
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { SearchComponent, BtmDrawer } from "../Index";
-import  DropDownHeaDER from "./DropDownHeaDER.JSX";
+import DropDownHeader from "./dropDown.jsx";
+
+
 const Header = () => {
   const cart = useSelector((state) => state.cart.carts);
   const site = useSelector((st) => st.site.data);
@@ -58,7 +60,7 @@ const Header = () => {
                 {site.logo ? (
                   <Link to={"/"}>
                     <img
-                
+
                       className="w-[100px] h-[50px] md:w-[120px] md:h-[60px]"
                       src={site.logo}
                       alt="logo"
@@ -78,7 +80,7 @@ const Header = () => {
                 )}
               </>
             ) : (
-              <DropDownHeaDER />
+              <DropDownHeader />
             )}
             <Stack display={{ xs: "none ", md: "block" }}>
               <SearchComponent style={{ color: "white" }} />
@@ -100,76 +102,76 @@ const Header = () => {
             </Stack>
           </Stack>
 
-     {location.pathname === "/" && 
-     <div
-       className=" heads w-[100vh] p-3 justify-around  "
-       style={{
-         borderTop: "1px solid #180000",
-         borderColor: "black",
-         flexDirection: "row",
-         gap: "24px",
-         boxShadow: "0 12px 15px rgba(0,0,0,.15)",
-         background: site.primarybg,       
-         position: "fixed",
-         display: showDivOnScroll ? "none" : "flex",
-         top: showDivOnScroll ? 0 : 75,
-         right: 0,
-         width: "100%",
-         zIndex: 9,
-       }}
-     >
-       <DropDownHeaDER/>
-       <div className="flex gap-8">
-         <Link to={"/"}>
-           <p className="text-white text-[17px] ">Home</p>
-         </Link>
-         <Link to={"/about"}>
-           <p className="text-white text-[17px] ">About</p>
-         </Link>
-         <Link to={"/contact"}>
-           <p className="text-white text-[17px] ">Contact Us</p>
-         </Link>
-         <Link to={"/product"}>
-           <p className="text-white text-[17px] ">Store</p>
-         </Link>
-       </div>
-       <div className="flex items-center  gap-3">
-         {users ? (
-           <Link to={"/checkout"}>
-             <Badge badgeContent={CartCount} color="primary">
-               <ShoppingBagOutlinedIcon  className= "text-white" />
-             </Badge>
-           </Link>
-         ) : (
-           <Link to="/login">
-             <Badge badgeContent={CartCount} color="primary">
-               <ShoppingBagOutlinedIcon
-                 className="text-white"
-                 style={{ fontSize: "26px" }}
-               />
-             </Badge>
-           </Link>
-         )}
-         {currentuser ? (
-           <Link className="hidden md:flex gap-2"   to={"/users"}>
-             <AccountCircleIcon className="text-white" />
-            <p className="text-md text-white">User</p>
-           </Link>
-         ) : (
-           <Link to={"/login"}>
-             <div className="flex gap-1 flex-row">
-               <PersonOutlineIcon
-                 className="text-white"
-                
-               />
-               <p  className="text-white">Login & SignUp</p>
-            
-             </div>
-           </Link>
-         )}
-       </div>
-     </div>
-}
+          {location.pathname === "/" &&
+            <div
+              className=" heads w-[100vh] p-3 justify-around  "
+              style={{
+                borderTop: "1px solid #180000",
+                borderColor: "black",
+                flexDirection: "row",
+                gap: "24px",
+                boxShadow: "0 12px 15px rgba(0,0,0,.15)",
+                background: site.primarybg,
+                position: "fixed",
+                display: showDivOnScroll ? "none" : "flex",
+                top: showDivOnScroll ? 0 : 75,
+                right: 0,
+                width: "100%",
+                zIndex: 9,
+              }}
+            >
+              <DropDownHeader />
+              <div className="flex gap-8">
+                <Link to={"/"}>
+                  <p className="text-white text-[17px] ">Home</p>
+                </Link>
+                <Link to={"/about"}>
+                  <p className="text-white text-[17px] ">About</p>
+                </Link>
+                <Link to={"/contact"}>
+                  <p className="text-white text-[17px] ">Contact Us</p>
+                </Link>
+                <Link to={"/product"}>
+                  <p className="text-white text-[17px] ">Store</p>
+                </Link>
+              </div>
+              <div className="flex items-center  gap-3">
+                {users ? (
+                  <Link to={"/checkout"}>
+                    <Badge badgeContent={CartCount} color="primary">
+                      <ShoppingBagOutlinedIcon className="text-white" />
+                    </Badge>
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <Badge badgeContent={CartCount} color="primary">
+                      <ShoppingBagOutlinedIcon
+                        className="text-white"
+                        style={{ fontSize: "26px" }}
+                      />
+                    </Badge>
+                  </Link>
+                )}
+                {currentuser ? (
+                  <Link className="hidden md:flex gap-2" to={"/users"}>
+                    <AccountCircleIcon className="text-white" />
+                    <p className="text-md text-white">User</p>
+                  </Link>
+                ) : (
+                  <Link to={"/login"}>
+                    <div className="flex gap-1 flex-row">
+                      <PersonOutlineIcon
+                        className="text-white"
+
+                      />
+                      <p className="text-white">Login & SignUp</p>
+
+                    </div>
+                  </Link>
+                )}
+              </div>
+            </div>
+          }
         </Stack>
       </div>
     </div>

@@ -66,7 +66,6 @@ const Address = () => {
         dispatch(VerifyApi())
       });
   };
-  console.log(user);
 
   return (
     <div className="container">

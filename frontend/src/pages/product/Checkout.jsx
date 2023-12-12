@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./checkout.css";
-import Loader from "../../components/productslider/loader/Loader";
 import Loading from "../../features/loading/Loader";
 import EmptyCart from "../../components/emptycart";
 import numberFormat from "../../essentail/numberFormat";
@@ -11,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
 const Checkout = () => {
   const cart = useSelector((state) => state.cart.carts);
-  ;
+
   const site = useSelector((st) => st.site.data);
   const productLoading = useSelector((st) => st.cart.loading);
   const CartCount = cart.products?.length;
@@ -40,7 +39,7 @@ const Checkout = () => {
                 <div className="flex justify-between  flex-wrap ">
                   <div className="rounded-lg md:w-[60%] mt-[12px]">
                     {carts.products?.map((value, index) => {
-                    
+
                       const { url, name, price, count, _id, discount, total } = value;
                       let defaultQty = count;
                       return (
@@ -81,8 +80,8 @@ const Checkout = () => {
                                 >
                                   -
                                 </span>
-                          
-                             
+
+
                                 <input
                                   type="text"
                                   className="h-8 w-8 border bg-white text-center text-xs outline-none"
@@ -90,7 +89,7 @@ const Checkout = () => {
                                     const newValue = e.target.value.replace(/\D/g, "").slice(0, 2);
                                     setQty(newValue);
                                   }}
-                                  onBlur={(e) => {
+                                  onBlur={() => {
                                     const newQty = qty || defaultQty; // Use the defaultQty if qty is empty
                                     if (newQty >= 1) {
                                       dispatch(updateCart({ id: _id, type: "value", value: newQty }))
@@ -102,7 +101,7 @@ const Checkout = () => {
                                   name="quantity"
                                   maxLength="2"
                                 />
-                               
+
                                 <span
                                   className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
                                   onClick={() => {
