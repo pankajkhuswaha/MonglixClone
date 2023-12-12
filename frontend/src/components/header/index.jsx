@@ -2,14 +2,15 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Stack, Badge } from "@mui/material";
 import TopDrawer from "../bottomdrawer/TopDrawer";
+import { FaHome } from "react-icons/fa";
+
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useLocation } from "react-router-dom";
-import './index.css'
+import "./index.css";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { SearchComponent, BtmDrawer } from "../Index";
 import DropDownHeader from "./dropDown.jsx";
-
 
 const Header = () => {
   const cart = useSelector((state) => state.cart.carts);
@@ -60,7 +61,6 @@ const Header = () => {
                 {site.logo ? (
                   <Link to={"/"}>
                     <img
-
                       className="w-[100px] h-[50px] md:w-[120px] md:h-[60px]"
                       src={site.logo}
                       alt="logo"
@@ -80,7 +80,15 @@ const Header = () => {
                 )}
               </>
             ) : (
-              <DropDownHeader />
+              <>
+                <div className="flex items-center gap-2 py-2">
+                  < Link to={'/'}>
+
+                  <FaHome  style={{fontSize:'28px',color:'white'}}/>
+                  </Link>
+                  <DropDownHeader />
+                </div>
+              </>
             )}
             <Stack display={{ xs: "none ", md: "block" }}>
               <SearchComponent style={{ color: "white" }} />
@@ -97,12 +105,17 @@ const Header = () => {
               </div>
               <div className="p-2  md:flex flex-col items-center hidden   rounded-lg">
                 <p className=" text-white">Customer Services</p>
-                <a href="tel:7678536510" className=" text-white text-bold text-xl">+917678536510</a>
+                <a
+                  href="tel:7678536510"
+                  className=" text-white text-bold text-xl"
+                >
+                  +917678536510
+                </a>
               </div>
             </Stack>
           </Stack>
 
-          {location.pathname === "/" &&
+          {location.pathname === "/" && (
             <div
               className=" heads w-[100vh] p-3 justify-around  "
               style={{
@@ -160,18 +173,14 @@ const Header = () => {
                 ) : (
                   <Link to={"/login"}>
                     <div className="flex gap-1 flex-row">
-                      <PersonOutlineIcon
-                        className="text-white"
-
-                      />
+                      <PersonOutlineIcon className="text-white" />
                       <p className="text-white">Login & SignUp</p>
-
                     </div>
                   </Link>
                 )}
               </div>
             </div>
-          }
+          )}
         </Stack>
       </div>
     </div>

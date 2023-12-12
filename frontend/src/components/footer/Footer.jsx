@@ -111,7 +111,7 @@ const Footer = () => {
             <div className="col-12 col-md-6 col-xl-3">
               <p className=" font-bold">Categories</p>
               <div className=" cursor-pointer text-gray-500">
-                {categories.map((ele, i) => {
+                {categories.slice(0,4).map((ele, i) => {
                   return (
                     <p
                       key={i}

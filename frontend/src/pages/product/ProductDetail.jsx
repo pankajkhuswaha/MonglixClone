@@ -48,7 +48,7 @@ const ProductDetail = () => {
     <div>
       {Data ? (
         <div className="flex flex-wrap gap-2 flex-row">
-          <div className="flex-[3] border-1 rounded-md bg-white">
+          <div className="flex-[3] border-1 h-fit rounded-md bg-white">
             <SelectImage img={Data.images} data={Data} />
           </div>
           <div className="flex-[5] border-1 bg-white rounded-md p-3">
@@ -111,31 +111,37 @@ const ProductDetail = () => {
                 </a>
               )}
 
-          
 
-              <div className="flex border-dotted mt-4  border-1 justify-between">
-                <div className=" flex-[6]  font-bolder capitalize  border-dotted border-2">
-                <div className="para p-2  my-1">brand</div>
-                <p className="para  bg-blue-100 p-2 my-1 ">category</p>
-                <p className="para  p-2 my-1 ">category</p>
 
-                  <p className="para p-2  bg-blue-100 my-1">Quantity In</p>
-                  <p className="para p-2 my-1">HSN Code</p>
-                  <p className="para p-2 bg-blue-100 my-1">Item Code</p>
-                  <p className="para p-2 my-1">Item per piece</p>
-                </div>
-                <div className=" flex-[4]  border-dotted border-1">
-                  <p className="para  p-2 my-1 ">{data.brand}</p>
-                  <p className="para  bg-blue-100 p-2 my-1 ">{data.category}</p>
-                  <p className="para  p-2 my-1 ">{data.subcategory}</p>
+<div className="text-nowrap flex border-dotted mt-4 border-1 justify-between">
+  <div className="flex-[6] font-bolder capitalize border-dotted border-2">
+    {data.brand && <div className="para p-2 my-1">Brand</div>}
+    {data.category && <p className="para bg-blue-100 p-2 my-1">Category</p>}
+    {data.subcategory && <p className="para p-2 my-1">Subcategory</p>}
+    {data.measurement && data.unitMeasurement && (
+      <p className="para p-2 bg-blue-100 my-1">
+        Quantity In:
+      </p>
+    )}
+    {data.hsnCode && <p className="para p-2 my-1">HSN Code: </p>}
+    {data.itemCode && <p className="para p-2 bg-blue-100 my-1">Item Code: </p>}
+    {data.perpiece && <p className="para p-2 my-1">Item per piece: </p>}
+  </div>
+  <div className="flex-[4] border-dotted border-1">
+    {data.brand && <p className="para p-2 my-1">{data.brand}</p>}
+    {data.category && <p className="para bg-blue-100 p-2 my-1">{data.category}</p>}
+    {data.subcategory && <p className="para p-2 my-1">{data.subcategory}</p>}
+    {data.measurement && data.unitMeasurement && (
+      <p className="para p-2 bg-blue-100 my-1">
+        {data.measurement} {data.unitMeasurement}
+      </p>
+    )}
+    {data.hsnCode && <p className="para p-2 my-1">{data.hsnCode}</p>}
+    {data.itemCode && <p className="para p-2 bg-blue-100 my-1">{data.itemCode}</p>}
+    {data.perpiece && <p className="para p-2 my-1">{data.perpiece} Rs</p>}
+  </div>
+</div>
 
-                  <p className="para p-2  bg-blue-100 my-1 ">{data.meausrement} {data.unitMeausrement}</p>
-                  <p className="para  p-2 my-1 ">{data.hsnCode}</p>
-                  <p className="para p-2  bg-blue-100 my-1 ">{data.itemCode}</p>
-                  <p className="para  p-2 my-1 ">{data.perpiece} Rs</p>
-
-                </div>
-              </div>
             </div>
 
             {subItems?.length > 0 && (
