@@ -21,11 +21,11 @@ const PrivacyPolicy = () => {
           the comments form, and also the visitor’s IP address and browser user
           agent string to help spam detection.
         </p>
-        <p>
+        <p className="">
           An anonymized string created from your email address (also called a
           hash) may be provided to the Gravatar service to see if you are using
           it. The Gravatar service privacy policy is available here:
-          https://www.ecommerce.deepmart.shop/privacy/. After approval of your
+         <a className="text-wrap text-blue-800 font-bold ml-2" href="https://www.ecommerce.deepmart.shop/privacy/">Visit</a> After approval of your
           comment, your profile picture is visible to the public in the context
           of your comment.
         </p>

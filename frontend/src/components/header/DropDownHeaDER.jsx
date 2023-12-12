@@ -14,7 +14,7 @@ const DropDownHeaDER = () => {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative p-1">
         <div
           onMouseEnter={() => setIsShown(true)}
           className="flex gap-2 items-center relative cursor-pointer"
