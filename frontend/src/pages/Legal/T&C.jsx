@@ -5,7 +5,7 @@ const TC = () => {
        {
          heading: "1. Acceptance of Terms and Conditions",
          para: [
-       '1.1. Welcome to ecommerce.deepmart.shop ("the Website"). By accessing or using this Website, you agree to comply with and be bound by these Terms and Conditions of Use ("Terms"). If you do not agree to these Terms, please do not use the Website.'
+           '1.1. Welcome to eprocuretech.com ("the Website"). By accessing or using this Website, you agree to comply with and be bound by these Terms and Conditions of Use ("Terms"). If you do not agree to these Terms, please do not use the Website.'
          ],
        },
        
@@ -19,7 +19,7 @@ const TC = () => {
        {
          heading: "3 Products and Services",
          para: [
-           "3.1. ecommerce.deepmart.shop offers a platform for B2B transactions, including the listing and sale of products and services. We do not endorse or guarantee the quality, safety, or legality of any products or services listed on our platform.",
+           "3.1. eprocuretech.com offers a platform for B2B transactions, including the listing and sale of products and services. We do not endorse or guarantee the quality, safety, or legality of any products or services listed on our platform.",
          ],
        },
        {
@@ -43,7 +43,7 @@ const TC = () => {
        {
          heading: "7.Content and Intellectual Property",
          para: [
-           "7.1. All content on the Website, including text, images, logos, and trademarks, is the property of ecommerce.deepmart.shop or its licensors and is protected by intellectual property laws. Customers may not use, reproduce, or distribute any content without prior written consent.",
+           "7.1. All content on the Website, including text, images, logos, and trademarks, is the property of eprocuretech.com or its licensors and is protected by intellectual property laws. Customers may not use, reproduce, or distribute any content without prior written consent.",
          ],
        },
        {
@@ -55,25 +55,25 @@ const TC = () => {
        {
          heading: "9.Termination",
          para: [
-           "9.1. ecommerce.deepmart.shop reserves the right to terminate or suspend the accounts of Customers who violate these Terms or engage in unlawful activities.",
+           "9.1. eprocuretech.com reserves the right to terminate or suspend the accounts of Customers who violate these Terms or engage in unlawful activities.",
          ],
        },
        {
          heading: "10. Limitation of Liability",
          para: [
-           "10.1. ecommerce.deepmart.shop is not liable for any damages, including but not limited to direct, indirect, incidental, or consequential damages, arising from the use or inability to use the Website.",
+           "10.1. eprocuretech.com is not liable for any damages, including but not limited to direct, indirect, incidental, or consequential damages, arising from the use or inability to use the Website.",
          ],
        },
        {
          heading: "11. Changes to Terms",
          para: [
-           "11.1. ecommerce.deepmart.shop reserves the right to modify or update these Terms at any time. Customers will be notified of significant changes, and continued use of the Website after such modifications constitutes acceptance of the revised Terms.",
+           "11.1. eprocuretech.com reserves the right to modify or update these Terms at any time. Customers will be notified of significant changes, and continued use of the Website after such modifications constitutes acceptance of the revised Terms.",
          ],
        },
        {
          heading: "12. Contact Information",
          para: [
-           "12.1. For any questions or concerns regarding these Terms and Conditions, please contact us at https://ecommerce.deepmart.shop/contact.",
+           "12.1. For any questions or concerns regarding these Terms and Conditions, please contact us at https://eprocuretech.com/contact.",
          ],
        },
      ];
@@ -122,14 +122,14 @@ const TC = () => {
           any part of our website, please contact our customer support team for
           assistance. We are committed to making reasonable accommodations to
           ensure everyone can access the information and services offered on
-          ecommerce.deepmart.shop.
+          eprocuretech.com.
         </p>
         <h1>Contact Information</h1>
         <p>
           For accessibility-related inquiries or assistance, please contact our
           customer support team using one of the following methods:
           <br />
-          Email: contact@ecommerce.deepmart.shop
+          Email: contact@eprocuretech.com
         </p>
         <h1>Feedback and Suggestions</h1>
         <p>

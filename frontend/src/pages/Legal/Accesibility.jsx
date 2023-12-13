@@ -5,7 +5,7 @@ const Accesibility = () => {
       <div className="mainsection">
         <h1>Accessibility Statement</h1>
         <p className="py-2">
-          ecommerce.deepmart.shop is committed to providing a website that is
+          eprocuretech.com is committed to providing a website that is
           accessible to the widest possible audience, regardless of disability
           or technology limitations. We are continually improving the user
           experience for everyone and strive to meet or exceed the accessibility
@@ -41,14 +41,14 @@ const Accesibility = () => {
           any part of our website, please contact our customer support team for
           assistance. We are committed to making reasonable accommodations to
           ensure everyone can access the information and services offered on
-          ecommerce.deepmart.shop.
+          eprocuretech.com.
         </p>
         <h1>Contact Information</h1>
         <p>
           For accessibility-related inquiries or assistance, please contact our
           customer support team using one of the following methods:
           <br />
-          Email: contact@ecommerce.deepmart.shop
+          Email: contact@eprocuretech.com
         </p>
         <h1>Feedback and Suggestions</h1>
         <p>
