@@ -89,12 +89,12 @@ export const routes = [
       //   txt: "Bulk Add",
       //   element: <BulkUpload />,
       // },
-      {
-        path: "/admin/bulk-images",
-        icon: <FaProductHunt fontSize={16} />,
-        txt: "Add Images",
-        element: <BulkImages />,
-      },
+      // {
+      //   path: "/admin/bulk-images",
+      //   icon: <FaProductHunt fontSize={16} />,
+      //   txt: "Add Images",
+      //   element: <BulkImages />,
+      // },
     ],
   },
   // {
