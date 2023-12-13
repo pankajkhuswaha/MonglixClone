@@ -10,9 +10,9 @@ const PrivacyPolicy = () => {
         <h1>Who we are</h1>
         <p>
           Our website address is:
-          <a href="  https://www.ecommerce.deepmart.shop">
+          <a href="  https://www.eprocuretech.com">
             {" "}
-            https://www.ecommerce.deepmart.shop
+            https://www.eprocuretech.com
           </a>
         </p>
         <h1>Comments</h1>
@@ -26,7 +26,7 @@ const PrivacyPolicy = () => {
           An anonymized string created from your email address (also called a
           hash) may be provided to the Gravatar service to see if you are using
           it. The Gravatar service privacy policy is available here:
-         <a className="text-wrap text-blue-800 font-bold ml-2" href="https://www.ecommerce.deepmart.shop/privacy/">Visit</a> After approval of your
+          <a className="text-wrap text-blue-800 font-bold ml-2" href="https://www.eprocuretech.com/privacy/">Visit</a> After approval of your
           comment, your profile picture is visible to the public in the context
           of your comment.
         </p>

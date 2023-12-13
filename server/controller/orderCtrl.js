@@ -97,7 +97,7 @@ const createOrder = async (req, res, next) => {
       },
       { new: true }
     );
-    res.redirect(`https://ecommerce.deepmart.shop/users/orders/success`);
+    res.redirect(`https://eprocuretech.com/users/orders/success`);
     // res.redirect(`http://localhost:3001/users/orders/success`);
     // const data = {
     //   to: "khuswahapankaj00@gmail.com",

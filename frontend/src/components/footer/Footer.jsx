@@ -10,10 +10,13 @@ const Footer = () => {
       name: "Contact Us",
       links: "/contact",
     },
-
     {
       name: "About Us",
       links: "/about",
+    },
+    {
+      name: "Bulk Order",
+      links: "/bulk",
     },
   ];
 
@@ -23,7 +26,7 @@ const Footer = () => {
 
   return (
     <>
-    <br />
+      <br />
       <footer className="bg-[#3d9bff86]">
         <div className="container ">
           <div className="p-4 row justify-center">
@@ -111,7 +114,7 @@ const Footer = () => {
             <div className="col-12 col-md-6 col-xl-3">
               <p className=" font-bold">Categories</p>
               <div className=" cursor-pointer text-gray-500">
-                {categories.slice(0,4).map((ele, i) => {
+                {categories.slice(0, 4).map((ele, i) => {
                   return (
                     <p
                       key={i}
@@ -129,16 +132,16 @@ const Footer = () => {
               <p className="font-bold">Legal</p>
               <div className=" text-gray-500">
                 <Link to={"/privacyPolicy"}>
-                  <p      className=" hover:text-[#ff4268]  "> Privacy Policy </p>
+                  <p className=" hover:text-[#ff4268]  "> Privacy Policy </p>
                 </Link>
                 <Link to={"/tc"}>
-                  <p     className=" hover:text-[#ff4268]  "> Terms &amp; Conditions </p>
+                  <p className=" hover:text-[#ff4268]  "> Terms &amp; Conditions </p>
                 </Link>
                 <Link to={"/return"}>
-                  <p     className=" hover:text-[#ff4268]  "> Return And Refund Policy </p>
+                  <p className=" hover:text-[#ff4268]  "> Return And Refund Policy </p>
                 </Link>
                 <Link to={"/accesibility"}>
-                  <p     className=" hover:text-[#ff4268]  "> Accessibility </p>
+                  <p className=" hover:text-[#ff4268]  "> Accessibility </p>
                 </Link>
               </div>
             </div>

@@ -23,7 +23,7 @@ const ProductLayout = (props) => {
   const site = useSelector((st) => st.site.data);
 
   return (
-    <div className="container p-0">
+    <div className="p-0">
       <Stack p={{ xs: 1, md: 3 }}>
         <Stack
           p={{ xs: 1, md: 2 }}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import './sidebar.css'
 import {
   Accordion,
@@ -22,7 +22,7 @@ export function SideFilter() {
 
   const data = useSelector((state) => state.products.products);
 
-  const categories = [...new Set(data.map((ele) => ele.category.toLowerCase()))];
+  const categories = [...new Set(data.map((ele) => ele.category))];
   const [openCategory, setOpenCategory] = useState(null);
   const Brands = [...new Set(data.map((ele) => ele.brand))];
   const handleOpenCategory = (ele) => {
