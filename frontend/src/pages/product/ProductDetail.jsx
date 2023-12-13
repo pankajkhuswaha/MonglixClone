@@ -53,8 +53,8 @@ const ProductDetail = () => {
               <SelectImage img={Data.images} data={Data} />
             </div>
             <div className="flex-[5] border-1 bg-white rounded-md p-3">
-              <div className="relative">
-                <div className="text-md BRAND w-[34%]  p-1 overflow-y-hidden text-gray-600 ">
+              <div className="">
+                <div className="text-md BRAND w-[calc(100%-160px)] md:w-[37%]  p-1 overflow-y-hidden text-gray-600 ">
                   {data.brand}
                 </div>
                 <div className="p-3  ">
