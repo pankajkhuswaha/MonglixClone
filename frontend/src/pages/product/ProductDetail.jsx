@@ -59,6 +59,7 @@ const ProductDetail = () => {
               <div className="p-3  ">
                 <p className="lghead py-2">{Data.name}</p>
 
+
                 <p className="text-2xl py-2 font-semibold text-[#54546b]">
                   {!user &&
                     numberFormat(

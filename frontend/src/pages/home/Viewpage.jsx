@@ -5,8 +5,9 @@ import { useSelector } from "react-redux";
 const Viewpage = () => {
   const data = useSelector((state) => state.products.products);
   const loading = useSelector((state) => state.products.loading);
-  let categories = [...new Set(data.map((item) => item.category))];
-
+  // let categories = [...new Set(data.map((item) => item.category))];
+  const categories = [...new Set(data.map((ele) => ele.category.toLowerCase()))];
+console.log(categories);
   return (
     <div className="relative   max-sm:top-0 top-[45px]">
       <Banner />
@@ -16,7 +17,7 @@ const Viewpage = () => {
           <ProductLayout key={id} title={ele} load={loading}>
             <Imagecarousel
               load={loading}
-              products={data.filter((item) => item.category === ele)}
+              products={data.filter((item) => item.category.toLowerCase() === ele)}
             />
           </ProductLayout>
         );

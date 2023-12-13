@@ -21,6 +21,7 @@ const PrivacyPolicy = () => {
           the comments form, and also the visitor’s IP address and browser user
           agent string to help spam detection.
         </p>
+        
         <p className="">
           An anonymized string created from your email address (also called a
           hash) may be provided to the Gravatar service to see if you are using

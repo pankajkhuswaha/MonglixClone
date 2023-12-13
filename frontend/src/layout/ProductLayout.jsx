@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react-refresh/only-export-components */
 import { Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Buttonele from "../components/button/Buttonele";
-import Skeleton from "@mui/material/Skeleton";
 import { useSelector, useDispatch } from "react-redux";
 import { AllFilterApi } from "../features/ProductSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
@@ -18,6 +18,7 @@ export const handleSeeAllClick = (dispatch, navigate, title) => {
 const ProductLayout = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // eslint-disable-next-line react/prop-types
   const { title } = props;
   const site = useSelector((st) => st.site.data);
 
@@ -33,7 +34,7 @@ const ProductLayout = (props) => {
           justifyContent={"space-between"}
         >
       
-            <h1 className="md:text-[24px] text-[18px] text-gray-700 font-bold">
+            <h1 className="md:text-[24px] capitalize text-[18px] text-gray-700 font-bold">
               {title}
             </h1>
     
