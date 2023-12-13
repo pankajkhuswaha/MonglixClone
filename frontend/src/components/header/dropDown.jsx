@@ -50,7 +50,7 @@ const DropDownHeader = () => {
                           handleSeeAllClick(dispatch, navigate, ele)
                         }
                         style={{ textWrap: "nowrap" }}
-                        className="w-full cursor-pointer px-1 text-gray-600  text-[16px] "
+                        className="w-full cursor-pointer capitalize px-1 text-gray-600  text-[16px] "
                       >
                         {ele}
                       </p>

@@ -22,7 +22,7 @@ export function SideFilter() {
 
   const data = useSelector((state) => state.products.products);
 
-  const categories = [...new Set(data.map((ele) => ele.category))];
+  const categories = [...new Set(data.map((ele) => ele.category.toLowerCase()))];
   const [openCategory, setOpenCategory] = useState(null);
   const Brands = [...new Set(data.map((ele) => ele.brand))];
   const handleOpenCategory = (ele) => {
@@ -53,7 +53,7 @@ export function SideFilter() {
 
                   <p
                     onClick={() => handleSeeAllClick("category", ele)}
-                    className="text-lg  text-gray-800"
+                    className="text-lg  capitalize text-gray-800"
                   >
                     {ele}
                   </p>
