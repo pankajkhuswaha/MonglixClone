@@ -1,5 +1,4 @@
 .mycard {
-  
   border-radius: 10px;
   /* height: 99%; */
   background-color: white;
@@ -24,11 +23,11 @@ p {
   object-fit: cover;
   justify-content: center;
 }
-.BRAND{
+.BRAND {
   width: 100%;
   border-radius: 3px;
-    background-color: rgb(59, 155, 255);
-    clip-path: polygon(0 0, 57% 0%, 46% 100%, 0% 100%);
-    padding-left: 10px;
-    color: white !important;
+  background-color: rgb(59, 155, 255);
+  clip-path: polygon(0 0, 57% 0%, 46% 100%, 0% 100%);
+  padding-left: 10px;
+  color: white !important;
 }

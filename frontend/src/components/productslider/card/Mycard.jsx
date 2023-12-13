@@ -55,8 +55,8 @@ const Mycard = ({ data, load }) => {
         <div
           className={
             pathname.includes("product")
-                ? "mycard w-[160px] md:w-[210px] my-2 hover:shadow-xl rounded-b-lg border border-[#e5e7eb]"
-              : "mycard w-[210px] hover:shadow-xl shadow-md rounded-b-lg mr-2 my-4"
+                ? "mycard w-[180px] md:w-[212px] my-2 hover:shadow-xl rounded-b-lg border border-[#e5e7eb]"
+                : "mycard w-[180px] md:w-[210px] hover:shadow-xl shadow-md rounded-b-lg mr-2 my-4"
           }
         >
           <div className="p-3">

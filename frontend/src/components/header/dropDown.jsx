@@ -11,7 +11,7 @@ const DropDownHeader = () => {
   const navigate = useNavigate();
   const data = useSelector((state) => state.products.products);
   // const categories = [...new Set(data.map((ele) => ele.category))];
-  const categories = [...new Set(data.map((ele) => ele.category.toLowerCase()))];
+  const categories = [...new Set(data.map((ele) => ele.category))];
 
   return (
     <>

@@ -34,9 +34,8 @@ const addProduct = asyncHandle(async (req, res) => {
     } catch (error) {
       if (error.message.includes("duplicate")) {
         res.send({
-          error: `Entered ${
-            error.message.split("{")[1].split(":")[0]
-          } is already registered`,
+          error: `Entered ${error.message.split("{")[1].split(":")[0]
+            } is already registered`,
         });
       } else {
         res.send({ error: error.message, errorDetail: error });
@@ -77,9 +76,9 @@ const searchProduct = asyncHandle(async (req, res) => {
     const filter = {};
     if (search) {
       filter.$or = [
-        { name: { $regex: new RegExp(search, "i") } },
-        { category: { $regex: new RegExp(search, "i") } },
-        { brand: { $regex: new RegExp(search, "i") } },
+        { name: { $regex: new RegExp(search) } },
+        { category: { $regex: new RegExp(search) } },
+        { brand: { $regex: new RegExp(search) } },
       ];
     }
     if (category) {
