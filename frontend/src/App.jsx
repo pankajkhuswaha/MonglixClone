@@ -4,7 +4,6 @@ import { useQueries } from "@tanstack/react-query";
 import Errorpage from "./pages/404/Errorpage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Stack } from "@mui/material";
 import { adduser } from "./features/authSlice";
 import { Link, Route, Routes } from "react-router-dom";
 import { userCart, getSiteConfigs } from "./utils/Apis";
@@ -56,8 +55,7 @@ const App = () => {
       {error ? (
         <Errorpage />
       ) : (
-        <Layout>
-          <Stack sx={{ padding: { sm: "12px", md: "30px" } }}>
+          <Layout>
             <Routes>
               {Routess?.map((ele, id) => {
                 return (
@@ -73,7 +71,6 @@ const App = () => {
                 </button>
               </Link>
             )}
-          </Stack>
         </Layout>
       )}
     </>

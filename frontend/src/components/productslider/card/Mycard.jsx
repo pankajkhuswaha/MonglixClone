@@ -47,7 +47,7 @@ const Mycard = ({ data, load }) => {
 
   return (
     <div
-      className="flex w-fit"
+      className={`flex items-center justify-center ${pathname.includes("product") && "w-fit"}`}
     >
       {load ? (
         <Loader />
@@ -55,8 +55,8 @@ const Mycard = ({ data, load }) => {
         <div
           className={
             pathname.includes("product")
-                ? "mycard w-[180px] md:w-[212px] my-2 hover:shadow-xl rounded-b-lg border border-[#e5e7eb]"
-                : "mycard w-[180px] md:w-[220px] hover:shadow-xl shadow-md rounded-b-lg mr-2 my-4"
+                ? "mycard w-[170px] md:w-[212px] my-2 hover:shadow-xl rounded-b-lg border border-[#e5e7eb]"
+                : "mycard w-[165px] md:w-[220px] hover:shadow-xl shadow-md rounded-b-lg mr-2 my-4"
           }
         >
           <div className="p-3">
