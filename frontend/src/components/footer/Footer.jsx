@@ -29,7 +29,7 @@ const Footer = () => {
       <br />
       <footer className="bg-[#3d9bff86]">
         <div className="container ">
-          <div className="p-4 row justify-center">
+          <div className="p-2 row justify-center">
             <div className="col-12 col-md-6 col-xl-3 flex flex-col items-start">
               <Link to={"/"}>
                 <img

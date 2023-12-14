@@ -24,31 +24,29 @@ const ProductLayout = (props) => {
 
   return (
     <div className="p-0">
-      <Stack p={{ xs: 1, md: 3 }}>
-        <Stack
-          p={{ xs: 1, md: 2 }}
-          borderRadius={2}
-          alignItems={"center"}
-          sx={{ backgroundColor: site.secondarybg }}
-          flexDirection={"row"}
-          justifyContent={"space-between"}
-        >
-      
-            <h1 className="md:text-[24px] capitalize text-[18px] text-gray-700 font-bold">
-              {title}
-            </h1>
-    
+      <Stack
+        p={{ xs: 1, md: 2 }}
+        borderRadius={2}
+        alignItems={"center"}
+        sx={{ backgroundColor: site.secondarybg }}
+        flexDirection={"row"}
+        justifyContent={"space-between"}
+      >
 
-          <Buttonele
-            width={"80%"}
-            title={"See All"}
-            onClick={() => handleSeeAllClick(dispatch, navigate, title)}
+        <h1 className="md:text-[24px] capitalize text-[18px] text-gray-700 font-bold">
+          {title}
+        </h1>
 
-          />
-        </Stack>
 
-        {props.children}
+        <Buttonele
+          width={"80%"}
+          title={"See All"}
+          onClick={() => handleSeeAllClick(dispatch, navigate, title)}
+
+        />
       </Stack>
+
+      {props.children}
     </div>
   );
 };

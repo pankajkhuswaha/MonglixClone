@@ -47,7 +47,7 @@ const ProductDetail = () => {
   return (
     <div>
       {Data ? (
-        <div className="conatiner">
+        <div className="container py-4">
           <div className="flex flex-wrap gap-2 flex-row">
             <div className="flex-[3] border-1 h-fit rounded-md bg-white">
               <SelectImage img={Data.images} data={Data} />

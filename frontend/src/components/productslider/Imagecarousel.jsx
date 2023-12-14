@@ -37,7 +37,7 @@ export default function Imagecarousel({ products, load }) {
 
     responsive: [
       {
-        breakpoint: 1400,
+        breakpoint: 1280,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
@@ -45,23 +45,15 @@ export default function Imagecarousel({ products, load }) {
         },
       },
       {
-        breakpoint: 1024,
+        breakpoint: 700,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
         },
       },
       {
-        breakpoint: 390,
+        breakpoint: 400,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -71,7 +63,7 @@ export default function Imagecarousel({ products, load }) {
   };
   return (
     <div className="relative   ">
-      <Slider {...settings}  >
+      <Slider {...settings} >
       {products.map((ele, i) => {
         return  <Mycard key={i} data={ele} load={load}  />;
       })}

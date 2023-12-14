@@ -11,10 +11,8 @@ const Layout = (props) => {
   return (
     <div style={{background:site.mainbg}}>
       {!isAtAdmin && <Header />}
-      <div className="relative">
 
       {props.children}
-      </div>
       {!isAtAdmin && <Footer />}
     </div>
   );

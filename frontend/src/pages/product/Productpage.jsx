@@ -1,5 +1,5 @@
 
-import  { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import LftDrawer from "../../components/bottomdrawer/LftDrawer";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -47,7 +47,7 @@ export default function Productpage() {
   }
 
   return (
-    <div className="">
+    <div className="container">
       <Stack
         display={"flex"}
         gap={2}
@@ -65,7 +65,7 @@ export default function Productpage() {
             sx={{
               flex: 2,
               position: "sticky",
-              top: "19%",
+              top: "10%",
               height: "100%",
             }}
           >
@@ -103,7 +103,7 @@ export default function Productpage() {
             </FormControl>
           </div>
 
-          <div className="row justify-center"
+          <div className="row justify-evenly"
           >
             {Products.map((ele, i) => {
               return <Mycard data={ele} key={i} />;
