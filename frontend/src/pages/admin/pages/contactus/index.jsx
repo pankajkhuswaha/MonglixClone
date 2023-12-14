@@ -73,7 +73,7 @@ const ContactUs = () => {
             <br />
             Email:-
             <span style={{ color: site?.primarybg }} className="font-bold">
-              contact@eprocuretech.com
+              contact@ecommerce.deepmart.shop
             </span>
           </p>
         </div>

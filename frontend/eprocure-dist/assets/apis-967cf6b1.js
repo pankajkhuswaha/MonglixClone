@@ -1,1 +1,0 @@
-import{ap as e,aT as r,aU as a}from"./index-058e87a5.js";const n=async s=>(await e.post(`${r}user/forgot-password-token`,s,a)).data,p=async s=>(await e.put(`${r}user/reset-password/${s.token}`,{password:s.password})).data,c=async s=>(await e.get(`${r}user/reset-password/${s.token}`)).data;export{c as C,n as f,p as r};

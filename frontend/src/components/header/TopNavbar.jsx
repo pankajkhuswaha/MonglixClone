@@ -11,7 +11,6 @@ import useShowonSroll from "./useShowonSroll.js";
 const TopNavbar = () => {
     const site = useSelector((st) => st.site.data);
     const visible = useShowonSroll();
-    console.log(visible)
     return (
         <div
             className={`z-50 ${visible ? "sticky top-0" : ""}`}

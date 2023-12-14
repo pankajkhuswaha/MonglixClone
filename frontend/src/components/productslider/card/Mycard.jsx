@@ -47,7 +47,7 @@ const Mycard = ({ data, load }) => {
 
   return (
     <div
-      className={`flex items-center justify-center ${pathname.includes("product") && "w-fit"}`}
+      className={`flex items-center justify-center ${pathname.includes("product") && "w-fit p-0"}`}
     >
       {load ? (
         <Loader />
@@ -55,11 +55,11 @@ const Mycard = ({ data, load }) => {
         <div
           className={
             pathname.includes("product")
-                ? "mycard w-[170px] md:w-[212px] my-2 hover:shadow-xl rounded-b-lg border border-[#e5e7eb]"
-                : "mycard w-[165px] md:w-[220px] hover:shadow-xl shadow-md rounded-b-lg mr-2 my-4"
+                ? "mycard w-[160px] min-[380px]:w-[165px] border-[#e5e7eb] md:w-[212px] my-2 hover:shadow-xl rounded-b-lg border "
+                : "mycard w-[160px] md:w-[220px] hover:shadow-xl shadow-md rounded-b-lg mr-2 my-4"
           }
         >
-          <div className="p-3">
+            <div className="p-1 md:p-3">
             <Link to={`/products/${data._id}`} state={data}>
               <div className="imgcontainer">
                 <img src={data.images[0]} alt="" width={140} height={140} />

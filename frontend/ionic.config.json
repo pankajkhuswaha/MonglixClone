@@ -1,0 +1,7 @@
+{
+  "name": "mart",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

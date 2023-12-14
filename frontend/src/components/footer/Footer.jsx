@@ -147,8 +147,8 @@ const Footer = () => {
             </div>
           </div>
           <hr />
-          <div className="col-12 text-center py-2">
-            Copyright © {new Date().getFullYear()} E-Procure, All Rights
+          <div className="col-12 hidden lg:block text-center py-2">
+            Copyright © {new Date().getFullYear()} DeepnapSoftech, All Rights
             Reserved . || Design and Developed By Deepnap Softech
           </div>
         </div>
