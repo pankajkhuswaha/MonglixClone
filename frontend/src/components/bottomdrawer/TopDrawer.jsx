@@ -23,15 +23,16 @@ export default function TopDrawer() {
   };
 
 
-const handleDrawerClose = () => {
-  setState({ ...state, top: false });
-};
+  const handleDrawerClose = () => {
+    setState({ ...state, top: false });
+  };
 
   const list = (anchor) => (
-    <Box 
+    <Box
       sx={{
         width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
         height: "50px",
+
       }}
       role="presentation"
       onClick={toggleDrawer(anchor, true)}
