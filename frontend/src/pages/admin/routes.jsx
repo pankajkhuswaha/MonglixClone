@@ -83,33 +83,33 @@ export const routes = [
         txt: "Add Products",
         element: <AddProduct />,
       },
-      // {
-      //   path: "/admin/bulk-products",
-      //   icon: <FaProductHunt fontSize={16} />,
-      //   txt: "Bulk Add",
-      //   element: <BulkUpload />,
-      // },
-      // {
-      //   path: "/admin/bulk-images",
-      //   icon: <FaProductHunt fontSize={16} />,
-      //   txt: "Add Images",
-      //   element: <BulkImages />,
-      // },
+      {
+        path: "/admin/bulk-products",
+        icon: <FaProductHunt fontSize={16} />,
+        txt: "Bulk Add",
+        element: <BulkUpload />,
+      },
+      {
+        path: "/admin/bulk-images",
+        icon: <FaProductHunt fontSize={16} />,
+        txt: "Add Images",
+        element: <BulkImages />,
+      },
     ],
   },
-  // {
-  //   path: "/admin/cus",
-  //   icon: <CgWebsite fontSize={22} color="skyblue" />,
-  //   txt: "Customize Website",
-  //   children: [
-  //     {
-  //       path: "/admin/custom-homepage",
-  //       icon: <FaProductHunt fontSize={16} />,
-  //       txt: "Home Page",
-  //       element: <Homepage />,
-  //     },
-  //   ],
-  // },
+  {
+    path: "/admin/cus",
+    icon: <CgWebsite fontSize={22} color="skyblue" />,
+    txt: "Website",
+    children: [
+      {
+        path: "/admin/custom-homepage",
+        icon: <FaProductHunt fontSize={16} />,
+        txt: "Home Page",
+        element: <Homepage />,
+      },
+    ],
+  },
 ];
 export const AdminRoute = [
   {

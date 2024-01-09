@@ -19,25 +19,25 @@ export default function TopDrawer() {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    if (event && event.currentTarget.tagName.toLowerCase() === "button") {
+      setState({ ...state, [anchor]: open });
+    }
   };
 
-
-const handleDrawerClose = () => {
-  setState({ ...state, top: false });
-};
+  const handleDrawerClose = () => {
+    setState({ ...state, top: false });
+  };
 
   const list = (anchor) => (
-    <Box 
+    <Box
       sx={{
         width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
-        height: "50px",
       }}
       role="presentation"
-      onClick={toggleDrawer(anchor, true)}
-      onKeyDown={toggleDrawer(anchor, true)}
     >
-      <SearchComponent  closeDrawer={handleDrawerClose} />
+      <div className="flex justify-center p-1">
+        <SearchComponent closeDrawer={handleDrawerClose} />
+      </div>
     </Box>
   );
 

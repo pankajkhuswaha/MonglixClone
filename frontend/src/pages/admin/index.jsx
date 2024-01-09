@@ -102,7 +102,7 @@ const Admin = () => {
                 : "col-12 flex justify-between pt-4"
             }
           >
-            <div className="mt-[20px] w-full min-h-[84vh]">
+            <div className="mt-[20px] w-full min-h-[84vh] p-4">
               <Routes>
                 <Route path="*" element={<Dashboard />} />
                 {routes.map((route, i) => {

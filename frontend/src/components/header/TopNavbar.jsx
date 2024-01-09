@@ -7,11 +7,11 @@ import "./index.css";
 import { SearchComponent, BtmDrawer } from "../Index";
 import DropDownHeader from "./dropDown.jsx";
 import useShowonSroll from "./useShowonSroll.js";
+import Logo from "./Logo.jsx";
 
 const TopNavbar = () => {
     const site = useSelector((st) => st.site.data);
     const visible = useShowonSroll();
-    console.log(visible)
     return (
         <div
             className={`z-50 ${visible ? "sticky top-0" : ""}`}
@@ -26,35 +26,11 @@ const TopNavbar = () => {
                         alignItems={"center"}
                         justifyContent={"space-between"}
                     >
-                        {!visible ? (
-                            <>
-                                {site.logo ? (
-                                    <Link to={"/"}>
-                                        <img
-                                            className="w-[100px] h-[50px] md:w-[120px] md:h-[60px]"
-                                            src={site.logo}
-                                            alt="logo"
-                                        />
-                                    </Link>
-                                ) : (
-                                    <Link
-                                        to={"/"}
-                                        style={{
-                                            color: site.primarybg,
-                                            fontWeight: "bold",
-                                            fontSize: "30px",
-                                        }}
-                                    >
-                                        {site.name}
-                                    </Link>
-                                )}
-                            </>
-                        ) : (
+                        {!visible ? <Logo /> : (
                             <>
                                 <div className="flex items-center gap-2 py-2">
-                                    < Link to={'/'}>
-
-                                        <FaHome style={{ fontSize: '28px', color: 'white' }} />
+                                    <Link to={"/"}>
+                                        <FaHome style={{ fontSize: "28px", color: "white" }} />
                                     </Link>
                                     <DropDownHeader />
                                 </div>
@@ -70,8 +46,8 @@ const TopNavbar = () => {
                             alignItems={"center"}
                         >
                             <div className="flex gap-2 md:hidden">
-                                <BtmDrawer className="text-white" />
-                                <TopDrawer className="text-white" />
+                                <BtmDrawer />
+                                <TopDrawer />
                             </div>
                             <div className="p-2  md:flex flex-col items-center hidden   rounded-lg">
                                 <p className=" text-white">Customer Services</p>
@@ -84,8 +60,6 @@ const TopNavbar = () => {
                             </div>
                         </Stack>
                     </Stack>
-
-
                 </Stack>
             </div>
         </div>
